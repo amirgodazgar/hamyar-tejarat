@@ -1,0 +1,37 @@
+
+@import url("./styles/reset.module.css");
+@import url('./fonts/css/fontiran.css');
+
+body {
+  font-family: Roboto, IRANSans !important ;
+  font-weight: 300;
+  direction: rtl;
+  height: 100%;
+  width: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
+  font-family: IRANSans !important;
+}
+h1 {
+  font-weight: bold;
+}
+
+/* color Palette */
+/* 
+
+dark : #222831
+semi-dark : #393e46
+blue : #00adb5
+light : #f0f5f9
+semi-light: #c9d6df
+grey : #52616b
+black : #1e2022
+
+ */

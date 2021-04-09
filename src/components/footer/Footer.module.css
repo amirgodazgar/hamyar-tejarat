@@ -1,0 +1,107 @@
+.footer {
+  width: 100%;
+  background-color: blue;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  height: 20rem;
+  padding: 1rem;
+  background-color: #1e4383;
+  display: grid;
+  grid-template-columns: 35% 15% 30%;
+  justify-content: space-evenly;
+}
+.preview {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.preview h2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+}
+.preview p {
+  flex: 2;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+.links {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.links h6,
+.signUp h6 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+}
+.links h6 {
+}
+.links ul {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+.links li {
+  flex: 1;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.signUp {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.signUp span {
+  flex: 0.5;
+  font-size: 1rem;
+}
+.signUpBox {
+  flex: 1.5;
+  width: 100%;
+  position: relative;
+}
+
+.signUpBox input {
+  position: absolute;
+  right: 0;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 60%;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+}
+
+.copyRight {
+  background-color: #13346b;
+  height: 4rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}

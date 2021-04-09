@@ -1,0 +1,175 @@
+.header {
+  width: 100%;
+  height: 35rem;
+  background-image: linear-gradient(180deg, #1e4383a9 70%, #1e43838a 100%),
+    url("../../styles/image/image\ \(4\).jpg");
+  background-size: cover;
+  /* background-position: 100%; */
+  background-repeat: no-repeat;
+  color: #f0f5f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.appBar {
+  background-color: #1e4383 !important;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+.header {
+  background: radial-gradient(
+      circle,
+      rgba(22, 49, 96, 0.65) 0%,
+      rgba(21, 48, 93, 0.9) 42%
+    ),
+    url("../../styles/image/image\ \(4\).jpg");
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+.navbar {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo {
+  flex: 0 0 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  height: 100%;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.leftSide {
+  flex: 0 0 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+.list {
+  flex: 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  transition: all 200ms;
+}
+.item {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 200ms;
+  padding: 0.7rem 0;
+  border-radius: 10px;
+  flex: 0 0 6rem;
+  margin: 0 0.25rem;
+  text-align: center;
+  transition: all 200ms;
+}
+
+.logo:hover {
+  opacity: 0.9;
+  transition: all 200ms;
+  transform: scale(1.07);
+}
+
+.item:hover {
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.9);
+  transition: all 300ms;
+}
+
+.item:active {
+  transform: scale(1.1);
+  transition: all 100ms;
+}
+.searchBox {
+  flex: 0 0 30%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.searchBox button {
+  outline: none;
+  border: none;
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  border-radius: 30px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 200ms;
+}
+.searchIcon {
+  border-radius: 30px;
+  color: #ffffff;
+  padding: 0.25rem;
+  border: 1px solid transparent;
+  transition: all 200ms;
+  box-shadow: 0px 6px 11px -3px transparent;
+}
+.searchIcon.active {
+  color: #1e4383;
+  transition: all 200ms;
+}
+.searchIcon:hover {
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.9);
+  border: 1px solid #5e708f42;
+  transition: all 200ms;
+}
+.searchInput {
+  position: absolute;
+  outline: none;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border-radius: 30px;
+  color: #424242;
+  width: 0rem;
+  opacity: 0;
+  transition: all 200ms;
+  left: 0;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+}
+.searchInput.active {
+  width: 15rem;
+  opacity: 1;
+  transition: all 200ms;
+}
+.panel {
+  flex: 0 0 20%;
+}
+
+.mainTitle {
+  width: 100%;
+  height: 14rem;
+  margin: 6rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainTitle h1 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+}
+.mainTitle h6 {
+  font-size: 1rem;
+  font-weight: bold;
+}

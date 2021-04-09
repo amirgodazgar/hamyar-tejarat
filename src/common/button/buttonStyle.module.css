@@ -1,0 +1,61 @@
+.btn {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: all 200ms;
+}
+
+.panel {
+  padding:.5rem 1rem ;
+  font-size: 1rem;
+  background-color: #ffffff;
+  color: #277fe5;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.header {
+  margin: 1.8rem 0 0 0;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  background-color: #ffffff;
+  color: #277fe5;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+}
+
+.footerSignUp {
+  position: absolute;
+  padding: 1rem;
+  width: 25%;
+  color: #ffffff;
+  background-color: #277fe5;
+  right: 60%;
+  border: 1px solid transparent;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+}
+
+.header:hover,
+.panel:hover {
+  background-color: #277fe5;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.header:active,
+.panel:active {
+  transform: translateY(2px);
+  transition: all 200ms;
+}
+
+.footerSignUp:hover {
+  background-color: #2372cc;
+  transition: all 200ms;
+}
