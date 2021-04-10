@@ -3,11 +3,19 @@ import React from "react";
 import { homeData } from "../../constant/pagesData";
 import clearanceImage from "../../styles/image/image (3).jpg";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowBackIos";
-import Card from "../../common/card/Card";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import MainCard from "../../common/card/MainCard";
 import cardImage from "../../styles/image/profile-image.png";
 
 const Home = () => {
+
+   const scrollRightHandler = () => {
+      document.scrollLeft = 15
+   }
+   const scrollLeftHandler = () => {
+
+   }
+
   return (
     <div className={classes.home}>
       <div className={classes.clearance}>
@@ -35,12 +43,50 @@ const Home = () => {
         <h3>{homeData.topCompanies.title}</h3>
         <span className={classes.subLine}></span>
         <div className={classes.cardsBox}>
-          <Card
-            title="شرکت ترخیص همراه"
-            subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
-            imgSrc={cardImage}
-            alt="card-alt"
-          />
+          <div className={classes.preCard} onClick={scrollLeftHandler}>
+            <ArrowForwardIosIcon className={classes.preIcon} fontSize="large" />
+          </div>
+          <div className={classes.slider} >
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+            <MainCard
+              title="شرکت ترخیص همراه"
+              subtitle="شرکت ترخیص همراه , همراه شما در مسیر تجارت"
+              imgSrc={cardImage}
+              alt="card-alt"
+            />
+          </div>
+          <div className={classes.nextCard} onClick={scrollRightHandler}>
+            <ArrowBackIosIcon className={classes.nextIcon} fontSize="large" />
+          </div>
         </div>
       </div>
 
