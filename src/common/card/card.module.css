@@ -1,0 +1,40 @@
+.card {
+  height: 23rem;
+  width: 18rem;
+  border-radius: 10px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.head {
+  flex: 0 0 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.head img {
+  border-radius: 100px;
+  height: 100%;
+  width: 40%;
+}
+
+.body {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.body h3 {
+   flex: 1;
+}
+.body p {
+   flex: 1;
+}
+.rating {
+   flex: 1;
+   border: none;
+}

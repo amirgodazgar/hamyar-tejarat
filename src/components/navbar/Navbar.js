@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { Menu } from "@material-ui/icons";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
-import { menuItem } from "../../constant/layout/layoutData";
+import { menuItem } from "../../constant/layoutData";
 
 const Navbar = (props) => {
   const [search, setSearch] = useState(true);

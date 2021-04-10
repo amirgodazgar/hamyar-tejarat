@@ -1,5 +1,5 @@
 import React from "react";
-import { footerText } from "../../constant/layout/layoutData";
+import { footerText } from "../../constant/layoutData";
 import Button from "../../common/button/Button";
 import classes from "./Footer.module.css";
 
