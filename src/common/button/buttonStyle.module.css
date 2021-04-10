@@ -15,7 +15,14 @@
   background-color: #e7f1fc;
   color: #277fe5;
   border: 1px solid transparent;
- 
+}
+.requestCard {
+  padding: 0.65rem 1.5rem;
+  background-color: #e7f1fc;
+  color: #277fe5;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .panel {
@@ -52,9 +59,23 @@
   box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
 }
 
-.card:hover {
+.registration {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  width: 60%;
+  /* margin: 0 auto; */
+  background-color: #1e4383;
+  color: #ffffff;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
+}
+
+.card:hover , .requestCard:hover {
   background-color: #277fe5;
   color: #ffffff;
+  transition: all 200ms;
+}
+.requestCard:active {
+  transform: scale(1.05);
   transition: all 200ms;
 }
 
@@ -65,9 +86,14 @@
   transition: all 200ms;
 }
 .header:active,
-.panel:active {
+.panel:active,
+.registration:active {
   transform: translateY(2px);
-  transition: all 200ms;
+  transition: all 100ms;
+}
+
+.registration:hover {
+  opacity: 0.85;
 }
 
 .footerSignUp:hover {

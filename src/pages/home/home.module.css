@@ -134,6 +134,7 @@
   align-items: center;
   cursor: pointer;
   transition: all 200ms;
+  margin: 0 0.5rem;
 }
 .preCard {
   justify-content: center;
@@ -157,4 +158,152 @@
 .nextCard:hover .nextIcon {
   color: #277fe5;
   transition: all 200ms;
+}
+
+/* introduction  */
+.introduction {
+  display: flex;
+  padding: 6rem 0;
+  justify-content: center;
+}
+.introduction .image {
+  flex: 0 0 50%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+.image img {
+  transition: all 500ms;
+}
+.image img:hover {
+  opacity: 0.85;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.introduction .registration {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.registration > h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e4383;
+  padding: 0 0 1.5rem 0;
+  width: 100%;
+}
+.registration > p {
+  text-align: justify;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  line-height: 2.5;
+}
+.registration > span {
+  border-top: 4px solid #1e4383;
+  width: 40%;
+  padding: 1rem;
+}
+
+/* Requests */
+
+.requests {
+  display: flex;
+  flex-direction: column;
+  background-color: #e7f1fc;
+  padding: 4rem 0;
+}
+
+.header {
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.header > h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #1e4383;
+}
+.header > a {
+  text-decoration: none;
+  color: #277fe5;
+  font-size: 1rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.underLine {
+  width: 75%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.underLine span {
+  border-top: 4px solid #1e4383;
+  display: block;
+  width: 15%;
+}
+
+.requestBox {
+  width: 75%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 49%);
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Statistics */
+.statistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+  background-color: #1e4383;
+}
+
+.successfulOrder,
+.partnerCompany,
+.activeUser {
+  flex: 0 0 23%;
+  font-size: 1.8rem !important;
+  color: #ffffff;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 45%;
+}
+
+.numberBox {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.number {
+  flex: 1;
+  font-size: 3.5rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.addIcon {
+  font-size: 3rem !important;
+  font-weight: bolder !important;
+  color: #ffffff;
+  margin: 1rem 0;
+}
+
+/* News */
+
+.news {
+  height: 50rem;
+  background-color: #ffffff;
 }
