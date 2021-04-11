@@ -4,12 +4,16 @@ import { homeData } from "../../constant/pagesData";
 import clearanceImage from "../../styles/image/image (3).jpg";
 import registrationImage from "../../styles/image/image (6).jpg";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import AddIcon from "@material-ui/icons/Add";
 import MainCard from "../../common/card/MainCard";
 import RequestCard from "../../common/card/homepage/RequestCard";
 import cardImage from "../../styles/image/profile-image.png";
 import Button from "../../common/button/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+  faPlus,
+} from "@fortawesome/fontawesome-free-solid";
 
 const Home = () => {
   const cardItems = [
@@ -68,7 +72,10 @@ const Home = () => {
         <span className={classes.subLine}></span>
         <div className={classes.cardsBox}>
           <div className={classes.preCard}>
-            <ArrowForwardIosIcon className={classes.preIcon} fontSize="large" />
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className={classes.preIcon}
+            />
           </div>
           <div className={classes.slider}>
             {cardItems.map((card, index) => (
@@ -82,7 +89,10 @@ const Home = () => {
             ))}
           </div>
           <div className={classes.nextCard} o>
-            <ArrowBackIosIcon className={classes.nextIcon} fontSize="large" />
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              className={classes.nextIcon}
+            />
           </div>
         </div>
       </div>
@@ -126,33 +136,31 @@ const Home = () => {
       </div>
 
       <div className={classes.statistics}>
-        <div className={classes.successfulOrder}>
-          <div className={classes.numberBox}>
-            <AddIcon fontSize="large" className={classes.addIcon} />
-            <p className={classes.number}>450</p>
+        {homeData.statistics.map((item) => (
+          <div className={classes.statisticsInfo}>
+            <div className={classes.numberBox}>
+              <FontAwesomeIcon icon={faPlus} className={classes.addIcon} />
+              <p className={classes.number}>{item.number}</p>
+            </div>
+            <p> {item.title}</p>
           </div>
-          <p> سفارش موفق</p>
-        </div>
-        <div className={classes.partnerCompany}>
-          <div className={classes.numberBox}>
-            <AddIcon fontSize="large" className={classes.addIcon} />
-            <p className={classes.number}>700</p>
-          </div>
-          <p> شرکت همکار</p>
-        </div>
-        <div className={classes.activeUser}>
-          <div className={classes.numberBox}>
-            <AddIcon fontSize="large" className={classes.addIcon} />
-            <p className={classes.number}> 8000</p>
-          </div>
-          <p> کاربر فعال</p>
-        </div>
+        ))}
       </div>
 
-
-      
       <div className={classes.news}>
-
+      <div className={classes.header}>
+          <h3>{homeData.news.title}</h3>
+          <a href="#">
+            {homeData.news.link}
+            <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
+          </a>
+        </div>
+        <div className={classes.underLine}>
+          <span></span>
+        </div>
+        <div className={classes.newsBox}>
+          
+        </div>
       </div>
     </div>
   );

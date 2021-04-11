@@ -53,4 +53,22 @@ export const homeData = {
       },
     ],
   },
+  statistics: [
+    {
+      number: "450",
+      title: "سفارش موفق",
+    },
+    {
+      number: "700",
+      title: "شرکت همکار",
+    },
+    {
+      number: "8000",
+      title: "کاربر فعال",
+    },
+  ],
+  news: {
+    title: "تازه ترین خبرها ",
+    link: "آرشیو خبرها",
+  },
 };

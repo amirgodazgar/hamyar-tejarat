@@ -3,4 +3,7 @@ export const cardData = {
   request: {
     btn: "ارسال پیشنهاد",
   },
+  new : {
+    
+  }
 };
