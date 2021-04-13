@@ -1,0 +1,110 @@
+.card {
+  border-radius: 20px !important;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.3) !important;
+  display: flex;
+}
+.card.horizontal {
+  flex-direction: row;
+}
+.card.vertical {
+  flex-direction: column;
+}
+.mainCardImage {
+  width: 50%;
+}
+.otherCardImage {
+  width: 100%;
+  height: 70%;
+}
+
+.content {
+  width: 50%;
+  padding: 0.5rem !important;
+}
+.verticalContent {
+  width: auto;
+  padding: 0.5rem !important;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem !important;
+  width: 80% !important;
+  margin: 0 auto;
+}
+.firstRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.firstRow span {
+  color: #c4cad0;
+}
+.secondRow {
+  color: #c4cad0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.7rem 0;
+}
+.title,
+.otherCardTitle {
+  font-size: 1.2rem;
+  color: #1e4383;
+  font-weight: bold;
+  width: 80% !important;
+  margin: 0 auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.title {
+  padding: 0.3rem !important;
+}
+.otherCardTitle {
+  font-size: 1rem;
+  width: 100%;
+}
+.text {
+  font-size: 1rem;
+  color: #192129;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  overflow: hidden;
+  width: 80% !important;
+  margin: 0 auto;
+}
+
+.link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 80% !important;
+  margin: 0 auto;
+}
+.link a {
+  color: #277fe5;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  transform: translateY(0);
+  transition: all 200ms;
+}
+.linkText {
+  margin: 0 0.5rem;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+.linkIcon {
+  font-size: 1.2rem;
+}
+.link a:hover {
+  opacity: 0.85;
+  transition: all 200ms;
+  cursor: pointer;
+}
+.link a:active {
+  transform: translateY(2px);
+  transition: all 200ms;
+}

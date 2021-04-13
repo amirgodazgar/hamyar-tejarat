@@ -3,7 +3,7 @@ export const cardData = {
   request: {
     btn: "ارسال پیشنهاد",
   },
-  new : {
-    
-  }
+  news: {
+    link: "مشاهده خبر",
+  },
 };

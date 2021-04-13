@@ -23,15 +23,19 @@ h1 {
   font-weight: bold;
 }
 
-/* color Palette */
-/* 
-
-dark : #222831
-semi-dark : #393e46
-blue : #00adb5
-light : #f0f5f9
-semi-light: #c9d6df
-grey : #52616b
-black : #1e2022
-
- */
+body::-webkit-scrollbar {
+  scroll-behavior: smooth;
+  width: 20px;
+}
+body::-webkit-scrollbar-track {
+  padding: 0.25rem;
+  border: 1px solid rgba(48, 48, 48, 0.342);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #013b81;
+  width: 20px;
+  border-radius: 2px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  opacity: 0.85;
+}

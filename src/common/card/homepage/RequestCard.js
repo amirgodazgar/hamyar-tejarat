@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./requestCard.module.css";
+import classes from "./request.module.css";
 import Button from "../../button/Button";
 import { cardData } from "../../../constant/cardData";
 import {
@@ -8,7 +8,6 @@ import {
   CardContent,
   Typography,
   Avatar,
-  Icon,
 } from "@material-ui/core";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 
