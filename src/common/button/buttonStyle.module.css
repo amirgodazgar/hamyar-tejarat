@@ -69,7 +69,16 @@
   box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
 }
 
-.card:hover , .requestCard:hover {
+.auth {
+  box-shadow: 0px 6px 11px -3px #4e50525e;
+  background-color: #c4cad0;
+  width: 94%;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.card:hover,
+.requestCard:hover {
   background-color: #277fe5;
   color: #ffffff;
   transition: all 200ms;
@@ -98,5 +107,16 @@
 
 .footerSignUp:hover {
   background-color: #2372cc;
+  transition: all 200ms;
+}
+
+.auth:hover {
+  background-color: #1e4383;
+  box-shadow: 0px 6px 11px -3px #1e4383c7;
+  color: #ffffff;
+  transition: all 200ms;
+}
+.auth:active {
+  transform: scale(1.05);
   transition: all 200ms;
 }

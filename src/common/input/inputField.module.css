@@ -1,0 +1,19 @@
+.label {
+  margin: 0 0.5rem -0.5rem 0;
+}
+
+.textField {
+  font-size: 1rem;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #70707025;
+  padding: 0.65rem 0.5rem;
+  width: 90%;
+  box-shadow: 0 3px 15px #c4cad08f;
+}
+
+.textField::placeholder {
+  color: #c4cad0;
+}
+
+
