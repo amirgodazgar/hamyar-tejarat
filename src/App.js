@@ -15,12 +15,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <StylesProvider jss={jss}>
-
         {/* <Layout>
           <Home/>
         </Layout> */}
-        
-          <Auth />
+
+        <Auth />
         
       </StylesProvider>
     </ThemeProvider>

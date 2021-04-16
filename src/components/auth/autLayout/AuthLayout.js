@@ -1,12 +1,11 @@
 import { Fade, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import classes from "./AuthLayout.module.css";
 import { changeFormType } from "../../../store/auth/authSlice";
 import { authData } from "../../../constant/authData";
 
 const AuthLayout = ({ children, title, titleType }) => {
-  const change = useSelector((state) => state.auth.change);
   const dispatch = useDispatch();
   const [signInActive, setSignInActive] = useState(true);
   const [signUpActive, setSignUpActive] = useState(false);

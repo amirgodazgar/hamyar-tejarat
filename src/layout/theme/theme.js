@@ -6,4 +6,9 @@ export const theme = createMuiTheme({
   typography: {
     fontFamily: " IRANSans ",
   },
+  palette: {
+    primary: {
+      main: "#1E4383",
+    },
+  },
 });

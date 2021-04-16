@@ -11,7 +11,7 @@ import SuccessChangePass from "./Confirmation/SuccessChangePass";
 
 const Auth = () => {
   const formType = useSelector((state) => state.auth.formType);
-  console.log(formType);
+
   let authType = null;
   let title = "";
   let titleType = "";

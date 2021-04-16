@@ -3,7 +3,13 @@ import classes from "./signUp.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
-import { Grow } from "@material-ui/core";
+import {
+  FormControlLabel,
+  FormLabel,
+  Grow,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const SignUp = () => {
@@ -43,49 +49,47 @@ const SignUp = () => {
               placeHolder="********"
             />
             <div className={classes.checkBoxContainer}>
-              <span> نوع شخص</span>
-
-              <label>
-                <input
-                  type="radio"
-                  name="personType"
-                  value={formik.values.personType}
+              <FormLabel className={classes.label}> نوع شخص</FormLabel>
+              <RadioGroup
+                className={classes.radioGroup}
+                name="personType"
+                value={formik.values.personType}
+                onChange={formik.handleChange}
+              >
+                <FormControlLabel
+                  value="real"
+                  control={<Radio color="primary" />}
+                  label="حقیقی"
                 />
-                <i>حقیقی</i>
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name="personType"
-                  value={formik.values.personType}
+                <FormControlLabel
+                  value="legal"
+                  control={<Radio color="primary" />}
+                  label="حقوقی"
                 />
-                <i> حقوقی</i>
-              </label>
+              </RadioGroup>
             </div>
 
             <div className={classes.checkBoxContainer}>
-              <span>نوع فعالیت</span>
-
-              <label>
-                <input
-                  type="radio"
-                  name="activityType"
-                  value={formik.values.activityType}
+              <FormLabel className={classes.label}> نوع فعالیت </FormLabel>
+              <RadioGroup
+                className={classes.radioGroup}
+                name="activityType"
+                value={formik.values.activityType}
+                onChange={formik.handleChange}
+              >
+                <FormControlLabel
+                  value="businessMan"
+                  control={<Radio color="primary" />}
+                  label="تاجر یا صاحب کالا"
                 />
-                <i>تاجر یا صاحب کالا</i>
-              </label>
-
-              <label>
-                <input
-                  type="radio"
-                  name="activityType"
-                  value={formik.values.activityType}
+                <FormControlLabel
+                  value="clearanceMan"
+                  control={<Radio color="primary" />}
+                  label=" ترخیص کالا"
                 />
-                <i> ترخیص کالا</i>
-              </label>
+              </RadioGroup>
             </div>
-            <Button customizeClass="auth">ثبت نام</Button>
+            <Button type='submit' customizeClass="auth">ثبت نام</Button>
           </div>
         </form>
       </Grow>

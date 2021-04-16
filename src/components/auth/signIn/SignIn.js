@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
 import { useDispatch } from "react-redux";
 import { changeFormType } from "../.../../../../store/auth/authSlice";
-import { Grow } from "@material-ui/core";
+import { Checkbox, Grow } from "@material-ui/core";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -46,11 +46,13 @@ const SignIn = () => {
             />
             <div className={classes.checkBoxContainer}>
               <label>
-                <input
+                <Checkbox
+                  defaultChecked
                   name="checkbox"
                   type="checkbox"
                   className={classes.checkbox}
                   value={formik.values.checkbox}
+                  color="primary"
                 />
                 <i>ذخیره اطلاعات</i>
               </label>
