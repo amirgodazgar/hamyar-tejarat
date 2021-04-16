@@ -1,36 +1,42 @@
-import { Typography } from "@material-ui/core";
+import { Fade, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./AuthLayout.module.css";
-import {changeFormType} from '../../../store/auth/authSlice'
+import { changeFormType } from "../../../store/auth/authSlice";
+import { authData } from "../../../constant/authData";
 
-const AuthLayout = ({ children, title }) => {
-  const dispatch = useDispatch()
+const AuthLayout = ({ children, title, titleType }) => {
+  const change = useSelector((state) => state.auth.change);
+  const dispatch = useDispatch();
   const [signInActive, setSignInActive] = useState(true);
   const [signUpActive, setSignUpActive] = useState(false);
 
   const signInSwitcher = () => {
     setSignInActive(true);
     setSignUpActive(false);
-    dispatch(changeFormType('signIn'))
+    dispatch(changeFormType("signIn"));
   };
   const signUpSwitcher = () => {
     setSignUpActive(true);
     setSignInActive(false);
-    dispatch(changeFormType('signUp'))
+    dispatch(changeFormType("signUp"));
   };
   return (
     <div className={classes.authLayout}>
       <div className={classes.container}>
         <div className={classes.image}>
-          <span className={classes.up}>به سامانه</span>
-          <h6 className={classes.center}>همیار تجارت</h6>
-          <span className={classes.down}>خوش آمدید</span>
+          <span className={classes.up}>{authData.authLayout.upText}</span>
+          <h6 className={classes.center}>{authData.authLayout.title}</h6>
+          <span className={classes.down}>{authData.authLayout.downText}</span>
         </div>
         <div className={classes.registerContainer}>
           <div className={classes.title}>
-            {title !== "register" ? (
-              <Typography variant="h4" component="h4">
+            {titleType !== "register" ? (
+              <Typography
+                className={classes.formTitle}
+                variant="h4"
+                component="h4"
+              >
                 {title}
               </Typography>
             ) : (
@@ -41,7 +47,7 @@ const AuthLayout = ({ children, title }) => {
                     signInActive ? classes.active : null
                   }`}
                 >
-                  ورود
+                  {authData.signIn.title}
                 </span>
 
                 <span
@@ -50,13 +56,28 @@ const AuthLayout = ({ children, title }) => {
                     signUpActive ? classes.active : null
                   }`}
                 >
-                  ثبت نام
+                  {authData.signUp.title}
                 </span>
-                <span
-                  className={`${classes.selectorBorder} ${
-                    signUpActive ? classes.active : null
-                  } `}
-                ></span>
+                <Fade
+                  in={signInActive}
+                  timeout={{ appear: 700, enter: 500, exit: 300 }}
+                >
+                  <span
+                    className={`${classes.signInSelect} ${
+                      signUpActive ? classes.active : null
+                    } `}
+                  ></span>
+                </Fade>
+                <Fade
+                  in={signUpActive}
+                  timeout={{ appear: 700, enter: 500, exit: 300 }}
+                >
+                  <span
+                    className={`${classes.signUpSelect} ${
+                      signUpActive ? classes.active : null
+                    } `}
+                  ></span>
+                </Fade>
               </div>
             )}
           </div>

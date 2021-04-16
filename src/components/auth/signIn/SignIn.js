@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
 import { useDispatch } from "react-redux";
 import { changeFormType } from "../.../../../../store/auth/authSlice";
+import { Grow } from "@material-ui/core";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -25,37 +26,42 @@ const SignIn = () => {
   });
   return (
     <React.Fragment>
-      <form className={classes.signInContainer} onSubmit={formik.handleSubmit}>
-        <div className={classes.inputBox}>
-          <Input
-            formik={formik}
-            type="text"
-            label="ایمیل"
-            placeHolder="example@gmail.com"
-          />
-          <Input
-            formik={formik}
-            type="password"
-            label="رمز عبور"
-            placeHolder="********"
-          />
-          <div className={classes.checkBoxContainer}>
-            <label>
-              <input
-                name="checkbox"
-                type="checkbox"
-                className={classes.checkbox}
-                value={formik.values.checkbox}
-              />
-              <i>ذخیره اطلاعات</i>
-            </label>
+      <Grow in={true}>
+        <form
+          className={classes.signInContainer}
+          onSubmit={formik.handleSubmit}
+        >
+          <div className={classes.inputBox}>
+            <Input
+              formik={formik}
+              type="text"
+              label="ایمیل"
+              placeHolder="example@gmail.com"
+            />
+            <Input
+              formik={formik}
+              type="password"
+              label="رمز عبور"
+              placeHolder="********"
+            />
+            <div className={classes.checkBoxContainer}>
+              <label>
+                <input
+                  name="checkbox"
+                  type="checkbox"
+                  className={classes.checkbox}
+                  value={formik.values.checkbox}
+                />
+                <i>ذخیره اطلاعات</i>
+              </label>
+            </div>
+            <Button customizeClass="auth">ورود</Button>
           </div>
-          <Button customizeClass="auth">ورود</Button>
-        </div>
-        <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
-          رمز عبور را فراموش کرده ام
-        </a>
-      </form>
+          <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
+            رمز عبور را فراموش کرده ام
+          </a>
+        </form>
+      </Grow>
     </React.Fragment>
   );
 };
