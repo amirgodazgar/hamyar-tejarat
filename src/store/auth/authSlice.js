@@ -4,20 +4,21 @@ export const authSlice = createSlice({
    name: 'auth',
    initialState: {
       token : '',
-      type : {
-         signIn : 'signIn',
-         signUp : 'signUp',
-         forgotPassword : 'forgotPassword',
-         successSignUp : 'successSignUp',
-         activeAccount : 'activeAccount',
-      },
+      formType : '',
+      // {
+      //    signIn : 'signIn',
+      //    signUp : 'signUp',
+      //    forgotPassword : 'forgotPassword',
+      //    successSignUp : 'successSignUp',
+      //    activeAccount : 'activeAccount',
+      // },
    },
    reducers : {
-      changeAuthType : (state, action) => {
-         // state.type = action.payload
+      changeFormType : (state, action) => {
+         state.formType = action.payload
       }
    }
 })
 
-export const {changeAuthType} = authSlice.actions
+export const {changeFormType} = authSlice.actions
 export default authSlice.reducer

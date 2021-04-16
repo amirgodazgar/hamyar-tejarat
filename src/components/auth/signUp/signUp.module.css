@@ -7,7 +7,7 @@
 .inputBox {
   padding: 1rem 0;
   width: 80%;
-  height: 75%;
+  height: 80%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -20,27 +20,26 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 80%;
+  width: 100%;
 }
+.checkBoxContainer span,
 .checkBoxContainer label {
   font-weight: 400;
+}
+
+.checkBoxContainer span {
+  margin-left: 2rem;
+}
+.checkBoxContainer input {
+  margin-left: 0.5rem;
   cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+}
+.checkBoxContainer label {
+  margin-left: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.checkbox {
-  margin: 0 0.5rem 0 0.5rem;
-  height: 1.2rem;
-  width: 1.2rem;
-  cursor: pointer;
-}
-
-.forgotPass {
-  color: #277fe5;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 400;
-  margin: 2rem auto;
   cursor: pointer;
 }

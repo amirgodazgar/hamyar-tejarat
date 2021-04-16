@@ -1,17 +1,23 @@
 import { Typography } from "@material-ui/core";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from "./AuthLayout.module.css";
+import {changeFormType} from '../../../store/auth/authSlice'
 
 const AuthLayout = ({ children, title }) => {
+  const dispatch = useDispatch()
   const [signInActive, setSignInActive] = useState(true);
   const [signUpActive, setSignUpActive] = useState(false);
+
   const signInSwitcher = () => {
     setSignInActive(true);
     setSignUpActive(false);
+    dispatch(changeFormType('signIn'))
   };
   const signUpSwitcher = () => {
     setSignUpActive(true);
     setSignInActive(false);
+    dispatch(changeFormType('signUp'))
   };
   return (
     <div className={classes.authLayout}>

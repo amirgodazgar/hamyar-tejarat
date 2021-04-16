@@ -3,7 +3,14 @@ import classes from "./signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
+import { useDispatch } from "react-redux";
+import { changeFormType } from "../.../../../../store/auth/authSlice";
+
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const forgotPasswordHandler = () => {
+    dispatch(changeFormType("forgotPassword"));
+  };
   const initialValues = {
     email: "",
     password: "",
@@ -33,17 +40,19 @@ const SignIn = () => {
             placeHolder="********"
           />
           <div className={classes.checkBoxContainer}>
-            <input
-              name="checkbox"
-              type="checkbox"
-              className={classes.checkbox}
-              value={formik.values.checkbox}
-            />
-            <label htmlFor="checkbox">ذخیره اطلاعات</label>
+            <label>
+              <input
+                name="checkbox"
+                type="checkbox"
+                className={classes.checkbox}
+                value={formik.values.checkbox}
+              />
+              <i>ذخیره اطلاعات</i>
+            </label>
           </div>
           <Button customizeClass="auth">ورود</Button>
         </div>
-        <a href="#" className={classes.forgotPass}>
+        <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
           رمز عبور را فراموش کرده ام
         </a>
       </form>
