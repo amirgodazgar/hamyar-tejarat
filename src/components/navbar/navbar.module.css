@@ -39,26 +39,30 @@
   flex-direction: column;
 }
 .navbar {
-  width: 100%;
+  width: 97%;
+  margin-left: auto;
   height: 8rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.logo {
-  flex: 0 0 25%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.logo {
+  flex: 0 0 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  cursor: auto;
+}
+
+.logoText {
+  /* font-family: 'Kalame'; */
   font-size: 2rem;
   font-weight: bold;
-  height: 100%;
   cursor: pointer;
   transition: all 200ms;
-  text-decoration: none;
   color: #f0f5f9;
-  /* font-family: 'Kalame'; */
 }
 
 .leftSide {
@@ -69,7 +73,7 @@
   height: 100%;
 }
 .list {
-  flex: 0 0 50%;
+  flex: 0 0 55%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,7 +92,7 @@
   transition: all 200ms;
 }
 
-.logo:hover {
+.logoText:hover {
   opacity: 0.9;
   transition: all 200ms;
   transform: scale(1.07);
@@ -169,16 +173,16 @@
   margin: 0 0.3rem;
 }
 .register {
-  flex: 0 0 10%;
-  cursor: pointer;
-  padding: 1rem .5rem;
+  padding: 1rem;
   border-radius: 10px;
   margin: 0 0.3rem;
   text-align: center;
   transition: all 200ms;
 }
 .registerLink {
-  font-size: 1rem;
+  flex: 0 0 15%;
+  cursor: pointer;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #f0f5f9;
   text-decoration: none;

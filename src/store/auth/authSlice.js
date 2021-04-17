@@ -4,6 +4,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: "",
+    isLogin: false,
     formType: "",
     change: false,
   },

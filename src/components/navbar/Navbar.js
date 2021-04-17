@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
 
@@ -15,7 +17,7 @@ const Navbar = (props) => {
     <header className={classes.header}>
       <nav className={classes.navbar}>
         <Link className={classes.logo} to="/">
-          همیار تجارت
+          <span className={classes.logoText}>همیار تجارت</span>
         </Link>
 
         <div className={classes.leftSide}>
@@ -44,19 +46,20 @@ const Navbar = (props) => {
               />
             </button>
           </div>
-          <div className={classes.panel}>
-            <Button customizeClass="panel">
-              <PersonIcon fontSize="large" />
+          {isLogin ? (
+            <div className={classes.panel}>
               <Link className={classes.link} to="/adminPanel">
-                پنل کاربری
+                <Button customizeClass="panel">
+                  <PersonIcon fontSize="large" />
+                  پنل کاربری
+                </Button>
               </Link>
-            </Button>
-          </div>
-          <div className={classes.register}>
+            </div>
+          ) : (
             <Link className={classes.registerLink} to="/register">
-              ورود | ثبتنام
+              <div className={classes.register}>ورود | ثبتنام</div>
             </Link>
-          </div>
+          )}
         </div>
       </nav>
       <div className={classes.mainTitle}>
