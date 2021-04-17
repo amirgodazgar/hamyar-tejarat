@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./navbar.module.css";
 import SearchIcon from "@material-ui/icons/Search";
 import { Menu } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
@@ -13,7 +14,10 @@ const Navbar = (props) => {
   return (
     <header className={classes.header}>
       <nav className={classes.navbar}>
-        <span className={classes.logo}>همیار تجارت</span>
+        <Link className={classes.logo} to="/">
+          همیار تجارت
+        </Link>
+
         <div className={classes.leftSide}>
           <ul className={classes.list}>
             {menuItem.map((item) => (
@@ -43,8 +47,15 @@ const Navbar = (props) => {
           <div className={classes.panel}>
             <Button customizeClass="panel">
               <PersonIcon fontSize="large" />
-              پنل کاربری
+              <Link className={classes.link} to="/adminPanel">
+                پنل کاربری
+              </Link>
             </Button>
+          </div>
+          <div className={classes.register}>
+            <Link className={classes.registerLink} to="/register">
+              ورود | ثبتنام
+            </Link>
           </div>
         </div>
       </nav>

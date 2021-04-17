@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AuthLayout from "./autLayout/AuthLayout";
-import ForgotPassword from "./forgotpassword/ForgotPassword";
-import SignIn from "./signIn/SignIn";
-import SignUp from "./signUp/SignUp";
-import SuccessSignUp from "./Confirmation/SuccessSignUp";
-import ActiveAccount from "./Confirmation/ActiveAccount";
+import AuthLayout from "../../components/auth/autLayout/AuthLayout";
+import ForgotPassword from "../../components/auth/forgotpassword/ForgotPassword";
+import SignIn from "../../components/auth/signIn/SignIn";
+import SignUp from "../../components/auth/signUp/SignUp";
+import SuccessSignUp from "../../components/auth/Confirmation/SuccessSignUp";
+import ActiveAccount from "../../components/auth/Confirmation/ActiveAccount";
+import SuccessChangePass from "../../components/auth/Confirmation/ActiveAccount";
 import { authData } from "../../constant/authData";
-import SuccessChangePass from "./Confirmation/SuccessChangePass";
+
 
 const Auth = () => {
   const formType = useSelector((state) => state.auth.formType);
