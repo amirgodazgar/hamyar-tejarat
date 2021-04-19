@@ -1,3 +1,8 @@
+.labelBox {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
 .label {
   margin: 0 0.5rem -0.5rem 0;
 }
@@ -16,4 +21,7 @@
   color: #c4cad0;
 }
 
-
+.error {
+  color: #b60123e1;
+  font-size: 0.9rem;
+}

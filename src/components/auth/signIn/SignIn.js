@@ -6,6 +6,8 @@ import Input from "../../../common/input/InputField";
 import { useDispatch } from "react-redux";
 import { changeFormType } from "../.../../../../store/auth/authSlice";
 import { Checkbox, Grow } from "@material-ui/core";
+import { authData } from "../../../constant/authData";
+import * as Yup from "yup";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -15,14 +17,24 @@ const SignIn = () => {
   const initialValues = {
     email: "",
     password: "",
-    checkbox: "",
+    checkbox: true,
   };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("آدرس ایمیل صحیح نیست")
+      .required("آدرس ایمیل را وارد کنید"),
+    password: Yup.string()
+      .min(8, "رمز عبور باید بیشتر از 8 کارکتر باشد")
+      .required("رمز عبور را وارد کنید"),
+  });
   const onSubmit = (values) => {
-    console.log(values.email, values.password);
+    console.log(values);
   };
   const formik = useFormik({
     initialValues,
     onSubmit,
+
+    validationSchema,
   });
   return (
     <React.Fragment>
@@ -34,14 +46,14 @@ const SignIn = () => {
           <div className={classes.inputBox}>
             <Input
               formik={formik}
-              type="text"
-              label="ایمیل"
+              type="email"
+              label={authData.signIn.email}
               placeHolder="example@gmail.com"
             />
             <Input
               formik={formik}
               type="password"
-              label="رمز عبور"
+              label={authData.signIn.pass}
               placeHolder="********"
             />
             <div className={classes.checkBoxContainer}>
@@ -49,18 +61,29 @@ const SignIn = () => {
                 <Checkbox
                   defaultChecked
                   name="checkbox"
-                  type="checkbox"
                   className={classes.checkbox}
+                  onChange={formik.handleChange}
                   value={formik.values.checkbox}
                   color="primary"
                 />
-                <i>ذخیره اطلاعات</i>
+                <i>{authData.signIn.saveInfo}</i>
               </label>
             </div>
-            <Button customizeClass="auth">ورود</Button>
+            <Button
+              type="submit"
+              customizeClass={
+                formik.isValid &&
+                formik.values.email !== "" &&
+                formik.values.password !== ""
+                  ? "authActive"
+                  : "auth"
+              }
+            >
+              {authData.signIn.btn}
+            </Button>
           </div>
           <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
-            رمز عبور را فراموش کرده ام
+            {authData.signIn.forgotPass}
           </a>
         </form>
       </Grow>

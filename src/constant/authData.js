@@ -13,7 +13,7 @@ export const authData = {
     forgotPass: "رمز عبور را فراموش کرده ام",
   },
   signUp: {
-    title: "ثبت نام",
+    title: " ثبت نام",
     email: "ایمیل",
     pass: "رمز عبور",
     personType: "نوع شخص",
@@ -23,6 +23,19 @@ export const authData = {
     real: "حقیقی",
     legal: "حقوقی",
     btn: "ثبت نام",
+    errors: {
+      email: {
+        wrong: "آدرس ایمیل صحیح نیست",
+        required: "آدرس ایمیل را وارد کنید",
+      },
+      pass: {
+        min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
+        required: "رمز عبور را وارد کنید",
+      },
+      personType : 'نوع شخص را انتخاب کنید',
+      activityType : 'نوع فعالیت را انتخاب کنید'
+      
+    },
   },
   forgotPass: {
     title: "بازیابی رمز عبور",

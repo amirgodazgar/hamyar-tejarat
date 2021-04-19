@@ -26,7 +26,7 @@
 }
 
 .panel {
-  padding: 0.3rem .5rem;
+  padding: 0.3rem 0.5rem;
   font-size: 1rem;
   background-color: #ffffff;
   color: #277fe5;
@@ -85,6 +85,14 @@
   padding: 0.5rem;
   box-shadow: 0px 6px 11px -3px #4e50525e;
 }
+.authActive {
+  background-color: #1e4383;
+  color: #ffffff;
+  width: 94%;
+  font-size: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0px 6px 11px -3px #1e43835e;
+}
 
 .card:hover,
 .requestCard:hover {
@@ -124,12 +132,16 @@
 }
 
 .auth:hover {
-  background-color: #1e4383;
-  box-shadow: 0px 6px 11px -3px #1e4383c7;
+  box-shadow: 0px 6px 11px -3px #535658c7;
+  transition: all 200ms;
+}
+.authActive:hover {
   color: #ffffff;
+  box-shadow: 0px 6px 11px -3px #1e4383c7;
   transition: all 200ms;
 }
 .auth:active,
+.authActive:active,
 .confirmation:active {
   transform: scale(1.05);
   transition: all 200ms;

@@ -7,7 +7,7 @@
 .inputBox {
   padding: 1rem 0;
   width: 80%;
-  height: 90%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -36,4 +36,25 @@
   flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+.error {
+  color: #b60123e1;
+  font-size: 0.9rem;
+}
+
+.alert {
+  color: #b60123e1 !important;
+  font-size: 0.9rem;
+ 
+  padding: .5rem !important;
+  border-radius: 50% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent !important;
+}
+.alert div {
+  padding: 0 !important;
+  margin: 0 !important;
 }

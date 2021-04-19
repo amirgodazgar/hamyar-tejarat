@@ -10,7 +10,11 @@ import {
   Radio,
   RadioGroup,
 } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import { useSelector } from "react-redux";
+import { authData } from "../../../constant/authData";
+import { Fade } from "@material-ui/core";
+import * as Yup from "yup";
 
 const SignUp = () => {
   const change = useSelector((state) => state.auth.change);
@@ -21,11 +25,22 @@ const SignUp = () => {
     personType: "",
     activityType: "",
   };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(authData.signUp.errors.email.wrong)
+      .required(authData.signUp.errors.email.required),
+    password: Yup.string()
+      .min(8, authData.signUp.errors.pass.min)
+      .required(authData.signUp.errors.pass.required),
+    personType: Yup.string().required(authData.signUp.errors.personType),
+    activityType: Yup.string().required(authData.signUp.errors.activityType),
+  });
   const onSubmit = (values) => {
-    console.log(values.email, values.password);
+    console.log(values);
   };
   const formik = useFormik({
     initialValues,
+    validationSchema,
     onSubmit,
   });
   return (
@@ -38,18 +53,21 @@ const SignUp = () => {
           <div className={classes.inputBox}>
             <Input
               formik={formik}
-              type="text"
-              label="ایمیل"
+              type="email"
+              label={authData.signUp.email}
               placeHolder="example@gmail.com"
             />
             <Input
               formik={formik}
               type="password"
-              label="رمز عبور"
+              label={authData.signUp.pass}
               placeHolder="********"
             />
             <div className={classes.checkBoxContainer}>
-              <FormLabel className={classes.label}> نوع شخص</FormLabel>
+              <FormLabel className={classes.label}>
+                {" "}
+                {authData.signUp.personType}
+              </FormLabel>
               <RadioGroup
                 className={classes.radioGroup}
                 name="personType"
@@ -59,18 +77,34 @@ const SignUp = () => {
                 <FormControlLabel
                   value="real"
                   control={<Radio color="primary" />}
-                  label="حقیقی"
+                  label={authData.signUp.real}
                 />
                 <FormControlLabel
                   value="legal"
                   control={<Radio color="primary" />}
-                  label="حقوقی"
+                  label={authData.signUp.legal}
                 />
               </RadioGroup>
+              {formik.touched.personType && formik.errors.personType ? (
+              <Fade
+                in={
+                  formik.touched.personType && formik.errors.personType
+                    ? true
+                    : false
+                }
+                timeout={400}
+              >
+                <Alert severity="error" className={classes.alert}></Alert>
+              </Fade>
+            ) : null}
             </div>
+            
 
             <div className={classes.checkBoxContainer}>
-              <FormLabel className={classes.label}> نوع فعالیت </FormLabel>
+              <FormLabel className={classes.label}>
+                {" "}
+                {authData.signUp.activityType}{" "}
+              </FormLabel>
               <RadioGroup
                 className={classes.radioGroup}
                 name="activityType"
@@ -80,16 +114,40 @@ const SignUp = () => {
                 <FormControlLabel
                   value="businessMan"
                   control={<Radio color="primary" />}
-                  label="تاجر یا صاحب کالا"
+                  label={authData.signUp.businessMan}
                 />
                 <FormControlLabel
                   value="clearanceMan"
                   control={<Radio color="primary" />}
-                  label=" ترخیص کالا"
+                  label={authData.signUp.clearanceMan}
                 />
               </RadioGroup>
+              {formik.touched.activityType && formik.errors.activityType ? (
+              <Fade
+                in={
+                  formik.touched.activityType && formik.errors.activityType
+                    ? true
+                    : false
+                }
+                timeout={400}
+              >
+                <Alert severity="error" className={classes.alert}></Alert>
+              </Fade>
+            ) : null}
             </div>
-            <Button type='submit' customizeClass="auth">ثبت نام</Button>
+    
+            <Button
+              type="submit"
+              customizeClass={
+                formik.isValid &&
+                formik.values.email !== "" &&
+                formik.values.password !== ""
+                  ? "authActive"
+                  : "auth"
+              }
+            >
+              {authData.signUp.btn}
+            </Button>
           </div>
         </form>
       </Grow>
