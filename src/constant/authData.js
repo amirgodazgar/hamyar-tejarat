@@ -11,6 +11,17 @@ export const authData = {
     btn: "ورود",
     saveInfo: "ذخیره اطلاعات",
     forgotPass: "رمز عبور را فراموش کرده ام",
+    errors: {
+      email: {
+        wrong: "آدرس ایمیل صحیح نیست",
+        required: "آدرس ایمیل را وارد کنید",
+      },
+      pass: {
+        min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
+        required: "رمز عبور را وارد کنید",
+      },
+      
+    },
   },
   signUp: {
     title: " ثبت نام",

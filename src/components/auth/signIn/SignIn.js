@@ -21,11 +21,11 @@ const SignIn = () => {
   };
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("آدرس ایمیل صحیح نیست")
-      .required("آدرس ایمیل را وارد کنید"),
+      .email(authData.signIn.errors.email.wrong)
+      .required(authData.signIn.errors.email.required),
     password: Yup.string()
-      .min(8, "رمز عبور باید بیشتر از 8 کارکتر باشد")
-      .required("رمز عبور را وارد کنید"),
+      .min(8, authData.signIn.errors.pass.min)
+      .required(authData.signIn.errors.pass.required),
   });
   const onSubmit = (values) => {
     console.log(values);

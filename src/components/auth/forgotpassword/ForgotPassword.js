@@ -6,6 +6,9 @@ import Input from "../../../common/input/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import { changeFormType } from "../.../../../../store/auth/authSlice";
 import { Grow } from "@material-ui/core";
+import * as Yup from "yup";
+import { authData } from "../../../constant/authData";
+
 const ForgotPassword = () => {
   const change = useSelector((state) => state.auth.change);
   const dispatch = useDispatch();
@@ -15,13 +18,20 @@ const ForgotPassword = () => {
   const initialValues = {
     email: "",
   };
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email(authData.signIn.errors.email.wrong)
+      .required(authData.signIn.errors.email.required),
+  });
   const onSubmit = (values) => {
-    console.log(values.email, values.password);
+    console.log(values);
   };
   const formik = useFormik({
     initialValues,
+    validationSchema,
     onSubmit,
   });
+
   return (
     <React.Fragment>
       <Grow in={change}>
@@ -32,15 +42,26 @@ const ForgotPassword = () => {
           <div className={classes.inputBox}>
             <Input
               formik={formik}
-              type="text"
-              label="ایمیل"
+              type="email"
+              label={authData.signIn.email}
               placeHolder="example@gmail.com"
             />
 
-            <Button customizeClass="auth">بازیابی رمز عبور</Button>
+            <Button
+              type="submit"
+              customizeClass={
+                formik.isValid &&
+                formik.values.email !== "" &&
+                formik.values.password !== ""
+                  ? "authActive"
+                  : "auth"
+              }
+            >
+              {authData.forgotPass.title}
+            </Button>
           </div>
           <a onClick={backwardHandler} className={classes.backward}>
-            بازگشت
+            {authData.successChangePass.btn}
           </a>
         </form>
       </Grow>
