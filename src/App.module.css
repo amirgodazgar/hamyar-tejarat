@@ -1,6 +1,5 @@
-
 @import url("./styles/reset.module.css");
-@import url('./fonts/css/fontiran.css');
+@import url("./fonts/css/fontiran.css");
 
 body {
   font-family: Roboto, IRANSans !important ;
@@ -21,6 +20,9 @@ textarea {
 }
 h1 {
   font-weight: bold;
+}
+a {
+  text-decoration: none !important;
 }
 
 body::-webkit-scrollbar {

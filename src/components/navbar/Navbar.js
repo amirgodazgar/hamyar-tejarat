@@ -46,7 +46,8 @@ const Navbar = (props) => {
               />
             </button>
           </div>
-          {isLogin ? (
+          {
+            isLogin === false ? (
             <div className={classes.panel}>
               <Link className={classes.link} to="/adminPanel">
                 <Button customizeClass="panel">

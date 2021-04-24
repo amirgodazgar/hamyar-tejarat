@@ -1,0 +1,148 @@
+.container {
+  border: 1px solid grey;
+  height: 100%;
+}
+
+.appBar {
+  background-color: #ffffff;
+  width: calc(100% - 5rem) !important;
+  transition: all 200ms !important;
+}
+.appBarShift {
+  width: calc(100% - 15rem) !important;
+  transition: all 200ms !important;
+}
+.appBar .leftSide {
+  width: 17rem;
+  transition: all 200ms;
+}
+.appBarShift .leftSide {
+  width: 18rem;
+  transition: all 200ms;
+}
+.toolbar {
+  z-index: 99;
+  background-color: #ffffff;
+  color: #192129;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.leftSide {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.userBox {
+  flex: 1.5;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.userBoxTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.notificationBox {
+  flex: 1;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.drawerContainer {
+  width: 5rem;
+  transition: all 200ms !important;
+  overflow-y: inherit !important;
+}
+.drawerContainerOpen {
+  width: 15rem;
+  transition: all 200ms !important;
+}
+
+.logo {
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 200ms !important;
+}
+.logo.open {
+  min-height: 9rem;
+  transition: all 200ms !important;
+}
+
+.logoText {
+  font-weight: bold !important;
+  font-size: 0rem !important;
+  transition: all 200ms !important;
+}
+.logoText.open {
+  font-size: 2rem !important;
+  transition: all 500ms !important;
+}
+.logoImg {
+  height: auto;
+  width: 70%;
+  margin: 0.5rem 0;
+  transition: all 200ms !important;
+}
+.logoImg.open {
+  width: 35%;
+  transition: all 200ms !important;
+}
+
+.list {
+  height: 20rem;
+}
+
+.listItem {
+  height: 16%;
+  color: #c4cad0 !important;
+  transition: all 100ms;
+}
+.listItemActive,
+.listItemActive svg {
+  color: #1e4383 !important;
+  transition: all 200ms;
+  fill: #1e4383;
+  cursor: pointer;
+}
+.listItem:hover {
+  cursor: pointer;
+  background-color: #f4f4f4;
+  color: #1e4383 !important;
+  transition: all 200ms;
+}
+.listItem:hover svg {
+  fill: #1e4383;
+  transition: all 200ms;
+}
+
+.listItemText span {
+  font-weight: 600 !important;
+  transition: all 200ms;
+}
+
+.menuIcon {
+  color: #192129;
+}
+.badge {
+  background-color: #277fe5;
+  color: #ffffff;
+}
+
+/* ----- Main ---- */
+.main {
+  color: #192129;
+  margin: 5rem auto 0 0;
+  height: 100vh;
+  width: 96%;
+}
