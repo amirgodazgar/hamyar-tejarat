@@ -17,7 +17,7 @@ import { ArrowBackIos } from "@material-ui/icons";
 
 const Dashboard = () => {
   const [open, setOpen] = React.useState(true);
-  const rows = [
+  const ticketRows = [
     {
       ticketId: "31254600012",
       subject: "درخواست بررسی مجدد قرارداد شماره 00032",
@@ -49,6 +49,20 @@ const Dashboard = () => {
       status: { color: "pending", text: "در انتظار بررسی" },
     },
   ];
+  const newsRows = [
+    {
+      subject: "تعیین نرخ ارز توسط بازار",
+      date: "1400/01/20",
+    },
+    {
+      subject: "صدور مجوز ورود برای کالاهای ممنوعه",
+      date: "1400/01/20",
+    },
+    {
+      subject: "واردات کالا با رمز ارز",
+      date: "1400/01/20",
+    },
+  ];
 
   let cardType = null;
   let type = "businessMan";
@@ -69,7 +83,7 @@ const Dashboard = () => {
       container
       spacing={3}
       justify="center"
-      alignItems="space-between"
+      alignItems="center"
       className={classes.container}
     >
       <Grid item xs={11}>
@@ -120,12 +134,27 @@ const Dashboard = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    <TableRow>
-                      <TableCell>1</TableCell>
-                      <TableCell>2</TableCell>
-                      <TableCell>3</TableCell>
-                      <TableCell>4</TableCell>
-                    </TableRow>
+                    {ticketRows.map((row) => (
+                      <TableRow
+                        key={`ticket-${row.ticketId}`}
+                        className={classes.tableRow}
+                        hover={true}
+                      >
+                        <TableCell>{row.ticketId}</TableCell>
+                        <TableCell>{row.subject}</TableCell>
+                        <TableCell>{row.date}</TableCell>
+                        <TableCell className={classes.statusCell}>
+                          <div
+                            className={`${classes.status} ${
+                              classes[row.status.color]
+                            }`}
+                          ></div>
+                          <span className={classes.statusText}>
+                            {row.status.text}
+                          </span>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
@@ -136,14 +165,37 @@ const Dashboard = () => {
           <Paper className={classes.paper}>
             <div className={classes.header}>
               <Typography className={classes.title} variant="h6">
-                جدیدترین تیکت ها
+                آخرین اخبار و اطلاعیه ها
               </Typography>
               <a className={classes.link} href="">
                 <Typography variant="body2">مشاهده همه</Typography>
                 <ArrowBackIos fontSize="small" />
               </a>
             </div>
-            <div className={classes.body}>body</div>
+            <div className={classes.body}>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>عنوان</TableCell>
+                      <TableCell>تاریخ </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {newsRows.map((row, index) => (
+                      <TableRow
+                        key={`news-${index + 1}`}
+                        className={classes.tableRow}
+                        hover={true}
+                      >
+                        <TableCell>{row.subject}</TableCell>
+                        <TableCell>{row.date}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
           </Paper>
         </Grid>
       </Grid>
