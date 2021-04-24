@@ -14,6 +14,8 @@ import {
 import { Alert } from "@material-ui/lab";
 import React from "react";
 import { ArrowBackIos } from "@material-ui/icons";
+import BusinessMan from "./BusinessMan";
+import ClearanceMan from "./ClearanceMan";
 
 const Dashboard = () => {
   const [open, setOpen] = React.useState(true);
@@ -68,10 +70,10 @@ const Dashboard = () => {
   let type = "businessMan";
   switch (type) {
     case "businessMan":
-      cardType = "";
+      cardType = <BusinessMan />;
       break;
     case "clearanceMan":
-      cardType = "";
+      cardType = <ClearanceMan />;
       break;
 
     default:
@@ -201,8 +203,12 @@ const Dashboard = () => {
       </Grid>
 
       <Grid item xs={11} className={classes.dynamicBox}>
-        dynamic card
-        {/* {cardType} */}
+
+
+
+
+      
+        {cardType}
       </Grid>
     </Grid>
   );
