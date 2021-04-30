@@ -41,6 +41,13 @@
 
 /* TABLE */
 
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .tableRow {
   transition: all 200ms !important;
 }
@@ -83,15 +90,43 @@
 .fixCell,
 .transmitter {
   display: flex !important;
-  justify-content: space-between ;
-  align-items: center ;
+  justify-content: space-between;
+  align-items: center;
 }
 .fixCell {
   width: 97%;
 }
 .transmitter {
-  justify-content: flex-start ;
+  justify-content: flex-start;
 }
 .transmitter div {
   margin-left: 1rem;
+}
+
+.footer {
+  width: 100%;
+  margin: 0 auto;
+}
+.pagination {
+  padding: 1.5rem;
+  width: 50%;
+  margin: 0 auto;
+}
+.paginationList {
+  direction: ltr !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.numberBtn {
+  border-radius: 6px !important;
+  padding: 0 !important;
+  height: 2rem !important;
+  min-width: 2rem !important;
+  background-color: transparent;
+}
+.change {
+  padding: 0.5rem !important;
+  min-width: 2rem !important;
 }

@@ -7,9 +7,11 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
   TableRow,
   Typography,
+  TablePagination
 } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
 
@@ -70,6 +72,11 @@ const ClearanceMan = () => {
                 </TableRow>
               ))}
             </TableBody>
+            <TableFooter>
+               <TableRow>
+                  <TablePagination/>
+               </TableRow>
+            </TableFooter>
           </Table>
         </TableContainer>
       </div>

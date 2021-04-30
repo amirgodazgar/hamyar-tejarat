@@ -9,11 +9,19 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableFooter,
   Typography,
+
 } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
+import { Pagination } from "@material-ui/lab";
 
 const BusinessMan = () => {
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   const rows = [
     {
       transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
@@ -93,7 +101,7 @@ const BusinessMan = () => {
         </a>
       </div>
       <div className={classes.body}>
-        <TableContainer>
+        <TableContainer className={classes.tableContainer}>
           <Table>
             <TableHead>
               <TableRow>
@@ -129,6 +137,18 @@ const BusinessMan = () => {
               ))}
             </TableBody>
           </Table>
+          <TableFooter className={classes.footer}>
+            <div className={classes.pagination}>
+              <Typography>Page: {page}</Typography>
+              <Pagination
+                shape="rounded"
+                color="secondary"
+                count={10}
+                page={page}
+                onChange={handleChange}
+              />
+            </div>
+          </TableFooter>
         </TableContainer>
       </div>
     </Paper>
