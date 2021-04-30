@@ -15,6 +15,7 @@
   padding: 0.65rem 0.5rem;
   width: 90%;
   box-shadow: 0 3px 15px #c4cad08f;
+  transition: all 250ms;
 }
 
 .textField::placeholder {
@@ -24,4 +25,23 @@
 .error {
   color: #b60123e1;
   font-size: 0.9rem;
+}
+
+/* UserInfo  */
+.userInfo_label_PC {
+  height: 40%;
+  width: 90%;
+}
+.userInfo_input_PC {
+  width: 90%;
+  background-color: #f4f4f4;
+  box-shadow: none;
+}
+
+.userInfo_input_PC:focus,
+.userInfo_input_PC:valid {
+  border: 1px solid #70707057;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 250ms;
 }
