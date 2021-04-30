@@ -7,14 +7,39 @@ export const authSlice = createSlice({
     isLogin: false,
     formType: "",
     change: false,
+    role: {
+      privateBusinessMan: false,
+      juridicalBusinessMan: false,
+      privateClearanceMan: true,
+      juridicalClearanceMan: false,
+    },
   },
   reducers: {
     changeFormType: (state, action) => {
       state.formType = action.payload;
       state.change = true;
     },
+    defineRole: (state, action) => {
+      switch (action.payload) {
+        case "PB":
+          state.role.privateBusinessMan = true;
+          break;
+        case "JB":
+          state.role.juridicalBusinessMan = true;
+          break;
+        case "PC":
+          state.role.privateClearanceMan = true;
+          break;
+        case "JC":
+          state.role.juridicalClearanceMan = true;
+          break;
+
+        default:
+          return state;
+      }
+    },
   },
 });
 
-export const { changeFormType } = authSlice.actions;
+export const { changeFormType, defineRole } = authSlice.actions;
 export default authSlice.reducer;

@@ -2,10 +2,10 @@ import { Fade } from "@material-ui/core";
 import React from "react";
 import classes from "./inputField.module.css";
 
-const InputField = ({ type, label, formik, placeHolder }) => {
+const InputField = ({ type, label, formik, placeHolder,name, customizeClass }) => {
   return (
     <React.Fragment>
-      <div className={classes.labelBox}>
+      <div className={`${classes.labelBox} ${classes[customizeClass]}`}>
         <label className={classes.label} htmlFor={type}>
           {label}
         </label>
@@ -21,7 +21,7 @@ const InputField = ({ type, label, formik, placeHolder }) => {
       <input
         className={classes.textField}
         type={type}
-        name={type}
+        name={name ? name : type}
         placeholder={placeHolder}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
