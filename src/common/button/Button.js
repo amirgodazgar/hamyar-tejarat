@@ -1,8 +1,7 @@
 import React from "react";
 import classes from "./buttonStyle.module.css";
 
-const Button = ({ children, customizeClass, click , type}) => {
-  console.log(`${classes.btn} ${classes[customizeClass]}`)
+const Button = ({ children, customizeClass, click, type }) => {
   return (
     <button
       className={`${classes.btn} ${classes[customizeClass]}`}

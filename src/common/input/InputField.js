@@ -14,26 +14,30 @@ const InputField = ({
   return (
     <React.Fragment>
       <div className={`${classes.labelBox} ${classes[customizeLabel]}`}>
-        <label className={classes.label} htmlFor={name ? name : type}>
+        <label className={classes.label} htmlFor={name}>
           {label}
         </label>
-        {formik.touched[type] && formik.errors[type] ? (
+        {formik.touched[name] && formik.errors[name] ? (
           <Fade
-            in={formik.touched[type] && formik.errors[type] ? true : false}
+            in={formik.touched[name] && formik.errors[name] ? true : false}
             timeout={400}
           >
-            <div className={classes.error}>{formik.errors[type]}</div>
+            <div className={classes.error}>{formik.errors[name]}</div>
           </Fade>
         ) : null}
       </div>
       <input
-        className={`${classes.textField} ${classes[customizeInput]} `}
+        className={`${classes.textField} ${classes[customizeInput]} ${
+          formik.touched[name] && formik.errors[name]
+            ? classes.inputError
+            : null
+        } `}
         type={type}
-        name={name ? name : type}
+        name={name}
         placeholder={placeHolder}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values[type]}
+        value={formik.values[name]}
         required
       />
     </React.Fragment>

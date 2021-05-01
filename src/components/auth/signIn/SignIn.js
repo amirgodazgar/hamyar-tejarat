@@ -46,12 +46,14 @@ const SignIn = () => {
             <Input
               formik={formik}
               type="email"
+              name="email"
               label={authData.signIn.email}
               placeHolder="example@gmail.com"
             />
             <Input
               formik={formik}
               type="password"
+              name="password"
               label={authData.signIn.pass}
               placeHolder="********"
             />

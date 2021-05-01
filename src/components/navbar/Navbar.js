@@ -46,10 +46,9 @@ const Navbar = (props) => {
               />
             </button>
           </div>
-          {
-            isLogin === false ? (
+          {isLogin === false ? (
             <div className={classes.panel}>
-              <Link className={classes.link} to="/adminPanel">
+              <Link className={classes.link} to="/adminPanel/dashboard">
                 <Button customizeClass="panel">
                   <PersonIcon fontSize="large" />
                   پنل کاربری

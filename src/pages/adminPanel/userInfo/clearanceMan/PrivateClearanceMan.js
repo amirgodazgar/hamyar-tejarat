@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../../../../common/input/InputField";
-import { Chip, Paper } from "@material-ui/core";
+import { Chip, Paper, Fade } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
 import classes from "./clearanceMan.module.css";
 import { useFormik } from "formik";
@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
 import { CloudUpload, Image } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { Alert } from "@material-ui/lab";
 
 const PrivateClearanceMan = ({ backToDashboard }) => {
   const [chips, setChips] = useState([]);
@@ -33,24 +34,32 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     selectClearance: "",
     clearances: [],
   };
+
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("نام را وارد کنید"),
+    lastName: Yup.string().required("نام خانوادگی را وارد کنید"),
+    clearanceId: Yup.string()
+      .min(11, "شماره صحیح نیست")
+      .required(" کارگذاری را وارد کنید"),
+    mobile: Yup.string()
+      .min(11, "شماره موبایل صحیح نیست")
+      .required("موبایل وارد کنید"),
+    address: Yup.string().required("آدرس  را وارد کنید"),
+    email: Yup.string().email("ایمیل صحیح نیست").required("ایمیل را وارد کنید"),
+    selectClearance: Yup.string().required("گمرک مورد نظر خود را وارد کنید"),
+    workExperience: Yup.mixed().required(),
+    criminalRecord: Yup.mixed().required(),
+  });
+
   const onSubmit = (values) => {
-    values.clearances.push(...chips);
     console.log(values);
+    values.clearances.push(...chips);
   };
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
   });
-
-  //  const validationSchema = Yup.object({
-  //    email: Yup.string()
-  //      .email(authData.signIn.errors.email.wrong)
-  //      .required(authData.signIn.errors.email.required),
-  //    password: Yup.string()
-  //      .min(8, authData.signIn.errors.pass.min)
-  //      .required(authData.signIn.errors.pass.required),
-  //  });
 
   return (
     <React.Fragment>
@@ -198,37 +207,75 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
           </div>
 
           <div className={`${classes.thirdRow} ${classes.selectClearance} `}>
-            <div>
+            <div className={classes.selectClearanceTitle}>
               {
                 adminPanelData.userInfo.privateClearanceMan.forms
                   .selectClearance
               }
+              {formik.touched.selectClearance &&
+              chips.length === 0 &&
+              formik.errors.selectClearance ? (
+                <Fade
+                  in={
+                    formik.touched.selectClearance &&
+                    chips.length === 0 &&
+                    formik.errors.selectClearance
+                      ? true
+                      : false
+                  }
+                  timeout={400}
+                >
+                  <div className={classes.error}>
+                    {formik.errors.selectClearance}
+                  </div>
+                </Fade>
+              ) : null}
             </div>
             <select
               name="selectClearance"
-              value={chips}
+              multiple={false}
               onChange={(e) => addChipsHandler(e.target.value)}
-              className={classes.selectInput}
+              className={`${classes.selectInput} ${
+                formik.touched.selectClearance &&
+                formik.errors.selectClearance &&
+                chips.length === 0
+                  ? classes.inputError
+                  : null
+              } `}
             >
               {adminPanelData.userInfo.privateClearanceMan.forms.options.map(
-                (option) => (
+                (option, index) => (
                   <option
                     style={
                       option.value === "0" ? { color: "rgba(0,0,0,0.4)" } : null
                     }
                     value={option.value}
                     label={option.label}
+                    key={index}
                   />
                 )
               )}
             </select>
           </div>
           <div className={`${classes.thirdRow} ${classes.criminalRecord} `}>
-            <div>
+            <div className={classes.criminalRecordTitle}>
               {
                 adminPanelData.userInfo.privateClearanceMan.forms
                   .criminalRecordUpload
               }
+              {formik.touched.criminalRecord && formik.errors.criminalRecord ? (
+                <Fade
+                  in={
+                    formik.touched.criminalRecord &&
+                    formik.errors.criminalRecord
+                      ? true
+                      : false
+                  }
+                  timeout={400}
+                >
+                  <Alert severity="error" className={classes.alert}></Alert>
+                </Fade>
+              ) : null}
             </div>
             <input
               className={classes.uploadInput}
@@ -240,11 +287,24 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
             <CloudUpload fontSize="small" className={classes.uploadIcon} />
           </div>
           <div className={`${classes.thirdRow} ${classes.workExperience} `}>
-            <div>
+            <div className={classes.workExperienceTitle}>
               {
                 adminPanelData.userInfo.privateClearanceMan.forms
                   .WorkExperienceUpload
               }
+              {formik.touched.workExperience && formik.errors.workExperience ? (
+                <Fade
+                  in={
+                    formik.touched.workExperience &&
+                    formik.errors.workExperience
+                      ? true
+                      : false
+                  }
+                  timeout={400}
+                >
+                  <Alert severity="error" className={classes.alert}></Alert>
+                </Fade>
+              ) : null}
             </div>
             <input
               className={classes.uploadInput}

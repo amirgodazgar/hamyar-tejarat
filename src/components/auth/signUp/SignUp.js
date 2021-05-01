@@ -54,12 +54,14 @@ const SignUp = () => {
             <Input
               formik={formik}
               type="email"
+              name="email"
               label={authData.signUp.email}
               placeHolder="example@gmail.com"
             />
             <Input
               formik={formik}
               type="password"
+              name="password"
               label={authData.signUp.pass}
               placeHolder="********"
             />
@@ -86,19 +88,18 @@ const SignUp = () => {
                 />
               </RadioGroup>
               {formik.touched.personType && formik.errors.personType ? (
-              <Fade
-                in={
-                  formik.touched.personType && formik.errors.personType
-                    ? true
-                    : false
-                }
-                timeout={400}
-              >
-                <Alert severity="error" className={classes.alert}></Alert>
-              </Fade>
-            ) : null}
+                <Fade
+                  in={
+                    formik.touched.personType && formik.errors.personType
+                      ? true
+                      : false
+                  }
+                  timeout={400}
+                >
+                  <Alert severity="error" className={classes.alert}></Alert>
+                </Fade>
+              ) : null}
             </div>
-            
 
             <div className={classes.checkBoxContainer}>
               <FormLabel className={classes.label}>
@@ -123,19 +124,19 @@ const SignUp = () => {
                 />
               </RadioGroup>
               {formik.touched.activityType && formik.errors.activityType ? (
-              <Fade
-                in={
-                  formik.touched.activityType && formik.errors.activityType
-                    ? true
-                    : false
-                }
-                timeout={400}
-              >
-                <Alert severity="error" className={classes.alert}></Alert>
-              </Fade>
-            ) : null}
+                <Fade
+                  in={
+                    formik.touched.activityType && formik.errors.activityType
+                      ? true
+                      : false
+                  }
+                  timeout={400}
+                >
+                  <Alert severity="error" className={classes.alert}></Alert>
+                </Fade>
+              ) : null}
             </div>
-    
+
             <Button
               type="submit"
               customizeClass={

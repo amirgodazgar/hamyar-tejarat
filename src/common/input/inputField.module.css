@@ -18,6 +18,11 @@
   transition: all 250ms;
 }
 
+.inputError {
+  border: 1px solid #b60123e1;
+  transition: all 250ms;
+}
+
 .textField::placeholder {
   color: #c4cad0;
 }
@@ -29,8 +34,12 @@
 
 /* UserInfo  */
 .userInfo_label_PC {
-  height: 40%;
-  width: 100%;
+  height: 32%;
+  width: 95%;
+  
+}
+.userInfo_label_PC div {
+  font-size: 0.9rem;
 }
 .userInfo_input_PC {
   width: 90%;

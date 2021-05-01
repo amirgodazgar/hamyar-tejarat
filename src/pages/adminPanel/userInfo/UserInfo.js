@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import classes from "./userInfo.module.css";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
 import { useHistory } from "react-router-dom";
 
