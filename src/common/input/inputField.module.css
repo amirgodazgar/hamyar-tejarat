@@ -30,16 +30,27 @@
 /* UserInfo  */
 .userInfo_label_PC {
   height: 40%;
-  width: 90%;
+  width: 100%;
 }
 .userInfo_input_PC {
   width: 90%;
   background-color: #f4f4f4;
   box-shadow: none;
+  padding: 0.65rem 0.5rem;
 }
-
+.userInfo_address_input_PC,
+.userInfo_email_input_PC {
+  width: 95%;
+  background-color: #f4f4f4;
+  box-shadow: none;
+  padding: 0.65rem 0.5rem;
+}
 .userInfo_input_PC:focus,
-.userInfo_input_PC:valid {
+.userInfo_input_PC:valid,
+.userInfo_address_input_PC:focus,
+.userInfo_address_input_PC:valid,
+.userInfo_email_input_PC:focus,
+.userInfo_email_input_PC:valid {
   border: 1px solid #70707057;
   background-color: #ffffff;
   box-shadow: 0px 4px 8px 1px #c4cad05b;

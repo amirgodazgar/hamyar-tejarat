@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./userInfo.module.css";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
 import { useDispatch, useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
+import { useHistory } from "react-router-dom";
 
+const UserInfo = ({ backToTab }) => {
+  let history = useHistory();
 
-const UserInfo = () => {
+  useEffect(() => {
+    backToTab(4);
+    history.push("/adminPanel/userInfo");
+  }, []);
+
   const role = useSelector((state) => state.auth.role);
-  const dispatch = useDispatch();
 
   let rolType;
 
@@ -20,7 +26,7 @@ const UserInfo = () => {
       rolType = "juridicalBusinessMan";
       break;
     case role.privateClearanceMan:
-      rolType = <PrivateClearanceMan/>;
+      rolType = <PrivateClearanceMan backToDashboard={backToTab} />;
       break;
     case role.juridicalClearanceMan:
       rolType = "juridicalClearanceMan";
