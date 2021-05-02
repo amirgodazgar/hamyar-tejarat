@@ -10,8 +10,8 @@ export const authSlice = createSlice({
     role: {
       privateBusinessMan: false,
       juridicalBusinessMan: false,
-      privateClearanceMan: true,
-      juridicalClearanceMan: false,
+      privateClearanceMan: false,
+      juridicalClearanceMan: true,
     },
   },
   reducers: {

@@ -39,12 +39,14 @@ export const adminPanelData = {
 
   userInfo: {
     title: "اطلاعات کاربری",
-    privateClearanceMan: {
+    clearanceMan: {
       forms: {
+        companyName: "نام شرکت",
+        companyNationalId: "شناسه ملی شرکت",
         firstName: "نام",
         lastName: "نام خانوادگی",
         clearanceId: "شماره کارگذاری گمرک",
-        mobile: "موبایل",
+        mobile: "شماره تلفن همراه  ",
         address: "آدرس محل کار",
         email: "ایمیل",
         clearances: "گمرک های انتخاب شده",
@@ -62,12 +64,28 @@ export const adminPanelData = {
         ],
       },
       placeHolder: {
+        companyName: "شرکت ترخیص همراه سپاهان ایرانیان",
         firstName: "علی",
         lastName: "محمدی",
+        companyNationalId: "_ _ _ _ _ _ _ _ _ _ _",
         clearanceId: "_ _ _ _ _ _ _ _ _ _ _",
         mobile: "_ _ _ _ _ _ _ _ _ _ _",
         address: "خیابان فاطمی، خیابان جهان آرا، ساختمان شقایق، واحد 5",
         email: "example@gmail.com",
+      },
+      error: {
+        companyName: "نام شرکت را وارد کنید",
+        wrongNumber: "شماره صحیح نیست",
+        companyNationalId: " شناسه را وارد کنید",
+        clearanceId: " کارگذاری را وارد کنید",
+        firstName: "نام  را وارد کنید",
+        lastName: " نام خانوادگی را وارد کنید",
+        mobileWrong: "شماره همراه صحیح نیست",
+        mobile: "شماره همراه وارد کنید",
+        address: "آدرس  را وارد کنید",
+        emailWrong: "ایمیل صحیح نیست",
+        email: "ایمیل را وارد کنید",
+        selectClearance: "گمرک مورد نظر خود را وارد کنید",
       },
     },
   },

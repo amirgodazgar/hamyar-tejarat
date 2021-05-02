@@ -1,4 +1,4 @@
-.paperPc {
+.paper {
   padding: 2rem !important;
   border-radius: 10px !important;
 }
@@ -26,7 +26,33 @@
   margin: 0 !important;
 }
 
-.PrivateClearanceMan {
+.juridicalClearanceMan {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 5rem 5rem 12rem 5rem 2.5rem;
+  gap: 3rem 1rem;
+  justify-content: center;
+}
+.firstRow_JC {
+  grid-column: 1/6;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 5rem;
+  gap: 3rem 1rem;
+  justify-content: center;
+}
+.companyName {
+  grid-column: 1/2;
+}
+.companyNationalId {
+  grid-column: 2/3;
+}
+.mobileNum {
+  grid-column: 3/4;
+}
+
+.privateClearanceMan {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 5rem 5rem 12rem 5rem 2.5rem;

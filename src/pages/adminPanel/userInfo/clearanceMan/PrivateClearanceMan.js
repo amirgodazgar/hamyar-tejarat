@@ -36,17 +36,27 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   };
 
   const validationSchema = Yup.object({
-    firstName: Yup.string().required("نام را وارد کنید"),
-    lastName: Yup.string().required("نام خانوادگی را وارد کنید"),
+    firstName: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.firstName
+    ),
+    lastName: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.lastName
+    ),
     clearanceId: Yup.string()
-      .min(11, "شماره صحیح نیست")
-      .required(" کارگذاری را وارد کنید"),
+      .min(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
+      .required(adminPanelData.userInfo.clearanceMan.error.clearanceId),
     mobile: Yup.string()
-      .min(11, "شماره موبایل صحیح نیست")
-      .required("موبایل وارد کنید"),
-    address: Yup.string().required("آدرس  را وارد کنید"),
-    email: Yup.string().email("ایمیل صحیح نیست").required("ایمیل را وارد کنید"),
-    selectClearance: Yup.string().required("گمرک مورد نظر خود را وارد کنید"),
+      .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
+      .required(adminPanelData.userInfo.clearanceMan.error.mobile),
+    address: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.address
+    ),
+    email: Yup.string()
+      .email(adminPanelData.userInfo.clearanceMan.error.emailWrong)
+      .required(adminPanelData.userInfo.clearanceMan.error.email),
+    selectClearance: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.selectClearance
+    ),
     workExperience: Yup.mixed().required(),
     criminalRecord: Yup.mixed().required(),
   });
@@ -63,100 +73,94 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
 
   return (
     <React.Fragment>
-      <Paper className={classes.paperPc}>
+      <Paper className={classes.paper}>
         <form
           onSubmit={formik.handleSubmit}
-          className={classes.PrivateClearanceMan}
+          className={classes.privateClearanceMan}
         >
           <div className={`${classes.firstRow} ${classes.firstName} `}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_input"
               formik={formik}
               name="firstName"
               type="text"
-              label={
-                adminPanelData.userInfo.privateClearanceMan.forms.firstName
-              }
+              label={adminPanelData.userInfo.clearanceMan.forms.firstName}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder
-                  .firstName
+                adminPanelData.userInfo.clearanceMan.placeHolder.firstName
               }
             />
           </div>
           <div className={`${classes.firstRow} ${classes.lastName} `}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_input"
               formik={formik}
               name="lastName"
               type="text"
-              label={adminPanelData.userInfo.privateClearanceMan.forms.lastName}
+              label={adminPanelData.userInfo.clearanceMan.forms.lastName}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder.lastName
+                adminPanelData.userInfo.clearanceMan.placeHolder.lastName
               }
             />
           </div>
           <div className={`${classes.firstRow} ${classes.clearanceId} `}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_input"
               formik={formik}
               name="clearanceId"
               type="text"
-              label={
-                adminPanelData.userInfo.privateClearanceMan.forms.clearanceId
-              }
+              label={adminPanelData.userInfo.clearanceMan.forms.clearanceId}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder
-                  .clearanceId
+                adminPanelData.userInfo.clearanceMan.placeHolder.clearanceId
               }
             />
           </div>
           <div className={`${classes.firstRow} ${classes.mobile} `}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_input"
               formik={formik}
               name="mobile"
               type="text"
-              label={adminPanelData.userInfo.privateClearanceMan.forms.mobile}
+              label={adminPanelData.userInfo.clearanceMan.forms.mobile}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder.mobile
+                adminPanelData.userInfo.clearanceMan.placeHolder.mobile
               }
             />
           </div>
 
           <div className={classes.addressBox}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_address_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_address_input"
               formik={formik}
               name="address"
               type="text"
-              label={adminPanelData.userInfo.privateClearanceMan.forms.address}
+              label={adminPanelData.userInfo.clearanceMan.forms.address}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder.address
+                adminPanelData.userInfo.clearanceMan.placeHolder.address
               }
             />
           </div>
           <div className={classes.emailBox}>
             <InputField
-              customizeLabel="userInfo_label_PC"
-              customizeInput="userInfo_email_input_PC"
+              customizeLabel="userInfo_label"
+              customizeInput="userInfo_email_input"
               formik={formik}
               name="email"
               type="text"
-              label={adminPanelData.userInfo.privateClearanceMan.forms.email}
+              label={adminPanelData.userInfo.clearanceMan.forms.email}
               placeHolder={
-                adminPanelData.userInfo.privateClearanceMan.placeHolder.email
+                adminPanelData.userInfo.clearanceMan.placeHolder.email
               }
             />
           </div>
 
           <div className={`${classes.secondRow} ${classes.clearances} `}>
             <div className={classes.clearancesTitle}>
-              {adminPanelData.userInfo.privateClearanceMan.forms.clearances}
+              {adminPanelData.userInfo.clearanceMan.forms.clearances}
             </div>
             <div className={classes.clearancesBox}>
               {chips.map((item, index) =>
@@ -175,10 +179,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
             className={`${classes.secondRow} ${classes.imageCriminalRecord} `}
           >
             <div className={classes.imageCriminalRecordTitle}>
-              {
-                adminPanelData.userInfo.privateClearanceMan.forms
-                  .criminalRecordImg
-              }
+              {adminPanelData.userInfo.clearanceMan.forms.criminalRecordImg}
             </div>
             <div className={classes.imageCriminalRecordBox}>
               {formik.values.criminalRecord ? (
@@ -192,10 +193,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
             className={`${classes.secondRow} ${classes.imageWorkExperience} `}
           >
             <div className={classes.imageWorkExperienceTitle}>
-              {
-                adminPanelData.userInfo.privateClearanceMan.forms
-                  .WorkExperienceImg
-              }
+              {adminPanelData.userInfo.clearanceMan.forms.WorkExperienceImg}
             </div>
             <div className={classes.imageWorkExperienceBox}>
               {formik.values.workExperience ? (
@@ -208,10 +206,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
 
           <div className={`${classes.thirdRow} ${classes.selectClearance} `}>
             <div className={classes.selectClearanceTitle}>
-              {
-                adminPanelData.userInfo.privateClearanceMan.forms
-                  .selectClearance
-              }
+              {adminPanelData.userInfo.clearanceMan.forms.selectClearance}
               {formik.touched.selectClearance &&
               chips.length === 0 &&
               formik.errors.selectClearance ? (
@@ -243,7 +238,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                   : null
               } `}
             >
-              {adminPanelData.userInfo.privateClearanceMan.forms.options.map(
+              {adminPanelData.userInfo.clearanceMan.forms.options.map(
                 (option, index) => (
                   <option
                     style={
@@ -259,10 +254,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
           </div>
           <div className={`${classes.thirdRow} ${classes.criminalRecord} `}>
             <div className={classes.criminalRecordTitle}>
-              {
-                adminPanelData.userInfo.privateClearanceMan.forms
-                  .criminalRecordUpload
-              }
+              {adminPanelData.userInfo.clearanceMan.forms.criminalRecordUpload}
               {formik.touched.criminalRecord && formik.errors.criminalRecord ? (
                 <Fade
                   in={
@@ -288,10 +280,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
           </div>
           <div className={`${classes.thirdRow} ${classes.workExperience} `}>
             <div className={classes.workExperienceTitle}>
-              {
-                adminPanelData.userInfo.privateClearanceMan.forms
-                  .WorkExperienceUpload
-              }
+              {adminPanelData.userInfo.clearanceMan.forms.WorkExperienceUpload}
               {formik.touched.workExperience && formik.errors.workExperience ? (
                 <Fade
                   in={

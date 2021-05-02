@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import classes from "./userInfo.module.css";
-import { Grid, Paper, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
 import { useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
 import { useHistory } from "react-router-dom";
+import JuridicalClearanceMan from "./clearanceMan/JuridicalClearanceMan";
 
 const UserInfo = ({ backToTab }) => {
   let history = useHistory();
@@ -29,7 +30,7 @@ const UserInfo = ({ backToTab }) => {
       rolType = <PrivateClearanceMan backToDashboard={backToTab} />;
       break;
     case role.juridicalClearanceMan:
-      rolType = "juridicalClearanceMan";
+      rolType = <JuridicalClearanceMan backToDashboard={backToTab} />;
       break;
 
     default:
