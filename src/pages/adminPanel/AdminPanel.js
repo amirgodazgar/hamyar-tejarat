@@ -15,12 +15,12 @@ import {
   ListItemText,
   Fade,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "./adminPanel.module.css";
 import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
 import { Menu, Notifications, Email } from "@material-ui/icons";
-import { Switch, Route, Link, useHistory } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Dashboard from "./dashboard/Dashboard";
 import SuggestionsList from "./suggestionsList/SuggestionsList";
 import Tickets from "./tickets/Tickets";
@@ -37,15 +37,9 @@ const AdminPanel = () => {
   const selectedHandler = (index) => {
     setSelected(index);
   };
-  // let history = useHistory();
-
-  // useEffect(() => {
-  //   selectedHandler(0);
-  //   history.push("/adminPanel/dashboard");
-  // }, []);
 
   return (
-    <Container maxWidth="xl" className={classes.container}>
+    <div className={classes.container}>
       <AppBar
         position="fixed"
         className={open ? classes.appBarShift : classes.appBar}
@@ -59,8 +53,8 @@ const AdminPanel = () => {
             <Box className={classes.userBox}>
               <Avatar />
               <div className={classes.userBoxTitle}>
-                <Typography variant="button">چنگیز مغول</Typography>
-                <Typography variant="caption">ترخیص کار</Typography>
+                <Typography variant="button" className={classes.userTitle}>چنگیز مغول</Typography>
+                <Typography variant="caption" className={classes.userRole}>ترخیص کار</Typography>
               </div>
             </Box>
             <Box className={classes.notificationBox}>
@@ -168,7 +162,7 @@ const AdminPanel = () => {
           <Route path="/adminPanel/bankAccount" component={BankAccount} />
         </Switch>
       </div>
-    </Container>
+    </div>
   );
 };
 

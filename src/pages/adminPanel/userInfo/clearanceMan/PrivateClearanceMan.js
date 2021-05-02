@@ -162,7 +162,13 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
             <div className={classes.clearancesTitle}>
               {adminPanelData.userInfo.clearanceMan.forms.clearances}
             </div>
-            <div className={classes.clearancesBox}>
+            <div
+              className={
+                chips.length === 0
+                  ? classes.clearancesBox
+                  : `${classes.clearancesBox} ${classes.active}`
+              }
+            >
               {chips.map((item, index) =>
                 item !== "0" ? (
                   <Chip

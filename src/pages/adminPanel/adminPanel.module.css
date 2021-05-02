@@ -1,5 +1,8 @@
 .container {
-  height: 100%;
+  height: 100% !important;
+  width: 100% !important;
+  background-color: #f4f4f4;
+  padding: 0 !important;
 }
 
 .appBar {
@@ -44,7 +47,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+}
+.userTitle {
+  color: #192129;
+}
+.userRole {
+  font-size: 0.75rem;
+  color: #c4cad0;
+  font-weight: 500 !important;
 }
 .notificationBox {
   flex: 1;
@@ -141,7 +152,8 @@
 /* ----- Main ---- */
 .main {
   color: #192129;
-  margin: 5rem auto 2rem 0;
+  /* margin: 5rem auto 2rem 0; */
+  padding: 7rem 3rem 5rem 0;
   height: 100%;
   width: 96%;
 }

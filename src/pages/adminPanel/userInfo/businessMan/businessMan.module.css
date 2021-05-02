@@ -1,0 +1,123 @@
+.paper {
+  border-radius: 10px !important;
+  height: 30rem;
+  padding: 6rem !important;
+}
+.error {
+  color: #b60123e1;
+  font-size: 0.9rem;
+}
+
+.juridicalBusinessMan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 5rem 5rem;
+  gap: 3rem 1rem;
+  justify-content: center;
+}
+.privateBusinessMan {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 5rem 5rem 5rem;
+  gap: 3rem 1rem;
+  justify-content: center;
+}
+.firstRow_JB,
+.firstRow_PB {
+  grid-column: 1/6;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 5rem;
+  justify-content: center;
+}
+.firstName {
+  grid-column: 1/2;
+}
+.lastName {
+  grid-column: 2/3;
+}
+.nationalId {
+  grid-column: 3/4;
+}
+
+.firstRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  grid-row: 1;
+}
+.mobileBox {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1/2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.emailBox_PB {
+  display: flex;
+  flex-direction: column;
+  grid-column: 2/4;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.emailBox_PB input {
+  width: 99%;
+}
+.emailBox {
+  display: flex;
+  flex-direction: column;
+  grid-column: 1/3;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.emailBox input {
+  width: 99%;
+}
+.inputError {
+  border: 1px solid #b60123e1;
+  transition: all 250ms;
+}
+
+.BtnBox {
+  grid-row: 2;
+  grid-column: 3;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 1.2rem 0.25rem 0;
+}
+
+.BtnBox button {
+  flex: 0 0 45%;
+}
+.BtnBox a {
+  flex: 0 0 45%;
+}
+
+.BtnBox_PB {
+  grid-row: 3;
+  grid-column: 3/4;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding: 0 1rem 0 0;
+}
+.BtnBox_PB button {
+  flex: 0 0 45%;
+}
+.BtnBox_PB a {
+  flex: 0 0 45%;
+}

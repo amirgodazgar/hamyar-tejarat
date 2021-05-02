@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
 import { useHistory } from "react-router-dom";
 import JuridicalClearanceMan from "./clearanceMan/JuridicalClearanceMan";
+import JuridicalBusinessMan from "./businessMan/JuridicalBusinessMan";
+import PrivateBusinessMan from "./businessMan/PrivateBusinessMan";
 
 const UserInfo = ({ backToTab }) => {
   let history = useHistory();
@@ -21,10 +23,10 @@ const UserInfo = ({ backToTab }) => {
 
   switch (true) {
     case role.privateBusinessMan:
-      rolType = "privateBusinessMan";
+      rolType = <PrivateBusinessMan backToDashboard={backToTab} />;
       break;
     case role.juridicalBusinessMan:
-      rolType = "juridicalBusinessMan";
+      rolType = <JuridicalBusinessMan backToDashboard={backToTab} />;
       break;
     case role.privateClearanceMan:
       rolType = <PrivateClearanceMan backToDashboard={backToTab} />;
