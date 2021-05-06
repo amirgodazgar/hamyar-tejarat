@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { authData } from "../../../constant/authData";
 import { Fade } from "@material-ui/core";
 import * as Yup from "yup";
+import { register } from "../../../services/register";
 
 const SignUp = () => {
   const change = useSelector((state) => state.auth.change);
@@ -36,7 +37,14 @@ const SignUp = () => {
     activityType: Yup.string().required(authData.signUp.errors.activityType),
   });
   const onSubmit = (values) => {
-    console.log(values);
+    const userInfo = {
+      email: values.email,
+      password: values.password,
+      userType: values.personType,
+      userRole: values.activityType,
+    };
+    register(userInfo);
+    console.log(userInfo);
   };
   const formik = useFormik({
     initialValues,
@@ -77,12 +85,12 @@ const SignUp = () => {
                 onChange={formik.handleChange}
               >
                 <FormControlLabel
-                  value="real"
+                  value="Private"
                   control={<Radio color="primary" />}
                   label={authData.signUp.real}
                 />
                 <FormControlLabel
-                  value="legal"
+                  value="Juridical"
                   control={<Radio color="primary" />}
                   label={authData.signUp.legal}
                 />
@@ -113,12 +121,12 @@ const SignUp = () => {
                 onChange={formik.handleChange}
               >
                 <FormControlLabel
-                  value="businessMan"
+                  value="Businessman"
                   control={<Radio color="primary" />}
                   label={authData.signUp.businessMan}
                 />
                 <FormControlLabel
-                  value="clearanceMan"
+                  value="Clearanceman"
                   control={<Radio color="primary" />}
                   label={authData.signUp.clearanceMan}
                 />

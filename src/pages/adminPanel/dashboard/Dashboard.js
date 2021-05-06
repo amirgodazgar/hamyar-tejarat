@@ -113,7 +113,7 @@ const Dashboard = () => {
         justify="space-between"
         className={classes.staticBox}
       >
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <Paper className={classes.paper}>
             <div className={classes.header}>
               <Typography className={classes.title} variant="h6">
@@ -163,7 +163,7 @@ const Dashboard = () => {
             </div>
           </Paper>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Paper className={classes.paper}>
             <div className={classes.header}>
               <Typography className={classes.title} variant="h6">

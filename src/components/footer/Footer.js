@@ -14,8 +14,8 @@ const Footer = () => {
         <div className={classes.links}>
           <h6>{footerText.links.header}</h6>
           <ul>
-            {footerText.links.items.map((item) => (
-              <li>{item}</li>
+            {footerText.links.items.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </ul>
         </div>

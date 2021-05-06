@@ -9,6 +9,8 @@ import "./App.module.css";
 import Home from "./pages/home/Home";
 import Auth from "./pages/auth/Auth";
 import AdminPanel from "./pages/adminPanel/AdminPanel";
+import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
+import ResetPassword from "./components/auth/resetPassword/ResetPassword";
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -22,6 +24,8 @@ function App() {
           <Route path="/adminPanel" component={AdminPanel} />
           <Layout>
             <Route exact path="/" component={Home} />
+            <Route path="/Account/VerifyEmail" component={VerifyEmail} />
+            <Route path="/Account/ResetPassword" component={ResetPassword} />
           </Layout>
         </Switch>
       </StylesProvider>

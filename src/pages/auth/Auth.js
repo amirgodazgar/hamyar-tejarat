@@ -6,7 +6,7 @@ import SignIn from "../../components/auth/signIn/SignIn";
 import SignUp from "../../components/auth/signUp/SignUp";
 import SuccessSignUp from "../../components/auth/Confirmation/SuccessSignUp";
 import ActiveAccount from "../../components/auth/Confirmation/ActiveAccount";
-import SuccessChangePass from "../../components/auth/Confirmation/ActiveAccount";
+import SuccessChangePass from "../../components/auth/Confirmation/SuccessChangePass";
 import { authData } from "../../constant/authData";
 
 

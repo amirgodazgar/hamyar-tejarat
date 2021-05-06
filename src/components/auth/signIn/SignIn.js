@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
-import { useDispatch } from "react-redux";
-import { changeFormType } from "../.../../../../store/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeFormType,
+  setMessage,
+} from "../.../../../../store/auth/authSlice";
 import { Checkbox, Grow } from "@material-ui/core";
 import { authData } from "../../../constant/authData";
 import * as Yup from "yup";
+import { signIn } from "../../../services/login";
+import { Alert } from "@material-ui/lab";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  let message = useSelector((state) => state.auth.message);
+
   const forgotPasswordHandler = () => {
     dispatch(changeFormType("forgotPassword"));
   };
+
   const initialValues = {
     email: "",
     password: "",
@@ -29,6 +37,11 @@ const SignIn = () => {
   });
   const onSubmit = (values) => {
     console.log(values);
+    const userInfo = {
+      email: values.email,
+      password: values.password,
+    };
+    signIn(userInfo, dispatch);
   };
   const formik = useFormik({
     initialValues,
@@ -70,19 +83,32 @@ const SignIn = () => {
                 <i>{authData.signIn.saveInfo}</i>
               </label>
             </div>
-            <Button
-              type="submit"
-              customizeClass={
-                formik.isValid &&
-                formik.values.email !== "" &&
-                formik.values.password !== ""
-                  ? "authActive"
-                  : "auth"
-              }
-            >
-              {authData.signIn.btn}
-            </Button>
+            {message === "" ? (
+              <Button
+                type="submit"
+                customizeClass={
+                  formik.isValid &&
+                  formik.values.email !== "" &&
+                  formik.values.password !== ""
+                    ? "authActive"
+                    : "auth"
+                }
+              >
+                {authData.signIn.btn}
+              </Button>
+            ) : (
+              <Grow in={message !== "" ? true : false}>
+                <Alert
+                  severity="success"
+                  onClose={() => dispatch(setMessage(""))}
+                  className={classes.alert}
+                >
+                  {message}
+                </Alert>
+              </Grow>
+            )}
           </div>
+
           <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
             {authData.signIn.forgotPass}
           </a>

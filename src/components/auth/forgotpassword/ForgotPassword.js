@@ -4,10 +4,14 @@ import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
 import { useDispatch, useSelector } from "react-redux";
-import { changeFormType } from "../.../../../../store/auth/authSlice";
+import {
+  changeFormType,
+} from "../.../../../../store/auth/authSlice";
 import { Grow } from "@material-ui/core";
 import * as Yup from "yup";
 import { authData } from "../../../constant/authData";
+import { requestResetPassword } from "../../../services/requestResetPassword";
+
 
 const ForgotPassword = () => {
   const change = useSelector((state) => state.auth.change);
@@ -24,7 +28,7 @@ const ForgotPassword = () => {
       .required(authData.signIn.errors.email.required),
   });
   const onSubmit = (values) => {
-    console.log(values);
+    requestResetPassword(values.email, dispatch);
   };
   const formik = useFormik({
     initialValues,
@@ -43,6 +47,7 @@ const ForgotPassword = () => {
             <Input
               formik={formik}
               type="email"
+              name="email"
               label={authData.signIn.email}
               placeHolder="example@gmail.com"
             />
@@ -60,6 +65,7 @@ const ForgotPassword = () => {
               {authData.forgotPass.title}
             </Button>
           </div>
+
           <a onClick={backwardHandler} className={classes.backward}>
             {authData.successChangePass.btn}
           </a>

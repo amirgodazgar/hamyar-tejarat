@@ -1,11 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import http from "../../services/httpServices";
+
+export const getToken = createAsyncThunk("auth/getToken", async (userInfo) => {
+  const { email, password } = userInfo;
+  const data = await http
+    .post("Account/Login", {
+      email,
+      password,
+    })
+    .then((res) => {
+      console.log(res);
+    });
+  return data;
+});
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: "",
     isLogin: false,
+    status: "",
+    message: "",
     formType: "",
+    anyData: "",
     change: false,
     role: {
       privateBusinessMan: false,
@@ -38,8 +55,34 @@ export const authSlice = createSlice({
           return state;
       }
     },
+    setMessage: (state, action) => {
+      state.message = action.payload;
+    },
+    changeData: (state, action) => {
+      state.anyData = action.payload;
+    },
+  },
+  extraReducers: {
+    [getToken.pending]: (state) => {
+      state.status = "pending";
+      state.isLogin = false;
+    },
+    [getToken.fulfilled]: (state, action) => {
+      state.token = action.payload;
+      state.status = "success";
+      state.isLogin = true;
+    },
+    [getToken.rejected]: (state) => {
+      state.status = "failed";
+      state.isLogin = false;
+    },
   },
 });
 
-export const { changeFormType, defineRole } = authSlice.actions;
+export const {
+  changeFormType,
+  defineRole,
+  setMessage,
+  changeData,
+} = authSlice.actions;
 export default authSlice.reducer;

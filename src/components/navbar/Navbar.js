@@ -22,8 +22,8 @@ const Navbar = (props) => {
 
         <div className={classes.leftSide}>
           <ul className={classes.list}>
-            {menuItem.map((item) => (
-              <li className={classes.item}>{item}</li>
+            {menuItem.map((item,index) => (
+              <li className={classes.item} key={index}>{item}</li>
             ))}
           </ul>
           <div className={classes.searchBox}>

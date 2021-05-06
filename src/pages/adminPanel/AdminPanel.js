@@ -53,8 +53,12 @@ const AdminPanel = () => {
             <Box className={classes.userBox}>
               <Avatar />
               <div className={classes.userBoxTitle}>
-                <Typography variant="button" className={classes.userTitle}>چنگیز مغول</Typography>
-                <Typography variant="caption" className={classes.userRole}>ترخیص کار</Typography>
+                <Typography variant="button" className={classes.userTitle}>
+                  چنگیز مغول
+                </Typography>
+                <Typography variant="caption" className={classes.userRole}>
+                  ترخیص کار
+                </Typography>
               </div>
             </Box>
             <Box className={classes.notificationBox}>
@@ -151,11 +155,9 @@ const AdminPanel = () => {
             adminPanel
           />
           <Route path="/adminPanel/tickets" component={Tickets} adminPanel />
-          <Route
-            path="/adminPanel/requestRegister"
-            component={RequestRegister}
-            adminPanel
-          />
+          <Route path="/adminPanel/requestRegister" adminPanel>
+            <RequestRegister backToTab={selectedHandler} />
+          </Route>
           <Route path="/adminPanel/userInfo" adminPanel>
             <UserInfo backToTab={selectedHandler} />
           </Route>
