@@ -8,21 +8,24 @@ export const getToken = createAsyncThunk("auth/getToken", async (userInfo) => {
       email,
       password,
     })
-    .then((res) => {
-      console.log(res);
-    });
+    .then((res) => res);
   return data;
 });
 
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: "",
+    token: {
+      token: "",
+      tokenExp: "",
+      refreshToken: "",
+      refreshTokenExp: "",
+    },
     isLogin: false,
     status: "",
     message: "",
     formType: "",
-    anyData: "",
+    isVerify: false,
     change: false,
     role: {
       privateBusinessMan: false,
@@ -30,6 +33,7 @@ export const authSlice = createSlice({
       privateClearanceMan: false,
       juridicalClearanceMan: true,
     },
+    anyData: "",
   },
   reducers: {
     changeFormType: (state, action) => {
@@ -61,6 +65,9 @@ export const authSlice = createSlice({
     changeData: (state, action) => {
       state.anyData = action.payload;
     },
+    checkVerify: (state, action) => {
+      state.isVerify = action.payload;
+    },
   },
   extraReducers: {
     [getToken.pending]: (state) => {
@@ -84,5 +91,6 @@ export const {
   defineRole,
   setMessage,
   changeData,
+  checkVerify,
 } = authSlice.actions;
 export default authSlice.reducer;

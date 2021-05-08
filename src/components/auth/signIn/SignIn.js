@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import classes from "./signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
@@ -13,14 +13,25 @@ import { authData } from "../../../constant/authData";
 import * as Yup from "yup";
 import { signIn } from "../../../services/login";
 import { Alert } from "@material-ui/lab";
+import { useHistory } from "react-router";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   let message = useSelector((state) => state.auth.message);
-
+  let isVerifySuccess = useSelector((state) => state.auth.isVerify);
+  console.log(isVerifySuccess);
+  const history = useHistory();
   const forgotPasswordHandler = () => {
     dispatch(changeFormType("forgotPassword"));
   };
+  const timeout = setTimeout(() => {
+    return true
+  }, 3000);
+
+
+  useEffect(() => {
+    message = "";
+  }, []);
 
   const initialValues = {
     email: "",
@@ -41,8 +52,9 @@ const SignIn = () => {
       email: values.email,
       password: values.password,
     };
-    signIn(userInfo, dispatch);
+    signIn(userInfo, dispatch, history);
   };
+
   const formik = useFormik({
     initialValues,
     onSubmit,
@@ -99,7 +111,7 @@ const SignIn = () => {
             ) : (
               <Grow in={message !== "" ? true : false}>
                 <Alert
-                  severity="success"
+                  severity={isVerifySuccess ? "success" : "warning"}
                   onClose={() => dispatch(setMessage(""))}
                   className={classes.alert}
                 >

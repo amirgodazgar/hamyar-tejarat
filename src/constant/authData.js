@@ -49,9 +49,25 @@ export const authData = {
     },
   },
   forgotPass: {
-    title: "بازیابی رمز عبور",
+    title: "تغییر رمز عبور",
     return: "بازگشت",
     btn: "بازیابی رمز",
+  },
+  resetPass: {
+    title: "تغییر رمز عبور",
+    pass: "رمز عبور جدید",
+    passConfirm:" تکرار رمز عبور جدید",
+    btn: "ثبت رمز جدید",
+    errors: {
+      pass: {
+        min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
+        required: "رمز عبور را وارد کنید",
+      },
+      passConfirm: {
+        min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
+        required: "تکرار رمز عبور را وارد کنید ",
+      },
+    },
   },
   successChangePass: {
     title: "بازیابی رمز عبور",
@@ -66,5 +82,5 @@ export const authData = {
   successSignUp: {
     title: "ثبت نام شما با موفقیت انجام شد",
     text: "لینک فعال سازی به ایمیل شما ارسال شد",
-  },
-};
+  }
+}

@@ -1,0 +1,50 @@
+.paper {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingBox {
+  height: 12rem;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.fabBox {
+  position: relative !important;
+}
+.loading {
+  position: absolute !important;
+}
+
+.fabSuccess {
+  background-color: #4caf50 !important;
+}
+.fabFailed {
+  background-color: #dc004e !important;
+}
+.checkSuccess,
+.checkFailed {
+  color: #ffffff;
+}
+
+.btn {
+  font-size: 1rem !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 12px !important;
+}
+
+.btnSuccess {
+  border: 1px solid #4caf50 !important ;
+  color: #4caf50 !important;
+}
+.btnFailed {
+  border: 1px solid #dc004e !important ;
+  color: #dc004e !important;
+}

@@ -20,6 +20,7 @@ import { register } from "../../../services/register";
 const SignUp = () => {
   const change = useSelector((state) => state.auth.change);
 
+
   const initialValues = {
     email: "",
     password: "",

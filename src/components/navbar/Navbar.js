@@ -22,8 +22,10 @@ const Navbar = (props) => {
 
         <div className={classes.leftSide}>
           <ul className={classes.list}>
-            {menuItem.map((item,index) => (
-              <li className={classes.item} key={index}>{item}</li>
+            {menuItem.map((item, index) => (
+              <li className={classes.item} key={index}>
+                {item}
+              </li>
             ))}
           </ul>
           <div className={classes.searchBox}>
@@ -46,7 +48,7 @@ const Navbar = (props) => {
               />
             </button>
           </div>
-          {isLogin === false ? (
+          {isLogin ? (
             <div className={classes.panel}>
               <Link className={classes.link} to="/adminPanel/dashboard">
                 <Button customizeClass="panel">
@@ -56,7 +58,7 @@ const Navbar = (props) => {
               </Link>
             </div>
           ) : (
-            <Link className={classes.registerLink} to="/register">
+            <Link className={classes.registerLink} to="/Account">
               <div className={classes.register}>ورود | ثبتنام</div>
             </Link>
           )}
