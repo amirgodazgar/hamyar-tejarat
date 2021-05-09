@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
@@ -24,14 +24,7 @@ const SignIn = () => {
   const forgotPasswordHandler = () => {
     dispatch(changeFormType("forgotPassword"));
   };
-  const timeout = setTimeout(() => {
-    return true
-  }, 3000);
 
-
-  useEffect(() => {
-    message = "";
-  }, []);
 
   const initialValues = {
     email: "",
@@ -53,6 +46,7 @@ const SignIn = () => {
       password: values.password,
     };
     signIn(userInfo, dispatch, history);
+
   };
 
   const formik = useFormik({

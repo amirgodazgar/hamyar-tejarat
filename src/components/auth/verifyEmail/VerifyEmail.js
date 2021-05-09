@@ -1,11 +1,4 @@
-import {
-  Backdrop,
-  Button,
-  ButtonBase,
-  CircularProgress,
-  Fab,
-  Paper,
-} from "@material-ui/core";
+import { Button, CircularProgress, Fab } from "@material-ui/core";
 import {
   Check,
   HourglassEmpty,
@@ -14,46 +7,55 @@ import {
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { verifyEmail } from "../../../services/verifyEmail";
-import { changeFormType } from "../../../store/auth/authSlice";
+import { changeFormType, setMessage } from "../../../store/auth/authSlice";
+import AuthLayout from "../autLayout/AuthLayout";
 import classes from "./verifyEmail.module.css";
 
 const VerifyEmail = () => {
   // QueryString ------------
-  const history = useHistory();
-  const queryStr = history.location.search;
-  const query = new URLSearchParams(queryStr);
-  const email = query.get("email");
-  const token = query.get("token");
+  const location = useLocation();
+  const queryStr = location.search;
+  const filterQS = queryStr.split("&token=");
+  const token = filterQS[1];
+  const email = filterQS[0].toString().split("?email=")[1];
   const config = {
     email,
     token,
   };
   // QueryString ------------
 
+  const history = useHistory();
   const message = useSelector((state) => state.auth.message);
   const isVerifySuccess = useSelector((state) => state.auth.isVerify);
   const dispatch = useDispatch();
   const [isSuccess, setIsSuccess] = useState(false);
-  
-  
+
   if (email && token) {
-    dispatch(changeFormType("verifyEmail"));
     verifyEmail(config, dispatch, setIsSuccess);
     // if token ACCEPT go to page >>>
     if (isVerifySuccess) {
       setTimeout(() => {
-        history.replace("/Account");
+        dispatch(setMessage(""));
+        dispatch(changeFormType("activeAccount"));
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        history.replace("/Register");
+        dispatch(setMessage(""));
       }, 5000);
     }
   } else {
     // if token REJECT go to page >>>
-    // history.replace("/");
+    setTimeout(() => {
+      history.replace("/Register");
+      dispatch(setMessage(""));
+    }, 5000);
   }
 
   return (
-    <React.Fragment>
+    <AuthLayout>
       <div className={classes.paper}>
         {isSuccess ? (
           <div className={classes.loadingBox}>
@@ -98,7 +100,7 @@ const VerifyEmail = () => {
           </div>
         )}
       </div>
-    </React.Fragment>
+    </AuthLayout>
   );
 };
 

@@ -19,6 +19,7 @@ export const signIn = async (userInfo, dispatch, history) => {
       dispatch(checkVerify(true));
       setTokenCookies(tokenData);
       setTimeout(() => {
+        dispatch(setMessage(""));
         history.replace("/");
       }, 2000);
     } else {
@@ -31,6 +32,9 @@ export const signIn = async (userInfo, dispatch, history) => {
       dispatch(setMessage(res.payload.data.message));
       dispatch(checkVerify(false));
       setTokenCookies(tokenData);
+      setTimeout(() => {
+        dispatch(setMessage(""));
+      }, 5000);
     }
   });
 };

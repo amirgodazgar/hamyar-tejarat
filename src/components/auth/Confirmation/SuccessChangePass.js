@@ -1,5 +1,5 @@
 import classes from "./confirmation.module.css";
-import React, { useEffect } from "react";
+import React from "react";
 import Button from "../../../common/button/Button";
 import { authData } from "../../../constant/authData";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,9 +21,6 @@ const SuccessChangePass = () => {
     dispatch(changeData(""));
   };
 
-  useEffect(() => {
-    message = "";
-  }, []);
 
   return (
     <React.Fragment>

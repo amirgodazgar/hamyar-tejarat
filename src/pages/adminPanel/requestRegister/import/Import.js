@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./import.module.css";
 import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
-import { adminPanelData } from "../../../../constant/adminPanel";
+// import { adminPanelData } from "../../../../constant/adminPanel";
 
 const Import = () => {
   const [activeStep, setActiveStep] = React.useState(0);

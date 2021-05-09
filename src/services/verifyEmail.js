@@ -14,7 +14,7 @@ export const verifyEmail = async (config, dispatch, isSuccess) => {
     })
     .then((res) => {
       console.log(res);
-      if (res.status === 200 || res.status === 201) {
+      if (res.status === 200 ) {
         isSuccess(true);
         
         if (res.data.statusCode !== "BadRequest") {
@@ -25,7 +25,7 @@ export const verifyEmail = async (config, dispatch, isSuccess) => {
           dispatch(checkVerify(false));
           dispatch(setMessage(res.data.message));
         }
-        console.log("go to SignIn page", res.data.isSuccess);
+       
       }
     });
 };

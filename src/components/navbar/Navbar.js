@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import classes from "./navbar.module.css";
 import SearchIcon from "@material-ui/icons/Search";
-import { Menu } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
@@ -58,7 +57,7 @@ const Navbar = (props) => {
               </Link>
             </div>
           ) : (
-            <Link className={classes.registerLink} to="/Account">
+            <Link className={classes.registerLink} to="/Register">
               <div className={classes.register}>ورود | ثبتنام</div>
             </Link>
           )}

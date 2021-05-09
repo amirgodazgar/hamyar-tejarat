@@ -1,32 +1,33 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { useLocation, Link } from "react-router-dom";
 import classes from "./resetPassword.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
 import { useDispatch, useSelector } from "react-redux";
-import { setMessage } from "../.../../../../store/auth/authSlice";
+import {
+  changeFormType,
+  setMessage,
+} from "../.../../../../store/auth/authSlice";
 import { Grow } from "@material-ui/core";
 import { authData } from "../../../constant/authData";
 import * as Yup from "yup";
 import { Alert } from "@material-ui/lab";
 import { resetPassword } from "../../../services/resetPassword";
+import AuthLayout from "../autLayout/AuthLayout";
 
 const ResetPassword = () => {
   // QueryString ------------
-  const history = useHistory();
-  const queryStr = history.location.search;
-  const query = new URLSearchParams(queryStr);
-  const email = query.get("email");
-  const token = query.get("token");
+  const location = useLocation();
+  const queryStr = location.search;
+  const filterQS = queryStr.split("&token=");
+  const token = filterQS[1];
+  const email = filterQS[0].toString().split("?email=")[1];
   // QueryString ------------
 
   const dispatch = useDispatch();
   let message = useSelector((state) => state.auth.message);
-
-  useEffect(() => {
-    message = "";
-  }, []);
+  let isChangeSuccess = useSelector((state) => state.auth.isVerify);
 
   const initialValues = {
     newPassword: "",
@@ -41,7 +42,6 @@ const ResetPassword = () => {
       .required(authData.resetPass.errors.pass.required),
   });
   const onSubmit = (values) => {
-    console.log(values);
     const userInfo = {
       email,
       token,
@@ -49,6 +49,7 @@ const ResetPassword = () => {
       newPasswordConfirmation: values.newPasswordConfirmation,
     };
     resetPassword(userInfo, dispatch);
+    console.log(userInfo);
   };
   const formik = useFormik({
     initialValues,
@@ -57,7 +58,7 @@ const ResetPassword = () => {
   });
 
   return (
-    <React.Fragment>
+    <AuthLayout title={authData.resetPass.title}>
       <Grow in={true}>
         <form
           className={classes.resetPasswordContainer}
@@ -67,14 +68,14 @@ const ResetPassword = () => {
             <Input
               formik={formik}
               type="password"
-              name="password"
+              name="newPassword"
               label={authData.resetPass.pass}
-              placeHolder="example@gmail.com"
+              placeHolder="********"
             />
             <Input
               formik={formik}
               type="password"
-              name="password"
+              name="newPasswordConfirmation"
               label={authData.resetPass.passConfirm}
               placeHolder="********"
             />
@@ -94,7 +95,7 @@ const ResetPassword = () => {
             ) : (
               <Grow in={message !== "" ? true : false}>
                 <Alert
-                  severity="success"
+                  severity={isChangeSuccess ? "success" : "warning"}
                   onClose={() => dispatch(setMessage(""))}
                   className={classes.alert}
                 >
@@ -103,9 +104,16 @@ const ResetPassword = () => {
               </Grow>
             )}
           </div>
+          <Link
+            className={classes.backward}
+            to="/Register"
+            onClick={() => dispatch(setMessage(""))}
+          >
+            {authData.successChangePass.btn}
+          </Link>
         </form>
       </Grow>
-    </React.Fragment>
+    </AuthLayout>
   );
 };
 

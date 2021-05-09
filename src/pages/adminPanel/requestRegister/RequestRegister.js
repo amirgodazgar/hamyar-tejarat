@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classes from "./requestRegister.module.css";
-import { Grid, Typography, Paper } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
 import { useHistory } from "react-router-dom";
 import Import from "./import/Import";
