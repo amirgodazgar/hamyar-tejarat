@@ -19,7 +19,6 @@ const SignIn = () => {
   const dispatch = useDispatch();
   let message = useSelector((state) => state.auth.message);
   let isVerifySuccess = useSelector((state) => state.auth.isVerify);
-  console.log(isVerifySuccess);
   const history = useHistory();
   const forgotPasswordHandler = () => {
     dispatch(changeFormType("forgotPassword"));
@@ -40,7 +39,7 @@ const SignIn = () => {
       .required(authData.signIn.errors.pass.required),
   });
   const onSubmit = (values) => {
-    console.log(values);
+    
     const userInfo = {
       email: values.email,
       password: values.password,
@@ -115,9 +114,9 @@ const SignIn = () => {
             )}
           </div>
 
-          <a onClick={forgotPasswordHandler} className={classes.forgotPass}>
+          <span onClick={forgotPasswordHandler} className={classes.forgotPass}>
             {authData.signIn.forgotPass}
-          </a>
+          </span>
         </form>
       </Grow>
     </React.Fragment>

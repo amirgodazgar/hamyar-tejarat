@@ -6,7 +6,6 @@ import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  changeFormType,
   setMessage,
 } from "../.../../../../store/auth/authSlice";
 import { Grow } from "@material-ui/core";

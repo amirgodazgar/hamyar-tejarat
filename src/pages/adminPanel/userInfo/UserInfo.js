@@ -10,12 +10,12 @@ import JuridicalBusinessMan from "./businessMan/JuridicalBusinessMan";
 import PrivateBusinessMan from "./businessMan/PrivateBusinessMan";
 
 const UserInfo = ({ backToTab }) => {
-  let history = useHistory();
+  const history = useHistory();
 
   useEffect(() => {
     backToTab(4);
     history.push("/adminPanel/userInfo");
-  }, []);
+  });
 
   const role = useSelector((state) => state.auth.role);
 

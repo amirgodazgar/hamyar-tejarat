@@ -3,14 +3,17 @@ import React from "react";
 import Button from "../../../common/button/Button";
 import { authData } from "../../../constant/authData";
 import { useDispatch, useSelector } from "react-redux";
-import { changeFormType } from "../../../store/auth/authSlice";
+import { changeFormType, setMessage } from "../../../store/auth/authSlice";
 import { Grow } from "@material-ui/core";
 
 const ActiveAccount = () => {
   const change = useSelector((state) => state.auth.change);
+  const message = useSelector((state) => state.auth.message);
+  
   const dispatch = useDispatch();
   const signInHandler = () => {
     dispatch(changeFormType("signIn"));
+    dispatch(setMessage(""))
   };
 
   return (
@@ -19,7 +22,7 @@ const ActiveAccount = () => {
         <div className={classes.container}>
           <span className={classes.text}>{authData.activeAccount.text}</span>
           <Button click={signInHandler} customizeClass="confirmation">
-            {authData.activeAccount.btn}
+            {message}
           </Button>
         </div>
       </Grow>

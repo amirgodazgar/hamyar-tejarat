@@ -11,15 +11,22 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authData } from "../../../constant/authData";
 import { Fade } from "@material-ui/core";
 import * as Yup from "yup";
 import { register } from "../../../services/register";
+import { setMessage } from "../../../store/auth/authSlice";
+import { useHistory } from "react-router";
 
 const SignUp = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
   const change = useSelector((state) => state.auth.change);
+  let message = useSelector((state) => state.auth.message);
+  let isVerifySuccess = useSelector((state) => state.auth.isVerify);
 
+  
 
   const initialValues = {
     email: "",
@@ -27,6 +34,7 @@ const SignUp = () => {
     personType: "",
     activityType: "",
   };
+
   const validationSchema = Yup.object({
     email: Yup.string()
       .email(authData.signUp.errors.email.wrong)
@@ -44,7 +52,7 @@ const SignUp = () => {
       userType: values.personType,
       userRole: values.activityType,
     };
-    register(userInfo);
+    register(userInfo, dispatch , history);
     console.log(userInfo);
   };
   const formik = useFormik({
@@ -146,7 +154,9 @@ const SignUp = () => {
               ) : null}
             </div>
 
-            <Button
+
+            {message === "" ? (
+              <Button
               type="submit"
               customizeClass={
                 formik.isValid &&
@@ -158,6 +168,18 @@ const SignUp = () => {
             >
               {authData.signUp.btn}
             </Button>
+            ) : (
+              <Grow in={message !== "" ? true : false}>
+                <Alert
+                  severity={isVerifySuccess ? "success" : "warning"}
+                  onClose={() => dispatch(setMessage(""))}
+                  className={classes.alertResponse}
+                >
+                  {message}
+                </Alert>
+              </Grow>
+            )}
+
           </div>
         </form>
       </Grow>

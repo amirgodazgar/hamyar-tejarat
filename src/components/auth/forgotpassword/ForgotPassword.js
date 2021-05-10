@@ -66,9 +66,9 @@ const ForgotPassword = () => {
             </Button>
           </div>
 
-          <a onClick={backwardHandler} className={classes.backward}>
+          <span onClick={backwardHandler} className={classes.backward}>
             {authData.successChangePass.btn}
-          </a>
+          </span>
         </form>
       </Grow>
     </React.Fragment>

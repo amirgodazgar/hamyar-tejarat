@@ -26,6 +26,7 @@ export const authSlice = createSlice({
     message: "",
     formType: "",
     isVerify: false,
+    isResendVerification: false,
     change: false,
     role: {
       privateBusinessMan: false,
@@ -68,6 +69,9 @@ export const authSlice = createSlice({
     checkVerify: (state, action) => {
       state.isVerify = action.payload;
     },
+    checkResendVerification: (state, action) => {
+      state.isResendVerification = action.payload;
+    },
   },
   extraReducers: {
     [getToken.pending]: (state) => {
@@ -92,5 +96,6 @@ export const {
   setMessage,
   changeData,
   checkVerify,
+  checkResendVerification
 } = authSlice.actions;
 export default authSlice.reducer;

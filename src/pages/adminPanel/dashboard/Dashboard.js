@@ -119,10 +119,10 @@ const Dashboard = () => {
               <Typography className={classes.title} variant="h6">
                 جدیدترین تیکت ها
               </Typography>
-              <a className={classes.link} href="">
+              <span className={classes.link} >
                 <Typography variant="body2">مشاهده همه</Typography>
                 <ArrowBackIos fontSize="small" />
-              </a>
+              </span>
             </div>
             <div className={classes.body}>
               <TableContainer>
@@ -169,10 +169,10 @@ const Dashboard = () => {
               <Typography className={classes.title} variant="h6">
                 آخرین اخبار و اطلاعیه ها
               </Typography>
-              <a className={classes.link} href="">
+              <span className={classes.link} >
                 <Typography variant="body2">مشاهده همه</Typography>
                 <ArrowBackIos fontSize="small" />
-              </a>
+              </span>
             </div>
             <div className={classes.body}>
               <TableContainer>

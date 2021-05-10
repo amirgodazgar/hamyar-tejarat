@@ -49,7 +49,7 @@ const Home = () => {
     <div className={classes.home}>
       <div className={classes.clearance}>
         <div className={classes.image}>
-          <img src={clearanceImage} alt="clearance-image" />
+          <img src={clearanceImage} alt="clearance-img" />
         </div>
         <div className={classes.links}>
           <h3>{homeData.clearance.links.title}</h3>
@@ -108,17 +108,17 @@ const Home = () => {
           </Button>
         </div>
         <div className={classes.image}>
-          <img src={registrationImage} alt="clearance-image" />
+          <img src={registrationImage} alt="clearance-img" />
         </div>
       </div>
 
       <div className={classes.requests}>
         <div className={classes.header}>
           <h3>{homeData.requests.title}</h3>
-          <a href="#">
+          <span>
             {homeData.requests.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
-          </a>
+          </span>
         </div>
         <div className={classes.underLine}>
           <span></span>
@@ -151,10 +151,10 @@ const Home = () => {
       <div className={classes.news}>
         <div className={classes.header}>
           <h3>{homeData.news.title}</h3>
-          <a href="#">
+          <span>
             {homeData.news.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
-          </a>
+          </span>
         </div>
         <div className={classes.underLine}>
           <span></span>

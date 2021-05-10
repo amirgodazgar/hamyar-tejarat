@@ -31,10 +31,10 @@ const ClearanceMan = () => {
         <Typography className={classes.title} variant="h6">
           جدیدترین درخواست ها
         </Typography>
-        <a className={classes.link} href="">
+        <span className={classes.link}>
           <Typography variant="body2">مشاهده همه</Typography>
           <ArrowBackIos fontSize="small" />
-        </a>
+        </span>
       </div>
       <div className={classes.body}>
         <TableContainer>

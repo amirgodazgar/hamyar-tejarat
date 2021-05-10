@@ -60,13 +60,13 @@ const NewsCard = ({ img, type, date, title, tagTitle, text, dir }) => {
           ) : null}
 
           <CardContent className={classes.link}>
-            <a>
+            <span>
               <span className={classes.linkText}>{cardData.news.link}</span>
               <FontAwesomeIcon
                 icon={faChevronLeft}
                 className={classes.linkIcon}
               />
-            </a>
+            </span>
           </CardContent>
         </CardContent>
       </Card>

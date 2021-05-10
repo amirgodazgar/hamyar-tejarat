@@ -1,6 +1,7 @@
+import { checkVerify, setMessage } from "../store/auth/authSlice";
 import http from "./httpServices";
 
-export const register = async (userInfo) => {
+export const register = async (userInfo, dispatch, history) => {
   const { email, password, userType, userRole } = userInfo;
   await http
     .post("/Account/Register", {
@@ -11,8 +12,19 @@ export const register = async (userInfo) => {
     })
     .then((res) => {
       console.log(res);
-      if (res.status === 200) {
-        // goto page verifyEmail Page and Get "queryString" email || token
+      if (res.data.isSuccess) {
+        dispatch(setMessage(res.data.message));
+        dispatch(checkVerify(true));
+        setTimeout(() => {
+          dispatch(setMessage(""));
+          history.replace("/Register");
+        }, 5000);
+      } else {
+        dispatch(setMessage(res.data.message));
+        dispatch(checkVerify(false));
+        // Show send another EMAIL
+        console.log("reject")
+        
       }
     });
 };
