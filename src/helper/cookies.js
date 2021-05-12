@@ -8,3 +8,10 @@ export const setTokenCookies = (tokenData) => {
   Cookies.set("refreshToken", refreshToken);
   Cookies.set("refreshTokenExp", refreshTokenExp);
 };
+
+export const clearCookies = () => {
+  Cookies.remove("token");
+  Cookies.remove("tokenExp");
+  Cookies.remove("refreshToken");
+  Cookies.remove("refreshTokenExp");
+};

@@ -41,6 +41,7 @@ const MainCard = ({ imgSrc, alt, title, subtitle }) => {
             value={value}
             onChange={(e, newValue) => ratingHandler(e, newValue)}
             size="large"
+            name="rating"
             //  icon
           />
           <Button customizeClass="card">{cardData.btn}</Button>

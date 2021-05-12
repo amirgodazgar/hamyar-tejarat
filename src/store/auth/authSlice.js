@@ -32,7 +32,7 @@ export const authSlice = createSlice({
       privateBusinessMan: false,
       juridicalBusinessMan: false,
       privateClearanceMan: false,
-      juridicalClearanceMan: true,
+      juridicalClearanceMan: false,
     },
     anyData: "",
   },
@@ -72,6 +72,9 @@ export const authSlice = createSlice({
     checkResendVerification: (state, action) => {
       state.isResendVerification = action.payload;
     },
+    removeToken: (state) => {
+      state.token = "";
+    },
   },
   extraReducers: {
     [getToken.pending]: (state) => {
@@ -96,6 +99,7 @@ export const {
   setMessage,
   changeData,
   checkVerify,
-  checkResendVerification
+  checkResendVerification,
+  removeToken,
 } = authSlice.actions;
 export default authSlice.reducer;

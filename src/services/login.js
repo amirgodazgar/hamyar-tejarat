@@ -8,6 +8,7 @@ export const signIn = async (userInfo, dispatch, history) => {
     let tokenData;
 
     if (res.payload.data.isSuccess) {
+      console.log(res.payload.data.data)
       tokenInfo = res.payload.data.data;
       tokenData = {
         token: tokenInfo.accessToken,

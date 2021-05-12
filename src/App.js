@@ -12,6 +12,7 @@ import AdminPanel from "./pages/adminPanel/AdminPanel";
 import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
 import ResetPassword from "./components/auth/resetPassword/ResetPassword";
 
+
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 

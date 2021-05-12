@@ -137,8 +137,8 @@ const Home = () => {
       </div>
 
       <div className={classes.statistics}>
-        {homeData.statistics.map((item) => (
-          <div className={classes.statisticsInfo}>
+        {homeData.statistics.map((item,index) => (
+          <div className={classes.statisticsInfo} key={index}>
             <div className={classes.numberBox}>
               <FontAwesomeIcon icon={faPlus} className={classes.addIcon} />
               <p className={classes.number}>{item.number}</p>
