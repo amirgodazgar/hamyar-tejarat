@@ -102,8 +102,8 @@
   align-items: center;
 }
 
-
-.price , .purchase {
+.price,
+.purchase {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -118,10 +118,45 @@
 .formBox {
   flex: 2.5;
   border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .selected {
-   background-color: #277fe5;
-   color: #ffffff;
+  background-color: #277fe5;
+  color: #ffffff;
 }
 
+.merchandiseSelect,
+.originReleasingSelect,
+.originLoading {
+  width: 95%;
+  border: 1px solid #70707057;
+  border-radius: 10px;
+  padding: 0.65rem;
+  font-size: 0.95rem !important;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 250ms;
+  font-family: inherit !important;
+}
+.originLoading {
+  width: 88%;
+  padding: 0.75rem;
+}
+
+.inputBox {
+  flex: 0 0 30%;
+  height: 65%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.inputBox label {
+  font-size: 0.9rem;
+}

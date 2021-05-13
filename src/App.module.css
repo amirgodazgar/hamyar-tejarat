@@ -41,3 +41,13 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
   background-color: #1e4383ee;
 }
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("./styles/svg/arrow-down.svg");
+  background-repeat: no-repeat;
+  background-position-x: 2%;
+  background-position-y: 50%;
+}

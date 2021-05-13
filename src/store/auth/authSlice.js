@@ -33,7 +33,7 @@ export const authSlice = createSlice({
     role: {
       privateBusinessMan: false,
       juridicalBusinessMan: false,
-      privateClearanceMan: false,
+      privateClearanceMan: true,
       juridicalClearanceMan: false,
     },
     anyData: "",
