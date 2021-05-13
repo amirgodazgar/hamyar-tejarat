@@ -15,8 +15,10 @@ import {
   faChevronLeft,
   faPlus,
 } from "@fortawesome/fontawesome-free-solid";
+import http from "../../services/httpServices";
 
 const Home = () => {
+
   const cardItems = [
     {
       title: "شرکت ترخیص همراه",
@@ -44,9 +46,17 @@ const Home = () => {
       alt: "card-alt",
     },
   ];
-
+  const axiosHandler = async () => {
+    await http.get("BusinessmanPanel/GetBusinessmanProfile").then(res => {
+      console.log("home",res)
+    })
+  }
   return (
     <div className={classes.home}>
+    
+    <button onClick={axiosHandler}>get</button>
+
+
       <div className={classes.clearance}>
         <div className={classes.image}>
           <img src={clearanceImage} alt="clearance-img" />

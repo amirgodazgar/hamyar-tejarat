@@ -15,7 +15,7 @@ const UserInfo = ({ backToTab }) => {
   useEffect(() => {
     backToTab(4);
     history.push("/adminPanel/userInfo");
-  });
+  }, []);
 
   const role = useSelector((state) => state.auth.role);
 

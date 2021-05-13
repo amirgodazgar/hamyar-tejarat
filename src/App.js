@@ -11,6 +11,7 @@ import Auth from "./pages/auth/Auth";
 import AdminPanel from "./pages/adminPanel/AdminPanel";
 import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
 import ResetPassword from "./components/auth/resetPassword/ResetPassword";
+// import {  } from 'react-router-dom'
 
 
 // Configure JSS

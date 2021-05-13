@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { clearCookies } from "../../helper/cookies";
 import http from "../../services/httpServices";
 
 export const getToken = createAsyncThunk("auth/getToken", async (userInfo) => {
   const { email, password } = userInfo;
+  clearCookies()
   const data = await http
     .post("Account/Login", {
       email,

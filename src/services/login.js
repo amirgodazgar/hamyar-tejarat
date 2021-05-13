@@ -3,12 +3,12 @@ import { checkVerify, getToken, setMessage } from "../store/auth/authSlice";
 
 export const signIn = async (userInfo, dispatch, history) => {
   dispatch(getToken(userInfo)).then((res) => {
-    console.log(res.payload.data);
+    console.log(res);
     let tokenInfo;
     let tokenData;
 
     if (res.payload.data.isSuccess) {
-      console.log(res.payload.data.data)
+      console.log("login", res);
       tokenInfo = res.payload.data.data;
       tokenData = {
         token: tokenInfo.accessToken,

@@ -7,8 +7,9 @@ import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
 import { useSelector } from "react-redux";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const isLogin = useSelector((state) => state.auth.isLogin);
+  console.log(isLogin)
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
 

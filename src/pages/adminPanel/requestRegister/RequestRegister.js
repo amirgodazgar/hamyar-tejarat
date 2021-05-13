@@ -11,7 +11,7 @@ const RequestRegister = ({ backToTab }) => {
   useEffect(() => {
     backToTab(3);
     history.push("/adminPanel/requestRegister");
-  });
+  },[]);
 
   return (
     <Grid
