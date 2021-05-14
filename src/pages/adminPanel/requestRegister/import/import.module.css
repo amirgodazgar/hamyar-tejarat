@@ -2,12 +2,12 @@
   height: 33rem;
   display: flex;
   flex-direction: column;
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 10px !important;
 }
 .stepper {
-  flex: 1;
-  width: 50%;
+  flex: 0.5;
+  width: 80%;
   margin: 0 auto;
   display: flex;
   padding: 1rem 0;
@@ -53,18 +53,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.importSelect {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  border-radius: 10px;
-  width: 40%;
-  height: 60%;
-  color: #ffffff;
-  background-color: #277fe5;
-  cursor: pointer;
-}
+.importSelect,
 .exportSelect {
   display: flex;
   flex-direction: column;
@@ -73,8 +62,18 @@
   border-radius: 10px;
   width: 40%;
   height: 60%;
+}
+
+.importSelect {
+  color: #ffffff;
+  background-color: #277fe5;
+  box-shadow: 0px 4px 8px 1px #2780e560;
+  cursor: pointer;
+}
+.exportSelect {
   color: #c4cad0;
   background-color: #f4f4f4;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
 }
 .stepBtnBox {
   flex: 1;
@@ -94,12 +93,12 @@
 
 /* Second step -------------------*/
 .selectBox_stepTwo {
-  flex: 1;
+  flex: 3.5;
   width: 45%;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .price,
@@ -110,25 +109,61 @@
   align-items: center;
   border-radius: 10px;
   width: 45%;
-  height: 70%;
+  height: 50%;
   background-color: #e7f1fc;
   color: #192129;
   cursor: pointer;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 200ms;
 }
+
+/* Third step -------------------*/
+
 .formBox {
-  flex: 2.5;
-  border: 1px solid black;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputContainer {
+  flex: 1;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.selected {
-  background-color: #277fe5;
-  color: #ffffff;
+.tariffCodes {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  width: 95%;
+}
+.tariffCodes img,
+.tariffCodes span {
+  margin: 0 0.25rem 0 0.25rem;
+  color: #277fe5;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 200ms;
 }
 
-.merchandiseSelect,
+.tariffCodes span:active,
+.tariffCodes img:active {
+  transform: scale(1.01);
+  transition: all 200ms;
+}
+
+.selected {
+  color: #ffffff;
+  background-color: #277fe5;
+  box-shadow: 0px 4px 8px 1px #277fe55b;
+  transition: all 200ms;
+}
+
+.tariffSelect,
 .originReleasingSelect,
 .originLoading {
   width: 95%;
@@ -139,7 +174,7 @@
   outline: none;
   background-color: #ffffff;
   box-shadow: 0px 4px 8px 1px #c4cad05b;
-  transition: all 250ms;
+  transition: all 200ms;
   font-family: inherit !important;
 }
 .originLoading {
@@ -149,11 +184,10 @@
 
 .inputBox {
   flex: 0 0 30%;
-  height: 65%;
-  border: 1px solid black;
+  height: 90%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: flex-start;
 }
 

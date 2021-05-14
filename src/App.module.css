@@ -50,4 +50,5 @@ select {
   background-repeat: no-repeat;
   background-position-x: 2%;
   background-position-y: 50%;
+  outline: none;
 }

@@ -2,13 +2,23 @@ import React from "react";
 import classes from "./import.module.css";
 import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
 import ServiceType from "./ServiceType";
-import Location from "./Location";
+import RequestType from "./RequestType";
+import LocationPurchase from "./LocationPurchase";
+import LocationPrice from "./LocationPrice";
+import UploadPurchase from "./UploadPurchase";
+import UploadPrice from "./UploadPrice";
 // import { adminPanelData } from "../../../../constant/adminPanel";
 
 const Import = () => {
-  const steps = ["انتخاب نوع خدمت", "انتخاب مبدا و مقصد", "بارگذاری مدارک"];
+  const steps = [
+    "انتخاب نوع خدمت",
+    "انتخاب نوع درخواست",
+    "انتخاب مبدا و مقصد",
+    "بارگذاری مدارک",
+  ];
 
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isPurchase, setIsPurchase] = React.useState(true);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -22,13 +32,17 @@ const Import = () => {
       case 0:
         return <ServiceType />;
       case 1:
-        return <Location/>;
+        return <RequestType setRequestType={setIsPurchase} />;
       case 2:
-        return "مرحله سوم";
+        return isPurchase ? <LocationPurchase /> : <LocationPrice />;
+      case 3:
+        return isPurchase ? <UploadPurchase /> : <UploadPrice />;
       default:
         return "Unknown stepIndex";
     }
   }
+
+
 
   return (
     <React.Fragment>
