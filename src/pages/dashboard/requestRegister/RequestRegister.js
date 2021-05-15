@@ -10,7 +10,7 @@ const RequestRegister = ({ backToTab }) => {
 
   useEffect(() => {
     backToTab(3);
-    history.push("/adminPanel/requestRegister");
+    history.push("/Dashboard/requestRegister");
   },[]);
 
   return (

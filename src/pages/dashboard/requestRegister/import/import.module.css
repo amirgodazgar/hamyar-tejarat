@@ -1,0 +1,444 @@
+.paper {
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border-radius: 10px !important;
+}
+.stepper {
+  flex: 0.5;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  padding: 1rem 0;
+  justify-content: center;
+  align-items: center !important;
+}
+.chip {
+  margin: 0.5rem 0.2rem;
+}
+
+.main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin: 0 auto;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 95%;
+}
+
+/* First step  ------------------*/
+.fistStpTitle {
+  flex: 0.75;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: bold;
+}
+.fistStpSubTitle {
+  flex: 1;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.selectBox {
+  flex: 2.75;
+  width: 35%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.importSelect,
+.exportSelect {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  width: 45%;
+  height: 50%;
+}
+
+.importSelect {
+  color: #ffffff;
+  background-color: #277fe5;
+  box-shadow: 0px 4px 8px 1px #2780e560;
+  cursor: pointer;
+}
+.exportSelect {
+  color: #c4cad0;
+  background-color: #f4f4f4;
+  box-shadow: 0px 4px 8px 1px #c4cad086;
+}
+.stepBtnBox {
+  flex: 0.75;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.backBtn,
+.forwardBtn {
+  width: 12%;
+  height: 70%;
+  margin: 0 0.25rem 0 0.5rem !important;
+  border-radius: 10px !important;
+}
+
+/* Second step -------------------*/
+.selectBox_stepTwo {
+  flex: 3.5;
+  width: 45%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.selectBoxTitle {
+  font-weight: bold !important;
+}
+
+.price,
+.purchase {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  width: 45%;
+  height: 50%;
+  background-color: #e7f1fc;
+  color: #192129;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 200ms;
+}
+
+/* Third step -------------------*/
+
+.formBox {
+  flex: 3.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputContainer {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.tariffList {
+  flex: 1.5;
+}
+
+.selectedTariff {
+  height: 75%;
+  width: 80%;
+  border: 1px solid #70707057;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+.tariffListTitle {
+  width: 80%;
+  margin: 0 auto 0.5rem auto;
+}
+
+.selectedTariff::-webkit-scrollbar {
+  scroll-behavior: smooth;
+  width: 10px;
+}
+.selectedTariff::-webkit-scrollbar-track {
+  border: 1px solid #70707057;
+  border-radius: 10px;
+}
+.selectedTariff::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 20px;
+  border-radius: 10px;
+}
+
+.tariffCodes {
+  flex: 0.5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 auto;
+  width: 95%;
+}
+.tariffCodes img,
+.tariffCodes span {
+  margin: 0 0.25rem 0 0.25rem;
+  color: #277fe5;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 200ms;
+}
+
+.tariffCodes span:active,
+.tariffCodes img:active {
+  transform: scale(1.01);
+  transition: all 200ms;
+}
+
+.selected {
+  color: #ffffff;
+  background-color: #277fe5;
+  box-shadow: 0px 4px 8px 1px #277fe55b;
+  transition: all 200ms;
+}
+
+.tariff,
+.originReleasingSelect,
+.originLoading {
+  width: 95%;
+  border: 1px solid #70707057;
+  border-radius: 10px;
+  padding: 0.65rem !important;
+  font-size: 0.95rem !important;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  font-family: inherit !important;
+  transition: all 200ms;
+}
+
+.originReleasingSelect {
+  padding: 0.6rem !important;
+}
+
+.packingType,
+.amount,
+.conveyanceSelect,
+.priceValue {
+  width: 95%;
+  border: 1px solid #70707057;
+  border-radius: 10px;
+  padding: 0.65rem !important;
+  font-size: 0.95rem !important;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  font-family: inherit !important;
+  transition: all 200ms;
+}
+.conveyanceSelect {
+  width: 97%;
+}
+
+.inputBox {
+  flex: 0 0 30%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.UploadInputBox {
+  flex: 0 0 22%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.errorBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.errorBox label {
+  font-size: 0.9rem;
+}
+.error {
+  color: #b60123e1;
+  font-size: 0.8rem;
+}
+.inputError {
+  border: 1px solid #b60123e1;
+  transition: all 200ms;
+}
+
+/* -----------UPLOAD--------------- */
+.firstStpSubTitle_Upload {
+  flex: 0.3;
+  display: flex;
+  justify-content: center !important;
+  align-items: flex-start !important;
+}
+/* ------- INPUT ------ */
+.uploadContainer,
+.inputContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.uploadContainer {
+  flex: 3;
+}
+
+.uploadInputBoxTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.2rem;
+}
+
+.inputContainer {
+  flex: 1.2;
+}
+
+.uploadInputBox {
+  position: relative;
+  height: 100%;
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.uploadInputBox input {
+  color: transparent;
+}
+.uploadInputBox input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.uploadInputBox input::before {
+  content: "انتخاب تصویر";
+  color: #19212970;
+  display: inline-block;
+  background-color: #ffffff;
+  font-size: 1rem;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #70707025;
+  padding: 0.65rem 0.5rem;
+  width: 90%;
+  transition: all 250ms;
+}
+.uploadInputBox input:hover::before {
+  border: 1px solid #70707057;
+  transition: all 250ms;
+}
+input[type="file"] {
+  cursor: pointer;
+}
+.uploadInput {
+  width: 100%;
+}
+.uploadIcon {
+  background-color: #ffffff;
+  fill: #192129 !important;
+  border-radius: 10px;
+  padding: 0.75rem 0;
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+  cursor: pointer;
+}
+
+.selectInput {
+  color: #192129;
+  background-color: #ffffff;
+  font-size: 1rem;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #70707025;
+  padding: 0.8rem 0.5rem;
+  width: 98%;
+  font-family: inherit;
+  transition: all 250ms;
+}
+
+.selectInput:focus {
+  border: 1px solid #70707057;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 250ms;
+}
+
+/* ------ IMAGE ------ */
+.uploadImgBox {
+  flex: 0 0 30%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.uploadImgTitle {
+  width: 95%;
+  height: 12%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 0.2rem;
+}
+
+.uploadImg {
+  background-color: #f4f4f4;
+  width: 95%;
+  height: 85%;
+  border: 1px solid #70707025;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+}
+.uploadImg img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* ----------------------------- */
+.successfulContainer {
+  flex: 5.25;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.successfulIcon {
+  margin-top: 2rem;
+  background: #ffc05e;
+  border-radius: 50%;
+  color: #fff;
+}
+.successfulTitle {
+  margin:1rem 0 2rem 0 !important;
+  width: 40%;
+  text-align: center;
+}
+.link {
+  width: 30%;
+  height: 10%;
+}
+.successfulBtn {
+  font-size: 1rem !important;
+  width: 100%;
+  height: 100%;
+  margin: 0 0.25rem 0 0.5rem !important;
+  border-radius: 10px !important;
+}

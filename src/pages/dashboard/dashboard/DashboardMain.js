@@ -17,7 +17,7 @@ import { ArrowBackIos } from "@material-ui/icons";
 import BusinessMan from "./BusinessMan";
 import ClearanceMan from "./ClearanceMan";
 
-const Dashboard = () => {
+const DashboardMain = () => {
   const [open, setOpen] = React.useState(true);
   const ticketRows = [
     {
@@ -214,4 +214,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardMain;

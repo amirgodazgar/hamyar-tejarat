@@ -1,0 +1,81 @@
+.container {
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.mainPaper {
+  width: 100%;
+  padding: 4rem 2rem !important;
+  border-radius: 10px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.paper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+.header {
+  width: 100%;
+  background-color: #1e4383;
+  color: #ffffff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem 0.5rem;
+}
+.body {
+  width: 100%;
+}
+.title {
+  flex: 0 0 60%;
+  padding: 0.5rem;
+}
+
+.tableHead {
+  border-bottom: 2px solid #c4cad0;
+}
+
+
+.tableRow {
+  transition: all 200ms !important;
+}
+
+.tableRow:nth-child(even) {
+  background-color: #f4f4f4;
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.searchBox {
+  flex: 0 0 40%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.searchTitle {
+  font-size: 1rem !important;
+  padding: 0 0.5rem;
+}
+
+.search {
+  width: 100%;
+  position: relative;
+  margin-top: 0.7rem;
+}
+.search input {
+  font-size: .8rem;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7rem;
+  width: 70%;
+  box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.5);
+}

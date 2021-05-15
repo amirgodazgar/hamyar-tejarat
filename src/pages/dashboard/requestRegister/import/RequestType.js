@@ -34,7 +34,7 @@ const RequestType = ({ setRequestType }) => {
           onClick={purchaseHandler}
         >
           <img src={purchaseSelect ? PriceActiveSvg : PriceSvg} alt="price" />
-          <Typography variant="button">کالا خریداری شده </Typography>
+          <Typography variant="body1" className={classes.selectBoxTitle}>کالا خریداری شده </Typography>
         </div>
         <div
           className={`${classes.price} ${
@@ -46,7 +46,7 @@ const RequestType = ({ setRequestType }) => {
             src={priceSelect ? PurchaseActiveSvg : PurchaseSvg}
             alt="purchase"
           />
-          <Typography variant="button">قصد استعلام قیمت را دارم </Typography>
+          <Typography variant="body1" className={classes.selectBoxTitle}>قصد استعلام قیمت را دارم </Typography>
         </div>
       </div>
     </React.Fragment>

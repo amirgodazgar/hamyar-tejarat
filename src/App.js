@@ -8,11 +8,10 @@ import { theme } from "./layout/theme/theme";
 import "./App.module.css";
 import Home from "./pages/home/Home";
 import Auth from "./pages/auth/Auth";
-import AdminPanel from "./pages/adminPanel/AdminPanel";
+import Dashboard from "./pages/dashboard/Dashboard";
 import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
 import ResetPassword from "./components/auth/resetPassword/ResetPassword";
 // import {  } from 'react-router-dom'
-
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -23,7 +22,7 @@ function App() {
       <StylesProvider jss={jss}>
         <Switch>
           <Route path="/Register" component={Auth} />
-          <Route path="/adminPanel" component={AdminPanel} />
+          <Route path="/Dashboard" component={Dashboard} />
           <Route path="/Account/VerifyEmail" component={VerifyEmail} />
           <Route path="/Account/ResetPassword" component={ResetPassword} />
 

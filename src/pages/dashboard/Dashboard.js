@@ -15,19 +15,20 @@ import {
   Fade,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import classes from "./adminPanel.module.css";
+import classes from "./Dashboard.module.css";
 import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
 import { Menu, Notifications, Email } from "@material-ui/icons";
 import { Switch, Route, Link } from "react-router-dom";
-import Dashboard from "./dashboard/Dashboard";
+import DashboardMain from "./dashboard/DashboardMain";
 import SuggestionsList from "./suggestionsList/SuggestionsList";
 import Tickets from "./tickets/Tickets";
 import RequestRegister from "./requestRegister/RequestRegister";
 import UserInfo from "./userInfo/UserInfo";
 import BankAccount from "./bankAccount/BankAccount";
+import TariffCodeList from "./tariffCodesList/TariffCodeList";
 
-const AdminPanel = () => {
+const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const drawerHandler = () => {
@@ -120,7 +121,7 @@ const AdminPanel = () => {
         <Divider />
         <List className={classes.list}>
           {adminPanelData.listItem.map((item, index) => (
-            <Link to={item.path ? item.path : "/adminPanel/dashboard"}>
+            <Link to={item.path ? item.path : "/Dashboard/dashboard"}>
               <ListItem
                 className={
                   selected === index ? classes.listItemActive : classes.listItem
@@ -142,29 +143,24 @@ const AdminPanel = () => {
 
       <div className={classes.main}>
         <Switch>
+          <Route path="/Dashboard/dashboard" exact component={DashboardMain} />
           <Route
-            path="/adminPanel/dashboard"
-            exact
-            component={Dashboard}
-            adminPanel
-          />
-          <Route
-            path="/adminPanel/suggestionsList"
+            path="/Dashboard/suggestionsList"
             component={SuggestionsList}
-            adminPanel
           />
-          <Route path="/adminPanel/tickets" component={Tickets} adminPanel />
-          <Route path="/adminPanel/requestRegister" adminPanel>
+          <Route path="/Dashboard/tickets" component={Tickets} />
+          <Route path="/Dashboard/requestRegister">
             <RequestRegister backToTab={selectedHandler} />
           </Route>
-          <Route path="/adminPanel/userInfo" adminPanel>
+          <Route path="/Dashboard/userInfo">
             <UserInfo backToTab={selectedHandler} />
           </Route>
-          <Route path="/adminPanel/bankAccount" component={BankAccount} />
+          <Route path="/Dashboard/bankAccount" component={BankAccount} />
+          <Route path="/Dashboard/tariffCodesList" component={TariffCodeList} />
         </Switch>
       </div>
     </div>
   );
 };
 
-export default AdminPanel;
+export default Dashboard;

@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
           {isLogin ? (
             <div className={classes.panel}>
-              <Link className={classes.link} to="/adminPanel/dashboard">
+              <Link className={classes.link} to="/Dashboard/dashboard">
                 <Button customizeClass="panel">
                   <PersonIcon fontSize="large" />
                   پنل کاربری

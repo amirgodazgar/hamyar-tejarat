@@ -6,34 +6,37 @@ export const adminPanelData = {
     {
       text: "داشبورد",
       icon: <Home fontSize="large" style={{ color: "#C4CAD0" }} />,
-      path: "/adminPanel/dashboard",
+      path: "/Dashboard/dashboard",
     },
     {
       text: "لیست پیشنهادات",
-      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} adminPanel />,
-      path: "/adminPanel/suggestionsList",
+      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/suggestionsList",
     },
     {
       text: "تیکت ها",
-      icon: <Sms fontSize="large" style={{ color: "#C4CAD0" }} adminPanel />,
-      path: "/adminPanel/tickets",
+      icon: <Sms fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/tickets",
     },
     {
       text: "ثبت درخواست",
-      icon: <Edit fontSize="large" style={{ color: "#C4CAD0" }} adminPanel />,
-      path: "/adminPanel/requestRegister",
+      icon: <Edit fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/requestRegister",
     },
     {
       text: "اطلاعات کاربری",
-      icon: <Person fontSize="large" style={{ color: "#C4CAD0" }} adminPanel />,
-      path: "/adminPanel/userInfo",
+      icon: <Person fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/userInfo",
     },
     {
       text: "حساب بانکی",
-      icon: (
-        <Payment fontSize="large" style={{ color: "#C4CAD0" }} adminPanel />
-      ),
-      path: "/adminPanel/bankAccount",
+      icon: <Payment fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/bankAccount",
+    },
+    {
+      text: "لیست کد تعرفه کالا",
+      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/tariffCodesList",
     },
   ],
 
@@ -84,7 +87,7 @@ export const adminPanelData = {
         clearanceId: " کارگذاری را وارد کنید",
         firstName: "نام  را وارد کنید",
         lastName: " نام خانوادگی را وارد کنید",
-        mobileWrong: "شماره همراه صحیح نیست",
+        mobileWrong: "شماره صحیح نیست",
         mobile: "شماره همراه وارد کنید",
         address: "آدرس  را وارد کنید",
         emailWrong: "ایمیل صحیح نیست",

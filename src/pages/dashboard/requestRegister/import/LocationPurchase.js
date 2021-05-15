@@ -14,9 +14,9 @@ const LocationPurchase = () => {
   };
 
   const validationSchema = Yup.object({
-    tariff: Yup.string().required("error"),
-    originLoading: Yup.string().required("error"),
-    originReleasing: Yup.string().required("error"),
+    tariff: Yup.string().required("کد تعرفه را وارد کنید"),
+    originLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
+    originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
   });
 
   const onSubmit = (values) => {
@@ -28,8 +28,9 @@ const LocationPurchase = () => {
     validationSchema,
   });
 
-  const errorBox = (name) => (
-    <div>
+  const errorBox = (name, label) => (
+    <div className={classes.errorBox}>
+      <label htmlFor={name}>{label}</label>
       {formik.touched[name] && formik.errors[name] ? (
         <Fade
           in={formik.touched[name] && formik.errors[name] ? true : false}
@@ -49,13 +50,16 @@ const LocationPurchase = () => {
       <div className={classes.formBox}>
         <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
           <div className={classes.inputBox}>
-            <label htmlFor="tariff">کد تعرفه</label>
-            {errorBox("tariff")}
+            {errorBox("tariff", "کد تعرفه")}
             <input
-              className={classes.tariffSelect}
+              className={`${classes.tariff}  ${
+                formik.touched.tariff && formik.errors.tariff
+                  ? classes.inputError
+                  : null
+              } `}
               name="tariff"
               type="text"
-              placeHolder="0101"
+              placeholder="0101"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.tariff}
@@ -63,13 +67,16 @@ const LocationPurchase = () => {
             />
           </div>
           <div className={classes.inputBox}>
-            <label htmlFor="originLoading">مبدا بارگیری کالا </label>
-            {errorBox("originLoading")}
+            {errorBox("originLoading", "مبدا بارگیری کالا ")}
             <input
-              className={classes.originLoading}
+              className={`${classes.originLoading}  ${
+                formik.touched.originLoading && formik.errors.originLoading
+                  ? classes.inputError
+                  : null
+              } `}
               name="originLoading"
               type="text"
-              placeHolder="بازارچه پرویزخان"
+              placeholder="بازارچه پرویزخان"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.originLoading}
@@ -77,26 +84,34 @@ const LocationPurchase = () => {
             />
           </div>
           <div className={classes.inputBox}>
-            <label htmlFor="originReleasing">گمرک مقصد، محل ترخیص کالا </label>
-            {errorBox("originReleasing")}
+            {errorBox("originReleasing", "گمرک مقصد، محل ترخیص کالا ")}
             <select
               name="originReleasing"
-              className={classes.originReleasingSelect}
               value={formik.values.originReleasing}
               onChange={formik.handleChange}
+              className={`${classes.originReleasingSelect}  ${
+                formik.touched.originReleasing &&
+                formik.errors.originReleasing &&
+                formik.values.originReleasing === "0"
+                  ? classes.inputError
+                  : null
+              } `}
             >
-              <option value="1">انتخاب کنید</option>
+              <option value="0" style={{ color: "rgba(0,0,0,0.4)" }}>
+                انتخاب کنید
+              </option>
               <option value="2">ممدخان</option>
               <option value="3">مصیب</option>
             </select>
           </div>
         </form>
         <div className={classes.tariffCodes}>
-          <Link to="/">
+          <Link to="/Dashboard/tariffCodesList">
             <img src={tariffSvg} alt="tariffCode" />
             <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
           </Link>
         </div>
+        <div className={classes.tariffList}></div>
       </div>
     </React.Fragment>
   );

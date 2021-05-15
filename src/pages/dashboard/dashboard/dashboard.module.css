@@ -14,6 +14,7 @@
 .paper {
   width: 100%;
   overflow: hidden;
+  border-radius: 10px !important;
 }
 .header {
   width: 100%;
@@ -58,9 +59,10 @@
   background-color: #f4f4f4;
 }
 
-.tableRow:hover svg {
+.tableRow:hover svg , .tableRow:hover img  {
   fill: #277fe5 !important;
   transition: all 200ms !important;
+  
 }
 
 .statusCell {

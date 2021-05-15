@@ -1,22 +1,24 @@
 import React from "react";
 import classes from "./import.module.css";
-import { Paper, Stepper, Step, StepLabel, Button } from "@material-ui/core";
+import {
+  Paper,
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Typography,
+} from "@material-ui/core";
 import ServiceType from "./ServiceType";
 import RequestType from "./RequestType";
 import LocationPurchase from "./LocationPurchase";
 import LocationPrice from "./LocationPrice";
 import UploadPurchase from "./UploadPurchase";
 import UploadPrice from "./UploadPrice";
+import { Check } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 // import { adminPanelData } from "../../../../constant/adminPanel";
 
 const Import = () => {
-  const steps = [
-    "انتخاب نوع خدمت",
-    "انتخاب نوع درخواست",
-    "انتخاب مبدا و مقصد",
-    "بارگذاری مدارک",
-  ];
-
   const [activeStep, setActiveStep] = React.useState(0);
   const [isPurchase, setIsPurchase] = React.useState(true);
 
@@ -26,6 +28,17 @@ const Import = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const steps = [
+    { type: "انتخاب نوع خدمت" },
+    { type: "انتخاب نوع درخواست" },
+    { type: "انتخاب مبدا و مقصد" },
+    { type: isPurchase ? "بارگذاری مدارک" : "تکمیل اطلاعات" },
+  ];
+  const next = "ادامه";
+  const accept = "ثبت درخواست";
+
+  console.log(activeStep, steps.length - 1);
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {
@@ -42,8 +55,6 @@ const Import = () => {
     }
   }
 
-
-
   return (
     <React.Fragment>
       <Paper className={classes.paper}>
@@ -54,7 +65,7 @@ const Import = () => {
         >
           {steps.map((label, index) => (
             <Step key={index}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel>{label.type}</StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -79,7 +90,7 @@ const Import = () => {
                     color="primary"
                     onClick={handleNext}
                   >
-                    {activeStep === steps.length - 1 ? "ثبت درخواست" : "ادامه"}
+                    <div>{activeStep == steps.length - 1 ? accept : next}</div>
                   </Button>
                 </div>
               </div>
@@ -87,10 +98,26 @@ const Import = () => {
           ) : (
             <div className={classes.main}>
               <div className={classes.container}>
-                <div>All steps completed</div>
-                <Button disabled={activeStep === 0} onClick={handleBack}>
-                  بازگشت
-                </Button>
+                <div className={classes.successfulContainer}>
+                  <Check fontSize="large" className={classes.successfulIcon} />
+                  <Typography variant="h6" className={classes.successfulTitle}>
+                    درخواست شما با موفقیت ثبت شد و در لیست در خواست ها نمایش
+                    داده می شود
+                  </Typography>
+                  <Link
+                    to="/Dashboard/suggestionsList"
+                    className={classes.link}
+                  >
+                    <Button
+                      className={classes.successfulBtn}
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                    >
+                      مشاهده لیست پیشنهادها
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           )}

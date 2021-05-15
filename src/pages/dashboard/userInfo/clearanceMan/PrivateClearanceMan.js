@@ -316,7 +316,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
               ثبت
             </Button>
 
-            <Link to="/adminPanel/dashboard" replace>
+            <Link to="/Dashboard/dashboard" replace>
               <Button click={() => backToDashboard(0)} customizeClass="auth">
                 انصراف
               </Button>

@@ -51,6 +51,11 @@ const Home = () => {
       console.log("home",res)
     })
   }
+
+  // if(!isLogin) {
+  //   push("login")
+  // }
+
   return (
     <div className={classes.home}>
     
