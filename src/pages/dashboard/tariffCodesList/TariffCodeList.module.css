@@ -32,20 +32,60 @@
   flex: 0 0 60%;
   padding: 0.5rem;
 }
-
 .tableHead {
   border-bottom: 2px solid #c4cad0;
 }
-
-
 .tableRow {
   transition: all 200ms !important;
 }
-
 .tableRow:nth-child(even) {
   background-color: #f4f4f4;
 }
 
+.FaDescription {
+  height: auto;
+  width: 30%;
+}
+.EngDescription {
+  height: auto;
+  width: 45%;
+}
+.tariff {
+  height: auto;
+  width: 15%;
+}
+.copyCode {
+  width: 10%;
+}
+.tariffButton {
+  width: 100%;
+  outline: none;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  color: #192129;
+  background-color: #c4cad0;
+  font-family: inherit;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  box-shadow: 0px 6px 11px -3px rgb(0 0 0 / 20%);
+  transition: all 200ms;
+}
+.tariffButton:hover {
+  background-color: #277fe5;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.tariffButton:active {
+  transform: scale(1.05);
+  transition: all 200ms;
+}
+.tablePagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+}
 .searchContainer {
   display: flex;
   justify-content: space-around;
@@ -71,7 +111,7 @@
   margin-top: 0.7rem;
 }
 .search input {
-  font-size: .8rem;
+  font-size: 0.8rem;
   outline: none;
   border: none;
   border-radius: 10px;

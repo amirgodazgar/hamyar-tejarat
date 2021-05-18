@@ -137,17 +137,25 @@
 .inputContainer {
   flex: 1;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
+}
+
+.selectedTariffBox {
+  height: 100%;
+  width: 60%;
 }
 
 .tariffList {
   flex: 1.5;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .selectedTariff {
   height: 75%;
-  width: 80%;
+  width: 100%;
   border: 1px solid #70707057;
   margin: 0 auto;
   border-radius: 10px;
@@ -156,8 +164,9 @@
 }
 
 .tariffListTitle {
-  width: 80%;
-  margin: 0 auto 0.5rem auto;
+  width: 98%;
+  margin: 0 auto 1rem auto;
+  font-size: 0.9rem;
 }
 
 .selectedTariff::-webkit-scrollbar {
@@ -206,7 +215,8 @@
 
 .tariff,
 .originReleasingSelect,
-.originLoading {
+.originLoading,
+.merchandise {
   width: 95%;
   border: 1px solid #70707057;
   border-radius: 10px;
@@ -242,13 +252,17 @@
   width: 97%;
 }
 
-.inputBox {
+.inputBox,
+.inputBoxPurchase {
   flex: 0 0 30%;
   height: 65%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
+}
+.inputBoxPurchase {
+  flex: 0 0 45%;
 }
 
 .UploadInputBox {
@@ -427,7 +441,7 @@ input[type="file"] {
   color: #fff;
 }
 .successfulTitle {
-  margin:1rem 0 2rem 0 !important;
+  margin: 1rem 0 2rem 0 !important;
   width: 40%;
   text-align: center;
 }

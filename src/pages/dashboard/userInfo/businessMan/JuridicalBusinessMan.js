@@ -7,8 +7,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
 import { Link } from "react-router-dom";
+import { sendBusinessmanJuridical } from "../../../../services/userInfo/userInfoServices";
+import { useDispatch } from "react-redux";
 
 const JuridicalBusinessMan = ({ backToDashboard }) => {
+  const dispatch = useDispatch();
   const initialValues = {
     companyName: "",
     companyNationalId: "",
@@ -33,6 +36,13 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
 
   const onSubmit = (values) => {
     console.log(values);
+    const userInfo = {
+      companyName: values.companyName,
+      nationalCompanyId: values.companyNationalId,
+      phoneNumber: values.mobileNum,
+    };
+    console.log(userInfo);
+    sendBusinessmanJuridical(userInfo, dispatch);
   };
   const formik = useFormik({
     initialValues,

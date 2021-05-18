@@ -75,15 +75,14 @@
 
 .topCompanies {
   background-color: #e7f1fc;
-  height: 45rem;
+  height: 36rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
-
 .topCompanies h3 {
-  flex: 0 0 20%;
+  flex: 0 0 15%;
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -99,30 +98,18 @@
   width: 8%;
 }
 .cardsBox {
-  /* border: 1px solid; */
-  flex: 0 0 70%;
+  flex: 0 0 80%;
   display: flex;
   justify-content: center;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.slider {
-  /* border: 1px solid red; */
-  height: 90%;
-  width: 80%;
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.slider::-webkit-scrollbar {
-  /* display: none; */
+.sliderBox {
+  padding: 1rem 1rem 5rem 1rem;
+  max-width: 80% !important;
+  height: 80%;
+  margin: 0 auto;
 }
 
 .preCard,
@@ -137,6 +124,8 @@
   cursor: pointer;
   transition: all 200ms;
   margin: 0 0.5rem;
+  outline: none;
+  border: none;
 }
 .nextIcon,
 .preIcon {
@@ -327,7 +316,7 @@
 .otherNews {
   flex: 0 0 45%;
   width: 80%;
-  margin: .65rem auto;
+  margin: 0.65rem auto;
   display: grid;
   grid-template-columns: repeat(3, 32%);
   justify-content: space-between;

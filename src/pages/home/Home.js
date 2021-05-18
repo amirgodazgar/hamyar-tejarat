@@ -1,5 +1,5 @@
 import classes from "./home.module.css";
-import React from "react";
+import React, { useState } from "react";
 import { homeData } from "../../constant/pagesData";
 import clearanceImage from "../../styles/image/image (3).jpg";
 import registrationImage from "../../styles/image/image (6).jpg";
@@ -15,53 +15,64 @@ import {
   faChevronLeft,
   faPlus,
 } from "@fortawesome/fontawesome-free-solid";
-import http from "../../services/httpServices";
+import { Link } from "react-router-dom";
+import ItemsCarousel from "react-items-carousel";
 
 const Home = () => {
-
   const cardItems = [
     {
-      title: "شرکت ترخیص همراه",
+      title: "0 شرکت ترخیص همراه",
       subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
-      alt: "card-alt",
+      alt: "1",
+      img: cardImage,
     },
     {
-      title: "شرکت ترخیص همراه",
+      title: "1 شرکت ترخیص همراه",
       subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
-      alt: "card-alt",
+      alt: "2",
+      img: cardImage,
     },
     {
-      title: "شرکت ترخیص همراه",
+      title: "2 شرکت ترخیص همراه",
       subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
-      alt: "card-alt",
+      alt: "3",
+      img: cardImage,
     },
     {
-      title: "شرکت ترخیص همراه",
+      title: "3 شرکت ترخیص همراه",
       subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
-      alt: "card-alt",
+      alt: "4",
+      img: cardImage,
     },
     {
-      title: "شرکت ترخیص همراه",
+      title: "4 شرکت ترخیص همراه",
       subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
-      alt: "card-alt",
+      alt: "5",
+      img: cardImage,
+    },
+    {
+      title: "5 شرکت ترخیص همراه",
+      subTitle: "شرکت ترخیص همراه , همراه شما در مسیر تجارت",
+      alt: "6",
+      img: cardImage,
     },
   ];
-  const axiosHandler = async () => {
-    await http.get("BusinessmanPanel/GetBusinessmanProfile").then(res => {
-      console.log("home",res)
-    })
-  }
 
-  // if(!isLogin) {
-  //   push("login")
-  // }
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
+
+  const previous = (
+    <button className={classes.preCard}>
+      <FontAwesomeIcon icon={faChevronRight} className={classes.preIcon} />
+    </button>
+  );
+  const next = (
+    <button className={classes.nextCard}>
+      <FontAwesomeIcon icon={faChevronLeft} className={classes.nextIcon} />
+    </button>
+  );
 
   return (
     <div className={classes.home}>
-    
-    <button onClick={axiosHandler}>get</button>
-
-
       <div className={classes.clearance}>
         <div className={classes.image}>
           <img src={clearanceImage} alt="clearance-img" />
@@ -87,28 +98,34 @@ const Home = () => {
         <h3>{homeData.topCompanies.title}</h3>
         <span className={classes.subLine}></span>
         <div className={classes.cardsBox}>
-          <div className={classes.preCard}>
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className={classes.preIcon}
-            />
-          </div>
-          <div className={classes.slider}>
-            {cardItems.map((card, index) => (
-              <MainCard
-                title={card.title}
-                subtitle={card.subTitle}
-                imgSrc={cardImage}
-                alt={card.alt}
-                key={index}
-              />
-            ))}
-          </div>
-          <div className={classes.nextCard} o>
-            <FontAwesomeIcon
-              icon={faChevronLeft}
-              className={classes.nextIcon}
-            />
+          <div className={classes.sliderBox}>
+            <ItemsCarousel
+              noOfChildren={10}
+              infiniteLoop={false}
+              activePosition={"center"}
+              chevronWidth={70}
+              alwaysShowChevrons={true}
+              numberOfCards={4}
+              slidesToScroll={1}
+              showSlither={false}
+              firstAndLastGutter={false}
+              requestToChangeActive={setActiveItemIndex}
+              activeItemIndex={activeItemIndex}
+              gutter={15}
+              leftChevron={next}
+              rightChevron={previous}
+              outsideChevron
+            >
+              {cardItems.reverse().map((item, index) => (
+                <MainCard
+                  key={index}
+                  title={item.title}
+                  subtitle={item.subTitle}
+                  imgSrc={item.img}
+                  alt={item.alt}
+                />
+              ))}
+            </ItemsCarousel>
           </div>
         </div>
       </div>
@@ -130,13 +147,13 @@ const Home = () => {
       <div className={classes.requests}>
         <div className={classes.header}>
           <h3>{homeData.requests.title}</h3>
-          <span>
+          <Link to="/">
             {homeData.requests.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
-          </span>
+          </Link>
         </div>
         <div className={classes.underLine}>
-          <span></span>
+          <a></a>
         </div>
         <div className={classes.requestBox}>
           {homeData.requests.requestList.map((card, index) => (
@@ -152,7 +169,7 @@ const Home = () => {
       </div>
 
       <div className={classes.statistics}>
-        {homeData.statistics.map((item,index) => (
+        {homeData.statistics.map((item, index) => (
           <div className={classes.statisticsInfo} key={index}>
             <div className={classes.numberBox}>
               <FontAwesomeIcon icon={faPlus} className={classes.addIcon} />
@@ -166,10 +183,10 @@ const Home = () => {
       <div className={classes.news}>
         <div className={classes.header}>
           <h3>{homeData.news.title}</h3>
-          <span>
+          <Link to="/">
             {homeData.news.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
-          </span>
+          </Link>
         </div>
         <div className={classes.underLine}>
           <span></span>

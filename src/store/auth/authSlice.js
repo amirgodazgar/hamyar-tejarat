@@ -4,7 +4,7 @@ import http from "../../services/httpServices";
 
 export const getToken = createAsyncThunk("auth/getToken", async (userInfo) => {
   const { email, password } = userInfo;
-  clearCookies()
+  clearCookies();
   const data = await http
     .post("Account/Login", {
       email,
@@ -31,9 +31,9 @@ export const authSlice = createSlice({
     isResendVerification: false,
     change: false,
     role: {
-      privateBusinessMan: false,
+      privateBusinessMan: true,
       juridicalBusinessMan: false,
-      privateClearanceMan: true,
+      privateClearanceMan: false,
       juridicalClearanceMan: false,
     },
     anyData: "",

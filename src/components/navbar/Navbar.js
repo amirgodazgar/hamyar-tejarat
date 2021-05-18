@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const isLogin = useSelector((state) => state.auth.isLogin);
-  console.log(isLogin)
+  console.log(isLogin);
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
 
@@ -59,7 +59,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link className={classes.registerLink} to="/Register">
-              <div className={classes.register}>ورود | ثبتنام</div>
+              <Button customizeClass="registerLink">ورود | ثبت نام</Button>
             </Link>
           )}
         </div>

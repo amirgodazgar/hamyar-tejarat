@@ -25,7 +25,8 @@
   font-weight: bold;
 }
 
-.panel {
+.panel,
+.registerLink {
   padding: 0.3rem 0.5rem;
   font-size: 1rem;
   background-color: #ffffff;
@@ -38,6 +39,9 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+.registerLink {
+  padding: 0.85rem 0;
 }
 
 .header {
@@ -106,18 +110,20 @@
 }
 
 .header:hover,
-.panel:hover {
+.panel:hover,
+.registerLink:hover {
   background-color: #277fe5;
   color: #ffffff;
   transition: all 200ms;
 }
-.panel:hover a {
+.panel:hover a,
+.registerLink:hover a {
   color: #ffffff;
   transition: all 200ms;
 }
 .header:active,
 .panel:active,
-.registration:active {
+.registerLink:active .registration:active {
   transform: translateY(2px);
   transition: all 100ms;
 }
@@ -154,8 +160,8 @@
 }
 
 .tariffSearch {
-  font-size: .8rem;
-  font-weight: 500 ;
+  font-size: 0.8rem;
+  font-weight: 500;
   position: absolute;
   left: 5%;
   padding: 0.7rem;

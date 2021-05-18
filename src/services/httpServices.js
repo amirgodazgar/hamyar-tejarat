@@ -6,7 +6,6 @@ const history = createBrowserHistory();
 
 axios.defaults.baseURL = "https://lunacyst.ir/api/v1";
 
-
 // Request Config ---------------------------------
 axios.interceptors.request.use(
   (config) => {
@@ -31,61 +30,60 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-
     const originalRequest = error.config;
     const token = Cookies.get("token");
 
-    // prevent infinite loop
+    // prevent infinite loop ---------------
     if (
-      error.response.status === 401 &&
-      originalRequest.url === "Account/RefreshToken"
+      error.response.status === 401 
+      // && originalRequest.url === "Account/RefreshToken"
     ) {
-      console.log("first condition", error.response.status);
-      // clearCookies();
-      // history.replace("/Register");
-      // window.location.reload();
+
+      clearCookies();
+      history.replace("/Register");
+      window.location.reload();
       return Promise.reject(error);
     }
 
-// handle refresh token
-if (error.response.status === 401 && !originalRequest._retry) {
-  originalRequest._retry = true;
+    // handle refresh token ----------------------
+    // if (error.response.status === 401 && !originalRequest._retry) {
+    //   originalRequest._retry = true;
 
-  console.log("second condition" ,error.response.status)
+    //   console.log("second condition" ,error.response.status)
 
-  const refreshToken = Cookies.get("refreshToken");
+      // const refreshToken = Cookies.get("refreshToken");
 
-  return axios
-  .post("Account/RefreshToken", {
-    accessToken: token,
-    refreshToken: refreshToken,
-  })
-  .then((res) => {
+      // return axios
+      // .post("/Account/RefreshToken", {
+      //   accessToken: token,
+      //   refreshToken: refreshToken,
+      // })
+    //   .then((res) => {
 
-      console.log("in axios " ,res)
+    //       console.log("in axios " ,res)
 
-      if (res.status === 200) {
-        const tokenInfo = res.data;
-        const tokenData = {
-          token: tokenInfo.accessToken,
-          tokenExp: tokenInfo.accessTokenExpirationTime,
-          refreshToken: tokenInfo.refreshToken,
-          refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
-        };
-        setTokenCookies(tokenData);
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${tokenInfo.accessToken}`;
-        return axios(originalRequest);
-      }
-    })
-    .catch((error) => {
-      // clearCookies();
-      return Promise.reject(error);
-    });
-}
+    //       if (res.status === 200) {
+    //         const tokenInfo = res.data;
+    //         const tokenData = {
+    //           token: tokenInfo.accessToken,
+    //           tokenExp: tokenInfo.accessTokenExpirationTime,
+    //           refreshToken: tokenInfo.refreshToken,
+    //           refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
+    //         };
+    //         setTokenCookies(tokenData);
+    //         axios.defaults.headers.common[
+    //           "Authorization"
+    //         ] = `Bearer ${tokenInfo.accessToken}`;
+    //         return axios(originalRequest);
+    //       }
+    //     })
+    //     .catch((error) => {
+    //       // clearCookies();
+    //       return Promise.reject(error);
+    //     });
+    // }
 
-// for usual Errors
+    // for usual Errors
     return Promise.reject(error);
   }
 );
@@ -97,8 +95,6 @@ const http = {
   delete: axios.delete,
 };
 export default http;
-
-
 
 // // ? set with Credential to ture
 // // axios.defaults.withCredentials = true;
@@ -148,7 +144,7 @@ export default http;
 //         };
 
 //         let res = axios.post("Account/RefreshToken", body).then((res) => {
-          
+
 //           console.log(res);
 
 //           // localStorage.setItem("access", res.access);

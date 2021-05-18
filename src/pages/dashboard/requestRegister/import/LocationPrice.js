@@ -22,12 +22,14 @@ const LocationPrice = () => {
     tariff: "",
     originLoading: "",
     originReleasing: [],
+    merchandise: "",
   };
 
   const validationSchema = Yup.object({
     tariff: Yup.string().required("کد تعرفه را وارد کنید"),
     originLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
     originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
+    merchandise: Yup.mixed().required("عنوان کالا را وارد کنید"),
   });
 
   const onSubmit = (values) => {
@@ -79,6 +81,23 @@ const LocationPrice = () => {
             />
           </div>
           <div className={classes.inputBox}>
+            {errorBox("merchandise", " عنوان کالا ")}
+            <input
+              className={`${classes.merchandise}  ${
+                formik.touched.merchandise && formik.errors.merchandise
+                  ? classes.inputError
+                  : null
+              } `}
+              name="merchandise"
+              type="text"
+              placeholder=" اسب و الاغ"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.merchandise}
+              required
+            />
+          </div>
+          <div className={classes.inputBox}>
             {errorBox("originLoading", "مبدا بارگیری کالا ")}
             <input
               className={`${classes.originLoading}  ${
@@ -95,7 +114,15 @@ const LocationPrice = () => {
               required
             />
           </div>
-          <div className={classes.inputBox}>
+        </form>
+        <div className={classes.tariffCodes}>
+          <Link to="/Dashboard/tariffCodesList">
+            <img src={tariffSvg} alt="tariffCode" />
+            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
+          </Link>
+        </div>
+        <div className={classes.tariffList}>
+          <div className={classes.inputBox} style={{ width: "30%" }}>
             {errorBox("originReleasing", "گمرک مقصد، محل ترخیص کالا ")}
             <select
               name="originReleasing"
@@ -126,26 +153,20 @@ const LocationPrice = () => {
               ))}
             </select>
           </div>
-        </form>
-        <div className={classes.tariffCodes}>
-          <Link to="/Dashboard/tariffCodesList">
-            <img src={tariffSvg} alt="tariffCode" />
-            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
-          </Link>
-        </div>
-        <div className={classes.tariffList}>
-          <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
-          <div className={classes.selectedTariff}>
-            {chips.map((item, index) =>
-              item !== "0" ? (
-                <Chip
-                  className={classes.chip}
-                  label={item}
-                  onDelete={() => chipDeleteHandler(index)}
-                  key={index}
-                />
-              ) : null
-            )}
+          <div className={classes.selectedTariffBox}>
+            <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
+            <div className={classes.selectedTariff}>
+              {chips.map((item, index) =>
+                item !== "0" ? (
+                  <Chip
+                    className={classes.chip}
+                    label={item}
+                    onDelete={() => chipDeleteHandler(index)}
+                    key={index}
+                  />
+                ) : null
+              )}
+            </div>
           </div>
         </div>
       </div>

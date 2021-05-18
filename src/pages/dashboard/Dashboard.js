@@ -27,7 +27,7 @@ import RequestRegister from "./requestRegister/RequestRegister";
 import UserInfo from "./userInfo/UserInfo";
 import BankAccount from "./bankAccount/BankAccount";
 import TariffCodeList from "./tariffCodesList/TariffCodeList";
-
+import { getBusinessmanProfile } from "../../services/userInfo/userInfoServices";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -36,6 +36,9 @@ const Dashboard = () => {
   };
   const selectedHandler = (index) => {
     setSelected(index);
+    if (selected === 4) {
+      //run general method from server to check what kind of UserType and RoleType is exist
+    }
   };
 
   return (
@@ -121,17 +124,22 @@ const Dashboard = () => {
         <Divider />
         <List className={classes.list}>
           {adminPanelData.listItem.map((item, index) => (
-            <Link to={item.path ? item.path : "/Dashboard/dashboard"}>
+            <Link
+              to={item.path ? item.path : "/Dashboard/dashboard"}
+              key={index}
+            >
               <ListItem
                 className={
                   selected === index ? classes.listItemActive : classes.listItem
                 }
-                key={`listItem-${index}`}
                 onClick={() => selectedHandler(index)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <Fade in={open}>
-                  <ListItemText className={classes.listItemText}>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
                     {item.text}
                   </ListItemText>
                 </Fade>
@@ -143,7 +151,7 @@ const Dashboard = () => {
 
       <div className={classes.main}>
         <Switch>
-          <Route path="/Dashboard/dashboard" exact component={DashboardMain} />
+          <Route exact path="/Dashboard/dashboard" component={DashboardMain} />
           <Route
             path="/Dashboard/suggestionsList"
             component={SuggestionsList}

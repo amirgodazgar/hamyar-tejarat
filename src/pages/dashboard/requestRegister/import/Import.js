@@ -38,8 +38,6 @@ const Import = () => {
   const next = "ادامه";
   const accept = "ثبت درخواست";
 
-  console.log(activeStep, steps.length - 1);
-
   function getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:

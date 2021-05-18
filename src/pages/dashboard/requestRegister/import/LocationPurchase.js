@@ -11,12 +11,14 @@ const LocationPurchase = () => {
     tariff: "",
     originLoading: "",
     originReleasing: "",
+    merchandise: "",
   };
 
   const validationSchema = Yup.object({
     tariff: Yup.string().required("کد تعرفه را وارد کنید"),
     originLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
     originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
+    merchandise: Yup.mixed().required(" نوع کالا  را وارد کنید"),
   });
 
   const onSubmit = (values) => {
@@ -49,7 +51,7 @@ const LocationPurchase = () => {
       </Typography>
       <div className={classes.formBox}>
         <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
-          <div className={classes.inputBox}>
+          <div className={classes.inputBoxPurchase}>
             {errorBox("tariff", "کد تعرفه")}
             <input
               className={`${classes.tariff}  ${
@@ -66,7 +68,32 @@ const LocationPurchase = () => {
               required
             />
           </div>
-          <div className={classes.inputBox}>
+          <div className={classes.inputBoxPurchase}>
+            {errorBox("merchandise", "نوع کالا ")}
+            <input
+              className={`${classes.merchandise}  ${
+                formik.touched.merchandise && formik.errors.merchandise
+                  ? classes.inputError
+                  : null
+              } `}
+              name="merchandise"
+              type="text"
+              placeholder=" اسب و الاغ"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.merchandise}
+              required
+            />
+          </div>
+        </form>
+        <div className={classes.tariffCodes}>
+          <Link to="/Dashboard/tariffCodesList">
+            <img src={tariffSvg} alt="tariffCode" />
+            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
+          </Link>
+        </div>
+        <div className={classes.tariffList}>
+          <div className={classes.inputBoxPurchase}>
             {errorBox("originLoading", "مبدا بارگیری کالا ")}
             <input
               className={`${classes.originLoading}  ${
@@ -83,7 +110,7 @@ const LocationPurchase = () => {
               required
             />
           </div>
-          <div className={classes.inputBox}>
+          <div className={classes.inputBoxPurchase}>
             {errorBox("originReleasing", "گمرک مقصد، محل ترخیص کالا ")}
             <select
               name="originReleasing"
@@ -104,14 +131,7 @@ const LocationPurchase = () => {
               <option value="3">مصیب</option>
             </select>
           </div>
-        </form>
-        <div className={classes.tariffCodes}>
-          <Link to="/Dashboard/tariffCodesList">
-            <img src={tariffSvg} alt="tariffCode" />
-            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
-          </Link>
         </div>
-        <div className={classes.tariffList}></div>
       </div>
     </React.Fragment>
   );

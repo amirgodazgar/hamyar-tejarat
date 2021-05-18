@@ -9,6 +9,7 @@
   background-color: #ffffff;
   width: calc(100% - 5rem) !important;
   transition: all 200ms !important;
+  padding: 0 !important;
 }
 .appBarShift {
   width: calc(100% - 15rem) !important;
@@ -29,6 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 }
 .leftSide {
   display: flex;

@@ -117,7 +117,7 @@ const UploadPrice = () => {
               placeholder="70,000,000"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.packingType}
+              value={formik.values.priceValue}
               required
             />
           </div>

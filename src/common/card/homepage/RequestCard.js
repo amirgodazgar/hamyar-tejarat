@@ -9,7 +9,6 @@ import {
   Typography,
   Avatar,
 } from "@material-ui/core";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 
 const RequestCard = ({ imgSrc, alt, title, subtitle }) => {
   return (
@@ -37,7 +36,6 @@ const RequestCard = ({ imgSrc, alt, title, subtitle }) => {
           </Typography>
         </CardContent>
         <CardContent className={classes.cardContent}>
-          <BookmarkIcon className={classes.BookmarkIcon}/>
           <Button customizeClass="requestCard">{cardData.request.btn}</Button>
         </CardContent>
       </Card>

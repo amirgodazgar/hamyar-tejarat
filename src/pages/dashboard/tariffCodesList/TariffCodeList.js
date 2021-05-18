@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./TariffCodeList.module.css";
 import {
   Grid,
@@ -9,38 +9,45 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TablePagination,
   Typography,
 } from "@material-ui/core";
 import Button from "../../../common/button/Button";
-
+import http from "../../../services/httpServices";
 const TariffCodeList = () => {
-  const tariffCodeRows = [
-    {
-      merchandiseFa: "اسب، الاغ، قاطر و استر، زنده",
-      merchandiseEng: "Live horses, asses, mules and hinnies",
-      tariffCode: "0101",
-    },
-    {
-      merchandiseFa: "اسب، الاغ، قاطر و استر، زنده",
-      merchandiseEng: "Live horses, asses, mules and hinnies",
-      tariffCode: "0101",
-    },
-    {
-      merchandiseFa: "اسب، الاغ، قاطر و استر، زنده",
-      merchandiseEng: "Live horses, asses, mules and hinnies",
-      tariffCode: "0101",
-    },
-    {
-      merchandiseFa: "اسب، الاغ، قاطر و استر، زنده",
-      merchandiseEng: "Live horses, asses, mules and hinnies",
-      tariffCode: "0101",
-    },
-    {
-      merchandiseFa: "اسب، الاغ، قاطر و استر، زنده",
-      merchandiseEng: "Live horses, asses, mules and hinnies",
-      tariffCode: "0101",
-    },
-  ];
+  const [textSearch, setTextSearch] = useState("");
+  const [codeSearch, setCodeSearch] = useState([]);
+  const [result, setResult] = useState([]);
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const getDataByText = async (text) => {
+    await http
+      .get(
+        `CustomsCargos/SearchCustomsCargos?persianDescription=${text}&page=1&pageSize=10`
+      )
+      .then((res) => {
+        setResult(res.data.data.results);
+      });
+  };
+
+  const getDataByCode = async (code) => {
+    await http
+      .get(
+        `https://lunacyst.ir/api/v1/CustomsCargos/SearchCustomsCargos?tariffCode=${code}&page=1&pageSize=10`
+      )
+      .then((res) => {
+        setResult(res.data.data.results);
+      });
+  };
 
   return (
     <Grid
@@ -64,8 +71,18 @@ const TariffCodeList = () => {
                   جستجو براساس کد کالا
                 </Typography>
                 <div className={classes.search}>
-                  <input type="text" placeholder="0101" />
-                  <Button customizeClass="tariffSearch" type="submit">
+                  <input
+                    value={codeSearch}
+                    onChange={(e) => setCodeSearch(e.target.value)}
+                    id="code-search"
+                    type="text"
+                    placeholder="0101"
+                  />
+                  <Button
+                    click={() => getDataByCode(codeSearch)}
+                    customizeClass="tariffSearch"
+                    type="submit"
+                  >
                     جستجو
                   </Button>
                 </div>
@@ -76,10 +93,17 @@ const TariffCodeList = () => {
                 </Typography>
                 <div className={classes.search}>
                   <input
+                    value={textSearch}
+                    onChange={(e) => setTextSearch(e.target.value)}
+                    id="text-search"
                     type="text"
                     placeholder="اسب، الاغ، قاطر و استر، زنده"
                   />
-                  <Button customizeClass="tariffSearch" type="submit">
+                  <Button
+                    click={() => getDataByText(textSearch)}
+                    customizeClass="tariffSearch"
+                    type="submit"
+                  >
                     جستجو
                   </Button>
                 </div>
@@ -101,19 +125,73 @@ const TariffCodeList = () => {
                           <TableCell>شرح کالا</TableCell>
                           <TableCell>شرح انگلیسی کالا</TableCell>
                           <TableCell>کد تعرفه</TableCell>
+                          <TableCell></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {tariffCodeRows.map((row, index) => (
-                          <TableRow key={index} className={classes.tableRow}>
-                            <TableCell>{row.merchandiseFa}</TableCell>
-                            <TableCell>{row.merchandiseEng}</TableCell>
-                            <TableCell>{row.tariffCode}</TableCell>
+                        {result.length !== 0 || result === null ? (
+                          result
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map((row, index) => (
+                              <TableRow
+                                key={index}
+                                className={classes.tableRow}
+                              >
+                                <TableCell className={classes.FaDescription}>
+                                  {row.persianCargoDescription}
+                                </TableCell>
+                                <TableCell className={classes.EngDescription}>
+                                  {row.englishCargoDescription}
+                                </TableCell>
+                                <TableCell className={classes.tariff}>
+                                  {row.id}
+                                </TableCell>
+                                <TableCell className={classes.copyCode}>
+                                  <button
+                                    className={classes.tariffButton}
+                                    onClick={() => {
+                                      navigator.clipboard.writeText(
+                                        row.id
+                                      );
+                                    }}
+                                  >
+                                    کپی
+                                  </button>
+                                </TableCell>
+                              </TableRow>
+                            ))
+                        ) : (
+                          <TableRow className={classes.tableRow}>
+                            <TableCell className={classes.FaDescription}>
+                              اطلاعاتی در دسترس نیست
+                            </TableCell>
+                            <TableCell className={classes.EngDescription}>
+                              اطلاعاتی در دسترس نیست
+                            </TableCell>
+                            <TableCell className={classes.tariff}>
+                              اطلاعاتی در دسترس نیست
+                            </TableCell>
+                            <TableCell className={classes.copyCode}></TableCell>
                           </TableRow>
-                        ))}
+                        )}
                       </TableBody>
                     </Table>
                   </TableContainer>
+                  <TablePagination
+                    className={classes.tablePagination}
+                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                    component="div"
+                    count={result.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangePage={handleChangePage}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    labelRowsPerPage="ردیف در هر صفحه"
+                    labelDisplayedRows={({ from, to }) => `${from}-${to}`}
+                  />
                 </div>
               </Paper>
             </Grid>

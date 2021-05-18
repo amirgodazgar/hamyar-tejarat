@@ -9,17 +9,20 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableFooter,
+  TablePagination,
   Typography,
-
 } from "@material-ui/core";
 import { ArrowBackIos } from "@material-ui/icons";
-import { Pagination } from "@material-ui/lab";
 
 const BusinessMan = () => {
-  const [page, setPage] = React.useState(1);
-  const handleChange = (event, value) => {
-    setPage(value);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
   };
 
   const rows = [
@@ -113,43 +116,42 @@ const BusinessMan = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow
-                  key={`ticket-${row.ticketId}`}
-                  className={classes.tableRow}
-                >
-                  <TableCell>
-                    <div className={classes.transmitter}>
-                      <Avatar />
-                      <p>{row.transmitter}</p>
-                    </div>
-                  </TableCell>
-                  <TableCell>{row.requestId}</TableCell>
-                  <TableCell>{row.cost.toLocaleString()}</TableCell>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>
-                    <div className={classes.fixCell}>
-                      <p>{row.description}</p>
-                      <ArrowBackIos fontSize="small" />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => (
+                  <TableRow key={index} className={classes.tableRow}>
+                    <TableCell>
+                      <div className={classes.transmitter}>
+                        <Avatar />
+                        <p>{row.transmitter}</p>
+                      </div>
+                    </TableCell>
+                    <TableCell>{row.requestId}</TableCell>
+                    <TableCell>{row.cost.toLocaleString()}</TableCell>
+                    <TableCell>{row.date}</TableCell>
+                    <TableCell>
+                      <div className={classes.fixCell}>
+                        <p>{row.description}</p>
+                        <ArrowBackIos fontSize="small" />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
-          <TableFooter className={classes.footer}>
-            <div className={classes.pagination}>
-              <Typography>Page: {page}</Typography>
-              <Pagination
-                shape="rounded"
-                color="secondary"
-                count={10}
-                page={page}
-                onChange={handleChange}
-              />
-            </div>
-          </TableFooter>
         </TableContainer>
+        <TablePagination
+          className={classes.tablePagination}
+          rowsPerPageOptions={[5, 10, 25, 50, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          labelRowsPerPage="ردیف در هر صفحه"
+          labelDisplayedRows={({ from, to }) => `${from}-${to}`}
+        />
       </div>
     </Paper>
   );

@@ -119,7 +119,7 @@ const DashboardMain = () => {
               <Typography className={classes.title} variant="h6">
                 جدیدترین تیکت ها
               </Typography>
-              <span className={classes.link} >
+              <span className={classes.link}>
                 <Typography variant="body2">مشاهده همه</Typography>
                 <ArrowBackIos fontSize="small" />
               </span>
@@ -136,12 +136,8 @@ const DashboardMain = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {ticketRows.map((row) => (
-                      <TableRow
-                        key={`ticket-${row.ticketId}`}
-                        className={classes.tableRow}
-                        hover={true}
-                      >
+                    {ticketRows.map((row, index) => (
+                      <TableRow key={index} className={classes.tableRow} hover>
                         <TableCell>{row.ticketId}</TableCell>
                         <TableCell>{row.subject}</TableCell>
                         <TableCell>{row.date}</TableCell>
@@ -169,7 +165,7 @@ const DashboardMain = () => {
               <Typography className={classes.title} variant="h6">
                 آخرین اخبار و اطلاعیه ها
               </Typography>
-              <span className={classes.link} >
+              <span className={classes.link}>
                 <Typography variant="body2">مشاهده همه</Typography>
                 <ArrowBackIos fontSize="small" />
               </span>
@@ -185,11 +181,7 @@ const DashboardMain = () => {
                   </TableHead>
                   <TableBody>
                     {newsRows.map((row, index) => (
-                      <TableRow
-                        key={`news-${index + 1}`}
-                        className={classes.tableRow}
-                        hover={true}
-                      >
+                      <TableRow key={index} className={classes.tableRow} hover>
                         <TableCell>{row.subject}</TableCell>
                         <TableCell>{row.date}</TableCell>
                       </TableRow>
@@ -203,11 +195,6 @@ const DashboardMain = () => {
       </Grid>
 
       <Grid item xs={11} className={classes.dynamicBox}>
-
-
-
-
-      
         {cardType}
       </Grid>
     </Grid>

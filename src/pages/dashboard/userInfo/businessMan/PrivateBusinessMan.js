@@ -8,8 +8,11 @@ import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
 
 import { Link } from "react-router-dom";
+import { sendBusinessmanPrivate } from "../../../../services/userInfo/userInfoServices";
+import { useDispatch } from "react-redux";
 
 const PrivateBusinessMan = ({ backToDashboard }) => {
+  const dispatch = useDispatch();
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -37,7 +40,14 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    const userInfo = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      nationalId: values.nationalId,
+      phoneNumber: values.mobileNum,
+    };
+    console.log(userInfo);
+    sendBusinessmanPrivate(userInfo, dispatch);
   };
   const formik = useFormik({
     initialValues,

@@ -10,8 +10,9 @@ import {
   Typography,
   Avatar,
 } from "@material-ui/core";
+import { StarRateRounded } from "@material-ui/icons";
 
-const MainCard = ({ imgSrc, alt, title, subtitle }) => {
+const MainCard = ({ imgSrc, alt, title, subtitle, disable , removeIfLast }) => {
   const [value, setValue] = React.useState(3);
   const ratingHandler = (e, newValue) => {
     setValue(newValue);
@@ -19,7 +20,12 @@ const MainCard = ({ imgSrc, alt, title, subtitle }) => {
 
   return (
     <React.Fragment>
-      <Card className={classes.card}>
+      <Card
+        style={removeIfLast ? {display:"none"} : null}
+        className={
+          disable ? `${classes.card} ${classes.disable}` : classes.card
+        }
+      >
         <CardHeader
           className={classes.cardHeader}
           avatar={<Avatar className={classes.avatar} src={imgSrc} alt={alt} />}
@@ -33,16 +39,22 @@ const MainCard = ({ imgSrc, alt, title, subtitle }) => {
           >
             {title}
           </Typography>
-          <Typography className={classes.subTitle} variant="button" align="center" paragraph>
+          <Typography
+            className={classes.subTitle}
+            variant="button"
+            align="center"
+            paragraph
+          >
             {subtitle}
           </Typography>
           <Rating
             className={classes.rating}
-            value={value}
+            // value={value}
+            value={5}
             onChange={(e, newValue) => ratingHandler(e, newValue)}
             size="large"
             name="rating"
-            //  icon
+            icon={<StarRateRounded fontSize="large" />}
           />
           <Button customizeClass="card">{cardData.btn}</Button>
         </CardContent>
