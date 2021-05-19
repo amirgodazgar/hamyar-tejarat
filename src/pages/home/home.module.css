@@ -181,10 +181,10 @@
 }
 .registration > p {
   text-align: justify;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   margin-bottom: 1.5rem;
-  line-height: 2.5;
+  line-height: 2;
 }
 .registration > span {
   border-top: 4px solid #1e4383;

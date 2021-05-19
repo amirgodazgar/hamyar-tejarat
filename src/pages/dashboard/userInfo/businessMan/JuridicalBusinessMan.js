@@ -123,7 +123,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
               ثبت
             </Button>
 
-            <Link to="/Dashboard/dashboard" replace>
+            <Link to="/Dashboard/main" replace>
               <Button click={() => backToDashboard(0)} customizeClass="auth">
                 انصراف
               </Button>

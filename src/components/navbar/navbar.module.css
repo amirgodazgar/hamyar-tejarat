@@ -57,8 +57,8 @@
 }
 
 .logoText {
-  /* font-family: 'Kalame'; */
-  font-size: 2rem;
+  font-family: Kalameh !important;
+  font-size: 3rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 200ms;

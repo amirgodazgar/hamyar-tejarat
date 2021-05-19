@@ -10,10 +10,10 @@ import {
   Avatar,
 } from "@material-ui/core";
 
-const RequestCard = ({ imgSrc, alt, title, subtitle }) => {
+const RequestCard = ({ imgSrc, alt, title, subtitle, animation, delay }) => {
   return (
     <React.Fragment>
-      <Card className={classes.card}>
+      <Card className={classes.card}  data-aos={animation}>
         <div className={classes.header}>
           <CardHeader
             className={classes.cardHeader}

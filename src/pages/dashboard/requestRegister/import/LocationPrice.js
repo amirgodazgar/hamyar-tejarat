@@ -138,9 +138,9 @@ const LocationPrice = () => {
             >
               {[
                 { label: "انتخاب کنید", value: "0" },
-                { label: " مصیب", value: "مصیب" },
-                { label: " ممدخان", value: "ممدخان" },
-                { label: " پرویزخان", value: "پرویزخان" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
               ].map((option, index) => (
                 <option
                   style={

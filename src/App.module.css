@@ -1,5 +1,6 @@
 @import url("./styles/reset.module.css");
 @import url("./fonts/css/fontiran.css");
+@import url("./fonts/kalameh/kalamehFont.css");
 
 body {
   font-family: Roboto, IRANSans !important ;

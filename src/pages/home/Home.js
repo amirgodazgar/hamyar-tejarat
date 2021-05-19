@@ -1,13 +1,17 @@
 import classes from "./home.module.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { homeData } from "../../constant/pagesData";
 import clearanceImage from "../../styles/image/image (3).jpg";
 import registrationImage from "../../styles/image/image (6).jpg";
+import newsImg from "../../styles/image/image (7).jpg";
+import otherNewsImg1 from "../../styles/image/image (1).jpg";
+// import otherNewsImg2 from "../../styles/image/image (2).jpg";
+// import otherNewsImg3 from "../../styles/image/image (5).jpg";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import MainCard from "../../common/card/MainCard";
 import NewsCard from "../../common/card/homepage/NewsCard";
 import RequestCard from "../../common/card/homepage/RequestCard";
-import cardImage from "../../styles/image/profile-image.png";
+import cardImage from "../../styles/image/profile-image.svg";
 import Button from "../../common/button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -74,10 +78,10 @@ const Home = () => {
   return (
     <div className={classes.home}>
       <div className={classes.clearance}>
-        <div className={classes.image}>
+        <div data-aos="fade-out" data-aos-delay="30" className={classes.image}>
           <img src={clearanceImage} alt="clearance-img" />
         </div>
-        <div className={classes.links}>
+        <div className={classes.links} data-aos="fade-out" data-aos-delay="20">
           <h3>{homeData.clearance.links.title}</h3>
           <span></span>
           <ul>
@@ -95,10 +99,18 @@ const Home = () => {
       </div>
 
       <div className={classes.topCompanies}>
-        <h3>{homeData.topCompanies.title}</h3>
-        <span className={classes.subLine}></span>
-        <div className={classes.cardsBox}>
-          <div className={classes.sliderBox}>
+        <h3 data-aos="flip-down">{homeData.topCompanies.title}</h3>
+        <span
+          data-aos="flip-down"
+          data-aos-delay="10"
+          className={classes.subLine}
+        ></span>
+        <div
+          data-aos="flip-up"
+          data-aos-delay="20"
+          className={classes.cardsBox}
+        >
+          <div className={classes.sliderBox} style={{ direction: "ltr" }}>
             <ItemsCarousel
               noOfChildren={10}
               infiniteLoop={false}
@@ -116,7 +128,7 @@ const Home = () => {
               rightChevron={previous}
               outsideChevron
             >
-              {cardItems.reverse().map((item, index) => (
+              {cardItems.map((item, index) => (
                 <MainCard
                   key={index}
                   title={item.title}
@@ -132,22 +144,28 @@ const Home = () => {
 
       <div className={classes.introduction}>
         <div className={classes.registration}>
-          <h3>{homeData.registration.title}</h3>
-          <span></span>
-          <p>{homeData.registration.text}</p>
-          <Button customizeClass="registration">
-            {homeData.registration.btn}
-          </Button>
+          <h3 data-aos="fade-left" data-aos-delay="10">
+            {homeData.registration.title}
+          </h3>
+          <span data-aos="fade-left" data-aos-delay="20"></span>
+          <p data-aos="fade-left" data-aos-delay="25">
+            {homeData.registration.text}
+          </p>
+          <div data-aos="fade-left" data-aos-delay="30">
+            <Button customizeClass="registration">
+              {homeData.registration.btn}
+            </Button>
+          </div>
         </div>
-        <div className={classes.image}>
+        <div data-aos="fade-out" data-aos-delay="20" className={classes.image}>
           <img src={registrationImage} alt="clearance-img" />
         </div>
       </div>
 
       <div className={classes.requests}>
         <div className={classes.header}>
-          <h3>{homeData.requests.title}</h3>
-          <Link to="/">
+          <h3 data-aos="fade-in">{homeData.requests.title}</h3>
+          <Link to="/" data-aos="fade-in">
             {homeData.requests.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
           </Link>
@@ -163,6 +181,7 @@ const Home = () => {
               imgSrc={cardImage}
               alt={card.alt}
               key={index}
+              animation="zoom-in"
             />
           ))}
         </div>
@@ -171,19 +190,19 @@ const Home = () => {
       <div className={classes.statistics}>
         {homeData.statistics.map((item, index) => (
           <div className={classes.statisticsInfo} key={index}>
-            <div className={classes.numberBox}>
+            <div className={classes.numberBox} data-aos="flip-up">
               <FontAwesomeIcon icon={faPlus} className={classes.addIcon} />
               <p className={classes.number}>{item.number}</p>
             </div>
-            <p> {item.title}</p>
+            <p data-aos="flip-up"> {item.title}</p>
           </div>
         ))}
       </div>
 
       <div className={classes.news}>
         <div className={classes.header}>
-          <h3>{homeData.news.title}</h3>
-          <Link to="/">
+          <h3 data-aos="fade-out">{homeData.news.title}</h3>
+          <Link to="/" data-aos="fade-out">
             {homeData.news.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
           </Link>
@@ -195,7 +214,7 @@ const Home = () => {
           <div className={classes.mainNews}>
             {homeData.news.mainCard.map((card, index) => (
               <NewsCard
-                img={clearanceImage}
+                img={newsImg}
                 type={card.type}
                 date={card.date}
                 title={card.title}
@@ -210,7 +229,7 @@ const Home = () => {
           <div className={classes.otherNews}>
             {homeData.news.cards.map((card, index) => (
               <NewsCard
-                img={clearanceImage}
+                img={otherNewsImg1}
                 type={card.type}
                 date={card.date}
                 title={card.title}

@@ -113,7 +113,7 @@ const DashboardMain = () => {
         justify="space-between"
         className={classes.staticBox}
       >
-        <Grid item xs={6}>
+        <Grid className={classes.ticketsRows}>
           <Paper className={classes.paper}>
             <div className={classes.header}>
               <Typography className={classes.title} variant="h6">
@@ -147,9 +147,9 @@ const DashboardMain = () => {
                               classes[row.status.color]
                             }`}
                           ></div>
-                          <span className={classes.statusText}>
+                          <div className={classes.statusText}>
                             {row.status.text}
-                          </span>
+                          </div>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -159,7 +159,7 @@ const DashboardMain = () => {
             </div>
           </Paper>
         </Grid>
-        <Grid item xs={5}>
+        <Grid className={classes.newsRows}>
           <Paper className={classes.paper}>
             <div className={classes.header}>
               <Typography className={classes.title} variant="h6">

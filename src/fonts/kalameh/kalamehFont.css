@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Kalameh";
+  font-style: normal;
+  font-weight: bold;
+  src: url("./KalamehWeb_Bold.eot");
+  src: url("./KalamehWeb_Bold.eot") format("embedded-opentype"),
+    /* IE6-8 */ url("./KalamehWeb_Bold.woff2") format("woff2"),
+    /* FF39+,Chrome36+, Opera24+*/ url("./KalamehWeb_Bold.woff") format("woff"),
+    /* FF3.6+, IE9, Chrome6+, Saf5.1+*/ url("./KalamehWeb_Bold.ttf")
+      format("truetype");
+}

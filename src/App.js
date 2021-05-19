@@ -11,7 +11,6 @@ import Auth from "./pages/auth/Auth";
 import Dashboard from "./pages/dashboard/Dashboard";
 import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
 import ResetPassword from "./components/auth/resetPassword/ResetPassword";
-// import {  } from 'react-router-dom'
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });

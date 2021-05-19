@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <header className={classes.header}>
-      <nav className={classes.navbar}>
+      <nav data-aos="fade-down" className={classes.navbar}>
         <Link className={classes.logo} to="/">
           <span className={classes.logoText}>همیار تجارت</span>
         </Link>
@@ -50,7 +50,7 @@ const Navbar = () => {
           </div>
           {isLogin ? (
             <div className={classes.panel}>
-              <Link className={classes.link} to="/Dashboard/dashboard">
+              <Link className={classes.link} to="/Dashboard/main">
                 <Button customizeClass="panel">
                   <PersonIcon fontSize="large" />
                   پنل کاربری
@@ -64,7 +64,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      <div className={classes.mainTitle}>
+      <div data-aos="fade-up" className={classes.mainTitle}>
         <h1>سامانه همیار تجارت</h1>
         <h6>نخستین سامانه برونسپاری ترخیص کالا در ایران</h6>
         <Button customizeClass="header">همین حالا شروع کنید</Button>

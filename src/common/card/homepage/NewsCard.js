@@ -14,6 +14,8 @@ const NewsCard = ({ img, type, date, title, tagTitle, text, dir }) => {
     <React.Fragment>
       <Card className={`${classes.card} ${classes[dir]}`}>
         <CardMedia
+          data-aos="zoom-out"
+          data-aos-duration="200"
           image={img}
           className={
             dir === "horizontal"
@@ -22,6 +24,7 @@ const NewsCard = ({ img, type, date, title, tagTitle, text, dir }) => {
           }
         />
         <CardContent
+          data-aos="zoom-out"
           className={
             dir === "horizontal" ? classes.content : classes.verticalContent
           }

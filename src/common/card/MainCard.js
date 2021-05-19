@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { StarRateRounded } from "@material-ui/icons";
 
-const MainCard = ({ imgSrc, alt, title, subtitle, disable , removeIfLast }) => {
+const MainCard = ({ imgSrc, alt, title, subtitle, disable, removeIfLast }) => {
   const [value, setValue] = React.useState(3);
   const ratingHandler = (e, newValue) => {
     setValue(newValue);
@@ -21,7 +21,7 @@ const MainCard = ({ imgSrc, alt, title, subtitle, disable , removeIfLast }) => {
   return (
     <React.Fragment>
       <Card
-        style={removeIfLast ? {display:"none"} : null}
+        style={removeIfLast ? { display: "none" } : null}
         className={
           disable ? `${classes.card} ${classes.disable}` : classes.card
         }
@@ -31,19 +31,13 @@ const MainCard = ({ imgSrc, alt, title, subtitle, disable , removeIfLast }) => {
           avatar={<Avatar className={classes.avatar} src={imgSrc} alt={alt} />}
         />
         <CardContent className={classes.cardContent}>
-          <Typography
-            className={classes.title}
-            variant="h6"
-            align="center"
-            paragraph
-          >
+          <Typography className={classes.title} variant="h6" align="center">
             {title}
           </Typography>
           <Typography
             className={classes.subTitle}
             variant="button"
             align="center"
-            paragraph
           >
             {subtitle}
           </Typography>

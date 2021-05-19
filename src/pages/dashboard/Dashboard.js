@@ -27,7 +27,9 @@ import RequestRegister from "./requestRegister/RequestRegister";
 import UserInfo from "./userInfo/UserInfo";
 import BankAccount from "./bankAccount/BankAccount";
 import TariffCodeList from "./tariffCodesList/TariffCodeList";
+import cardImage from "../../styles/svg/profile-image.svg";
 import { getBusinessmanProfile } from "../../services/userInfo/userInfoServices";
+
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -54,10 +56,10 @@ const Dashboard = () => {
 
           <Box color="primary" className={classes.leftSide}>
             <Box className={classes.userBox}>
-              <Avatar />
+              <Avatar src={cardImage} />
               <div className={classes.userBoxTitle}>
                 <Typography variant="button" className={classes.userTitle}>
-                  چنگیز مغول
+                  امیررضا چهری
                 </Typography>
                 <Typography variant="caption" className={classes.userRole}>
                   ترخیص کار
@@ -124,10 +126,7 @@ const Dashboard = () => {
         <Divider />
         <List className={classes.list}>
           {adminPanelData.listItem.map((item, index) => (
-            <Link
-              to={item.path ? item.path : "/Dashboard/dashboard"}
-              key={index}
-            >
+            <Link to={item.path ? item.path : "/Dashboard/main"} key={index}>
               <ListItem
                 className={
                   selected === index ? classes.listItemActive : classes.listItem
@@ -151,7 +150,7 @@ const Dashboard = () => {
 
       <div className={classes.main}>
         <Switch>
-          <Route exact path="/Dashboard/dashboard" component={DashboardMain} />
+          <Route exact path="/Dashboard/main" component={DashboardMain} />
           <Route
             path="/Dashboard/suggestionsList"
             component={SuggestionsList}

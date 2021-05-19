@@ -6,7 +6,7 @@ export const adminPanelData = {
     {
       text: "داشبورد",
       icon: <Home fontSize="large" style={{ color: "#C4CAD0" }} />,
-      path: "/Dashboard/dashboard",
+      path: "/Dashboard/main",
     },
     {
       text: "لیست پیشنهادات",

@@ -124,11 +124,21 @@ const LocationPurchase = () => {
                   : null
               } `}
             >
-              <option value="0" style={{ color: "rgba(0,0,0,0.4)" }}>
-                انتخاب کنید
-              </option>
-              <option value="2">ممدخان</option>
-              <option value="3">مصیب</option>
+              {[
+                { label: "انتخاب کنید", value: "0" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
+                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
+              ].map((option, index) => (
+                <option
+                  style={
+                    option.value === "0" ? { color: "rgba(0,0,0,0.4)" } : null
+                  }
+                  value={option.value}
+                  label={option.label}
+                  key={index}
+                />
+              ))}
             </select>
           </div>
         </div>
