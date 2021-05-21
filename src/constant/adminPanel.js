@@ -7,36 +7,54 @@ export const adminPanelData = {
       text: "داشبورد",
       icon: <Home fontSize="large" style={{ color: "#C4CAD0" }} />,
       path: "/Dashboard/main",
+      hasDropDown: false,
     },
     {
       text: "لیست پیشنهادات",
       icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/suggestionsList",
+      dropDownText: [
+        {
+          text: "ترخیص کالا",
+          path: "/Dashboard/suggestionsList/clearance",
+          
+        },
+        {
+          text: "استعلام قیمت",
+          path: "/Dashboard/suggestionsList/findPrice",
+        },
+      ],
+      hasDropDown: true,
     },
     {
       text: "تیکت ها",
       icon: <Sms fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/tickets",
+      hasDropDown: false,
     },
     {
       text: "ثبت درخواست",
       icon: <Edit fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/requestRegister",
+      hasDropDown: false,
     },
     {
       text: "اطلاعات کاربری",
       icon: <Person fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/userInfo",
+      hasDropDown: false,
     },
     {
       text: "حساب بانکی",
       icon: <Payment fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/bankAccount",
+      hasDropDown: false,
     },
     {
       text: "لیست کد تعرفه کالا",
       icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/tariffCodesList",
+      hasDropDown: false,
     },
   ],
 

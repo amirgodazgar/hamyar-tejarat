@@ -3,7 +3,7 @@ import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import { Grid, Typography } from "@material-ui/core";
 
-const SuggestionsList = () => {
+const ClearanceList = () => {
   return (
     <Grid
       container
@@ -13,7 +13,7 @@ const SuggestionsList = () => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          لیست پیشنهادات
+          ترخیص کالا
         </Typography>
       </Grid>
       <Grid item xs={11}>
@@ -35,4 +35,4 @@ const SuggestionsList = () => {
   );
 };
 
-export default SuggestionsList;
+export default ClearanceList;

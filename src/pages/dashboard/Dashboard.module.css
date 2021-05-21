@@ -146,6 +146,26 @@
   transition: all 200ms;
 }
 
+.dropDownText span {
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  transition: all 200ms;
+}
+
+.dropDownList,
+.dropDownListActive {
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  color: #c4cad0 !important;
+  transition: all 100ms;
+}
+.dropDownListActive {
+  color: #1e4383 !important;
+  transition: all 200ms;
+  cursor: pointer;
+}
+
 .menuIcon {
   color: #192129;
 }

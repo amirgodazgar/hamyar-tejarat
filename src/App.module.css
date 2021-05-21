@@ -10,7 +10,6 @@
 body {
   font-weight: 300;
   direction: rtl;
-
 }
 
 a {
@@ -19,7 +18,7 @@ a {
 
 body::-webkit-scrollbar {
   scroll-behavior: smooth;
-  width: 20px;
+  width: 13px;
 }
 body::-webkit-scrollbar-track {
   padding: 0.25rem;

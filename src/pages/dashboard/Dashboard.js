@@ -13,34 +13,57 @@ import {
   ListItemIcon,
   ListItemText,
   Fade,
+  Collapse,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import classes from "./Dashboard.module.css";
 import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
-import { Menu, Notifications, Email } from "@material-ui/icons";
-import { Switch, Route, Link } from "react-router-dom";
+import {
+  Menu,
+  Notifications,
+  Email,
+  ExpandLess,
+  ExpandMore,
+} from "@material-ui/icons";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
 import DashboardMain from "./dashboard/DashboardMain";
-import SuggestionsList from "./suggestionsList/SuggestionsList";
+
 import Tickets from "./tickets/Tickets";
 import RequestRegister from "./requestRegister/RequestRegister";
 import UserInfo from "./userInfo/UserInfo";
 import BankAccount from "./bankAccount/BankAccount";
 import TariffCodeList from "./tariffCodesList/TariffCodeList";
 import cardImage from "../../styles/svg/profile-image.svg";
+import ClearanceList from "./suggestionsList/ClearanceList";
+import FindPrice from "./suggestionsList/FindPrice";
 import { getBusinessmanProfile } from "../../services/userInfo/userInfoServices";
 
 const Dashboard = () => {
+  const history = useHistory();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [dropDownSelect, setDropDownSelect] = useState(0);
+  const [openDropDown, setOpenDropDown] = useState(false);
   const drawerHandler = () => {
     setOpen((prevState) => !prevState);
+    setOpenDropDown(false);
   };
   const selectedHandler = (index) => {
     setSelected(index);
     if (selected === 4) {
       //run general method from server to check what kind of UserType and RoleType is exist
     }
+  };
+  const dropDownHandler = (path) => {
+    if (path === "/Dashboard/suggestionsList") {
+      setOpenDropDown((prevState) => !prevState);
+      setOpen(true);
+    }
+  };
+  const dropDownSelectHandler = (path, index) => {
+    setDropDownSelect(index);
+    history.replace(path);
   };
 
   return (
@@ -126,23 +149,61 @@ const Dashboard = () => {
         <Divider />
         <List className={classes.list}>
           {adminPanelData.listItem.map((item, index) => (
-            <Link to={item.path ? item.path : "/Dashboard/main"} key={index}>
+            <Link
+              to={item.path !== "/Dashboard/suggestionsList" ? item.path : "#"}
+              key={index}
+            >
               <ListItem
                 className={
                   selected === index ? classes.listItemActive : classes.listItem
                 }
-                onClick={() => selectedHandler(index)}
+                onClick={() => dropDownHandler(item.path)}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <Fade in={open}>
-                  <ListItemText
-                    style={open ? null : { display: "none" }}
-                    className={classes.listItemText}
-                  >
-                    {item.text}
-                  </ListItemText>
+                  <>
+                    <ListItemText
+                      style={open ? null : { display: "none" }}
+                      className={classes.listItemText}
+                    >
+                      {item.text}
+                    </ListItemText>
+                    <div
+                      style={
+                        item.hasDropDown && open ? null : { display: "none" }
+                      }
+                    >
+                      {openDropDown ? <ExpandMore /> : <ExpandLess />}
+                    </div>
+                  </>
                 </Fade>
               </ListItem>
+              {item.hasDropDown ? (
+                <Collapse in={openDropDown} timeout={200} unmountOnExit>
+                  <List component="div" disablePadding>
+                    {item.dropDownText.map((subItem, idx) => (
+                      <Link
+                        onClick={() => dropDownSelectHandler(subItem.path, idx)}
+                      >
+                        <ListItem
+                          style={open ? null : { display: "none" }}
+                          button
+                          key={idx}
+                          className={
+                            dropDownSelect === idx
+                              ? classes.dropDownListActive
+                              : classes.dropDownList
+                          }
+                        >
+                          <ListItemText className={classes.dropDownText}>
+                            {subItem.text}
+                          </ListItemText>
+                        </ListItem>
+                      </Link>
+                    ))}
+                  </List>
+                </Collapse>
+              ) : null}
             </Link>
           ))}
         </List>
@@ -151,10 +212,7 @@ const Dashboard = () => {
       <div className={classes.main}>
         <Switch>
           <Route exact path="/Dashboard/main" component={DashboardMain} />
-          <Route
-            path="/Dashboard/suggestionsList"
-            component={SuggestionsList}
-          />
+
           <Route path="/Dashboard/tickets" component={Tickets} />
           <Route path="/Dashboard/requestRegister">
             <RequestRegister backToTab={selectedHandler} />
@@ -164,6 +222,15 @@ const Dashboard = () => {
           </Route>
           <Route path="/Dashboard/bankAccount" component={BankAccount} />
           <Route path="/Dashboard/tariffCodesList" component={TariffCodeList} />
+
+          <Route
+            path="/Dashboard/suggestionsList/clearance"
+            component={ClearanceList}
+          />
+          <Route
+            path="/Dashboard/suggestionsList/findPrice"
+            component={FindPrice}
+          />
         </Switch>
       </div>
     </div>
