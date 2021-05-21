@@ -53,7 +53,7 @@
 }
 .title,
 .otherCardTitle {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #1e4383;
   font-weight: bold;
   width: 90% !important;
@@ -70,7 +70,7 @@
   width: 100%;
 }
 .text {
-  font-size: .95rem;
+  font-size: .9rem;
   color: #192129;
   text-overflow: ellipsis;
   white-space: pre-line;
@@ -100,7 +100,7 @@
   font-size: 0.95rem;
 }
 .linkIcon {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 .link span:hover {
   opacity: 0.8;

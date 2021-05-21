@@ -198,9 +198,10 @@
 }
 .mainTitle h1 {
   font-size: 2rem;
+  font-weight: bold;
   margin: 0 0 1rem 0;
 }
 .mainTitle h6 {
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
 }

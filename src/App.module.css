@@ -1,27 +1,18 @@
 @import url("./styles/reset.module.css");
-@import url("./fonts/css/fontiran.css");
+@import url("./fonts/fonts/fonts.css");
 @import url("./fonts/kalameh/kalamehFont.css");
 
+#root {
+  height: 100% !important;
+  width: 100% !important;
+}
+
 body {
-  font-family: Roboto, IRANSans !important ;
   font-weight: 300;
   direction: rtl;
-  height: 100%;
-  width: 100%;
+
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-input,
-textarea {
-  font-family: IRANSans !important;
-}
-h1 {
-  font-weight: bold;
-}
+
 a {
   text-decoration: none !important;
 }

@@ -1,7 +1,24 @@
+.container {
+  height: 100% !important;
+}
+.mainTitle {
+  margin-bottom: 2rem !important;
+}
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.staticBox {
+  margin: 0 0 2rem 0 !important;
+}
+
 .alert {
   background-color: #ffc05e !important;
   padding: 0.5rem 1rem !important;
   font-size: 1rem !important;
+  margin: 0 0 2rem 0 !important;
 }
 
 .paper {

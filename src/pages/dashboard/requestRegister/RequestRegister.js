@@ -11,23 +11,22 @@ const RequestRegister = ({ backToTab }) => {
   useEffect(() => {
     backToTab(3);
     history.push("/Dashboard/requestRegister");
-  },[]);
+  }, []);
 
   return (
     <Grid
       container
-      spacing={3}
       justify="center"
       alignItems="center"
       className={classes.container}
     >
-      <Grid item xs={11}>
+      <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
           {adminPanelData.requestRegister.title}
         </Typography>
       </Grid>
       <Grid item xs={11}>
-        <Import/>
+        <Import />
       </Grid>
     </Grid>
   );

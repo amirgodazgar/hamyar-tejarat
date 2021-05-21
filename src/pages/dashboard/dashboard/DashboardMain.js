@@ -83,119 +83,129 @@ const DashboardMain = () => {
   return (
     <Grid
       container
-      spacing={3}
       justify="center"
       alignItems="center"
       className={classes.container}
     >
-      <Grid item xs={11}>
+      <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
           داشبورد
         </Typography>
       </Grid>
 
-      <Grid item xs={11}>
-        <Collapse in={open}>
-          <Alert
-            onClose={() => setOpen(false)}
-            severity="warning"
-            className={classes.alert}
-          >
-            کاربر گرامی برای استفاده کامل از خدمات سایت همیار تجارت باید پروفایل
-            و مدارک خود را کامل کنید
-          </Alert>
-        </Collapse>
-      </Grid>
-      <Grid
-        item
-        xs={11}
-        container
-        justify="space-between"
-        className={classes.staticBox}
-      >
-        <Grid className={classes.ticketsRows}>
-          <Paper className={classes.paper}>
-            <div className={classes.header}>
-              <Typography className={classes.title} variant="h6">
-                جدیدترین تیکت ها
-              </Typography>
-              <span className={classes.link}>
-                <Typography variant="body2">مشاهده همه</Typography>
-                <ArrowBackIos fontSize="small" />
-              </span>
-            </div>
-            <div className={classes.body}>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>شناسه تیکت</TableCell>
-                      <TableCell>موضوع</TableCell>
-                      <TableCell>تاریخ ثبت</TableCell>
-                      <TableCell>وضعیت تیکت</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {ticketRows.map((row, index) => (
-                      <TableRow key={index} className={classes.tableRow} hover>
-                        <TableCell>{row.ticketId}</TableCell>
-                        <TableCell>{row.subject}</TableCell>
-                        <TableCell>{row.date}</TableCell>
-                        <TableCell className={classes.statusCell}>
-                          <div
-                            className={`${classes.status} ${
-                              classes[row.status.color]
-                            }`}
-                          ></div>
-                          <div className={classes.statusText}>
-                            {row.status.text}
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-          </Paper>
+      <Grid item xs={11} className={classes.mainContent}>
+        <Grid item xs={12}>
+          <Collapse in={open}>
+            <Alert
+              onClose={() => setOpen(false)}
+              severity="warning"
+              className={classes.alert}
+            >
+              کاربر گرامی برای استفاده کامل از خدمات سایت همیار تجارت باید
+              پروفایل و مدارک خود را کامل کنید
+            </Alert>
+          </Collapse>
         </Grid>
-        <Grid className={classes.newsRows}>
-          <Paper className={classes.paper}>
-            <div className={classes.header}>
-              <Typography className={classes.title} variant="h6">
-                آخرین اخبار و اطلاعیه ها
-              </Typography>
-              <span className={classes.link}>
-                <Typography variant="body2">مشاهده همه</Typography>
-                <ArrowBackIos fontSize="small" />
-              </span>
-            </div>
-            <div className={classes.body}>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>عنوان</TableCell>
-                      <TableCell>تاریخ </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {newsRows.map((row, index) => (
-                      <TableRow key={index} className={classes.tableRow} hover>
-                        <TableCell>{row.subject}</TableCell>
-                        <TableCell>{row.date}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </div>
-          </Paper>
-        </Grid>
-      </Grid>
 
-      <Grid item xs={11} className={classes.dynamicBox}>
-        {cardType}
+        <Grid
+          item
+          xs={12}
+          container
+          justify="space-between"
+          className={classes.staticBox}
+        >
+          <Grid className={classes.ticketsRows}>
+            <Paper className={classes.paper}>
+              <div className={classes.header}>
+                <Typography className={classes.title} variant="h6">
+                  جدیدترین تیکت ها
+                </Typography>
+                <span className={classes.link}>
+                  <Typography variant="body2">مشاهده همه</Typography>
+                  <ArrowBackIos fontSize="small" />
+                </span>
+              </div>
+              <div className={classes.body}>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>شناسه تیکت</TableCell>
+                        <TableCell>موضوع</TableCell>
+                        <TableCell>تاریخ ثبت</TableCell>
+                        <TableCell>وضعیت تیکت</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {ticketRows.map((row, index) => (
+                        <TableRow
+                          key={index}
+                          className={classes.tableRow}
+                          hover
+                        >
+                          <TableCell>{row.ticketId}</TableCell>
+                          <TableCell>{row.subject}</TableCell>
+                          <TableCell>{row.date}</TableCell>
+                          <TableCell className={classes.statusCell}>
+                            <div
+                              className={`${classes.status} ${
+                                classes[row.status.color]
+                              }`}
+                            ></div>
+                            <div className={classes.statusText}>
+                              {row.status.text}
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid className={classes.newsRows}>
+            <Paper className={classes.paper}>
+              <div className={classes.header}>
+                <Typography className={classes.title} variant="h6">
+                  آخرین اخبار و اطلاعیه ها
+                </Typography>
+                <span className={classes.link}>
+                  <Typography variant="body2">مشاهده همه</Typography>
+                  <ArrowBackIos fontSize="small" />
+                </span>
+              </div>
+              <div className={classes.body}>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>عنوان</TableCell>
+                        <TableCell>تاریخ </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {newsRows.map((row, index) => (
+                        <TableRow
+                          key={index}
+                          className={classes.tableRow}
+                          hover
+                        >
+                          <TableCell>{row.subject}</TableCell>
+                          <TableCell>{row.date}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Grid item xs={12} className={classes.dynamicBox}>
+          {cardType}
+        </Grid>
       </Grid>
     </Grid>
   );

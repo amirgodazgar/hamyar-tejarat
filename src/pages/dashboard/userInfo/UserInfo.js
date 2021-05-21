@@ -43,12 +43,11 @@ const UserInfo = ({ backToTab }) => {
   return (
     <Grid
       container
-      spacing={3}
       justify="center"
       alignItems="center"
       className={classes.container}
     >
-      <Grid item xs={11}>
+      <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
           {adminPanelData.userInfo.title}
         </Typography>

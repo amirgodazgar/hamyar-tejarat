@@ -1,4 +1,6 @@
 .container {
   height: 100% !important;
-  padding: 0 !important;
+}
+.mainTitle {
+  margin-bottom: 2rem !important;
 }

@@ -52,12 +52,11 @@ const TariffCodeList = () => {
   return (
     <Grid
       container
-      spacing={3}
       justify="center"
       alignItems="center"
       className={classes.container}
     >
-      <Grid item xs={11}>
+      <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
           لیست کد تعرفه کالا
         </Typography>
@@ -153,9 +152,7 @@ const TariffCodeList = () => {
                                   <button
                                     className={classes.tariffButton}
                                     onClick={() => {
-                                      navigator.clipboard.writeText(
-                                        row.id
-                                      );
+                                      navigator.clipboard.writeText(row.id);
                                     }}
                                   >
                                     کپی

@@ -1,0 +1,39 @@
+@font-face {
+  font-family: IranSansXV;
+  src: url("./IRANSansXV.woff") format("woff-variations"),
+    /* for the other supporting browsers */ url("./IRANSansXV.woff")
+      format("woff");
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: IranSansX;
+  src: url("./IRANSansX-Regular.woff") format("woff");
+  font-display: fallback;
+}
+@font-face {
+  font-family: IranSansX;
+  src: url("./IRANSansX-Bold.woff") format("woff");
+  font-weight: bold;
+  font-display: fallback;
+}
+
+* {
+  font-family: IranSansX, IranSansX, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif, tahoma !important;
+  -moz-font-feature-settings: "ss03";
+  -webkit-font-feature-settings: "ss03";
+  font-feature-settings: "ss03";
+}
+
+@supports (font-variation-settings: normal) {
+  * {
+    font-family: IranSansXV, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+      Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+      sans-serif, tahoma !important;
+    -moz-font-feature-settings: "ss03";
+    -webkit-font-feature-settings: "ss03";
+    font-feature-settings: "ss03";
+  }
+}
