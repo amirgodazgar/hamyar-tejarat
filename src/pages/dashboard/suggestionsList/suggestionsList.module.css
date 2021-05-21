@@ -1,6 +1,241 @@
 .container {
-   height: 100% !important;
- }
- .mainTitle {
-   margin-bottom: 2rem !important;
- }
+  height: 100% !important;
+}
+.mainTitle {
+  margin-bottom: 2rem !important;
+}
+.mainPaper {
+  width: 100%;
+  padding: 4rem 2rem !important;
+  border-radius: 10px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.inputContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.selectedInput {
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 10px;
+  border: 1px solid #70707025;
+  padding: 0 0.5rem !important;
+  font-size: 0.95rem !important;
+  outline: none;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  font-family: inherit !important;
+  transition: all 200ms;
+  color: #192129;
+  background-color: #f4f4f4;
+}
+.selectedInput:focus {
+  border: 1px solid #70707057;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 250ms;
+}
+
+/* Errors ----------------- */
+.errorBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 1.5rem;
+}
+.errorBox label {
+  font-size: 0.9rem;
+}
+.error {
+  color: #b60123e1;
+  font-size: 0.85rem;
+}
+.inputError {
+  border: 1px solid #b60123e1;
+  transition: all 200ms;
+}
+
+/* button ---------------- */
+.inputBox {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.btnBox {
+  flex: 0 0 15%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  height: 4.5rem;
+}
+.btnBox {
+  flex: 0 0 15%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  height: 4rem;
+}
+
+.filterBtn,
+.clearBtn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 50%;
+  height: 2.5rem;
+  color: #ffffff;
+  background-color: #1e4383;
+  border: 1px solid #70707025;
+  outline: none;
+  border-radius: 10px;
+  font-family: inherit;
+  box-shadow: 0px 6px 11px -3px rgb(0 0 0 / 40%);
+  transition: all 200ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clearBtn {
+  width: 30%;
+  color: #c4cad0;
+  background-color: #f4f4f4;
+}
+
+.filterBtn:active,
+.clearBtn:active {
+  transform: scale(1.05);
+  transition: all 200ms;
+}
+.filterBtn:hover {
+  background-color: #214c96;
+  transition: all 200ms;
+  cursor: pointer;
+}
+.clearBtn:hover {
+  color: #b60123e1;
+  transition: all 200ms;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Table ---------------- */
+.paper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.header {
+  width: 100%;
+  background-color: #1e4383;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.title {
+  flex: 0 0 60%;
+  padding: 0.5rem;
+}
+.body {
+  width: 100%;
+}
+.link {
+  flex: 0 0 25%;
+  padding: 0.5rem;
+  color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* TABLE */
+
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tableHeader {
+  font-weight: bold !important;
+}
+
+.tableRow {
+  transition: all 200ms !important;
+}
+.tableRow:hover {
+  cursor: pointer !important;
+  transition: all 200ms !important;
+  background-color: #f4f4f4;
+}
+
+.tableRow:hover svg {
+  fill: #277fe5 !important;
+  transition: all 200ms !important;
+}
+
+.statusText {
+  display: inline-block;
+  flex: 0 0 80%;
+  margin: 0 0.5rem;
+}
+.status {
+  display: inline-block;
+  flex: 0 0 auto;
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 50%;
+}
+.status.pending {
+  background-color: #ffc05e;
+}
+.status.closed {
+  background-color: #219b26;
+}
+.status.open {
+  background-color: #e52727;
+}
+
+.fixCell,
+.businessMan {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+.fixCell {
+  width: 97%;
+}
+.businessMan {
+  justify-content: flex-start;
+}
+.businessMan div {
+  margin-left: 1rem;
+}
+
+.tablePagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+}
+
+.numberBtn {
+  border-radius: 6px !important;
+  padding: 0 !important;
+  height: 2rem !important;
+  min-width: 2rem !important;
+  background-color: transparent;
+}
+.change {
+  padding: 0.5rem !important;
+  min-width: 2rem !important;
+}

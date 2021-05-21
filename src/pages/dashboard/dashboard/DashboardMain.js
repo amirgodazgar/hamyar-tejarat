@@ -130,10 +130,10 @@ const DashboardMain = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>شناسه تیکت</TableCell>
-                        <TableCell>موضوع</TableCell>
-                        <TableCell>تاریخ ثبت</TableCell>
-                        <TableCell>وضعیت تیکت</TableCell>
+                        <TableCell variant="head" className={classes.tableHeader}>شناسه تیکت</TableCell>
+                        <TableCell variant="head" className={classes.tableHeader}>موضوع</TableCell>
+                        <TableCell variant="head" className={classes.tableHeader}>تاریخ ثبت</TableCell>
+                        <TableCell variant="head" className={classes.tableHeader}>وضعیت تیکت</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -180,8 +180,8 @@ const DashboardMain = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell>عنوان</TableCell>
-                        <TableCell>تاریخ </TableCell>
+                        <TableCell variant="head" className={classes.tableHeader} >عنوان</TableCell>
+                        <TableCell variant="head" className={classes.tableHeader} >تاریخ </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

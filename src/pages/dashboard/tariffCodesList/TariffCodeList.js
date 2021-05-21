@@ -121,10 +121,10 @@ const TariffCodeList = () => {
                     <Table>
                       <TableHead className={classes.tableHead}>
                         <TableRow>
-                          <TableCell>شرح کالا</TableCell>
-                          <TableCell>شرح انگلیسی کالا</TableCell>
-                          <TableCell>کد تعرفه</TableCell>
-                          <TableCell></TableCell>
+                          <TableCell variant="head" className={classes.tableHeader} >شرح کالا</TableCell>
+                          <TableCell variant="head" className={classes.tableHeader} >شرح انگلیسی کالا</TableCell>
+                          <TableCell variant="head" className={classes.tableHeader} >کد تعرفه</TableCell>
+                          <TableCell variant="head" className={classes.tableHeader} ></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

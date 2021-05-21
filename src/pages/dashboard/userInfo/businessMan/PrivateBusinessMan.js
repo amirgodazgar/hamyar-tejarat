@@ -6,7 +6,6 @@ import classes from "./businessMan.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
-
 import { Link } from "react-router-dom";
 import { sendBusinessmanPrivate } from "../../../../services/userInfo/userInfoServices";
 import { useDispatch } from "react-redux";

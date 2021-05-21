@@ -2,9 +2,11 @@
   display: flex;
   justify-content: space-between;
   width: 90%;
+  height: 1.5rem;
 }
 .label {
   margin: 0 0.5rem -0.5rem 0;
+  font-size: 0.9rem;
 }
 
 .textField {
@@ -12,46 +14,49 @@
   border-radius: 10px;
   outline: none;
   border: 1px solid #70707025;
-  padding: 0.65rem 0.5rem;
+  padding: 0 0.5rem;
+  height: 2.5rem;
   width: 90%;
   box-shadow: 0 3px 15px #c4cad08f;
   transition: all 250ms;
 }
 
+/* error ------------------ */
 .inputError {
   border: 1px solid #b60123e1;
   transition: all 250ms;
+}
+.error {
+  color: #b60123e1;
+  font-size: 0.85rem;
 }
 
 .textField::placeholder {
   color: #c4cad0;
 }
 
-.error {
-  color: #b60123e1;
-  font-size: 0.9rem;
-}
-
 /* UserInfo  */
 .userInfo_label {
-  height: 32%;
+  height: 1.5rem;
   width: 97%;
 }
 .userInfo_label div {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 .userInfo_input {
   width: 90%;
   background-color: #f4f4f4;
   box-shadow: none;
-  padding: 0.65rem 0.5rem;
+  padding: 0 0.5rem;
+  height: 2.5rem;
 }
 .userInfo_address_input,
 .userInfo_email_input {
   width: 95%;
   background-color: #f4f4f4;
   box-shadow: none;
-  padding: 0.65rem 0.5rem;
+  padding: 0 0.5rem;
+  height: 2.5rem;
 }
 .userInfo_input:focus,
 .userInfo_input:valid,
@@ -64,5 +69,3 @@
   box-shadow: 0px 4px 8px 1px #c4cad05b;
   transition: all 250ms;
 }
-
-

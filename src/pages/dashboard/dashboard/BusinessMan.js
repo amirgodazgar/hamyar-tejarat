@@ -12,6 +12,7 @@ import {
   TablePagination,
   Typography,
 } from "@material-ui/core";
+import avatarImg from "../../../styles/image/profile-image.svg";
 import { ArrowBackIos } from "@material-ui/icons";
 
 const BusinessMan = () => {
@@ -108,11 +109,23 @@ const BusinessMan = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>فرستنده</TableCell>
-                <TableCell>شناسه درخواست</TableCell>
-                <TableCell>مبلغ پیشنهادی (تومان) </TableCell>
-                <TableCell> تاریخ</TableCell>
-                <TableCell> توضیحات</TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  فرستنده
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  شناسه درخواست
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  مبلغ پیشنهادی (تومان){" "}
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  {" "}
+                  تاریخ
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  {" "}
+                  توضیحات
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -122,7 +135,7 @@ const BusinessMan = () => {
                   <TableRow key={index} className={classes.tableRow}>
                     <TableCell>
                       <div className={classes.transmitter}>
-                        <Avatar />
+                        <Avatar src={avatarImg} />
                         <p>{row.transmitter}</p>
                       </div>
                     </TableCell>

@@ -34,8 +34,13 @@
   flex: 0 0 60%;
   padding: 0.5rem;
 }
+
+
 .tableHead {
   border-bottom: 2px solid #c4cad0;
+}
+.tableHeader {
+  font-weight: bold !important;
 }
 .tableRow {
   transition: all 200ms !important;

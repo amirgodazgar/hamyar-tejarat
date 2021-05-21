@@ -12,6 +12,7 @@ import {
   Typography,
   TablePagination,
 } from "@material-ui/core";
+import avatarImg from "../../../styles/image/profile-image.svg";
 import { ArrowBackIos } from "@material-ui/icons";
 
 const ClearanceMan = () => {
@@ -50,11 +51,11 @@ const ClearanceMan = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>فرستنده</TableCell>
-                <TableCell>موضوع</TableCell>
-                <TableCell>نوع خدمت </TableCell>
-                <TableCell> گمرک محل ترخیص</TableCell>
-                <TableCell> تاریخ</TableCell>
+                <TableCell variant="head" className={classes.tableHeader} >فرستنده</TableCell>
+                <TableCell variant="head" className={classes.tableHeader} >موضوع</TableCell>
+                <TableCell variant="head" className={classes.tableHeader} >نوع خدمت </TableCell>
+                <TableCell variant="head" className={classes.tableHeader} > گمرک محل ترخیص</TableCell>
+                <TableCell variant="head" className={classes.tableHeader} > تاریخ</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,7 +65,7 @@ const ClearanceMan = () => {
                   <TableRow key={index} className={classes.tableRow}>
                     <TableCell>
                       <div className={classes.transmitter}>
-                        <Avatar />
+                        <Avatar src={avatarImg} />
                         <p>{row.transmitter}</p>
                       </div>
                     </TableCell>

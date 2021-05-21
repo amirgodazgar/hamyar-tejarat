@@ -31,9 +31,9 @@ export const authSlice = createSlice({
     isResendVerification: false,
     change: false,
     role: {
-      privateBusinessMan: true,
+      privateBusinessMan: false,
       juridicalBusinessMan: false,
-      privateClearanceMan: false,
+      privateClearanceMan: true,
       juridicalClearanceMan: false,
     },
     anyData: "",
