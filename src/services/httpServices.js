@@ -10,14 +10,15 @@ axios.defaults.baseURL = "https://lunacyst.ir/api/v1";
 axios.interceptors.request.use(
   (config) => {
     const token = Cookies.get("token");
-
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
       config.headers["Content-Type"] = "application/json";
+      config.headers["Access-Control-Allow-Origin"] = "*";
+      return config;
     } else {
       config.headers["Content-Type"] = "application/json";
+      return config;
     }
-    return config;
   },
   (error) => {
     Promise.reject(error);
@@ -44,7 +45,6 @@ axios.interceptors.response.use(
     }
 
     // handle refresh token ----------------------
-
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
@@ -54,7 +54,7 @@ axios.interceptors.response.use(
           refreshToken: Cookies.get("refreshToken"),
         })
         .then((res) => {
-          if (res.status === 200) {
+          if (res.status === 201 || res.status === 200) {
             const tokenInfo = res.data;
             const tokenData = {
               token: tokenInfo.accessToken,
@@ -63,12 +63,11 @@ axios.interceptors.response.use(
               refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
             };
             setTokenCookies(tokenData);
-            Cookies.set("userRole", res.data.userType);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${tokenInfo.accessToken}`;
-            return axios(originalRequest);
           }
+          return axios(originalRequest);
         })
         .catch((error) => {
           return Promise.reject(error);

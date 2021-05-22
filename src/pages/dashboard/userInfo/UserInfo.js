@@ -2,54 +2,42 @@ import React, { useEffect } from "react";
 import classes from "./userInfo.module.css";
 import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
-import { useDispatch, useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
 import { useHistory } from "react-router-dom";
 import JuridicalClearanceMan from "./clearanceMan/JuridicalClearanceMan";
 import JuridicalBusinessMan from "./businessMan/JuridicalBusinessMan";
 import PrivateBusinessMan from "./businessMan/PrivateBusinessMan";
-
+import Cookies from "js-cookie";
 
 const UserInfo = ({ backToTab }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
   useEffect(() => {
     backToTab(4);
     history.push("/Dashboard/userInfo");
   }, []);
 
-  // const role = useSelector((state) => state.dashBoard.role);
-  // const type = useSelector((state) => state.dashBoard.type);
-  const PC = null;
-  const JC = null;
-  const PB = null;
-  const JB = null;
-
-  // console.log("USER-INFO", role, type);
-
-  // let rolType = {
-  //   role,
-  //   type,
-  // };
-
-  let User = null;
+  let user = Cookies.getJSON("userInfo");
+  const PC = user.role === "Clearanceman" && user.type === "Private";
+  const JC = user.role === "Clearanceman" && user.type === "Juridical";
+  const PB = user.role === "Businessman" && user.type === "Private";
+  const JB = user.role === "Businessman" && user.type === "Juridical";
 
   switch (true) {
     case PB:
-      User = <PrivateBusinessMan backToDashboard={backToTab} />;
+      user = <PrivateBusinessMan backToDashboard={backToTab} />;
       break;
     case JB:
-      User = <JuridicalBusinessMan backToDashboard={backToTab} />;
+      user = <JuridicalBusinessMan backToDashboard={backToTab} />;
       break;
     case PC:
-      User = <PrivateClearanceMan backToDashboard={backToTab} />;
+      user = <PrivateClearanceMan backToDashboard={backToTab} />;
       break;
     case JC:
-      User = <JuridicalClearanceMan backToDashboard={backToTab} />;
+      user = <JuridicalClearanceMan backToDashboard={backToTab} />;
       break;
 
     default:
-      User = null;
+      user = null;
       break;
   }
 
@@ -66,7 +54,7 @@ const UserInfo = ({ backToTab }) => {
         </Typography>
       </Grid>
       <Grid item xs={11}>
-        {User}
+        {user}
       </Grid>
     </Grid>
   );

@@ -49,13 +49,14 @@ const Dashboard = () => {
   const [userInfoRoute, setUserInfoRoute] = useState("");
   const [openSuggestList, setOpenSuggestList] = useState(false);
 
-  const userInfoHandler = async () => {
-    await dispatch(getUserInfoData()).then((res) => {
-      console.log(res);
-      const userInfo = res.payload.userInfo;
-      setUserInfoRoute(`${userInfo.role}-${userInfo.type}`);
-      console.log(userInfo);
-    });
+  useEffect(() => {
+    dispatch(getUserInfoData());
+  }, []);
+
+  const userInfoHandler = () => {
+    const user = Cookies.getJSON("userInfo");
+    console.log(`${user.type}-${user.role}`);
+    setUserInfoRoute(`${user.type}-${user.role}`);
   };
 
   const drawerHandler = () => {
@@ -164,7 +165,6 @@ const Dashboard = () => {
               className={
                 selected === 0 ? classes.listItemActive : classes.listItem
               }
-              onClick={() => dropDownHandler(adminPanelData.listItem[0].path)}
             >
               <ListItemIcon>{adminPanelData.listItem[0].icon}</ListItemIcon>
               <Fade in={open}>
@@ -245,7 +245,6 @@ const Dashboard = () => {
               className={
                 selected === 2 ? classes.listItemActive : classes.listItem
               }
-              onClick={() => dropDownHandler(adminPanelData.listItem[2].path)}
             >
               <ListItemIcon>{adminPanelData.listItem[2].icon}</ListItemIcon>
               <Fade in={open}>
@@ -267,7 +266,6 @@ const Dashboard = () => {
               className={
                 selected === 3 ? classes.listItemActive : classes.listItem
               }
-              onClick={() => dropDownHandler(adminPanelData.listItem[3].path)}
             >
               <ListItemIcon>{adminPanelData.listItem[3].icon}</ListItemIcon>
               <Fade in={open}>
@@ -284,12 +282,11 @@ const Dashboard = () => {
           </Link>
 
           {/* USER-INFO --------------------- */}
-          <Link to={`/Dashboard/userInfo/${userInfoRoute}`}>
+          <Link to={"/Dashboard/userInfo"}>
             <ListItem
               className={
                 selected === 4 ? classes.listItemActive : classes.listItem
               }
-              onClick={userInfoHandler}
             >
               <ListItemIcon>{adminPanelData.listItem[4].icon}</ListItemIcon>
               <Fade in={open}>
@@ -311,7 +308,6 @@ const Dashboard = () => {
               className={
                 selected === 5 ? classes.listItemActive : classes.listItem
               }
-              onClick={() => dropDownHandler(adminPanelData.listItem[5].path)}
             >
               <ListItemIcon>{adminPanelData.listItem[5].icon}</ListItemIcon>
               <Fade in={open}>
@@ -333,7 +329,6 @@ const Dashboard = () => {
               className={
                 selected === 6 ? classes.listItemActive : classes.listItem
               }
-              onClick={() => dropDownHandler(adminPanelData.listItem[6].path)}
             >
               <ListItemIcon>{adminPanelData.listItem[6].icon}</ListItemIcon>
               <Fade in={open}>
@@ -360,7 +355,7 @@ const Dashboard = () => {
             <RequestRegister backToTab={selectedHandler} />
           </Route>
 
-          <Route path={`/Dashboard/userInfo/${userInfoRoute}`}>
+          <Route path={"/Dashboard/userInfo"}>
             <UserInfo backToTab={selectedHandler} />
           </Route>
 
