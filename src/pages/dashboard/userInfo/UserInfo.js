@@ -2,41 +2,54 @@ import React, { useEffect } from "react";
 import classes from "./userInfo.module.css";
 import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PrivateClearanceMan from "./clearanceMan/PrivateClearanceMan";
 import { useHistory } from "react-router-dom";
 import JuridicalClearanceMan from "./clearanceMan/JuridicalClearanceMan";
 import JuridicalBusinessMan from "./businessMan/JuridicalBusinessMan";
 import PrivateBusinessMan from "./businessMan/PrivateBusinessMan";
 
+
 const UserInfo = ({ backToTab }) => {
   const history = useHistory();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     backToTab(4);
     history.push("/Dashboard/userInfo");
   }, []);
 
-  const role = useSelector((state) => state.auth.role);
+  // const role = useSelector((state) => state.dashBoard.role);
+  // const type = useSelector((state) => state.dashBoard.type);
+  const PC = null;
+  const JC = null;
+  const PB = null;
+  const JB = null;
 
-  let rolType;
+  // console.log("USER-INFO", role, type);
+
+  // let rolType = {
+  //   role,
+  //   type,
+  // };
+
+  let User = null;
 
   switch (true) {
-    case role.privateBusinessMan:
-      rolType = <PrivateBusinessMan backToDashboard={backToTab} />;
+    case PB:
+      User = <PrivateBusinessMan backToDashboard={backToTab} />;
       break;
-    case role.juridicalBusinessMan:
-      rolType = <JuridicalBusinessMan backToDashboard={backToTab} />;
+    case JB:
+      User = <JuridicalBusinessMan backToDashboard={backToTab} />;
       break;
-    case role.privateClearanceMan:
-      rolType = <PrivateClearanceMan backToDashboard={backToTab} />;
+    case PC:
+      User = <PrivateClearanceMan backToDashboard={backToTab} />;
       break;
-    case role.juridicalClearanceMan:
-      rolType = <JuridicalClearanceMan backToDashboard={backToTab} />;
+    case JC:
+      User = <JuridicalClearanceMan backToDashboard={backToTab} />;
       break;
 
     default:
-      rolType = null;
+      User = null;
       break;
   }
 
@@ -53,7 +66,7 @@ const UserInfo = ({ backToTab }) => {
         </Typography>
       </Grid>
       <Grid item xs={11}>
-        {rolType}
+        {User}
       </Grid>
     </Grid>
   );

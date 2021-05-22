@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 AOS.init({
   offset: 100,
-  duration: 250, 
+  duration: 350, 
 });
 
 ReactDOM.render(

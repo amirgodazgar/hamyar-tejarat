@@ -14,3 +14,11 @@ export const clearCookies = () => {
   Cookies.remove("refreshToken");
   Cookies.remove("refreshTokenExp");
 };
+
+export const setUserInfoCookies = (role, type) => {
+  const userInfo = {
+    role,
+    type,
+  };
+  Cookies.set("userInfo", userInfo);
+};

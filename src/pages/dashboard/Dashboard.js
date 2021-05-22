@@ -15,7 +15,7 @@ import {
   Fade,
   Collapse,
 } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./Dashboard.module.css";
 import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
@@ -28,7 +28,6 @@ import {
 } from "@material-ui/icons";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import DashboardMain from "./dashboard/DashboardMain";
-
 import Tickets from "./tickets/Tickets";
 import RequestRegister from "./requestRegister/RequestRegister";
 import UserInfo from "./userInfo/UserInfo";
@@ -37,27 +36,38 @@ import TariffCodeList from "./tariffCodesList/TariffCodeList";
 import cardImage from "../../styles/svg/profile-image.svg";
 import ClearanceList from "./suggestionsList/ClearanceList";
 import FindPrice from "./suggestionsList/FindPrice";
-import { getBusinessmanProfile } from "../../services/userInfo/userInfoServices";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { getUserInfoData } from "../../store/dashboard/dashboardSlice";
 
 const Dashboard = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const [dropDownSelect, setDropDownSelect] = useState(0);
-  const [openDropDown, setOpenDropDown] = useState(false);
+  const [userInfoRoute, setUserInfoRoute] = useState("");
+  const [openSuggestList, setOpenSuggestList] = useState(false);
+
+  const userInfoHandler = async () => {
+    await dispatch(getUserInfoData()).then((res) => {
+      console.log(res);
+      const userInfo = res.payload.userInfo;
+      setUserInfoRoute(`${userInfo.role}-${userInfo.type}`);
+      console.log(userInfo);
+    });
+  };
+
   const drawerHandler = () => {
     setOpen((prevState) => !prevState);
-    setOpenDropDown(false);
+    setOpenSuggestList(false);
   };
   const selectedHandler = (index) => {
     setSelected(index);
-    if (selected === 4) {
-      //run general method from server to check what kind of UserType and RoleType is exist
-    }
   };
   const dropDownHandler = (path) => {
     if (path === "/Dashboard/suggestionsList") {
-      setOpenDropDown((prevState) => !prevState);
+      setOpenSuggestList((prevState) => !prevState);
       setOpen(true);
     }
   };
@@ -148,40 +158,62 @@ const Dashboard = () => {
         </Link>
         <Divider />
         <List className={classes.list}>
-          {adminPanelData.listItem.map((item, index) => (
-            <Link
-              to={item.path !== "/Dashboard/suggestionsList" ? item.path : "#"}
-              key={index}
+          {/* DASHBOARD --------------------- */}
+          <Link to={adminPanelData.listItem[0].path}>
+            <ListItem
+              className={
+                selected === 0 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[0].path)}
             >
-              <ListItem
-                className={
-                  selected === index ? classes.listItemActive : classes.listItem
-                }
-                onClick={() => dropDownHandler(item.path)}
-              >
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <Fade in={open}>
-                  <>
-                    <ListItemText
-                      style={open ? null : { display: "none" }}
-                      className={classes.listItemText}
-                    >
-                      {item.text}
-                    </ListItemText>
-                    <div
-                      style={
-                        item.hasDropDown && open ? null : { display: "none" }
-                      }
-                    >
-                      {openDropDown ? <ExpandMore /> : <ExpandLess />}
-                    </div>
-                  </>
-                </Fade>
-              </ListItem>
-              {item.hasDropDown ? (
-                <Collapse in={openDropDown} timeout={200} unmountOnExit>
-                  <List component="div" disablePadding>
-                    {item.dropDownText.map((subItem, idx) => (
+              <ListItemIcon>{adminPanelData.listItem[0].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[0].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
+
+          {/* SUGGESTIONS-LIST --------------------- */}
+          <Link to="#">
+            <ListItem
+              className={
+                selected === 1 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[1].path)}
+            >
+              <ListItemIcon>{adminPanelData.listItem[1].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[1].text}
+                  </ListItemText>
+                  <div
+                    style={
+                      adminPanelData.listItem[1].hasDropDown && open
+                        ? null
+                        : { display: "none" }
+                    }
+                  >
+                    {openSuggestList ? <ExpandMore /> : <ExpandLess />}
+                  </div>
+                </>
+              </Fade>
+            </ListItem>
+            {adminPanelData.listItem[1].hasDropDown ? (
+              <Collapse in={openSuggestList} timeout={200} unmountOnExit>
+                <List component="div" disablePadding>
+                  {adminPanelData.listItem[1].dropDownText.map(
+                    (subItem, idx) => (
                       <Link
                         onClick={() => dropDownSelectHandler(subItem.path, idx)}
                       >
@@ -200,12 +232,122 @@ const Dashboard = () => {
                           </ListItemText>
                         </ListItem>
                       </Link>
-                    ))}
-                  </List>
-                </Collapse>
-              ) : null}
-            </Link>
-          ))}
+                    )
+                  )}
+                </List>
+              </Collapse>
+            ) : null}
+          </Link>
+
+          {/* TICKETS --------------------- */}
+          <Link to={adminPanelData.listItem[2].path}>
+            <ListItem
+              className={
+                selected === 2 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[2].path)}
+            >
+              <ListItemIcon>{adminPanelData.listItem[2].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[2].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
+
+          {/* REQUEST-REGISTER --------------------- */}
+          <Link to={adminPanelData.listItem[3].path}>
+            <ListItem
+              className={
+                selected === 3 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[3].path)}
+            >
+              <ListItemIcon>{adminPanelData.listItem[3].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[3].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
+
+          {/* USER-INFO --------------------- */}
+          <Link to={`/Dashboard/userInfo/${userInfoRoute}`}>
+            <ListItem
+              className={
+                selected === 4 ? classes.listItemActive : classes.listItem
+              }
+              onClick={userInfoHandler}
+            >
+              <ListItemIcon>{adminPanelData.listItem[4].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[4].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
+
+          {/* BANK-ACCOUNT --------------------- */}
+          <Link to={adminPanelData.listItem[5].path}>
+            <ListItem
+              className={
+                selected === 5 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[5].path)}
+            >
+              <ListItemIcon>{adminPanelData.listItem[5].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[5].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
+
+          {/* TARIFF-CODE-LIST --------------------- */}
+          <Link to={adminPanelData.listItem[6].path}>
+            <ListItem
+              className={
+                selected === 6 ? classes.listItemActive : classes.listItem
+              }
+              onClick={() => dropDownHandler(adminPanelData.listItem[6].path)}
+            >
+              <ListItemIcon>{adminPanelData.listItem[6].icon}</ListItemIcon>
+              <Fade in={open}>
+                <>
+                  <ListItemText
+                    style={open ? null : { display: "none" }}
+                    className={classes.listItemText}
+                  >
+                    {adminPanelData.listItem[6].text}
+                  </ListItemText>
+                </>
+              </Fade>
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
 
@@ -217,9 +359,11 @@ const Dashboard = () => {
           <Route path="/Dashboard/requestRegister">
             <RequestRegister backToTab={selectedHandler} />
           </Route>
-          <Route path="/Dashboard/userInfo">
+
+          <Route path={`/Dashboard/userInfo/${userInfoRoute}`}>
             <UserInfo backToTab={selectedHandler} />
           </Route>
+
           <Route path="/Dashboard/bankAccount" component={BankAccount} />
           <Route path="/Dashboard/tariffCodesList" component={TariffCodeList} />
 

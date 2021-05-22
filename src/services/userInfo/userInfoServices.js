@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import http from "../httpServices";
 
 // SEND INFORMATION :
@@ -29,13 +30,4 @@ export const sendBusinessmanJuridical = async (userInfo, dispatch) => {
     .then((res) => {
       console.log(res.data);
     });
-};
-
-// GET INFORMATION :
-
-export const getBusinessmanProfile = async (dispatch) => {
-  await http.get("/BusinessmanPanel/GetBusinessmanProfile").then((res) => {
-    console.log(res.data.data);
-    // dispatch(res.data)
-  });
 };

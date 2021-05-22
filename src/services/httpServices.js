@@ -31,7 +31,6 @@ axios.interceptors.response.use(
   },
   (error) => {
     const originalRequest = error.config;
-    const token = Cookies.get("token");
 
     // prevent infinite loop ---------------
     if (
@@ -64,6 +63,7 @@ axios.interceptors.response.use(
               refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
             };
             setTokenCookies(tokenData);
+            Cookies.set("userRole", res.data.userType);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${tokenInfo.accessToken}`;

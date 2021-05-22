@@ -17,7 +17,6 @@ export const adminPanelData = {
         {
           text: "ترخیص کالا",
           path: "/Dashboard/suggestionsList/clearance",
-          
         },
         {
           text: "استعلام قیمت",
@@ -42,7 +41,17 @@ export const adminPanelData = {
       text: "اطلاعات کاربری",
       icon: <Person fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/userInfo",
-      hasDropDown: false,
+      dropDownText: [
+        {
+          text: "حقیقی",
+          path: "/Dashboard/userInfo/Private",
+        },
+        {
+          text: "حقوقی",
+          path: "/Dashboard/userInfo/Juridical ",
+        },
+      ],
+      hasDropDown: true,
     },
     {
       text: "حساب بانکی",

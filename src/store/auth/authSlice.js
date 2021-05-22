@@ -23,6 +23,7 @@ export const authSlice = createSlice({
       refreshToken: "",
       refreshTokenExp: "",
     },
+
     isLogin: false,
     status: "",
     message: "",
@@ -30,37 +31,12 @@ export const authSlice = createSlice({
     isVerify: false,
     isResendVerification: false,
     change: false,
-    role: {
-      privateBusinessMan: false,
-      juridicalBusinessMan: false,
-      privateClearanceMan: true,
-      juridicalClearanceMan: false,
-    },
     anyData: "",
   },
   reducers: {
     changeFormType: (state, action) => {
       state.formType = action.payload;
       state.change = true;
-    },
-    defineRole: (state, action) => {
-      switch (action.payload) {
-        case "PB":
-          state.role.privateBusinessMan = true;
-          break;
-        case "JB":
-          state.role.juridicalBusinessMan = true;
-          break;
-        case "PC":
-          state.role.privateClearanceMan = true;
-          break;
-        case "JC":
-          state.role.juridicalClearanceMan = true;
-          break;
-
-        default:
-          return state;
-      }
     },
     setMessage: (state, action) => {
       state.message = action.payload;
@@ -97,7 +73,6 @@ export const authSlice = createSlice({
 
 export const {
   changeFormType,
-  defineRole,
   setMessage,
   changeData,
   checkVerify,
