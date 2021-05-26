@@ -103,7 +103,7 @@ const Import = () => {
                     داده می شود
                   </Typography>
                   <Link
-                    to="/Dashboard/suggestionsList"
+                    to="/Dashboard/suggestionsList/findPrice"
                     className={classes.link}
                   >
                     <Button

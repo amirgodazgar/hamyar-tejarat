@@ -73,7 +73,7 @@
   height: 100%;
 }
 .list {
-  flex: 0 0 55%;
+  flex: 0 0 80%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -169,8 +169,11 @@
   transition: all 200ms;
 }
 .panel {
-  flex: 0 0 15%;
+  flex: 0 0 20%;
   margin: 0 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .register {
   padding: 1rem;

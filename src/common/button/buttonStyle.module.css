@@ -26,19 +26,29 @@
 }
 
 .panel,
+.logout,
 .registerLink {
-  padding: 0.3rem 0.3rem;
+  padding: 0.4rem;
   font-size: 0.95rem;
   background-color: #ffffff;
   color: #277fe5;
   box-shadow: 0px 6px 11px -3px rgba(0, 0, 0, 0.73);
   margin: 0 auto;
-  width: 95%;
-  display: flex;
   justify-content: space-around;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.panel {
+  flex: 0 0 55%;
+  margin: 0;
+  font-size: 0.8rem;
+}
+.logout {
+  flex: 0 0 40%;
+  margin: 0;
+  font-size: 0.8rem;
 }
 .registerLink {
   padding: 0.6rem 0;
@@ -112,18 +122,21 @@
 
 .header:hover,
 .panel:hover,
+.logout:hover,
 .registerLink:hover {
   background-color: #277fe5;
   color: #ffffff;
   transition: all 200ms;
 }
 .panel:hover a,
+.logout:hover a,
 .registerLink:hover a {
   color: #ffffff;
   transition: all 200ms;
 }
 .header:active,
 .panel:active,
+.logout:active,
 .registerLink:active .registration:active {
   transform: translateY(2px);
   transition: all 100ms;

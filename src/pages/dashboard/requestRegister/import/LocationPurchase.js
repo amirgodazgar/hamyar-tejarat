@@ -87,7 +87,7 @@ const LocationPurchase = () => {
           </div>
         </form>
         <div className={classes.tariffCodes}>
-          <Link to="/Dashboard/tariffCodesList">
+          <Link to="/Dashboard/tariffCodesList" target="blank">
             <img src={tariffSvg} alt="tariffCode" />
             <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
           </Link>

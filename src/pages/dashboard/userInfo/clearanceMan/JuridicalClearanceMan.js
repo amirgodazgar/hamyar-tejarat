@@ -55,21 +55,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     });
   }, []);
 
-
-
-
-  //   certificateOfNoCriminalRecordImagePath: null
-  // choosedCustoms: []
-  // companyName: null
-  // customsList: []
-  // email: "amirgodazgar.ag@gmail.com"
-  // nationalCompanyId: null
-  // officeAddress: null
-  // phoneNumber: null
-  // userInfo: {role: "Clearanceman", type: "Juridical"}
-  // userType: "Juridical"
-  // workExperienceImagePath: null
-
   const placeHolder = {
     companyName:
       userData.companyName === null
@@ -151,19 +136,18 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     );
     formData.append(
       "PhoneNumber",
-      userData.phoneNumber !== null
-        ? userData.phoneNumber
-        : values.mobileNum
+      userData.phoneNumber !== null ? userData.phoneNumber : values.mobileNum
     );
     formData.append(
       "OfficeAddress",
-      userData.officeAddress !== null
-        ? userData.officeAddress
-        : values.address
+      userData.officeAddress !== null ? userData.officeAddress : values.address
     );
     formData.append(
       "ChoosedCustomIds",
-      userData.choosedCustoms === undefined ? ids : userData.choosedCustoms
+      userData.choosedCustoms.length === 0 ||
+        userData.choosedCustoms === undefined
+        ? ids
+        : userData.choosedCustoms
     );
     formData.append(
       "CertificateOfNoCriminalRecordImage",
@@ -174,9 +158,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
     );
 
-    console.log(ids);
-    console.log(userData.choosedCustoms);
-    console.log(formData.getAll("ChoosedCustomIds"));
 
     postClearanceJuridical(formData);
   };

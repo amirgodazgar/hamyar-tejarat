@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Paper } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
 import classes from "./businessMan.module.css";
+import inputClass from "../../../../common/input/inputField.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
@@ -10,15 +11,44 @@ import { Link } from "react-router-dom";
 import { postBusinessmanJuridical } from "../../../../services/userInfo/userInfoServices";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
+import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 
 const JuridicalBusinessMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
+  const [userData, setUserData] = useState([]);
 
-  const userData = {
-    companyName: "نام دریافتی از api",
-    companyNationalId: "نام دریافتی از api",
-    phone: "تلفن دریافتی از api",
-    email: "ایمیل دریافتی از api",
+  useEffect(() => {
+    dispatch(getUserInfoData()).then((res) => {
+      console.log(res.payload);
+      setUserData(res.payload);
+    });
+  }, []);
+
+  const placeHolder = {
+    companyName:
+      userData.companyName === null
+        ? adminPanelData.userInfo.clearanceMan.placeHolder.companyName
+        : userData.companyName,
+
+    companyNationalId:
+      userData.nationalCompanyId === null
+        ? adminPanelData.userInfo.clearanceMan.placeHolder.companyNationalId
+        : userData.nationalCompanyId,
+
+    nationalId:
+      userData.nationalId === null
+        ? adminPanelData.userInfo.clearanceMan.placeHolder.nationalId
+        : userData.nationalId,
+
+    phone:
+      userData.phoneNumber === null
+        ? adminPanelData.userInfo.clearanceMan.placeHolder.mobile
+        : userData.phoneNumber,
+
+    email:
+      userData.email === null
+        ? adminPanelData.userInfo.clearanceMan.placeHolder.email
+        : userData.email,
   };
 
   const initialValues = {
@@ -38,9 +68,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
     mobileNum: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .required(adminPanelData.userInfo.clearanceMan.error.mobile),
-    email: Yup.string()
-      .email(adminPanelData.userInfo.clearanceMan.error.emailWrong)
-      .required(adminPanelData.userInfo.clearanceMan.error.email),
+   
   });
 
   const onSubmit = (values) => {
@@ -49,7 +77,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       nationalCompanyId: values.companyNationalId,
       phoneNumber: values.mobileNum,
     };
-    console.log("JB",userInfo);
+    console.log("JB", userInfo);
     postBusinessmanJuridical(userInfo);
   };
   const formik = useFormik({
@@ -75,7 +103,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
                   name="companyName"
                   type="text"
                   label={adminPanelData.userInfo.clearanceMan.forms.companyName}
-                  placeHolder={userData.companyName}
+                  placeHolder={placeHolder.companyName}
                 />
               </div>
               <div
@@ -90,7 +118,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
                   label={
                     adminPanelData.userInfo.clearanceMan.forms.companyNationalId
                   }
-                  placeHolder={userData.companyNationalId}
+                  placeHolder={placeHolder.companyNationalId}
                 />
               </div>
               <div className={`${classes.firstRow} ${classes.mobileNum} `}>
@@ -101,21 +129,25 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
                   name="mobileNum"
                   type="text"
                   label={adminPanelData.userInfo.clearanceMan.forms.mobile}
-                  placeHolder={userData.phone}
+                  placeHolder={placeHolder.phone}
                 />
               </div>
             </div>
 
             <div className={classes.emailBox}>
-              <InputField
-                disable={true}
-                customizeLabel="userInfo_label"
-                customizeInput="userInfo_email_input"
-                formik={formik}
+              <div
+                className={`${inputClass.labelBox} ${inputClass.userInfo_label}`}
+              >
+                <label className={inputClass.label} htmlFor="email">
+                  {adminPanelData.userInfo.clearanceMan.forms.email}
+                </label>
+              </div>
+              <input
+                className={`${inputClass.textField} ${inputClass.userInfo_email_input}`}
                 name="email"
-                type="text"
-                label={adminPanelData.userInfo.clearanceMan.forms.email}
-                placeHolder={userData.email}
+                type="email"
+                placeholder={placeHolder.email}
+                disabled={true}
               />
             </div>
 

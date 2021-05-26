@@ -5,6 +5,7 @@ import http from "../httpServices";
 
 export const postBusinessmanPrivate = async (userInfo) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
+  console.log(userInfo)
 
   await http
     .post("/BusinessmanPanel/UpdatePrivateBusinessmanProfile", {
@@ -13,8 +14,9 @@ export const postBusinessmanPrivate = async (userInfo) => {
       nationalId,
       phoneNumber,
     })
+
     .then((res) => {
-      console.log("BusinessPrivate", res.data);
+      console.log("BusinessPrivate", res);
     });
 };
 
@@ -28,7 +30,7 @@ export const postBusinessmanJuridical = async (userInfo) => {
       phoneNumber,
     })
     .then((res) => {
-      console.log("BusinessJuridical", res.data);
+      console.log("BusinessJuridical", res);
     });
 };
 

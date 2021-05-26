@@ -128,7 +128,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   });
 
   const onSubmit = (values) => {
-    console.log(values)
+    console.log(values);
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
@@ -156,7 +156,10 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     );
     formData.append(
       "ChoosedCustomIds",
-      userData.ChoosedCustomIds === undefined ? ids : userData.ChoosedCustomIds
+      userData.choosedCustoms.length === 0 ||
+        userData.choosedCustoms === undefined
+        ? ids
+        : userData.ChoosedCustomIds
     );
     formData.append(
       "CertificateOfNoCriminalRecordImage",

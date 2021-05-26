@@ -74,6 +74,7 @@ const SignUp = () => {
               name="email"
               label={authData.signUp.email}
               placeHolder="example@gmail.com"
+              
             />
             <Input
               formik={formik}
@@ -81,6 +82,7 @@ const SignUp = () => {
               name="password"
               label={authData.signUp.pass}
               placeHolder="********"
+              
             />
             <div className={classes.checkBoxContainer}>
               <FormLabel className={classes.label}>

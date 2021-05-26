@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./navbar.module.css";
 import SearchIcon from "@material-ui/icons/Search";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
@@ -14,6 +14,7 @@ import { clearCookies } from "../../helper/cookies";
 const Navbar = () => {
   const isLogin = Cookies.get("login");
   const dispatch = useDispatch();
+  const history = useHistory()
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
   const exitHandler = () => {
@@ -36,7 +37,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className={classes.searchBox} style={{ display: "none" }}>
+          {/* <div className={classes.searchBox} style={{ display: "none" }}>
             <input
               type="text"
               className={
@@ -55,31 +56,28 @@ const Navbar = () => {
                 }
               />
             </button>
-          </div>
+          </div> */}
           {isLogin ? (
             <div className={classes.panel}>
-              <Link className={classes.link} to="/Dashboard/main">
-                <Button customizeClass="panel">
-                  <PersonIcon fontSize="large" />
+              {/* <Link className={classes.link} to="/Dashboard/main"> */}
+                <Button customizeClass="panel" click={() => history.replace("/Dashboard/main")}>
+                  <PersonIcon  />
                   پنل کاربری
                 </Button>
-              </Link>
+              {/* </Link> */}
+
+              <Button customizeClass="logout" click={exitHandler}>
+                  <ExitToApp  />
+                  خروج
+                </Button>
+
             </div>
           ) : (
             <Link className={classes.registerLink} to="/Register">
               <Button customizeClass="registerLink">ورود | ثبت نام</Button>
             </Link>
           )}
-          <div className={classes.panel}>
-            {isLogin ? (
-              <div className={classes.panel}>
-                <Button customizeClass="panel" click={exitHandler}>
-                  <ExitToApp fontSize="large" />
-                  خروج
-                </Button>
-              </div>
-            ) : null}
-          </div>
+     
         </div>
       </nav>
       <div data-aos="fade-up" className={classes.mainTitle}>
