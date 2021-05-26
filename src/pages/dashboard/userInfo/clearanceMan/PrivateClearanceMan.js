@@ -13,28 +13,46 @@ import { Alert } from "@material-ui/lab";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
+import { postClearancePrivate } from "../../../../services/userInfo/userInfoServices";
 
 const PrivateClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
-  const [chips, setChips] = useState([]);
-  const addChipsHandler = (value) => {
+  const [workExpImg, setWorkExpImg] = useState(null);
+  const [crimeImg, setCrimeImg] = useState(null);
+  const initChips =
+    userData.choosedCustoms === undefined ? [] : userData.choosedCustoms;
+  const [chips, setChips] = useState(initChips);
+
+  const addChipsHandler = (e) => {
+    const id = e.target.value;
+    const label = e.nativeEvent.target[id - 1].label;
     const updateValue = [];
-    updateValue.push(value);
+    updateValue.push({
+      id,
+      name: label,
+    });
     setChips((prevState) => [...prevState, ...updateValue]);
   };
+
   const chipDeleteHandler = (chip) => {
     const updateValue = chips.filter((_, index) => index !== chip);
     setChips([...updateValue]);
   };
 
+  const onChangeWorkExpImg = (e) => {
+    setWorkExpImg(e.target.files[0]);
+  };
+  const onChangeCrimeImg = (e) => {
+    setCrimeImg(e.target.files[0]);
+  };
+
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
+      setChips(res.payload.choosedCustoms);
     });
   }, []);
-
-  // console.log("CP", userData);
 
   const placeHolder = {
     firstName:
@@ -81,7 +99,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     workExperience: "",
     criminalRecord: "",
     selectClearance: "",
-    clearances: [],
+    clearances: null,
   };
 
   const validationSchema = Yup.object({
@@ -93,9 +111,11 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     ),
     clearanceId: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
+      .max(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
       .required(adminPanelData.userInfo.clearanceMan.error.clearanceId),
     mobile: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
+      .max(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .required(adminPanelData.userInfo.clearanceMan.error.mobile),
     address: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.address
@@ -103,14 +123,51 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     // selectClearance: Yup.mixed().required(
     //   adminPanelData.userInfo.clearanceMan.error.selectClearance
     // ),
-    workExperience: Yup.mixed().required(),
-    criminalRecord: Yup.mixed().required(),
+    // workExperience: Yup.mixed().required(),
+    // criminalRecord: Yup.mixed().required(),
   });
 
   const onSubmit = (values) => {
-    console.log(values);
-    console.log("values");
-    values.clearances.push(...chips);
+    console.log(values)
+    const ids = chips === undefined ? [] : chips.map((item) => +item.id);
+    values.clearances = chips === undefined ? [] : chips;
+    const formData = new FormData();
+    formData.append(
+      "FirstName",
+      userData.firstName !== null ? userData.firstName : values.firstName
+    );
+    formData.append(
+      "LastName",
+      userData.lastName !== null ? userData.lastName : values.lastName
+    );
+    formData.append(
+      "CustomsBrokerageNumber",
+      userData.clearanceId !== undefined
+        ? userData.clearanceId
+        : values.clearanceId
+    );
+    formData.append(
+      "PhoneNumber",
+      userData.mobile !== undefined ? userData.mobile : values.mobile
+    );
+    formData.append(
+      "OfficeAddress",
+      userData.address !== undefined ? userData.address : values.address
+    );
+    formData.append(
+      "ChoosedCustomIds",
+      userData.ChoosedCustomIds === undefined ? ids : userData.ChoosedCustomIds
+    );
+    formData.append(
+      "CertificateOfNoCriminalRecordImage",
+      workExpImg ? workExpImg : userData.workExperienceImagePath
+    );
+    formData.append(
+      "WorkExperienceImage",
+      crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
+    );
+
+    postClearancePrivate(formData);
   };
   const formik = useFormik({
     initialValues,
@@ -210,26 +267,21 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                     : `${classes.clearancesBox} ${classes.active}`
                 }
               >
-                {/* {formik.values.clearances.length === 0
-                  ? null
-                  : formik.values.clearances.map((item, index) => (
-                      <Chip
-                        className={classes.chip}
-                        label={item}
-                        onDelete={() => chipDeleteHandler(index)}
-                        key={index}
-                      />
-                    ))} */}
                 {chips.length === 0
                   ? null
-                  : chips.map((item, index) => (
-                      <Chip
-                        className={classes.chip}
-                        label={item}
-                        onDelete={() => chipDeleteHandler(index)}
-                        key={index}
-                      />
-                    ))}
+                  : chips.map((item, index) => {
+                      const filtered = chips.filter(
+                        (curItem) => curItem.id !== item.id
+                      );
+                      return (
+                        <Chip
+                          className={classes.chip}
+                          label={item.name}
+                          onDelete={() => chipDeleteHandler(index)}
+                          key={item.id}
+                        />
+                      );
+                    })}
               </div>
             </div>
             <div
@@ -239,12 +291,12 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 {adminPanelData.userInfo.clearanceMan.forms.criminalRecordImg}
               </div>
               <div className={classes.imageCriminalRecordBox}>
-                {formik.values.criminalRecord ? (
+                {userData.certificateOfNoCriminalRecordImagePath !== null ? (
                   <img
                     src={
                       userData.certificateOfNoCriminalRecordImagePath === null
-                        ? formik.values.criminalRecord
-                        : userData.certificateOfNoCriminalRecordImagePath
+                        ? null
+                        : `https://lunacyst.ir/${userData.certificateOfNoCriminalRecordImagePath}`
                     }
                     alt="criminal-record"
                   />
@@ -267,24 +319,25 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 {adminPanelData.userInfo.clearanceMan.forms.WorkExperienceImg}
               </div>
               <div className={classes.imageWorkExperienceBox}>
-                {formik.values.workExperience ? (
+                {userData.workExperienceImagePath !== null ? (
                   <img
                     src={
                       userData.workExperienceImagePath === null
-                        ? formik.values.workExperience
-                        : userData.workExperienceImagePath
+                        ? null
+                        : `https://lunacyst.ir/${userData.workExperienceImagePath}`
                     }
                     alt="criminal-record"
                   />
                 ) : (
-                  <Image
-                    fontSize="large"
+                  <div
                     style={
                       userData.workExperienceImagePath !== null
                         ? { display: "none" }
                         : null
                     }
-                  />
+                  >
+                    <Image fontSize="large" />
+                  </div>
                 )}
               </div>
             </div>
@@ -314,7 +367,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
               <select
                 name="selectClearance"
                 multiple={false}
-                onChange={(e) => addChipsHandler(e.target.value)}
+                onChange={(e) => addChipsHandler(e)}
                 className={`${classes.selectInput} ${
                   formik.touched.selectClearance &&
                   formik.errors.selectClearance &&
@@ -328,7 +381,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 ) : (
                   userData.customsList.map((option) => (
                     <option
-                      value={option.name}
+                      value={option.id}
                       label={option.name}
                       key={option.id}
                     />
@@ -362,7 +415,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 type="file"
                 name="criminalRecord"
                 value={formik.values.criminalRecord}
-                onChange={formik.handleChange}
+                onChange={(e) => onChangeCrimeImg(e)}
               />
               <CloudUpload fontSize="small" className={classes.uploadIcon} />
             </div>
@@ -392,7 +445,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 type="file"
                 name="workExperience"
                 value={formik.values.workExperience}
-                onChange={formik.handleChange}
+                onChange={(e) => onChangeWorkExpImg(e)}
               />
               <CloudUpload fontSize="small" className={classes.uploadIcon} />
             </div>

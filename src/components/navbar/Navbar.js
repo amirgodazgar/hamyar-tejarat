@@ -8,12 +8,18 @@ import { menuItem } from "../../constant/layoutData";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { getUserInfoData } from "../../store/dashboard/dashboardSlice";
+import { ExitToApp } from "@material-ui/icons";
+import { clearCookies } from "../../helper/cookies";
 
 const Navbar = () => {
   const isLogin = Cookies.get("login");
   const dispatch = useDispatch();
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
+  const exitHandler = () => {
+    clearCookies();
+    window.location.reload();
+  };
 
   return (
     <header className={classes.header}>
@@ -30,7 +36,7 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-          <div className={classes.searchBox}>
+          <div className={classes.searchBox} style={{ display: "none" }}>
             <input
               type="text"
               className={
@@ -53,10 +59,7 @@ const Navbar = () => {
           {isLogin ? (
             <div className={classes.panel}>
               <Link className={classes.link} to="/Dashboard/main">
-                <Button
-                  customizeClass="panel"
-                  
-                >
+                <Button customizeClass="panel">
                   <PersonIcon fontSize="large" />
                   پنل کاربری
                 </Button>
@@ -67,6 +70,16 @@ const Navbar = () => {
               <Button customizeClass="registerLink">ورود | ثبت نام</Button>
             </Link>
           )}
+          <div className={classes.panel}>
+            {isLogin ? (
+              <div className={classes.panel}>
+                <Button customizeClass="panel" click={exitHandler}>
+                  <ExitToApp fontSize="large" />
+                  خروج
+                </Button>
+              </div>
+            ) : null}
+          </div>
         </div>
       </nav>
       <div data-aos="fade-up" className={classes.mainTitle}>

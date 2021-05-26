@@ -30,7 +30,7 @@ export const getUserInfoData = createAsyncThunk(
         .then((res) => {
           if (res.status === 200) {
             setUserInfoCookies(role, type);
-            const result = res.data;
+            const result = res.data.data;
             return {
               ...result,
               userInfo,

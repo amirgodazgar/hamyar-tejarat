@@ -16,11 +16,9 @@ axios.interceptors.request.use(
     const token = Cookies.get("token");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
-      config.headers["Content-Type"] = "application/json";
       config.headers["Access-Control-Allow-Origin"] = "*";
       return config;
     } else {
-      config.headers["Content-Type"] = "application/json";
       return config;
     }
   },

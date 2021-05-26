@@ -1,8 +1,9 @@
+import Cookies from "js-cookie";
 import http from "../httpServices";
 
 // SEND INFORMATION BUSINESSMAN --------------------------------- :
 
-export const postBusinessmanPrivate = async (userInfo ) => {
+export const postBusinessmanPrivate = async (userInfo) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
 
   await http
@@ -13,7 +14,7 @@ export const postBusinessmanPrivate = async (userInfo ) => {
       phoneNumber,
     })
     .then((res) => {
-      console.log("BusinessPrivate" ,res.data);
+      console.log("BusinessPrivate", res.data);
     });
 };
 
@@ -27,38 +28,39 @@ export const postBusinessmanJuridical = async (userInfo) => {
       phoneNumber,
     })
     .then((res) => {
-      console.log("BusinessJuridical" ,res.data);
+      console.log("BusinessJuridical", res.data);
     });
 };
 
-
 // SEND INFORMATION CLEARANCEMAN --------------------------------- :
 
-export const postClearancePrivate = async (userInfo ) => {
-  const { firstName, lastName, nationalId, phoneNumber } = userInfo;
+export const postClearancePrivate = async (userInfo) => {
+  const token = Cookies.get("token");
 
   await http
-    .post("/ClearancePanel/UpdatePrivateClearanceProfile", {
-      firstName,
-      lastName,
-      nationalId,
-      phoneNumber,
+    .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ContentType: "multipart/form-data",
+      },
     })
     .then((res) => {
-      console.log("BusinessPrivate" ,res.data);
+      console.log("ClearancePrivate-response", res);
     });
 };
 
 export const postClearanceJuridical = async (userInfo) => {
-  const { companyName, nationalCompanyId, phoneNumber } = userInfo;
+  console.log(userInfo.getAll("ChoosedCustomIds"))
+  const token = Cookies.get("token");
 
   await http
-    .post("/ClearancePanel/UpdateJuridicalClearanceProfile", {
-      companyName,
-      nationalCompanyId,
-      phoneNumber,
+    .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ContentType: "multipart/form-data",
+      },
     })
     .then((res) => {
-      console.log("BusinessJuridical" ,res.data);
+      console.log("ClearanceJuridical-response", res);
     });
 };
