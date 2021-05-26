@@ -1,9 +1,8 @@
-import Cookies from "js-cookie";
 import http from "../httpServices";
 
-// SEND INFORMATION :
+// SEND INFORMATION BUSINESSMAN --------------------------------- :
 
-export const sendBusinessmanPrivate = async (userInfo, dispatch) => {
+export const postBusinessmanPrivate = async (userInfo ) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
 
   await http
@@ -14,11 +13,11 @@ export const sendBusinessmanPrivate = async (userInfo, dispatch) => {
       phoneNumber,
     })
     .then((res) => {
-      console.log(res.data);
+      console.log("BusinessPrivate" ,res.data);
     });
 };
 
-export const sendBusinessmanJuridical = async (userInfo, dispatch) => {
+export const postBusinessmanJuridical = async (userInfo) => {
   const { companyName, nationalCompanyId, phoneNumber } = userInfo;
 
   await http
@@ -28,6 +27,38 @@ export const sendBusinessmanJuridical = async (userInfo, dispatch) => {
       phoneNumber,
     })
     .then((res) => {
-      console.log(res.data);
+      console.log("BusinessJuridical" ,res.data);
+    });
+};
+
+
+// SEND INFORMATION CLEARANCEMAN --------------------------------- :
+
+export const postClearancePrivate = async (userInfo ) => {
+  const { firstName, lastName, nationalId, phoneNumber } = userInfo;
+
+  await http
+    .post("/ClearancePanel/UpdatePrivateClearanceProfile", {
+      firstName,
+      lastName,
+      nationalId,
+      phoneNumber,
+    })
+    .then((res) => {
+      console.log("BusinessPrivate" ,res.data);
+    });
+};
+
+export const postClearanceJuridical = async (userInfo) => {
+  const { companyName, nationalCompanyId, phoneNumber } = userInfo;
+
+  await http
+    .post("/ClearancePanel/UpdateJuridicalClearanceProfile", {
+      companyName,
+      nationalCompanyId,
+      phoneNumber,
+    })
+    .then((res) => {
+      console.log("BusinessJuridical" ,res.data);
     });
 };

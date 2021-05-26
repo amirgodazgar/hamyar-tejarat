@@ -17,6 +17,7 @@ const UserInfo = ({ backToTab }) => {
   }, []);
 
   let user = Cookies.getJSON("userInfo");
+
   const PC = user.role === "Clearanceman" && user.type === "Private";
   const JC = user.role === "Clearanceman" && user.type === "Juridical";
   const PB = user.role === "Businessman" && user.type === "Private";

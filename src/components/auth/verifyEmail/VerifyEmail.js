@@ -48,8 +48,8 @@ const VerifyEmail = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [resendEmail, setResendEmail] = useState(false);
   const successHandler = () => {
-    history.replace("/Register");
     dispatch(setMessage(""));
+    history.replace("/Register");
   };
 
   const initialValues = {

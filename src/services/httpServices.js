@@ -1,6 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { clearCookies, setTokenCookies } from "../helper/cookies";
+import {
+  clearCookies,
+  setTokenCookies,
+  setUserInfoCookies,
+} from "../helper/cookies";
 import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
@@ -39,6 +43,7 @@ axios.interceptors.response.use(
       originalRequest.url === "/Account/RefreshToken"
     ) {
       clearCookies();
+      Cookies.set("login", false);
       history.replace("/Register");
       window.location.reload();
       return Promise.reject(error);
@@ -54,8 +59,10 @@ axios.interceptors.response.use(
           refreshToken: Cookies.get("refreshToken"),
         })
         .then((res) => {
-          if (res.status === 201 || res.status === 200) {
-            const tokenInfo = res.data;
+          if (res.status === 200) {
+            const tokenInfo = res.data.data;
+            const role = res.data.data.userRole;
+            const type = res.data.data.userType;
             const tokenData = {
               token: tokenInfo.accessToken,
               tokenExp: tokenInfo.accessTokenExpirationTime,
@@ -63,14 +70,17 @@ axios.interceptors.response.use(
               refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
             };
             setTokenCookies(tokenData);
+            setUserInfoCookies(role, type);
+            Cookies.set("login", true);
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${tokenInfo.accessToken}`;
+          } else {
+            clearCookies();
+            history.replace("/Register");
+            window.location.reload();
           }
           return axios(originalRequest);
-        })
-        .catch((error) => {
-          return Promise.reject(error);
         });
     }
 

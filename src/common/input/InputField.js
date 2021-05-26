@@ -10,6 +10,7 @@ const InputField = ({
   name,
   customizeLabel,
   customizeInput,
+  disable,
 }) => {
   return (
     <React.Fragment>
@@ -39,6 +40,7 @@ const InputField = ({
         onBlur={formik.handleBlur}
         value={formik.values[name]}
         required
+        disabled={disable}
       />
     </React.Fragment>
   );

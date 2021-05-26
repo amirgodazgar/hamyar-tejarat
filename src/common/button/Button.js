@@ -13,7 +13,6 @@ const Button = ({
       className={`${classes.btn} ${classes[customizeClass]}`}
       onClick={click}
       type={type}
-    
     >
       {children}
     </button>

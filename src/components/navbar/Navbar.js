@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+import { getUserInfoData } from "../../store/dashboard/dashboardSlice";
 
 const Navbar = () => {
-  const isLogin = useSelector((state) => state.auth.isLogin);
-  console.log(isLogin);
+  const isLogin = Cookies.get("login");
+  const dispatch = useDispatch();
   const [search, setSearch] = useState(true);
   const searchHandler = () => setSearch((prevState) => !prevState);
 
@@ -51,7 +53,10 @@ const Navbar = () => {
           {isLogin ? (
             <div className={classes.panel}>
               <Link className={classes.link} to="/Dashboard/main">
-                <Button customizeClass="panel">
+                <Button
+                  customizeClass="panel"
+                  
+                >
                   <PersonIcon fontSize="large" />
                   پنل کاربری
                 </Button>

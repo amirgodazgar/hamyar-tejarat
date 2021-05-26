@@ -1,18 +1,23 @@
 import Cookies from "js-cookie";
-import { clearCookies, setTokenCookies } from "../helper/cookies";
+import {
+  clearCookies,
+  setTokenCookies,
+  setUserInfoCookies,
+} from "../helper/cookies";
 import { checkVerify, getToken, setMessage } from "../store/auth/authSlice";
 
 export const signIn = async (userInfo, dispatch, history) => {
   dispatch(getToken(userInfo)).then((res) => {
     console.log(res);
-    Cookies.remove("userInfo")
-    Cookies.remove("userRole")
+    Cookies.remove("userInfo");
+    Cookies.remove("userRole");
     let tokenInfo;
     let tokenData;
-    let userRole;
+
     if (res.payload.data.isSuccess) {
       console.log("login", res);
-      userRole = res.payload.data.data.userRole;
+      const role = res.payload.data.data.userRole;
+      const type = res.payload.data.data.userType;
       tokenInfo = res.payload.data.data;
       tokenData = {
         token: tokenInfo.accessToken,
@@ -23,7 +28,8 @@ export const signIn = async (userInfo, dispatch, history) => {
       dispatch(setMessage(res.payload.data.message));
       dispatch(checkVerify(true));
       setTokenCookies(tokenData);
-      Cookies.set("userRole", userRole);
+      setUserInfoCookies(role, type);
+      Cookies.set("login", res.payload.data.isSuccess);
       setTimeout(() => {
         dispatch(setMessage(""));
         history.replace("/");

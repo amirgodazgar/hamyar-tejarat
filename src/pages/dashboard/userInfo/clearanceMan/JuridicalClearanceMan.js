@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Chip, Paper, Fade } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
@@ -9,9 +9,12 @@ import { adminPanelData } from "../../../../constant/adminPanel";
 import { CloudUpload, Image } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
+import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
+import { useDispatch } from "react-redux";
 
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const [chips, setChips] = useState([]);
+  const [data, setData] = useState([]);
   const addChipsHandler = (value) => {
     const updateValue = [];
     updateValue.push(value);
@@ -21,6 +24,14 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     const updateValue = chips.filter((_, index) => index !== chip);
     setChips([...updateValue]);
   };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(dispatch(getUserInfoData()));
+    dispatch(getUserInfoData()).then((res) => {
+      console.log(res);
+    });
+  }, []);
 
   const initialValues = {
     companyName: "",
@@ -136,6 +147,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
           </div>
           <div className={classes.emailBox}>
             <InputField
+              disable={true}
               customizeLabel="userInfo_label"
               customizeInput="userInfo_email_input"
               formik={formik}
