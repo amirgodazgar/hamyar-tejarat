@@ -3,12 +3,11 @@ import classes from "./import.module.css";
 import { Typography } from "@material-ui/core";
 import PriceSvg from "../../../../styles/svg/askfor-price.svg";
 import PurchaseSvg from "../../../../styles/svg/purchase.svg";
-import PriceActiveSvg from "../../../../styles/svg/askfor-price-active.svg";
 import PurchaseActiveSvg from "../../../../styles/svg/purchase-active.svg";
 
 const RequestType = ({ setRequestType }) => {
-  const [priceSelect, setPriceSelect] = useState(false);
-  const [purchaseSelect, setPurchaseSelect] = useState(true);
+  const [priceSelect, setPriceSelect] = useState(true);
+  const [purchaseSelect, setPurchaseSelect] = useState(false);
 
   const priceHandler = () => {
     setPriceSelect(true);
@@ -31,10 +30,11 @@ const RequestType = ({ setRequestType }) => {
           className={`${classes.purchase} ${
             purchaseSelect ? classes.selected : null
           }`}
-          onClick={purchaseHandler}
         >
-          <img src={purchaseSelect ? PriceActiveSvg : PriceSvg} alt="price" />
-          <Typography variant="body1" className={classes.selectBoxTitle}>کالا خریداری شده </Typography>
+          <img src={PriceSvg} alt="price" />
+          <Typography variant="body1" className={classes.selectBoxTitle}>
+            کالا خریداری شده{" "}
+          </Typography>
         </div>
         <div
           className={`${classes.price} ${
@@ -46,7 +46,9 @@ const RequestType = ({ setRequestType }) => {
             src={priceSelect ? PurchaseActiveSvg : PurchaseSvg}
             alt="purchase"
           />
-          <Typography variant="body1" className={classes.selectBoxTitle}>قصد استعلام قیمت را دارم </Typography>
+          <Typography variant="body1" className={classes.selectBoxTitle}>
+            قصد استعلام قیمت را دارم{" "}
+          </Typography>
         </div>
       </div>
     </React.Fragment>

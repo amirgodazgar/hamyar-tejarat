@@ -8,14 +8,12 @@ import { checkVerify, getToken, setMessage } from "../store/auth/authSlice";
 
 export const signIn = async (userInfo, dispatch, history) => {
   dispatch(getToken(userInfo)).then((res) => {
-    console.log(res);
     Cookies.remove("userInfo");
     Cookies.remove("userRole");
     let tokenInfo;
     let tokenData;
 
     if (res.payload.data.isSuccess) {
-      console.log("login", res);
       const role = res.payload.data.data.userRole;
       const type = res.payload.data.data.userType;
       tokenInfo = res.payload.data.data;

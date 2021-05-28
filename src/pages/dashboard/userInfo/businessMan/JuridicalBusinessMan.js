@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
 import { Link } from "react-router-dom";
-import { postBusinessmanJuridical } from "../../../../services/userInfo/userInfoServices";
+import { postBusinessmanJuridical } from "../../../../services/dashboard/userInfoServices";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
@@ -77,7 +77,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       nationalCompanyId: values.companyNationalId,
       phoneNumber: values.mobileNum,
     };
-    console.log("JB", userInfo);
+    
     postBusinessmanJuridical(userInfo);
   };
   const formik = useFormik({

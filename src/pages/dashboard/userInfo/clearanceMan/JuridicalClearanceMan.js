@@ -13,7 +13,7 @@ import { Alert } from "@material-ui/lab";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
-import { postClearanceJuridical } from "../../../../services/userInfo/userInfoServices";
+import { postClearanceJuridical } from "../../../../services/dashboard/userInfoServices";
 
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
@@ -157,7 +157,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       "WorkExperienceImage",
       crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
     );
-
 
     postClearanceJuridical(formData);
   };

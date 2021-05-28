@@ -1,10 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import {
-  clearCookies,
-  setTokenCookies,
-  setUserInfoCookies,
-} from "../helper/cookies";
+import { clearCookies, setTokenCookies } from "../helper/cookies";
 import { createBrowserHistory } from "history";
 const history = createBrowserHistory();
 
@@ -59,8 +55,6 @@ axios.interceptors.response.use(
         .then((res) => {
           if (res.status === 200) {
             const tokenInfo = res.data.data;
-            const role = res.data.data.userRole;
-            const type = res.data.data.userType;
             const tokenData = {
               token: tokenInfo.accessToken,
               tokenExp: tokenInfo.accessTokenExpirationTime,
@@ -68,7 +62,6 @@ axios.interceptors.response.use(
               refreshTokenExp: tokenInfo.refreshTokenExpirationTime,
             };
             setTokenCookies(tokenData);
-            setUserInfoCookies(role, type);
             Cookies.set("login", true);
             axios.defaults.headers.common[
               "Authorization"

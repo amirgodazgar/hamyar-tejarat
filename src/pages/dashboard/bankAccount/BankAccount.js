@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./bankAccount.module.css";
 import { Alert } from "@material-ui/lab";
 import { Grid, Typography } from "@material-ui/core";
+import { useHistory } from "react-router";
 
-const BankAccount = () => {
+const BankAccount = ({ backToTab }) => {
+  let history = useHistory();
+  useEffect(() => {
+    backToTab(5);
+    history.push("/Dashboard/bankAccount");
+  }, []);
+
   return (
     <Grid
       container

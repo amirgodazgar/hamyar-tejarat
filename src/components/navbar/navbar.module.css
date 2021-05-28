@@ -73,7 +73,7 @@
   height: 100%;
 }
 .list {
-  flex: 0 0 80%;
+  flex: 0 0 70%;
   display: flex;
   justify-content: center;
   align-items: center;

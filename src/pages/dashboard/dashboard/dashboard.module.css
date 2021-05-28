@@ -27,9 +27,12 @@
   border-radius: 10px !important;
 }
 
-.ticketsRows,
+.ticketsRows {
+  width: 65% !important;
+}
+
 .newsRows {
-  width: 49% !important;
+  width: 33% !important;
 }
 
 .header {

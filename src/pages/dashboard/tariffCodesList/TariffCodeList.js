@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./TariffCodeList.module.css";
 import {
   Grid,
@@ -14,7 +14,16 @@ import {
 } from "@material-ui/core";
 import Button from "../../../common/button/Button";
 import http from "../../../services/httpServices";
-const TariffCodeList = () => {
+import { useHistory } from "react-router";
+
+const TariffCodeList = ({ backToTab }) => {
+  let history = useHistory();
+
+  useEffect(() => {
+    backToTab(6);
+    history.push("/Dashboard/tariffCodesList");
+  }, []);
+
   const [textSearch, setTextSearch] = useState("");
   const [codeSearch, setCodeSearch] = useState([]);
   const [result, setResult] = useState([]);
@@ -121,10 +130,28 @@ const TariffCodeList = () => {
                     <Table>
                       <TableHead className={classes.tableHead}>
                         <TableRow>
-                          <TableCell variant="head" className={classes.tableHeader} >شرح کالا</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} >شرح انگلیسی کالا</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} >کد تعرفه</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} ></TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            شرح کالا
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            شرح انگلیسی کالا
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            کد تعرفه
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          ></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

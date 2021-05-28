@@ -130,7 +130,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-size: 0.9rem;
 }
+
 .imageCriminalRecordBox,
 .imageWorkExperienceBox {
   background-color: #f4f4f4;
@@ -212,6 +214,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.9rem;
 }
 
 .workExperience input,

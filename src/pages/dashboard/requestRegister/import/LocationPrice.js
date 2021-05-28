@@ -1,46 +1,26 @@
 import React, { useState } from "react";
 import classes from "./import.module.css";
 import { Chip, Fade, Typography } from "@material-ui/core";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
-const LocationPrice = () => {
-  const [chips, setChips] = useState([]);
-  const addChipsHandler = (value) => {
+const LocationPrice = ({ placeClearance, formik ,chips ,setChips}) => {
+  // const [chips, setChips] = useState([]);
+  const addChipsHandler = (e) => {
+    const id = e.target.value;
+    const text = e.nativeEvent.target[id].text;
     const updateValue = [];
-    updateValue.push(value);
+    updateValue.push({
+      id,
+      name: text,
+    });
     setChips((prevState) => [...prevState, ...updateValue]);
   };
+
   const chipDeleteHandler = (chip) => {
     const updateValue = chips.filter((_, index) => index !== chip);
     setChips([...updateValue]);
   };
-
-  const initialValues = {
-    tariff: "",
-    originLoading: "",
-    originReleasing: [],
-    merchandise: "",
-  };
-
-  const validationSchema = Yup.object({
-    tariff: Yup.string().required("کد تعرفه را وارد کنید"),
-    originLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
-    originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
-    merchandise: Yup.mixed().required("عنوان کالا را وارد کنید"),
-  });
-
-  const onSubmit = (values) => {
-    console.log(values);
-    values.originReleasing.push(...chips);
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
 
   const errorBox = (name, label) => (
     <div className={classes.errorBox}>
@@ -64,53 +44,53 @@ const LocationPrice = () => {
       <div className={classes.formBox}>
         <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
           <div className={classes.inputBox}>
-            {errorBox("tariff", "کد تعرفه")}
+            {errorBox("tariffCode", "کد تعرفه")}
             <input
               className={`${classes.tariff}  ${
-                formik.touched.tariff && formik.errors.tariff
+                formik.touched.tariffCode && formik.errors.tariffCode
                   ? classes.inputError
                   : null
               } `}
-              name="tariff"
+              name="tariffCode"
               type="text"
-              placeHolder="0101"
+              placeholder="0101"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.tariff}
+              value={formik.values.tariffCode}
               required
             />
           </div>
           <div className={classes.inputBox}>
-            {errorBox("merchandise", " عنوان کالا ")}
+            {errorBox("cargoTitle", " عنوان کالا ")}
             <input
               className={`${classes.merchandise}  ${
-                formik.touched.merchandise && formik.errors.merchandise
+                formik.touched.cargoTitle && formik.errors.cargoTitle
                   ? classes.inputError
                   : null
               } `}
-              name="merchandise"
+              name="cargoTitle"
               type="text"
               placeholder=" اسب و الاغ"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.merchandise}
+              value={formik.values.cargoTitle}
               required
             />
           </div>
           <div className={classes.inputBox}>
-            {errorBox("originLoading", "مبدا بارگیری کالا ")}
+            {errorBox("portOfLoading", "مبدا بارگیری کالا ")}
             <input
               className={`${classes.originLoading}  ${
-                formik.touched.originLoading && formik.errors.originLoading
+                formik.touched.portOfLoading && formik.errors.portOfLoading
                   ? classes.inputError
                   : null
               } `}
-              name="originLoading"
+              name="portOfLoading"
               type="text"
-              placeHolder="بازارچه پرویزخان"
+              placeholder="بازارچه پرویزخان"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.originLoading}
+              value={formik.values.portOfLoading}
               required
             />
           </div>
@@ -123,33 +103,24 @@ const LocationPrice = () => {
         </div>
         <div className={classes.tariffList}>
           <div className={classes.inputBox} style={{ width: "30%" }}>
-            {errorBox("originReleasing", "گمرک مقصد، محل ترخیص کالا ")}
+            {errorBox("originCustomIds", "گمرک مقصد، محل ترخیص کالا ")}
             <select
-              name="originReleasing"
-              value={formik.values.originReleasing}
-              onChange={(e) => addChipsHandler(e.target.value)}
+              name="originCustomIds"
+              value={formik.values.originCustomIds}
+              onChange={(e) => addChipsHandler(e)}
               className={`${classes.originReleasingSelect}  ${
-                formik.touched.originReleasing &&
-                formik.errors.originReleasing &&
-                formik.values.originReleasing === "0"
+                formik.touched.originCustomIds &&
+                formik.errors.originCustomIds &&
+                formik.values.originCustomIds === "0"
                   ? classes.inputError
                   : null
               } `}
             >
-              {[
-                { label: "انتخاب کنید", value: "0" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-              ].map((option, index) => (
-                <option
-                  style={
-                    option.value === "0" ? { color: "rgba(0,0,0,0.4)" } : null
-                  }
-                  value={option.value}
-                  label={option.label}
-                  key={index}
-                />
+              <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
+              {placeClearance.map((option, index) => (
+                <option value={option.id} key={index}>
+                  {option.name}
+                </option>
               ))}
             </select>
           </div>
@@ -160,9 +131,9 @@ const LocationPrice = () => {
                 item !== "0" ? (
                   <Chip
                     className={classes.chip}
-                    label={item}
+                    label={item.name}
                     onDelete={() => chipDeleteHandler(index)}
-                    key={index}
+                    key={item.id}
                   />
                 ) : null
               )}

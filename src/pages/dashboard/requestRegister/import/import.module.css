@@ -124,7 +124,12 @@
   box-shadow: 0px 4px 8px 1px #c4cad05b;
   transition: all 200ms;
 }
-
+.purchase {
+  color: #c4cad0;
+  background-color: #f4f4f4;
+  box-shadow: 0px 4px 8px 1px #c4cad086;
+  cursor: auto;
+}
 /* Third step -------------------*/
 
 .formBox {

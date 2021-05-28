@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { adminPanelData } from "../../../../constant/adminPanel";
 import { Link } from "react-router-dom";
-import { postBusinessmanPrivate } from "../../../../services/userInfo/userInfoServices";
+import { postBusinessmanPrivate } from "../../../../services/dashboard/userInfoServices";
 import { useDispatch } from "react-redux";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import BackDrop from "../../../../common/backDrop/BackDrop";
@@ -83,7 +83,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
       nationalId: values.nationalId,
       phoneNumber: values.mobileNum,
     };
-    console.log("PB", userInfo);
+   
     postBusinessmanPrivate(userInfo);
   };
   const formik = useFormik({

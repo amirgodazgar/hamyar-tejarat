@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import {
   Grid,
@@ -19,10 +19,12 @@ import InputField from "../../../common/input/InputField";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import avatarImg from "../../../styles/image/profile-image.svg";
+import { getSuggestionsListData } from "../../../services/dashboard/userInfoServices";
 
 const FindPrice = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [pageData , setPageData] = useState(null)
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -31,8 +33,34 @@ const FindPrice = () => {
     setPage(0);
   };
 
+  useEffect(() => {
+    getSuggestionsListData(1 , 10)
+    .then(res => {
+      setPageData(res)
+      console.log(res)
+    })
+  }, []);
+
+  // currentPage: 1
+  // pageSize: 10
+  // results: (2)
+  // cargoTitle: "اسب"
+  // proposalsCount: 0
+  // quotationRequestsId: "8dbf4602-541f-4882-9a82-be624baf968b"
+  // requestDescription: "درخواست استعلام قیمت برای 20 اسب از مسیر حمل‌ و نقل دریایی"
+  // submitDate: "2021-05-27T17:17:21.575063"
+
   const rows = [
     {
+
+
+  // cargoTitle: "اسب"
+  // proposalsCount: 0
+  // quotationRequestsId: "8dbf4602-541f-4882-9a82-be624baf968b"
+  // requestDescription: "درخواست استعلام قیمت برای 20 اسب از مسیر حمل‌ و نقل دریایی"
+  // submitDate: "2021-05-27T17:17:21.575063"
+
+
       businessMan: "شرکت لوازم پزشکی ایرانیان",
       title: "لوازم پزشکی",
       type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
@@ -246,12 +274,45 @@ const FindPrice = () => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell variant="head" className={classes.tableHeader} >تاجر</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} >عنوان کالا</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} > جنس و نوع کالا </TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} >مبدا بارگیری</TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} > وسیله حمل </TableCell>
-                          <TableCell variant="head" className={classes.tableHeader} > تاریخ ثبت </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            تاجر
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            عنوان کالا
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            {" "}
+                            جنس و نوع کالا{" "}
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            مبدا بارگیری
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            {" "}
+                            وسیله حمل{" "}
+                          </TableCell>
+                          <TableCell
+                            variant="head"
+                            className={classes.tableHeader}
+                          >
+                            {" "}
+                            تاریخ ثبت{" "}
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

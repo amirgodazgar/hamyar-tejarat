@@ -13,7 +13,7 @@ import { Alert } from "@material-ui/lab";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
-import { postClearancePrivate } from "../../../../services/userInfo/userInfoServices";
+import { postClearancePrivate } from "../../../../services/dashboard/userInfoServices";
 
 const PrivateClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();

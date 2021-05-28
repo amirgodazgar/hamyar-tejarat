@@ -10,7 +10,7 @@ export const adminPanelData = {
       hasDropDown: false,
     },
     {
-      text: "لیست پیشنهادات",
+      text: "لیست درخواست ها",
       icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
       path: "/Dashboard/suggestionsList",
       dropDownText: [
@@ -81,8 +81,8 @@ export const adminPanelData = {
         address: "آدرس محل کار",
         email: "ایمیل",
         clearances: "گمرک های انتخاب شده",
-        criminalRecordImg: "پیش نمایش تصویر گواهی",
-        WorkExperienceImg: "پیش نمایش تصویر سابقه کار",
+        criminalRecordImg: "پیش نمایش (سایز فایل حداکثر 2 مگابایت)",
+        WorkExperienceImg: "پیش نمایش (سایز فایل حداکثر 2 مگابایت)",
         selectClearance: "آمادگی ترخیص کالا در گمرک های",
         criminalRecordUpload: "بارگذاری گواهی عدم سوء پیشینه",
         WorkExperienceUpload: "بارگذاری سوابق کار قبلی",

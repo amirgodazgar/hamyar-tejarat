@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./import.module.css";
 import {
   Paper,
@@ -16,18 +16,86 @@ import UploadPurchase from "./UploadPurchase";
 import UploadPrice from "./UploadPrice";
 import { Check } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { getRequestRegisterFormData, postRequestRegisterFormData } from "../../../../services/dashboard/userInfoServices";
 // import { adminPanelData } from "../../../../constant/adminPanel";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const Import = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [isPurchase, setIsPurchase] = React.useState(true);
+  const [isPurchase, setIsPurchase] = React.useState(false);
+  const [transportTools, setTransportTools] = useState([]);
+  const [placeClearance, setPlaceClearance] = useState([]);
+  const [chips, setChips] = useState([]);
+
+  const initialValues = {
+    tariffCode: "",
+    cargoTitle: "",
+    portOfLoading: "",
+    originCustomIds: [],
+    packagingType: "",
+    cargoAmount: "",
+    cargoTransportTools: "",
+    cargoValue: "",
+  };
+
+  const validationSchema = Yup.object({
+    tariffCode: Yup.string().required("کد تعرفه را وارد کنید"),
+    cargoTitle: Yup.mixed().required("عنوان کالا را وارد کنید"),
+    portOfLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
+    originCustomIds: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
+    packagingType: Yup.string().required("فیلد را پر کنید"),
+    cargoAmount: Yup.string().required("فیلد را پر کنید"),
+    cargoTransportTools: Yup.mixed().required("فیلد را پر کنید"),
+    cargoValue: Yup.mixed().required("فیلد را پر کنید"),
+  });
+
+  useEffect(() => {
+    getRequestRegisterFormData().then((res) => {
+      const { cargoTransportTools } = res;
+      const { customsList } = res;
+      setTransportTools(cargoTransportTools);
+      setPlaceClearance(customsList);
+    });
+  }, []);
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === 0 || activeStep === 1 || activeStep === 2) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else if (formik.isValid) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+  const onSubmit = (values) => {
+    console.log(values);
+    const ids = chips === undefined ? [] : chips.map((item) => +item.id);
+    if (formik.isValid) {
+      setActiveStep(4);
+      const userInfo = {
+        tariffCode: values.tariffCode,
+        cargoTitle: values.cargoTitle,
+        portOfLoading: values.portOfLoading,
+        originCustomIds: ids,
+        packagingType: values.packagingType,
+        cargoAmount: values.cargoAmount,
+        cargoTransportTools: values.cargoTransportTools,
+        cargoValue: values.cargoValue,
+      };
+
+      postRequestRegisterFormData(userInfo);
+    }
+    // values.originReleasing.push(...chips);
+  };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
 
   const steps = [
     { type: "انتخاب نوع خدمت" },
@@ -45,9 +113,22 @@ const Import = () => {
       case 1:
         return <RequestType setRequestType={setIsPurchase} />;
       case 2:
-        return isPurchase ? <LocationPurchase /> : <LocationPrice />;
+        return isPurchase ? (
+          <LocationPurchase />
+        ) : (
+          <LocationPrice
+            formik={formik}
+            placeClearance={placeClearance}
+            chips={chips}
+            setChips={setChips}
+          />
+        );
       case 3:
-        return isPurchase ? <UploadPurchase /> : <UploadPrice />;
+        return isPurchase ? (
+          <UploadPurchase />
+        ) : (
+          <UploadPrice formik={formik} transportTools={transportTools} />
+        );
       default:
         return "Unknown stepIndex";
     }
@@ -67,7 +148,7 @@ const Import = () => {
             </Step>
           ))}
         </Stepper>
-        <div className={classes.main}>
+        <form onSubmit={formik.handleSubmit} className={classes.main}>
           {activeStep !== steps.length ? (
             <>
               <div className={classes.container}>
@@ -82,14 +163,25 @@ const Import = () => {
                   >
                     بازگشت
                   </Button>
-                  <Button
-                    className={classes.forwardBtn}
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                  >
-                    <div>{activeStep == steps.length - 1 ? accept : next}</div>
-                  </Button>
+                  {activeStep == steps.length - 1 ? (
+                    <Button
+                      className={classes.forwardBtn}
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                    >
+                      <div>{accept}</div>
+                    </Button>
+                  ) : (
+                    <Button
+                      className={classes.forwardBtn}
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                    >
+                      <div>{next}</div>
+                    </Button>
+                  )}
                 </div>
               </div>
             </>
@@ -119,7 +211,7 @@ const Import = () => {
               </div>
             </div>
           )}
-        </div>
+        </form>
       </Paper>
     </React.Fragment>
   );

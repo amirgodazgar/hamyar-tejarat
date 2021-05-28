@@ -49,7 +49,9 @@ export const dashBoardSlice = createSlice({
     status: "",
   },
 
-  reducers: {},
+  reducers: {
+
+  },
 
   extraReducers: {
     [getUserInfoData.pending]: (state) => {

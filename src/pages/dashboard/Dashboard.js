@@ -52,8 +52,8 @@ const Dashboard = () => {
     dispatch(getUserInfoData());
   };
   let isLogin = Cookies.get("login");
-  let navbarRole =  () => {
-    return ( Cookies.getJSON("userInfo")) === undefined
+  let navbarRole = () => {
+    return Cookies.getJSON("userInfo") === undefined
       ? history.replace("/register")
       : Cookies.getJSON("userInfo");
   };
@@ -189,6 +189,7 @@ const Dashboard = () => {
               </Link>
 
               {/* SUGGESTIONS-LIST --------------------- */}
+
               <Link to="#">
                 <ListItem
                   className={
@@ -205,7 +206,9 @@ const Dashboard = () => {
                         style={open ? null : { display: "none" }}
                         className={classes.listItemText}
                       >
-                        {adminPanelData.listItem[1].text}
+                        {navbarRole().role === "Clearanceman"
+                          ? "لیست پیشنهاد ها"
+                          : "لیست درخواست ها"}
                       </ListItemText>
                       <div
                         style={
@@ -214,7 +217,7 @@ const Dashboard = () => {
                             : { display: "none" }
                         }
                       >
-                        {openSuggestList ? <ExpandMore /> : <ExpandLess />}
+                        {openSuggestList ? <ExpandLess /> : <ExpandMore />}
                       </div>
                     </>
                   </Fade>
@@ -224,10 +227,12 @@ const Dashboard = () => {
                     <List component="div" disablePadding>
                       {adminPanelData.listItem[1].dropDownText.map(
                         (subItem, idx) => (
-                          <Link
+                          <span
                             onClick={() =>
                               dropDownSelectHandler(subItem.path, idx)
                             }
+                            key={idx}
+                            
                           >
                             <ListItem
                               style={open ? null : { display: "none" }}
@@ -243,7 +248,7 @@ const Dashboard = () => {
                                 {subItem.text}
                               </ListItemText>
                             </ListItem>
-                          </Link>
+                          </span>
                         )
                       )}
                     </List>
@@ -372,20 +377,19 @@ const Dashboard = () => {
                 <UserInfo backToTab={selectedHandler} />
               </Route>
 
-              <Route path="/Dashboard/bankAccount" component={BankAccount} />
-              <Route
-                path="/Dashboard/tariffCodesList"
-                component={TariffCodeList}
-              />
+              <Route path="/Dashboard/bankAccount">
+                <BankAccount backToTab={selectedHandler} />
+              </Route>
+              <Route path="/Dashboard/tariffCodesList">
+                <TariffCodeList backToTab={selectedHandler} />
+              </Route>
 
-              <Route
-                path="/Dashboard/suggestionsList/clearance"
-                component={ClearanceList}
-              />
-              <Route
-                path="/Dashboard/suggestionsList/findPrice"
-                component={FindPrice}
-              />
+              <Route path="/Dashboard/suggestionsList/clearance">
+                <ClearanceList backToTab={selectedHandler} />
+              </Route>
+              <Route path="/Dashboard/suggestionsList/findPrice">
+                <FindPrice backToTab={selectedHandler} />
+              </Route>
             </Switch>
           </div>
         </div>
