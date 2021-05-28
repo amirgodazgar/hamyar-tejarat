@@ -51,11 +51,23 @@ const ClearanceMan = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell variant="head" className={classes.tableHeader} >فرستنده</TableCell>
-                <TableCell variant="head" className={classes.tableHeader} >موضوع</TableCell>
-                <TableCell variant="head" className={classes.tableHeader} >نوع خدمت </TableCell>
-                <TableCell variant="head" className={classes.tableHeader} > گمرک محل ترخیص</TableCell>
-                <TableCell variant="head" className={classes.tableHeader} > تاریخ</TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  فرستنده
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  موضوع
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  نوع خدمت{" "}
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  {" "}
+                  گمرک محل ترخیص
+                </TableCell>
+                <TableCell variant="head" className={classes.tableHeader}>
+                  {" "}
+                  تاریخ
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -85,7 +97,7 @@ const ClearanceMan = () => {
         </TableContainer>
         <TablePagination
           className={classes.tablePagination}
-          rowsPerPageOptions={[5, 10, 25, 50, 100]}
+          rowsPerPageOptions={[10, 25, 50, { value: 999999999, label: "همه" }]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

@@ -19,37 +19,38 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
-      console.log(res.payload);
       setUserData(res.payload);
     });
   }, []);
 
   const placeHolder = {
     firstName:
-      userData.firstName === null
+      userData.firstName === null || userData.firstName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.firstName
         : userData.firstName,
 
     lastName:
-      userData.lastName === null
+      userData.lastName === null || userData.lastName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.lastName
         : userData.lastName,
 
     nationalId:
-      userData.nationalId === null
+      userData.nationalId === null || userData.nationalId === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.nationalId
         : userData.nationalId,
 
     phone:
-      userData.phoneNumber === null
+      userData.phoneNumber === null || userData.phoneNumber === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.mobile
         : userData.phoneNumber,
 
     email:
-      userData.email === null
+      userData.email === null || userData.email === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.email
         : userData.email,
   };
+
+
 
   const initialValues = {
     firstName: "",
@@ -83,7 +84,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
       nationalId: values.nationalId,
       phoneNumber: values.mobileNum,
     };
-   
+
     postBusinessmanPrivate(userInfo);
   };
   const formik = useFormik({

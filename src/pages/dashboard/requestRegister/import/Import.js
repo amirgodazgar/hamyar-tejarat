@@ -195,7 +195,7 @@ const Import = () => {
                     داده می شود
                   </Typography>
                   <Link
-                    to="/Dashboard/suggestionsList/findPrice"
+                    to="/Dashboard/suggestionsList/quotationRequestList"
                     className={classes.link}
                   >
                     <Button

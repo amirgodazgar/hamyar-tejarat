@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import {
   Grid,
-  Fade,
-  Avatar,
+  // Fade,
+  // Avatar,
   Paper,
   Table,
   TableBody,
@@ -13,18 +13,22 @@ import {
   TableRow,
   TablePagination,
   Typography,
+  CircularProgress,
 } from "@material-ui/core";
-import { ClearRounded, ArrowBackIos } from "@material-ui/icons";
-import InputField from "../../../common/input/InputField";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import avatarImg from "../../../styles/image/profile-image.svg";
+import { ArrowBackIosRounded } from "@material-ui/icons";
+// import { useFormik } from "formik";
+// import * as Yup from "yup";
 import { getSuggestionsListData } from "../../../services/dashboard/userInfoServices";
+import { dateToPersian } from "../../../helper/general";
+import { useHistory } from "react-router";
+import BackDrop from "../../../common/backDrop/BackDrop";
 
-const FindPrice = () => {
+const FindPrice = ({backToTab}) => {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [pageData , setPageData] = useState(null)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [pageData, setPageData] = useState([]);
+  const history = useHistory();
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -34,143 +38,67 @@ const FindPrice = () => {
   };
 
   useEffect(() => {
-    getSuggestionsListData(1 , 10)
-    .then(res => {
-      setPageData(res)
-      console.log(res)
-    })
+    let curPage = page === 0 ? 1 : page;
+    getSuggestionsListData(curPage, rowsPerPage).then((res) => {
+      setPageData(res.results);
+    });
+    backToTab(1);
+    history.push("/Dashboard/suggestionsList/quotationRequestList")
   }, []);
 
-  // currentPage: 1
-  // pageSize: 10
-  // results: (2)
-  // cargoTitle: "اسب"
-  // proposalsCount: 0
-  // quotationRequestsId: "8dbf4602-541f-4882-9a82-be624baf968b"
-  // requestDescription: "درخواست استعلام قیمت برای 20 اسب از مسیر حمل‌ و نقل دریایی"
-  // submitDate: "2021-05-27T17:17:21.575063"
+  const rows = pageData !== undefined ? pageData : [];
 
-  const rows = [
-    {
-
-
-  // cargoTitle: "اسب"
-  // proposalsCount: 0
-  // quotationRequestsId: "8dbf4602-541f-4882-9a82-be624baf968b"
-  // requestDescription: "درخواست استعلام قیمت برای 20 اسب از مسیر حمل‌ و نقل دریایی"
-  // submitDate: "2021-05-27T17:17:21.575063"
-
-
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-    {
-      businessMan: "شرکت لوازم پزشکی ایرانیان",
-      title: "لوازم پزشکی",
-      type: "برای تحقیقات (پزشکی، آزمایشگاهی ‌و سرم سازی) ",
-      loadingOrigin: "فرودگاه امام خمینی",
-      conveyance: "هواپیما",
-      date: "1400/01/20",
-    },
-  ];
-
-  const initialValues = {
-    first: "",
-    second: "",
-    third: "",
+  const showDetailHandler = (requestId) => {
+    history.push(
+      `/Dashboard/suggestionsList/singleQuotationRequest/${requestId}`
+    );
   };
 
-  const validationSchema = Yup.object({
-    first: Yup.string().required("فیلد را پر کنید"),
-    second: Yup.string().required("فیلد را پر کنید"),
-    third: Yup.mixed().required("انتخاب کنید"),
-  });
+  // const initialValues = {
+  //   first: "",
+  //   second: "",
+  //   third: "",
+  // };
 
-  const onSubmit = (values) => {
-    const userInfo = {
-      first: values.first,
-      second: values.second,
-      third: values.third,
-    };
-    console.log(userInfo);
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
+  // const validationSchema = Yup.object({
+  //   first: Yup.string().required("فیلد را پر کنید"),
+  //   second: Yup.string().required("فیلد را پر کنید"),
+  //   third: Yup.mixed().required("انتخاب کنید"),
+  // });
 
-  const clearHandler = () => {
-    formik.values.first = "";
-    formik.values.second = "";
-    formik.values.third = "";
-  };
+  // const onSubmit = (values) => {
+  //   const userInfo = {
+  //     first: values.first,
+  //     second: values.second,
+  //     third: values.third,
+  //   };
+  //   console.log(userInfo);
+  // };
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit,
+  //   validationSchema,
+  // });
 
-  const errorBox = (name, label) => (
-    <div className={classes.errorBox}>
-      <label htmlFor={name}>{label}</label>
-      {formik.touched[name] && formik.errors[name] ? (
-        <Fade
-          in={formik.touched[name] && formik.errors[name] ? true : false}
-          timeout={400}
-        >
-          <div className={classes.error}>{formik.errors[name]}</div>
-        </Fade>
-      ) : null}
-    </div>
-  );
+  // const clearHandler = () => {
+  //   formik.values.first = "";
+  //   formik.values.second = "";
+  //   formik.values.third = "";
+  // };
+
+  // const errorBox = (name, label) => (
+  //   <div className={classes.errorBox}>
+  //     <label htmlFor={name}>{label}</label>
+  //     {formik.touched[name] && formik.errors[name] ? (
+  //       <Fade
+  //         in={formik.touched[name] && formik.errors[name] ? true : false}
+  //         timeout={400}
+  //       >
+  //         <div className={classes.error}>{formik.errors[name]}</div>
+  //       </Fade>
+  //     ) : null}
+  //   </div>
+  // );
 
   return (
     <Grid
@@ -184,11 +112,19 @@ const FindPrice = () => {
           درخواست استعلام قیمت
         </Typography>
       </Grid>
-      <Grid item container spacing={1} xs={11}>
-        <Paper className={classes.mainPaper}>
-          <Grid item container spacing={3} xs={12}>
-            <Grid item xs={12}>
-              <form
+      {pageData.length === 0 ? (
+        <BackDrop />
+      ) : (
+        <Grid item container spacing={1} xs={11}>
+          {/* <Paper className={classes.mainPaper}> */}
+          <Grid
+            item
+            container
+            // spacing={3}
+            xs={12}
+          >
+            {/* <Grid item xs={12}>
+            <form
                 onSubmit={formik.handleSubmit}
                 className={classes.inputContainer}
               >
@@ -256,7 +192,7 @@ const FindPrice = () => {
                   </button>
                 </div>
               </form>
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={12}>
               <Paper className={classes.paper}>
@@ -264,10 +200,6 @@ const FindPrice = () => {
                   <Typography className={classes.title} variant="h6">
                     جدیدترین درخواست ها
                   </Typography>
-                  <span className={classes.link}>
-                    <Typography variant="body2">مشاهده همه</Typography>
-                    <ArrowBackIos fontSize="small" />
-                  </span>
                 </div>
                 <div className={classes.body}>
                   <TableContainer>
@@ -278,7 +210,7 @@ const FindPrice = () => {
                             variant="head"
                             className={classes.tableHeader}
                           >
-                            تاجر
+                            {""}
                           </TableCell>
                           <TableCell
                             variant="head"
@@ -290,63 +222,68 @@ const FindPrice = () => {
                             variant="head"
                             className={classes.tableHeader}
                           >
-                            {" "}
-                            جنس و نوع کالا{" "}
+                            تعداد پیشنهاد
                           </TableCell>
                           <TableCell
                             variant="head"
                             className={classes.tableHeader}
                           >
-                            مبدا بارگیری
+                            شرح در خواست
                           </TableCell>
                           <TableCell
                             variant="head"
                             className={classes.tableHeader}
                           >
-                            {" "}
-                            وسیله حمل{" "}
-                          </TableCell>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            {" "}
-                            تاریخ ثبت{" "}
+                            تاریخ ثبت
                           </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
-                          .map((row, index) => (
-                            <TableRow key={index} className={classes.tableRow}>
-                              <TableCell>
-                                <div className={classes.businessMan}>
-                                  <Avatar src={avatarImg} />
-                                  <p>{row.businessMan}</p>
-                                </div>
-                              </TableCell>
-                              <TableCell>{row.title}</TableCell>
-                              <TableCell>{row.type}</TableCell>
-                              <TableCell>{row.loadingOrigin}</TableCell>
-                              <TableCell>{row.conveyance}</TableCell>
-                              <TableCell>
-                                <div className={classes.fixCell}>
-                                  <p>{row.date}</p>
-                                  <ArrowBackIos fontSize="small" />
-                                </div>
-                              </TableCell>
-                            </TableRow>
-                          ))}
+                        {rows.length !== 0 ? (
+                          rows
+                            .slice(
+                              page * rowsPerPage,
+                              page * rowsPerPage + rowsPerPage
+                            )
+                            .map((row, index) => (
+                              <TableRow
+                                key={row.quotationRequestsId}
+                                className={classes.tableRow}
+                                onClick={() =>
+                                  showDetailHandler(row.quotationRequestsId)
+                                }
+                              >
+                                <TableCell>
+                                  {/* <div className={classes.businessMan}>
+                                    <Avatar src={avatarImg} />
+                                  </div> */}
+                                </TableCell>
+                                <TableCell>{row.cargoTitle}</TableCell>
+                                <TableCell>{row.proposalsCount}</TableCell>
+                                <TableCell>{row.requestDescription}</TableCell>
+
+                                <TableCell>
+                                  <div className={classes.fixCell}>
+                                    <p>{dateToPersian(row.submitDate)}</p>
+                                    <ArrowBackIosRounded fontSize="small" />
+                                  </div>
+                                </TableCell>
+                              </TableRow>
+                            ))
+                        ) : (
+                          <CircularProgress color="primary" />
+                        )}
                       </TableBody>
                     </Table>
                   </TableContainer>
                   <TablePagination
                     className={classes.tablePagination}
-                    rowsPerPageOptions={[5, 10, 25, 50, 100]}
+                    rowsPerPageOptions={[
+                      10,
+                      25,
+                      50,
+                      { value: 999999999, label: "همه" },
+                    ]}
                     component="div"
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
@@ -360,8 +297,9 @@ const FindPrice = () => {
               </Paper>
             </Grid>
           </Grid>
-        </Paper>
-      </Grid>
+          {/* </Paper> */}
+        </Grid>
+      )}
     </Grid>
   );
 };

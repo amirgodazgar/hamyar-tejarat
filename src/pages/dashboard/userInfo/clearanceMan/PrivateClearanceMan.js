@@ -56,38 +56,35 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
 
   const placeHolder = {
     firstName:
-      userData.firstName === null
+      userData.firstName === null || userData.firstName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.firstName
         : userData.firstName,
 
     lastName:
-      userData.lastName === null
+      userData.lastName === null || userData.lastName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.lastName
         : userData.lastName,
 
     email:
-      userData.email === null
+      userData.email === null || userData.email === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.email
         : userData.email,
 
     phoneNumber:
-      userData.phoneNumber === null
+      userData.phoneNumber === null || userData.phoneNumber === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.mobile
         : userData.phoneNumber,
 
     officeAddress:
-      userData.officeAddress === null
+      userData.officeAddress === null || userData.officeAddress === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.address
         : userData.officeAddress,
 
     customsBrokerageNumber:
-      userData.customsBrokerageNumber === null
+      userData.customsBrokerageNumber === null ||
+      userData.customsBrokerageNumber === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.clearanceId
         : userData.customsBrokerageNumber,
-
-    workExperienceImagePath: null,
-
-    certificateOfNoCriminalRecordImagePath: null,
   };
 
   const initialValues = {

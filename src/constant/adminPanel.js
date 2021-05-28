@@ -20,7 +20,7 @@ export const adminPanelData = {
         },
         {
           text: "استعلام قیمت",
-          path: "/Dashboard/suggestionsList/findPrice",
+          path: "/Dashboard/suggestionsList/quotationRequestList",
         },
       ],
       hasDropDown: true,

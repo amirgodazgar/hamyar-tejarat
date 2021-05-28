@@ -135,26 +135,16 @@
   background-color: #1e4383;
   color: #ffffff;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  padding: 0 0.5rem;
 }
 .title {
-  flex: 0 0 60%;
   padding: 0.5rem;
 }
 .body {
   width: 100%;
 }
-.link {
-  flex: 0 0 25%;
-  padding: 0.5rem;
-  color: #ffffff;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  cursor: pointer;
-}
-
 /* TABLE */
 
 .tableContainer {
@@ -238,4 +228,112 @@
 .change {
   padding: 0.5rem !important;
   min-width: 2rem !important;
+}
+
+/* ------------- RequestDetail ------------ */
+.requestDetailTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #c4cad0;
+  margin: 0 auto !important;
+}
+.requestDetailLink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+.requestDetailLink svg {
+  color: #c4cad0 !important;
+  font-size: 0.95rem !important;
+  transition: 200ms !important;
+}
+.requestDetailLink p {
+  font-size: 0.9rem;
+  color: #c4cad0;
+  margin-right: 0.5rem;
+  transition: 200ms;
+}
+.requestDetailLink:hover {
+  cursor: pointer;
+}
+.requestDetailLink:hover p,
+.requestDetailLink:hover svg {
+  cursor: pointer;
+  color: #2780e5da;
+  fill: #2780e5da;
+  transition: 200ms;
+}
+.businessMan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.businessManName {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+
+.requestDetailMain {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto !important;
+}
+.infoDataContainer {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.suggestDataContainer {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 9rem);
+  grid-template-rows: repeat(3, auto);
+  justify-content: center;
+  padding: 1rem 0;
+}
+.requestBox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+.suggestBox {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.7rem;
+  text-align: center;
+}
+.circle {
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  margin-left: 0.5rem;
+  background-color: #c4cad0;
+}
+.infoDataTitle {
+  flex: 1;
+  margin-left: 0.3rem;
+}
+.infoDataText {
+  flex: 4;
+  font-weight: bold;
+}
+.suggestTitle {
+  margin-bottom: 0.8rem;
+}
+.suggestText {
+  font-weight: bold;
+}
+
+.suggestBtn {
+  grid-column: 1/3;
+  height: 3rem;
+  margin: 0 auto;
+  font-size: 1rem !important;
+  border-radius: 10px !important;
 }

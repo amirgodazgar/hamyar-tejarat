@@ -68,7 +68,6 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
     mobileNum: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .required(adminPanelData.userInfo.clearanceMan.error.mobile),
-   
   });
 
   const onSubmit = (values) => {
@@ -77,7 +76,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       nationalCompanyId: values.companyNationalId,
       phoneNumber: values.mobileNum,
     };
-    
+
     postBusinessmanJuridical(userInfo);
   };
   const formik = useFormik({
@@ -167,7 +166,6 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       ) : (
         <BackDrop />
       )}
-      ;
     </React.Fragment>
   );
 };

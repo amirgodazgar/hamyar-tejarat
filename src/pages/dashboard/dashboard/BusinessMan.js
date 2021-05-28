@@ -155,7 +155,7 @@ const BusinessMan = () => {
         </TableContainer>
         <TablePagination
           className={classes.tablePagination}
-          rowsPerPageOptions={[5, 10, 25, 50, 100]}
+          rowsPerPageOptions={[10, 25, 50, { value: 999999999, label: "همه" }]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}

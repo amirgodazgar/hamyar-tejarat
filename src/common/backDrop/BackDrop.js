@@ -1,8 +1,10 @@
 import React from "react";
 import { Backdrop, CircularProgress, Fab } from "@material-ui/core";
 import logoImg from "../../styles/image/logo.png";
+import { useHistory } from "react-router";
 
 const BackDrop = () => {
+  const history = useHistory();
   return (
     <Backdrop
       open={true}
@@ -18,7 +20,9 @@ const BackDrop = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          cursor: "pointer",
         }}
+        onClick={() => history.replace("/")}
       >
         <Fab
           style={{
@@ -31,6 +35,7 @@ const BackDrop = () => {
             style={{ width: "100%", height: "100%" }}
             src={logoImg}
             alt="hamyar-tejarat"
+            onClick={() => history.replace("/")}
           />
         </Fab>
         <CircularProgress
