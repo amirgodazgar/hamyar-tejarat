@@ -12,13 +12,21 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import React from "react";
+import React, { useEffect } from "react";
 import { ArrowBackIos } from "@material-ui/icons";
 import BusinessMan from "./BusinessMan";
 import ClearanceMan from "./ClearanceMan";
+import { useHistory } from "react-router";
 
-const DashboardMain = () => {
+const DashboardMain = ({ backToTab }) => {
   const [open, setOpen] = React.useState(true);
+  const history = useHistory();
+
+  useEffect(() => {
+    backToTab(0);
+    history.push("/Dashboard/main");
+  }, []);
+
   const ticketRows = [
     {
       ticketId: "31254600012",
@@ -130,10 +138,30 @@ const DashboardMain = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell variant="head" className={classes.tableHeader}>شناسه تیکت</TableCell>
-                        <TableCell variant="head" className={classes.tableHeader}>موضوع</TableCell>
-                        <TableCell variant="head" className={classes.tableHeader}>تاریخ ثبت</TableCell>
-                        <TableCell variant="head" className={classes.tableHeader}>وضعیت تیکت</TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          شناسه تیکت
+                        </TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          موضوع
+                        </TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          تاریخ ثبت
+                        </TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          وضعیت تیکت
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -180,8 +208,18 @@ const DashboardMain = () => {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell variant="head" className={classes.tableHeader} >عنوان</TableCell>
-                        <TableCell variant="head" className={classes.tableHeader} >تاریخ </TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          عنوان
+                        </TableCell>
+                        <TableCell
+                          variant="head"
+                          className={classes.tableHeader}
+                        >
+                          تاریخ{" "}
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>

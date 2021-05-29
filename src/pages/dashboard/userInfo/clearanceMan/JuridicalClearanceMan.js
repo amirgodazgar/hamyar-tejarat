@@ -57,33 +57,30 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   const placeHolder = {
     companyName:
-      userData.companyName === null
+      userData.companyName === null || userData.companyName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.companyName
         : userData.companyName,
 
     nationalCompanyId:
-      userData.nationalCompanyId === null
+      userData.nationalCompanyId === null ||
+      userData.nationalCompanyId === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.companyNationalId
         : userData.nationalCompanyId,
 
     email:
-      userData.email === null
+      userData.email === null || userData.email === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.email
         : userData.email,
 
     phoneNumber:
-      userData.phoneNumber === null
+      userData.phoneNumber === null || userData.phoneNumber === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.mobile
         : userData.phoneNumber,
 
     officeAddress:
-      userData.officeAddress === null
+      userData.officeAddress === null || userData.officeAddress === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.address
         : userData.officeAddress,
-
-    workExperienceImagePath: null,
-
-    certificateOfNoCriminalRecordImagePath: null,
   };
 
   const initialValues = {
@@ -126,21 +123,28 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     const formData = new FormData();
     formData.append(
       "CompanyName",
-      userData.companyName !== null ? userData.companyName : values.companyName
+      userData.companyName !== null || userData.companyName !== undefined
+        ? userData.companyName
+        : values.companyName
     );
     formData.append(
       "NationalCompanyId",
-      userData.nationalCompanyId !== null
+      userData.nationalCompanyId !== null ||
+        userData.nationalCompanyId !== undefined
         ? userData.nationalCompanyId
         : values.companyNationalId
     );
     formData.append(
       "PhoneNumber",
-      userData.phoneNumber !== null ? userData.phoneNumber : values.mobileNum
+      userData.phoneNumber !== null || userData.phoneNumber !== undefined
+        ? userData.phoneNumber
+        : values.mobileNum
     );
     formData.append(
       "OfficeAddress",
-      userData.officeAddress !== null ? userData.officeAddress : values.address
+      userData.officeAddress !== null || userData.officeAddress !== undefined
+        ? userData.officeAddress
+        : values.address
     );
     formData.append(
       "ChoosedCustomIds",

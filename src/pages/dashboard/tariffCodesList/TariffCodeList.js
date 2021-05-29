@@ -70,7 +70,7 @@ const TariffCodeList = ({ backToTab }) => {
           لیست کد تعرفه کالا
         </Typography>
       </Grid>
-      {result.length === 0 || result === undefined ? (
+      {!result ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>

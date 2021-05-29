@@ -11,7 +11,9 @@ const UploadPrice = ({ transportTools, formik }) => {
           in={formik.touched[name] && formik.errors[name] ? true : false}
           timeout={400}
         >
-          <div className={classes.error}>{formik.errors[name]}</div>
+          <div className={classes.error}>
+          {/* {formik.errors[name]} */}
+          </div>
         </Fade>
       ) : null}
     </div>

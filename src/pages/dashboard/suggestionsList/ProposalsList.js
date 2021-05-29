@@ -13,7 +13,10 @@ import {
   Typography,
   CircularProgress,
 } from "@material-ui/core";
-import { ArrowBackIosRounded } from "@material-ui/icons";
+import {
+  ArrowBackIosRounded,
+  ArrowForwardIosRounded,
+} from "@material-ui/icons";
 import { getProposalsListData } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
@@ -38,12 +41,14 @@ const ProposalsList = ({ backToTab }) => {
     let curPage = page === 0 ? 1 : page;
     getProposalsListData(curPage, rowsPerPage, id).then((res) => {
       setPageData(res.results);
+      console.log(res)
     });
     backToTab(1);
     history.push(`/Dashboard/suggestionsList/quotationProposals/${id}`);
   }, []);
 
   const rows = pageData !== undefined ? pageData : [];
+
   const checkClearanceManType = (clearanceMan) => {
     if (clearanceMan === "Juridical") {
       return "حقوقی";
@@ -51,9 +56,9 @@ const ProposalsList = ({ backToTab }) => {
       return "حقیقی";
     }
   };
-  const showDetailHandler = (requestId) => {
+  const showDetailHandler = (proposalId) => {
     history.push(
-      `/Dashboard/suggestionsList/singleQuotationRequest/${requestId}`
+      `/Dashboard/suggestionsList/SingleQuotationProposal/${proposalId}`
     );
   };
 
@@ -66,10 +71,10 @@ const ProposalsList = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          درخواست استعلام قیمت
+          لیست پیشنهاد ها
         </Typography>
       </Grid>
-      {pageData.length === 0 ? (
+      {pageData.length === 0 || pageData === undefined ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>
@@ -80,7 +85,20 @@ const ProposalsList = ({ backToTab }) => {
                   <Typography className={classes.title} variant="h6">
                     جدیدترین پیشنهاد ها
                   </Typography>
+                  <div
+                    className={classes.link}
+                    onClick={() => history.goBack()}
+                  >
+                    <ArrowForwardIosRounded fontSize="small" />
+                    <Typography
+                      style={{ marginRight: ".5rem" }}
+                      variant="body2"
+                    >
+                      بازگشت به صفحه قبل
+                    </Typography>
+                  </div>
                 </div>
+
                 <div className={classes.body}>
                   <TableContainer>
                     <Table>
@@ -121,16 +139,16 @@ const ProposalsList = ({ backToTab }) => {
                             )
                             .map((row) => (
                               <TableRow
-                                key={row.quotationRequestsId}
+                                key={row.id}
                                 className={classes.tableRow}
-                                onClick={() =>
-                                  showDetailHandler(row.quotationRequestsId)
-                                }
+                                onClick={() => showDetailHandler(row.id)}
                               >
                                 <TableCell>
                                   {checkClearanceManType(row.clearancemanType)}
                                 </TableCell>
-                                <TableCell>{row.proposalValue}</TableCell>
+                                <TableCell>
+                                  {Number(row.price).toLocaleString()}
+                                </TableCell>
                                 <TableCell>
                                   {row.estimatedNumberOfDays}
                                 </TableCell>

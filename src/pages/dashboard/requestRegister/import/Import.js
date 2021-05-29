@@ -40,14 +40,14 @@ const Import = () => {
   };
 
   const validationSchema = Yup.object({
-    tariffCode: Yup.string().required("کد تعرفه را وارد کنید"),
-    cargoTitle: Yup.mixed().required("عنوان کالا را وارد کنید"),
-    portOfLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
-    originCustomIds: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
-    packagingType: Yup.string().required("فیلد را پر کنید"),
-    cargoAmount: Yup.string().required("فیلد را پر کنید"),
-    cargoTransportTools: Yup.mixed().required("فیلد را پر کنید"),
-    cargoValue: Yup.mixed().required("فیلد را پر کنید"),
+    tariffCode: Yup.string().required(),
+    cargoTitle: Yup.mixed().required(),
+    portOfLoading: Yup.string().required(),
+    originCustomIds: Yup.mixed().required(),
+    packagingType: Yup.string().required(),
+    cargoAmount: Yup.string().required(),
+    cargoTransportTools: Yup.mixed().required(),
+    cargoValue: Yup.mixed().required(),
   });
 
   useEffect(() => {

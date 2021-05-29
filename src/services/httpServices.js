@@ -53,6 +53,7 @@ axios.interceptors.response.use(
           refreshToken: Cookies.get("refreshToken"),
         })
         .then((res) => {
+          console.log("refresh token ", res);
           if (res.status === 200) {
             const tokenInfo = res.data.data;
             const tokenData = {

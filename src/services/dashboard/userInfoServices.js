@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import http from "../httpServices";
 
-// SEND INFORMATION BUSINESSMAN --------------------------------- :
+// ----------------------------- BusinessMan Methods  -------------------------------- //
 
+// SEND INFORMATION BUSINESSMAN --------------------------------- :
 export const postBusinessmanPrivate = async (userInfo) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
   console.log(userInfo);
@@ -34,43 +35,9 @@ export const postBusinessmanJuridical = async (userInfo) => {
     });
 };
 
-// SEND INFORMATION CLEARANCEMAN --------------------------------- :
-
-export const postClearancePrivate = async (userInfo) => {
-  const token = Cookies.get("token");
-
-  await http
-    .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        ContentType: "multipart/form-data",
-      },
-    })
-    .then((res) => {
-      // console.log("ClearancePrivate-response", res);
-    });
-};
-
-export const postClearanceJuridical = async (userInfo) => {
-  console.log(userInfo.getAll("ChoosedCustomIds"));
-  const token = Cookies.get("token");
-
-  await http
-    .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        ContentType: "multipart/form-data",
-      },
-    })
-    .then((res) => {
-      // console.log("ClearanceJuridical-response", res);
-    });
-};
-
-// -------------- Request Register  -------------------------------- //
+// -------------- Request Register  ------------------------- //
 
 // Request Register GET :
-
 export const getRequestRegisterFormData = async () => {
   const data = await http
     .get("/BusinessmanPanel/GetQuotationRequestFormData")
@@ -119,7 +86,6 @@ export const postRequestRegisterFormData = async (userInfo) => {
 // -------------- Suggestions List  -------------------------------- //
 
 // Suggestions List  GET :
-
 export const getSuggestionsListData = async (pageNumber = 1, pageSize = 10) => {
   const data = await http
     .get(
@@ -135,7 +101,6 @@ export const getSuggestionsListData = async (pageNumber = 1, pageSize = 10) => {
 };
 
 // Suggestion Single GET :
-
 export const getSuggestionIdData = async (requestId) => {
   const data = await http
     .get(
@@ -175,10 +140,10 @@ export const getProposalsListData = async (
 export const getProposalData = async (ProposalId) => {
   const data = await http
     .get(
-      `/BusinessmanPanel/GetSingleQuotationRequest?quotationRequestId=${ProposalId}`
+      `/BusinessmanPanel/GetSingleQuotationProposal?quotationProposalId=${ProposalId}`
     )
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -186,8 +151,40 @@ export const getProposalData = async (ProposalId) => {
   return data;
 };
 
-// getProposalsListData(1, 2, "8dbf4602-541f-4882-9a82-be624baf968b").then(
-//   (res) => {
-//     console.log(res);
-//   }
-// );
+
+// ----------------------------- Clearance Methods  -------------------------------- //
+
+
+
+// SEND INFORMATION CLEARANCEMAN --------------------------------- :
+export const postClearancePrivate = async (userInfo) => {
+  const token = Cookies.get("token");
+
+  await http
+    .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ContentType: "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      // console.log("ClearancePrivate-response", res);
+    });
+};
+
+export const postClearanceJuridical = async (userInfo) => {
+  console.log(userInfo.getAll("ChoosedCustomIds"));
+  const token = Cookies.get("token");
+
+  await http
+    .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ContentType: "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      // console.log("ClearanceJuridical-response", res);
+    });
+};
+

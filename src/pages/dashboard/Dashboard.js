@@ -42,6 +42,7 @@ import { getUserInfoData } from "../../store/dashboard/dashboardSlice";
 import RequestDetail from "./suggestionsList/RequestDetail";
 import BackDrop from "../../common/backDrop/BackDrop";
 import ProposalsList from "./suggestionsList/ProposalsList";
+import ProposalDetail from "./suggestionsList/ProposalDetail";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -234,7 +235,6 @@ const Dashboard = () => {
                   </Link>
 
                   {/* SUGGESTIONS-LIST --------------------- */}
-
                   <Link to="#">
                     <ListItem
                       className={
@@ -440,11 +440,9 @@ const Dashboard = () => {
 
               <div className={classes.main}>
                 <Switch>
-                  <Route
-                    exact
-                    path="/Dashboard/main"
-                    component={DashboardMain}
-                  />
+                  <Route exact path="/Dashboard/main">
+                    <DashboardMain backToTab={selectedHandler} />
+                  </Route>
 
                   <Route path="/Dashboard/tickets" component={Tickets} />
                   <Route path="/Dashboard/requestRegister">
@@ -462,6 +460,7 @@ const Dashboard = () => {
                     <TariffCodeList backToTab={selectedHandler} />
                   </Route>
 
+                      {/* ----- BusinessMan -------- */}
                   <Route path="/Dashboard/suggestionsList/clearance">
                     <ClearanceList backToTab={selectedHandler} />
                   </Route>
@@ -472,11 +471,15 @@ const Dashboard = () => {
                     <RequestDetail userName={userName} />
                   </Route>
                   <Route path="/Dashboard/suggestionsList/quotationProposals/:id">
-                    <ProposalsList backToTab={selectedHandler}/>
+                    <ProposalsList backToTab={selectedHandler} />
                   </Route>
-                  <Route path="/BusinessmanPanel/singleQuotationRequest/:id">
-                    <div>single</div>
+                  <Route path="/Dashboard/suggestionsList/SingleQuotationProposal/:id">
+                    <ProposalDetail userName={userName} />
                   </Route>
+
+                        {/* ----- ClearanceMan -------- */}
+
+
                 </Switch>
               </div>
             </>
@@ -488,6 +491,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-// {userData.length === 0 || userData === undefined ? (
-//   <BackDrop />
-// ) :

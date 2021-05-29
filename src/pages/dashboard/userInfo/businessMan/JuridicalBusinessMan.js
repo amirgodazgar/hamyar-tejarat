@@ -26,27 +26,27 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
 
   const placeHolder = {
     companyName:
-      userData.companyName === null
+      userData.companyName === null || userData.companyName === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.companyName
         : userData.companyName,
 
     companyNationalId:
-      userData.nationalCompanyId === null
+      userData.nationalCompanyId === null || userData.nationalCompanyId === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.companyNationalId
         : userData.nationalCompanyId,
 
     nationalId:
-      userData.nationalId === null
+      userData.nationalId === null || userData.nationalId === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.nationalId
         : userData.nationalId,
 
     phone:
-      userData.phoneNumber === null
+      userData.phoneNumber === null || userData.phoneNumber === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.mobile
         : userData.phoneNumber,
 
     email:
-      userData.email === null
+      userData.email === null || userData.email === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.email
         : userData.email,
   };

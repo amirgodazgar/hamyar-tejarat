@@ -4,7 +4,7 @@ import { Chip, Fade, Typography } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
-const LocationPrice = ({ placeClearance, formik ,chips ,setChips}) => {
+const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
   // const [chips, setChips] = useState([]);
   const addChipsHandler = (e) => {
     const id = e.target.value;
@@ -15,6 +15,10 @@ const LocationPrice = ({ placeClearance, formik ,chips ,setChips}) => {
       name: text,
     });
     setChips((prevState) => [...prevState, ...updateValue]);
+
+    // const PrevIds = prevState.map(item => item.id)
+    // const updateIds = updateValue.map(item => item.id)
+    // [...new Set([...prevState, ...updateValue])]);
   };
 
   const chipDeleteHandler = (chip) => {
@@ -30,7 +34,7 @@ const LocationPrice = ({ placeClearance, formik ,chips ,setChips}) => {
           in={formik.touched[name] && formik.errors[name] ? true : false}
           timeout={400}
         >
-          <div className={classes.error}>{formik.errors[name]}</div>
+          <div className={classes.error}>{/* {formik.errors[name]} */}</div>
         </Fade>
       ) : null}
     </div>
@@ -128,7 +132,7 @@ const LocationPrice = ({ placeClearance, formik ,chips ,setChips}) => {
             <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
             <div className={classes.selectedTariff}>
               {chips.map((item, index) =>
-                item !== "0" ? (
+                index !== -1 ? (
                   <Chip
                     className={classes.chip}
                     label={item.name}

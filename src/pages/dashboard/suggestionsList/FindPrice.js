@@ -23,7 +23,7 @@ import { dateToPersian } from "../../../helper/general";
 import { useHistory } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
-const FindPrice = ({backToTab}) => {
+const FindPrice = ({ backToTab }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
@@ -43,7 +43,7 @@ const FindPrice = ({backToTab}) => {
       setPageData(res.results);
     });
     backToTab(1);
-    history.push("/Dashboard/suggestionsList/quotationRequestList")
+    history.push("/Dashboard/suggestionsList/quotationRequestList");
   }, []);
 
   const rows = pageData !== undefined ? pageData : [];
@@ -112,7 +112,7 @@ const FindPrice = ({backToTab}) => {
           درخواست استعلام قیمت
         </Typography>
       </Grid>
-      {pageData.length === 0 ? (
+      {pageData.length === 0 || pageData === undefined ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>
@@ -196,8 +196,8 @@ const FindPrice = ({backToTab}) => {
 
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <div className={classes.header}>
-                  <Typography className={classes.title} variant="h6">
+                <div className={classes.priceHeader}>
+                  <Typography className={classes.priceTitle} variant="h6">
                     جدیدترین درخواست ها
                   </Typography>
                 </div>
