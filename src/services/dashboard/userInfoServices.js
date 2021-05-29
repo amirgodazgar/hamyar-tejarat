@@ -151,10 +151,7 @@ export const getProposalData = async (ProposalId) => {
   return data;
 };
 
-
 // ----------------------------- Clearance Methods  -------------------------------- //
-
-
 
 // SEND INFORMATION CLEARANCEMAN --------------------------------- :
 export const postClearancePrivate = async (userInfo) => {
@@ -173,9 +170,7 @@ export const postClearancePrivate = async (userInfo) => {
 };
 
 export const postClearanceJuridical = async (userInfo) => {
-  console.log(userInfo.getAll("ChoosedCustomIds"));
   const token = Cookies.get("token");
-
   await http
     .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
       headers: {
@@ -188,3 +183,95 @@ export const postClearanceJuridical = async (userInfo) => {
     });
 };
 
+//  PROPOSALS LIST  --------------------------------- :
+export const getProposalsList = async (pageNumber = 1, pageSize = 10) => {
+  const data = await http
+    .get(
+      `/ClearancemanPanel/GetQuotationProposalsListAsync?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    )
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+
+//  PROPOSALS DETAIL  --------------------------------- :
+
+export const getProposalDetail = async (ProposalId) => {
+  const data = await http
+    .get(
+      `/ClearancemanPanel/GetQuotationRequest?quotationRequestId=${ProposalId}`
+    )
+    .then((res) => {
+      // console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+
+//  SEARCH ALL REQUEST  --------------------------------- :
+
+// ClearancemanPanel/SearchAllQuotationRequests?pageNumber=1&pageSize=7&cargoTitle=%D8%A7%D8%B3%D8%A8&cargoTransportTools=RoadTransportation&portOfLoading=%D9%BE%D8%B1%D9%88%DB%8C%D8%B2&tariffCode=0101
+
+export const getSearchAllRequest = async (
+  page,
+  pageSize,
+  tariffCode,
+  cargoTitle,
+  portOfLoading,
+  transportTools
+) => {
+  const data = await http
+    .get(
+      `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
+        page === 0 ? 1 : page
+      }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`
+    )
+    .then((res) => {
+      console.log(res.data.data.searchResult);
+      if (res.status === 200) {
+        return res.data.data.searchResult.results;
+      }
+    });
+  return data;
+};
+
+//  SUBMIT-PROPOSAL  --------------------------------- :
+
+export const submitQuotationProposal = async (
+  quotationRequestId,
+  proposalValue,
+  estimatedNumberOfDays,
+  businessmanType,
+  setAlertMessage
+) => {
+  const data = {
+    quotationRequestId,
+    proposalValue: Number(proposalValue),
+    estimatedNumberOfDays,
+    businessmanType,
+  };
+  const token = Cookies.get("token");
+  await http
+    .post("/ClearancemanPanel/SubmitQuotationProposal", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        if (res.data.isSuccess) {
+          setAlertMessage("پیشنهاد با موفقیت ثبت شد");
+        } else {
+          setAlertMessage("پیشنهاد یک بار ثبت شده است");
+        }
+      }
+
+      console.log("Submit-Proposal", res);
+    });
+};

@@ -19,8 +19,6 @@
   width: 100%;
 }
 
-
-
 .selectedInput {
   width: 100%;
   height: 2.5rem;
@@ -132,7 +130,8 @@
   border-radius: 10px !important;
 }
 
-.header , .priceHeader {
+.header,
+.priceHeader {
   width: 100%;
   background-color: #1e4383;
   color: #ffffff;
@@ -163,7 +162,6 @@
   align-items: center;
   cursor: pointer;
 }
-
 
 /* TABLE */
 
@@ -355,5 +353,65 @@
   height: 3rem;
   margin: 0 auto;
   font-size: 1rem !important;
+  border-radius: 10px !important;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalPaper {
+  padding: 1rem !important;
+  height: 20rem !important;
+  width: 20rem !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px !important;
+}
+
+.modalTitle {
+  width: 95% !important;
+  font-weight: bold !important;
+  height: 2.5rem;
+  width: 12rem;
+  border-bottom: 1px solid #7a7e83;
+}
+
+.modalBtn {
+  height: 2.5rem;
+  width: 12rem;
+  border-radius: 10px !important;
+}
+
+.modalInput {
+  border: 1px solid #70707025;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  outline: none;
+  height: 2.5rem;
+  width: 12rem;
+  background-color: #f4f4f4;
+  box-shadow: none;
+  padding: 0 0.5rem;
+  transition: all 250ms;
+}
+.modalInput:focus,
+.modalInput:valid {
+  border: 1px solid #70707057;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  transition: all 250ms;
+}
+.modalInput::placeholder {
+  font-size: 0.85rem;
+  color: #adb2b8;
+}
+
+.modalAlert {
+  height: 2.5rem;
+  width: 12rem;
   border-radius: 10px !important;
 }

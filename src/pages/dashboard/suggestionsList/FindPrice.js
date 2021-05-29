@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
+import { Alert } from "@material-ui/lab";
 import {
   Grid,
   // Fade,
@@ -206,36 +207,45 @@ const FindPrice = ({ backToTab }) => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            {""}
-                          </TableCell>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            عنوان کالا
-                          </TableCell>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            تعداد پیشنهاد
-                          </TableCell>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            شرح در خواست
-                          </TableCell>
-                          <TableCell
-                            variant="head"
-                            className={classes.tableHeader}
-                          >
-                            تاریخ ثبت
-                          </TableCell>
+                          {rows.length !== 0 ? (
+                            <>
+                              <TableCell
+                                variant="head"
+                                className={classes.tableHeader}
+                              >
+                                {""}
+                              </TableCell>
+                              <TableCell
+                                variant="head"
+                                className={classes.tableHeader}
+                              >
+                                عنوان کالا
+                              </TableCell>
+                              <TableCell
+                                variant="head"
+                                className={classes.tableHeader}
+                              >
+                                تعداد پیشنهاد
+                              </TableCell>
+                              <TableCell
+                                variant="head"
+                                className={classes.tableHeader}
+                              >
+                                شرح در خواست
+                              </TableCell>
+                              <TableCell
+                                variant="head"
+                                className={classes.tableHeader}
+                              >
+                                تاریخ ثبت
+                              </TableCell>
+                            </>
+                          ) : (
+                            <TableCell
+                              variant="head"
+                              className={classes.tableHeader}
+                            ></TableCell>
+                          )}
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -271,7 +281,9 @@ const FindPrice = ({ backToTab }) => {
                               </TableRow>
                             ))
                         ) : (
-                          <CircularProgress color="primary" />
+                          <Alert variant="standard" severity="info">
+                            موردی یافت نشد دوباره جستجو کنید
+                          </Alert>
                         )}
                       </TableBody>
                     </Table>

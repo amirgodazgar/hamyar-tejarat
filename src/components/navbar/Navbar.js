@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import classes from "./navbar.module.css";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 import { Link, useHistory } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
 import { menuItem } from "../../constant/layoutData";
-import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
-import { getUserInfoData } from "../../store/dashboard/dashboardSlice";
 import { ExitToApp } from "@material-ui/icons";
 import { clearCookies } from "../../helper/cookies";
 
 const Navbar = () => {
   const isLogin = Cookies.get("login");
-  const dispatch = useDispatch();
-  const history = useHistory()
+
+  const history = useHistory();
   const [search, setSearch] = useState(true);
-  const searchHandler = () => setSearch((prevState) => !prevState);
+  // const searchHandler = () => setSearch((prevState) => !prevState);
   const exitHandler = () => {
     clearCookies();
     window.location.reload();
@@ -60,24 +58,25 @@ const Navbar = () => {
           {isLogin ? (
             <div className={classes.panel}>
               {/* <Link className={classes.link} to="/Dashboard/main"> */}
-                <Button customizeClass="panel" click={() => history.replace("/Dashboard/main")}>
-                  <PersonIcon  />
-                  پنل کاربری
-                </Button>
+              <Button
+                customizeClass="panel"
+                click={() => history.replace("/Dashboard/main")}
+              >
+                <PersonIcon />
+                پنل کاربری
+              </Button>
               {/* </Link> */}
 
               <Button customizeClass="logout" click={exitHandler}>
-                  <ExitToApp  />
-                  خروج
-                </Button>
-
+                <ExitToApp />
+                خروج
+              </Button>
             </div>
           ) : (
             <Link className={classes.registerLink} to="/Register">
               <Button customizeClass="registerLink">ورود | ثبت نام</Button>
             </Link>
           )}
-     
         </div>
       </nav>
       <div data-aos="fade-up" className={classes.mainTitle}>

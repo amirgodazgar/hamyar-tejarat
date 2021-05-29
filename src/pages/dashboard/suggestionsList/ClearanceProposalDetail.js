@@ -10,34 +10,38 @@ import {
 } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
-import { getSuggestionIdData } from "../../../services/dashboard/userInfoServices";
+import { getProposalDetail } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
-const RequestDetail = ({ userName }) => {
+const ClearanceProposalDetail = ({ userName }) => {
   const [pageData, setPageData] = useState([]);
   const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
-    getSuggestionIdData(id).then((res) => {
+    getProposalDetail(id).then((res) => {
       setPageData(res);
     });
   }, []);
 
+  //   const checkClearanceManType = (clearanceMan) => {
+  //     if (clearanceMan === "Juridical") {
+  //       return "حقوقی";
+  //     } else if (clearanceMan === "Private") {
+  //       return "حقیقی";
+  //     }
+  //   };
+
   const infoData = [
-    {
-      title: "عنوان کالا :",
-      text: pageData.cargoTitle,
-    },
     {
       title: "تاریخ ثبت :",
       text: dateToPersian(pageData.submitDate),
     },
     {
-      title: "کد تعرفه :",
-      text: pageData.customCargosId,
+      title: "عنوان کالا :",
+      text: pageData.cargoTitle,
     },
     {
       title: "جنس و نوع کالا :",
@@ -46,14 +50,6 @@ const RequestDetail = ({ userName }) => {
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,
-    },
-    {
-      title: " گمرک های مقصد:",
-      text: pageData.originCustomNames,
-    },
-    {
-      title: " تعداد پیشنهادات :",
-      text: pageData.proposalsCount,
     },
   ];
 
@@ -95,7 +91,7 @@ const RequestDetail = ({ userName }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          درخواست استعلام قیمت
+          جزئیات پیشنهاد
         </Typography>
       </Grid>
       <Grid item container spacing={1} xs={11}>
@@ -104,7 +100,9 @@ const RequestDetail = ({ userName }) => {
             <Grid item xs={10} className={classes.requestDetailTitle}>
               <div className={classes.businessMan}>
                 <Avatar src={avatarImg} />
-                <h6 className={classes.businessManName}>{userName()}</h6>
+                <h6 className={classes.businessManName}>
+                  {pageData.businessmanName}
+                </h6>
               </div>
               <div
                 className={classes.requestDetailLink}
@@ -116,7 +114,7 @@ const RequestDetail = ({ userName }) => {
             </Grid>
 
             <Grid item xs={10} className={classes.requestDetailMain}>
-              {pageData.length === 0 ? (
+              {pageData.length === 0 || pageData === undefined ? (
                 <BackDrop />
               ) : (
                 <React.Fragment>
@@ -130,18 +128,6 @@ const RequestDetail = ({ userName }) => {
                         <div className={classes.suggestText}>{item.text}</div>
                       </div>
                     ))}
-                    <Button
-                      className={classes.suggestBtn}
-                      color="primary"
-                      variant="contained"
-                      onClick={() =>
-                        history.replace(
-                          `/Dashboard/suggestionsList/quotationProposals/${id}`
-                        )
-                      }
-                    >
-                      لیست پیشنهادهای ثبت شده
-                    </Button>
                   </div>
                 </React.Fragment>
               )}
@@ -153,4 +139,4 @@ const RequestDetail = ({ userName }) => {
   );
 };
 
-export default RequestDetail;
+export default ClearanceProposalDetail;

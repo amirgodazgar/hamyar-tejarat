@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
+
 import { Alert } from "@material-ui/lab";
 import {
   Grid,
@@ -16,14 +17,14 @@ import {
 } from "@material-ui/core";
 import {
   ArrowBackIosRounded,
-  // ArrowForwardIosRounded,
+  ArrowForwardIosRounded,
 } from "@material-ui/icons";
-import { getProposalsListData } from "../../../services/dashboard/userInfoServices";
+import { getProposalsList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
-const ProposalsList = ({ backToTab }) => {
+const ClearanceProposalList = ({ backToTab }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
@@ -40,26 +41,18 @@ const ProposalsList = ({ backToTab }) => {
 
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
-    getProposalsListData(curPage, rowsPerPage, id).then((res) => {
+    getProposalsList(curPage, rowsPerPage).then((res) => {
       setPageData(res.results);
-      console.log(res);
     });
     backToTab(1);
-    history.push(`/Dashboard/suggestionsList/quotationProposals/${id}`);
+    history.push(`/Dashboard/quotationProposalsListAsync/quotationRequestList`);
   }, []);
 
   const rows = pageData !== undefined ? pageData : [];
 
-  const checkClearanceManType = (clearanceMan) => {
-    if (clearanceMan === "Juridical") {
-      return "حقوقی";
-    } else if (clearanceMan === "Private") {
-      return "حقیقی";
-    }
-  };
   const showDetailHandler = (proposalId) => {
     history.push(
-      `/Dashboard/suggestionsList/SingleQuotationProposal/${proposalId}`
+      `/Dashboard/quotationProposalsListAsync/quotationRequestDetail/${proposalId}`
     );
   };
 
@@ -75,7 +68,7 @@ const ProposalsList = ({ backToTab }) => {
           لیست پیشنهاد ها
         </Typography>
       </Grid>
-      {pageData.length === 0 ? (
+      {pageData.length === 0 || pageData === undefined ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>
@@ -86,18 +79,7 @@ const ProposalsList = ({ backToTab }) => {
                   <Typography className={classes.title} variant="h6">
                     جدیدترین پیشنهاد ها
                   </Typography>
-                  <div
-                    className={classes.link}
-                    // onClick={() => history.goBack()}
-                  >
-                    {/* <ArrowForwardIosRounded fontSize="small" /> */}
-                    <Typography
-                      style={{ marginRight: ".5rem" }}
-                      variant="body2"
-                    >
-                      {/* بازگشت به صفحه قبل */}
-                    </Typography>
-                  </div>
+                  <div className={classes.link}></div>
                 </div>
 
                 <div className={classes.body}>
@@ -111,20 +93,16 @@ const ProposalsList = ({ backToTab }) => {
                                 variant="head"
                                 className={classes.tableHeader}
                               >
-                                ترخیص کار
+                                تعداد روزهای تخمین زده شده
                               </TableCell>
+
                               <TableCell
                                 variant="head"
                                 className={classes.tableHeader}
                               >
                                 مبلغ پیشنهادی
                               </TableCell>
-                              <TableCell
-                                variant="head"
-                                className={classes.tableHeader}
-                              >
-                                تعداد روزهای تخمین زده شده
-                              </TableCell>
+
                               <TableCell
                                 variant="head"
                                 className={classes.tableHeader}
@@ -151,17 +129,16 @@ const ProposalsList = ({ backToTab }) => {
                               <TableRow
                                 key={row.id}
                                 className={classes.tableRow}
-                                onClick={() => showDetailHandler(row.id)}
+                                onClick={() =>
+                                  showDetailHandler(row.quotationRequestId)
+                                }
                               >
                                 <TableCell>
-                                  {checkClearanceManType(row.clearancemanType)}
+                                  {Number(
+                                    row.estimatedNumberOfDays
+                                  ).toLocaleString()}
                                 </TableCell>
-                                <TableCell>
-                                  {Number(row.price).toLocaleString()}
-                                </TableCell>
-                                <TableCell>
-                                  {row.estimatedNumberOfDays}
-                                </TableCell>
+                                <TableCell>{row.proposalValue}</TableCell>
 
                                 <TableCell>
                                   <div className={classes.fixCell}>
@@ -206,4 +183,4 @@ const ProposalsList = ({ backToTab }) => {
   );
 };
 
-export default ProposalsList;
+export default ClearanceProposalList;

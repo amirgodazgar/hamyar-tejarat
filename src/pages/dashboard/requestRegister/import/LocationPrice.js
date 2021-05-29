@@ -57,7 +57,7 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
               } `}
               name="tariffCode"
               type="text"
-              placeholder="0101"
+              placeholder="0202"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.tariffCode}
@@ -74,7 +74,7 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
               } `}
               name="cargoTitle"
               type="text"
-              placeholder=" اسب و الاغ"
+              placeholder="گوشت حیوانات از نوع گاو، منجمد"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.cargoTitle}

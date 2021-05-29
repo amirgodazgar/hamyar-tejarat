@@ -29,7 +29,7 @@ const TariffCodeList = ({ backToTab }) => {
   const [codeSearch, setCodeSearch] = useState([]);
   const [result, setResult] = useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -87,7 +87,7 @@ const TariffCodeList = ({ backToTab }) => {
                       onChange={(e) => setCodeSearch(e.target.value)}
                       id="code-search"
                       type="text"
-                      placeholder="0101"
+                      placeholder="0202"
                     />
                     <Button
                       click={() => getDataByCode(codeSearch)}
@@ -108,7 +108,7 @@ const TariffCodeList = ({ backToTab }) => {
                       onChange={(e) => setTextSearch(e.target.value)}
                       id="text-search"
                       type="text"
-                      placeholder="اسب، الاغ، قاطر و استر، زنده"
+                      placeholder="گوشت حیوانات از نوع گاو، منجمد."
                     />
                     <Button
                       click={() => getDataByText(textSearch)}

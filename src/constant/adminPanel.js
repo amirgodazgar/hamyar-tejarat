@@ -1,4 +1,12 @@
-import { Home, List, Sms, Edit, Person, Payment } from "@material-ui/icons";
+import {
+  Home,
+  List,
+  Sms,
+  Edit,
+  Person,
+  Payment,
+  PageviewRounded,
+} from "@material-ui/icons";
 
 export const adminPanelData = {
   logoTitle: "همیار تجارت",
@@ -61,9 +69,50 @@ export const adminPanelData = {
     },
     {
       text: "لیست کد تعرفه کالا",
-      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <PageviewRounded
+          fontSize="large"
+          style={{ color: "#C4CAD0" }}
+          dashboard
+        />
+      ),
       path: "/Dashboard/tariffCodesList",
       hasDropDown: false,
+    },
+  ],
+
+  listItemClearance: [
+    {
+      text: "لیست پیشنهاد ها",
+      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/quotationProposalsListAsync",
+      dropDownText: [
+        {
+          text: "ترخیص کالا",
+          path: "/Dashboard/quotationProposalsListAsync/clearance",
+        },
+        {
+          text: "استعلام قیمت",
+          path: "/Dashboard/quotationProposalsListAsync/quotationRequestList",
+        },
+      ],
+      hasDropDown: true,
+    },
+    {
+      text: "لیست درخواست ها",
+      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      path: "/Dashboard/getQuotationRequestList",
+      dropDownText: [
+        {
+          text: "ترخیص کالا",
+          path: "/Dashboard/getQuotationRequestList/clearance",
+        },
+        {
+          text: "استعلام قیمت",
+          path: "/Dashboard/getQuotationRequestList/SearchAllQuotationRequests",
+        },
+      ],
+      hasDropDown: true,
     },
   ],
 

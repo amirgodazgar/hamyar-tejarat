@@ -43,6 +43,11 @@ import RequestDetail from "./suggestionsList/RequestDetail";
 import BackDrop from "../../common/backDrop/BackDrop";
 import ProposalsList from "./suggestionsList/ProposalsList";
 import ProposalDetail from "./suggestionsList/ProposalDetail";
+import ClearanceProposalList from "./suggestionsList/ClearanceProposalList";
+import ClearanceProposalDetail from "./suggestionsList/ClearanceProposalDetail";
+import SearchAllRequest from "./suggestionsList/submitProposal/SearchAllRequest";
+import SubmitProposalDetail from "./suggestionsList/submitProposal/SubmitProposalDetail";
+import UserCheckBackDrop from "../../common/backDrop/UserCheckBackDrop";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -51,13 +56,30 @@ const Dashboard = () => {
   const [selected, setSelected] = useState(0);
   const [dropDownSelect, setDropDownSelect] = useState(0);
   const [openSuggestList, setOpenSuggestList] = useState(false);
+  const [openProposalList, setOpenProposalList] = useState(false);
   const [userData, setUserData] = useState([]);
+  const [isProfileCompleted, setIsProfileCompleted] = useState(false);
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
+      setIsProfileCompleted(res.payload.isProfileCompleted);
     });
   }, []);
+
+  const checkBusinessMan = () => {
+    const role = Cookies.getJSON("userInfo").role;
+    switch (role) {
+      case "Businessman":
+        return true;
+
+      case "Clearanceman ":
+        return false;
+
+      default:
+        return false;
+    }
+  };
 
   const userName = () => {
     if (userData.firstName && userData.lastName) {
@@ -88,14 +110,25 @@ const Dashboard = () => {
     setSelected(index);
   };
   const dropDownHandler = (path) => {
-    if (path === "/Dashboard/suggestionsList") {
+    if (
+      path === "/Dashboard/suggestionsList" ||
+      path === "/Dashboard/quotationProposalsListAsync"
+    ) {
       setOpenSuggestList((prevState) => !prevState);
+      setOpenProposalList(false);
       setOpen(true);
     }
   };
   const dropDownSelectHandler = (path, index) => {
     setDropDownSelect(index);
     history.replace(path);
+  };
+  const secondDropDownHandler = (path) => {
+    if (path === "/Dashboard/getQuotationRequestList") {
+      setOpenProposalList((prevState) => !prevState);
+      setOpenSuggestList(false);
+      setOpen(true);
+    }
   };
 
   return (
@@ -234,81 +267,165 @@ const Dashboard = () => {
                     </ListItem>
                   </Link>
 
-                  {/* SUGGESTIONS-LIST --------------------- */}
-                  <Link to="#">
-                    <ListItem
-                      className={
-                        selected === 1
-                          ? classes.listItemActive
-                          : classes.listItem
-                      }
-                      onClick={() =>
-                        dropDownHandler(adminPanelData.listItem[1].path)
-                      }
-                    >
-                      <ListItemIcon>
-                        {adminPanelData.listItem[1].icon}
-                      </ListItemIcon>
-                      <Fade in={open}>
-                        <>
-                          <ListItemText
-                            style={open ? null : { display: "none" }}
-                            className={classes.listItemText}
-                          >
-                            {navbarRole().role === "Clearanceman"
-                              ? "لیست پیشنهاد ها"
-                              : "لیست درخواست ها"}
-                          </ListItemText>
-                          <div
-                            style={
-                              adminPanelData.listItem[1].hasDropDown && open
-                                ? null
-                                : { display: "none" }
-                            }
-                          >
-                            {openSuggestList ? <ExpandLess /> : <ExpandMore />}
-                          </div>
-                        </>
-                      </Fade>
-                    </ListItem>
-                    {adminPanelData.listItem[1].hasDropDown ? (
-                      <Collapse
-                        in={openSuggestList}
-                        timeout={200}
-                        unmountOnExit
+                  {/* SUGGESTIONS-LIST --- OR --- PROPOSAL-LIST --------- */}
+                  {checkBusinessMan() === true ? (
+                    <Link to="#">
+                      <ListItem
+                        className={
+                          selected === 1
+                            ? classes.listItemActive
+                            : classes.listItem
+                        }
+                        onClick={() =>
+                          dropDownHandler(adminPanelData.listItem[1].path)
+                        }
                       >
-                        <List component="div" disablePadding>
-                          {adminPanelData.listItem[1].dropDownText.map(
-                            (subItem, idx) => (
-                              <span
-                                onClick={() =>
-                                  dropDownSelectHandler(subItem.path, idx)
-                                }
-                                key={idx}
-                              >
-                                <ListItem
-                                  style={open ? null : { display: "none" }}
-                                  button
-                                  key={idx}
-                                  className={
-                                    dropDownSelect === idx
-                                      ? classes.dropDownListActive
-                                      : classes.dropDownList
+                        <ListItemIcon>
+                          {adminPanelData.listItem[1].icon}
+                        </ListItemIcon>
+                        <Fade in={open}>
+                          <>
+                            <ListItemText
+                              style={open ? null : { display: "none" }}
+                              className={classes.listItemText}
+                            >
+                              {"لیست درخواست ها"}
+                            </ListItemText>
+                            <div
+                              style={
+                                adminPanelData.listItem[1].hasDropDown && open
+                                  ? null
+                                  : { display: "none" }
+                              }
+                            >
+                              {openSuggestList ? (
+                                <ExpandLess />
+                              ) : (
+                                <ExpandMore />
+                              )}
+                            </div>
+                          </>
+                        </Fade>
+                      </ListItem>
+                      {adminPanelData.listItem[1].hasDropDown ? (
+                        <Collapse
+                          in={openSuggestList}
+                          timeout={200}
+                          unmountOnExit
+                        >
+                          <List component="div" disablePadding>
+                            {adminPanelData.listItem[1].dropDownText.map(
+                              (subItem, idx) => (
+                                <span
+                                  onClick={() =>
+                                    dropDownSelectHandler(subItem.path, idx)
                                   }
+                                  key={idx}
                                 >
-                                  <ListItemText
-                                    className={classes.dropDownText}
+                                  <ListItem
+                                    style={open ? null : { display: "none" }}
+                                    button
+                                    key={idx}
+                                    className={
+                                      dropDownSelect === idx
+                                        ? classes.dropDownListActive
+                                        : classes.dropDownList
+                                    }
                                   >
-                                    {subItem.text}
-                                  </ListItemText>
-                                </ListItem>
-                              </span>
-                            )
-                          )}
-                        </List>
-                      </Collapse>
-                    ) : null}
-                  </Link>
+                                    <ListItemText
+                                      className={classes.dropDownText}
+                                    >
+                                      {subItem.text}
+                                    </ListItemText>
+                                  </ListItem>
+                                </span>
+                              )
+                            )}
+                          </List>
+                        </Collapse>
+                      ) : null}
+                    </Link>
+                  ) : (
+                    <Link to="#">
+                      <ListItem
+                        className={
+                          selected === 1
+                            ? classes.listItemActive
+                            : classes.listItem
+                        }
+                        onClick={() =>
+                          dropDownHandler(
+                            adminPanelData.listItemClearance[0].path
+                          )
+                        }
+                      >
+                        <ListItemIcon>
+                          {adminPanelData.listItemClearance[0].icon}
+                        </ListItemIcon>
+                        <Fade in={open}>
+                          <>
+                            <ListItemText
+                              style={open ? null : { display: "none" }}
+                              className={classes.listItemText}
+                            >
+                              {"لیست پیشنهاد ها"}
+                            </ListItemText>
+                            <div
+                              style={
+                                adminPanelData.listItemClearance[0]
+                                  .hasDropDown && open
+                                  ? null
+                                  : { display: "none" }
+                              }
+                            >
+                              {openSuggestList ? (
+                                <ExpandLess />
+                              ) : (
+                                <ExpandMore />
+                              )}
+                            </div>
+                          </>
+                        </Fade>
+                      </ListItem>
+                      {adminPanelData.listItemClearance[0].hasDropDown ? (
+                        <Collapse
+                          in={openSuggestList}
+                          timeout={200}
+                          unmountOnExit
+                        >
+                          <List component="div" disablePadding>
+                            {adminPanelData.listItemClearance[0].dropDownText.map(
+                              (subItem, idx) => (
+                                <span
+                                  onClick={() =>
+                                    dropDownSelectHandler(subItem.path, idx)
+                                  }
+                                  key={idx}
+                                >
+                                  <ListItem
+                                    style={open ? null : { display: "none" }}
+                                    button
+                                    key={idx}
+                                    className={
+                                      dropDownSelect === idx
+                                        ? classes.dropDownListActive
+                                        : classes.dropDownList
+                                    }
+                                  >
+                                    <ListItemText
+                                      className={classes.dropDownText}
+                                    >
+                                      {subItem.text}
+                                    </ListItemText>
+                                  </ListItem>
+                                </span>
+                              )
+                            )}
+                          </List>
+                        </Collapse>
+                      ) : null}
+                    </Link>
+                  )}
 
                   {/* TICKETS --------------------- */}
                   <Link to={adminPanelData.listItem[2].path}>
@@ -335,30 +452,113 @@ const Dashboard = () => {
                     </ListItem>
                   </Link>
 
-                  {/* REQUEST-REGISTER --------------------- */}
-                  <Link to={adminPanelData.listItem[3].path}>
-                    <ListItem
-                      className={
-                        selected === 3
-                          ? classes.listItemActive
-                          : classes.listItem
-                      }
-                    >
-                      <ListItemIcon>
-                        {adminPanelData.listItem[3].icon}
-                      </ListItemIcon>
-                      <Fade in={open}>
-                        <>
-                          <ListItemText
-                            style={open ? null : { display: "none" }}
-                            className={classes.listItemText}
-                          >
-                            {adminPanelData.listItem[3].text}
-                          </ListItemText>
-                        </>
-                      </Fade>
-                    </ListItem>
-                  </Link>
+                  {/* REQUEST-REGISTER --- OR --- QuotationList --------- */}
+
+                  {checkBusinessMan() === true ? (
+                    <Link to={adminPanelData.listItem[3].path}>
+                      <ListItem
+                        className={
+                          selected === 3
+                            ? classes.listItemActive
+                            : classes.listItem
+                        }
+                      >
+                        <ListItemIcon>
+                          {adminPanelData.listItem[3].icon}
+                        </ListItemIcon>
+                        <Fade in={open}>
+                          <>
+                            <ListItemText
+                              style={open ? null : { display: "none" }}
+                              className={classes.listItemText}
+                            >
+                              {adminPanelData.listItem[3].text}
+                            </ListItemText>
+                          </>
+                        </Fade>
+                      </ListItem>
+                    </Link>
+                  ) : (
+                    <Link to="#">
+                      <ListItem
+                        className={
+                          selected === 3
+                            ? classes.listItemActive
+                            : classes.listItem
+                        }
+                        onClick={() =>
+                          secondDropDownHandler(
+                            adminPanelData.listItemClearance[1].path
+                          )
+                        }
+                      >
+                        <ListItemIcon>
+                          {adminPanelData.listItemClearance[1].icon}
+                        </ListItemIcon>
+                        <Fade in={open}>
+                          <>
+                            <ListItemText
+                              style={open ? null : { display: "none" }}
+                              className={classes.listItemText}
+                            >
+                              {"لیست درخواست ها"}
+                            </ListItemText>
+                            <div
+                              style={
+                                adminPanelData.listItemClearance[1]
+                                  .hasDropDown && open
+                                  ? null
+                                  : { display: "none" }
+                              }
+                            >
+                              {openProposalList ? (
+                                <ExpandLess />
+                              ) : (
+                                <ExpandMore />
+                              )}
+                            </div>
+                          </>
+                        </Fade>
+                      </ListItem>
+                      {adminPanelData.listItemClearance[1].hasDropDown ? (
+                        <Collapse
+                          in={openProposalList}
+                          timeout={200}
+                          unmountOnExit
+                        >
+                          <List component="div" disablePadding>
+                            {adminPanelData.listItemClearance[1].dropDownText.map(
+                              (subItem, idx) => (
+                                <span
+                                  onClick={() =>
+                                    dropDownSelectHandler(subItem.path, idx)
+                                  }
+                                  key={idx}
+                                >
+                                  <ListItem
+                                    style={open ? null : { display: "none" }}
+                                    button
+                                    key={idx}
+                                    className={
+                                      dropDownSelect === idx
+                                        ? classes.dropDownListActive
+                                        : classes.dropDownList
+                                    }
+                                  >
+                                    <ListItemText
+                                      className={classes.dropDownText}
+                                    >
+                                      {subItem.text}
+                                    </ListItemText>
+                                  </ListItem>
+                                </span>
+                              )
+                            )}
+                          </List>
+                        </Collapse>
+                      ) : null}
+                    </Link>
+                  )}
 
                   {/* USER-INFO --------------------- */}
                   <Link to={"/Dashboard/userInfo"}>
@@ -441,12 +641,20 @@ const Dashboard = () => {
               <div className={classes.main}>
                 <Switch>
                   <Route exact path="/Dashboard/main">
-                    <DashboardMain backToTab={selectedHandler} />
+                    {isProfileCompleted ? (
+                      <DashboardMain backToTab={selectedHandler} />
+                    ) : (
+                      <UserCheckBackDrop />
+                    )}
                   </Route>
 
                   <Route path="/Dashboard/tickets" component={Tickets} />
                   <Route path="/Dashboard/requestRegister">
-                    <RequestRegister backToTab={selectedHandler} />
+                    {isProfileCompleted ? (
+                      <RequestRegister backToTab={selectedHandler} />
+                    ) : (
+                      <UserCheckBackDrop />
+                    )}
                   </Route>
 
                   <Route path={"/Dashboard/userInfo"}>
@@ -460,7 +668,7 @@ const Dashboard = () => {
                     <TariffCodeList backToTab={selectedHandler} />
                   </Route>
 
-                      {/* ----- BusinessMan -------- */}
+                  {/* ----- BusinessMan -------- */}
                   <Route path="/Dashboard/suggestionsList/clearance">
                     <ClearanceList backToTab={selectedHandler} />
                   </Route>
@@ -477,9 +685,35 @@ const Dashboard = () => {
                     <ProposalDetail userName={userName} />
                   </Route>
 
-                        {/* ----- ClearanceMan -------- */}
+                  {/* ----- ClearanceMan -------- */}
 
+                  {/* ClearanceList DEMO */}
+                  <Route path="/Dashboard/quotationProposalsListAsync/clearance">
+                    <ClearanceList />
+                  </Route>
+                  <Route path="/Dashboard/getQuotationRequestList/clearance">
+                    <ClearanceList />
+                  </Route>
+                  {/* ClearanceList : request & proposal */}
 
+                  <Route path="/Dashboard/quotationProposalsListAsync/quotationRequestList">
+                    <ClearanceProposalList backToTab={selectedHandler} />
+                  </Route>
+                  <Route path="/Dashboard/quotationProposalsListAsync/quotationRequestDetail/:id">
+                    <ClearanceProposalDetail userName={userName} />
+                  </Route>
+
+                  <Route path="/Dashboard/getQuotationRequestList/SearchAllQuotationRequests">
+                    {isProfileCompleted ? (
+                      <SearchAllRequest backToTab={selectedHandler} />
+                    ) : (
+                      <UserCheckBackDrop />
+                    )}
+                  </Route>
+
+                  <Route path="/Dashboard/getQuotationRequestList/GetQuotationRequest/:id">
+                    <SubmitProposalDetail userName={userName} />
+                  </Route>
                 </Switch>
               </div>
             </>

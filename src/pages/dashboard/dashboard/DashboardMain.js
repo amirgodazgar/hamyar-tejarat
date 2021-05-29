@@ -11,7 +11,7 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
+
 import React, { useEffect } from "react";
 import { ArrowBackIos } from "@material-ui/icons";
 import BusinessMan from "./BusinessMan";
@@ -102,19 +102,7 @@ const DashboardMain = ({ backToTab }) => {
       </Grid>
 
       <Grid item xs={11} className={classes.mainContent}>
-        <Grid item xs={12}>
-          <Collapse in={open}>
-            <Alert
-              onClose={() => setOpen(false)}
-              severity="warning"
-              className={classes.alert}
-            >
-              کاربر گرامی برای استفاده کامل از خدمات سایت همیار تجارت باید
-              پروفایل و مدارک خود را کامل کنید
-            </Alert>
-          </Collapse>
-        </Grid>
-
+  
         <Grid
           item
           xs={12}
