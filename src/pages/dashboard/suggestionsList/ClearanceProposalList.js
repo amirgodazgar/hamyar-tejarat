@@ -43,6 +43,7 @@ const ClearanceProposalList = ({ backToTab }) => {
     let curPage = page === 0 ? 1 : page;
     getProposalsList(curPage, rowsPerPage).then((res) => {
       setPageData(res.results);
+      console.log(res.results);
     });
     backToTab(1);
     history.push(`/Dashboard/quotationProposalsListAsync/quotationRequestList`);
@@ -138,7 +139,9 @@ const ClearanceProposalList = ({ backToTab }) => {
                                     row.estimatedNumberOfDays
                                   ).toLocaleString()}
                                 </TableCell>
-                                <TableCell>{row.proposalValue}</TableCell>
+                                <TableCell>
+                                  {Number(row.price).toLocaleString()}
+                                </TableCell>
 
                                 <TableCell>
                                   <div className={classes.fixCell}>
