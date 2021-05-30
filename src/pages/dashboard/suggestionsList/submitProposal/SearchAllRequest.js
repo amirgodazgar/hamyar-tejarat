@@ -14,7 +14,6 @@ import {
   Typography,
   Button,
   IconButton,
-  CircularProgress,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
 import { useHistory } from "react-router";
@@ -103,7 +102,7 @@ const SearchAllRequest = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-         جستجوی درخواست ها
+          جستجوی درخواست ها
         </Typography>
       </Grid>
       {!result ? (

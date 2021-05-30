@@ -216,14 +216,13 @@ export const getProposalDetail = async (ProposalId) => {
 
 //  SEARCH ALL REQUEST  --------------------------------- :
 
-
 export const getSearchAllRequest = async (
   page,
   pageSize,
   tariffCode,
   cargoTitle,
   portOfLoading,
-  transportTools 
+  transportTools
 ) => {
   const data = await http
     .get(
@@ -252,9 +251,10 @@ export const submitQuotationProposal = async (
   const data = {
     quotationRequestId,
     proposalValue: Number(proposalValue),
-    estimatedNumberOfDays,
+    estimatedNumberOfDays: Number(estimatedNumberOfDays),
     businessmanType,
   };
+  console.log(data);
   const token = Cookies.get("token");
   await http
     .post("/ClearancemanPanel/SubmitQuotationProposal", data, {
@@ -264,13 +264,9 @@ export const submitQuotationProposal = async (
     })
     .then((res) => {
       if (res.status === 200) {
-        if (res.data.isSuccess) {
-          setAlertMessage("پیشنهاد با موفقیت ثبت شد");
-        } else {
-          setAlertMessage("پیشنهاد یک بار ثبت شده است");
-        }
+        setAlertMessage(res.data.message);
+      } else {
+        setAlertMessage(res.data.message);
       }
-
-      console.log("Submit-Proposal", res);
     });
 };

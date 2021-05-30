@@ -12,7 +12,6 @@ import {
   TableRow,
   TablePagination,
   Typography,
-  CircularProgress,
 } from "@material-ui/core";
 import {
   ArrowBackIosRounded,

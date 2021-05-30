@@ -13,11 +13,9 @@ import {
   TableRow,
   TablePagination,
   Typography,
-  CircularProgress,
 } from "@material-ui/core";
 import {
   ArrowBackIosRounded,
-  ArrowForwardIosRounded,
 } from "@material-ui/icons";
 import { getProposalsList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";

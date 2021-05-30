@@ -42,6 +42,7 @@ const SubmitProposalDetail = ({ userName }) => {
   useEffect(() => {
     getProposalDetail(id).then((res) => {
       setPageData(res);
+      console.log(res);
     });
   }, []);
 
@@ -49,9 +50,9 @@ const SubmitProposalDetail = ({ userName }) => {
     submitQuotationProposal(id, value, days, type, setAlertMessage);
     setProposalValue("");
     setProposalDays("");
-    setIsSuccess(true)
+    setIsSuccess(true);
     setTimeout(() => {
-      setIsSuccess(false)
+      setIsSuccess(false);
       setOpen(false);
     }, 5000);
   };
@@ -216,7 +217,11 @@ const SubmitProposalDetail = ({ userName }) => {
                                 variant="standard"
                                 color="success"
                                 onClick={() => setOpen(false)}
-                                style={alertMessage === ''? {display:"none"} : null}
+                                style={
+                                  alertMessage === ""
+                                    ? { display: "none" }
+                                    : null
+                                }
                               >
                                 {alertMessage}
                               </Alert>
@@ -225,7 +230,11 @@ const SubmitProposalDetail = ({ userName }) => {
                                 variant="standard"
                                 color="error"
                                 onClick={() => setOpen(false)}
-                                style={alertMessage === ''? {display:"none"} : null}
+                                style={
+                                  alertMessage === ""
+                                    ? { display: "none" }
+                                    : null
+                                }
                               >
                                 {alertMessage}
                               </Alert>
