@@ -8,6 +8,7 @@ import {
   faChevronLeft,
 } from "@fortawesome/fontawesome-free-solid";
 import { cardData } from "../../../constant/cardData";
+import { Link } from "react-router-dom";
 
 const NewsCard = ({ img, type, date, title, tagTitle, text, dir }) => {
   return (
@@ -64,7 +65,9 @@ const NewsCard = ({ img, type, date, title, tagTitle, text, dir }) => {
 
           <CardContent className={classes.link}>
             <span>
-              <span className={classes.linkText}>{cardData.news.link}</span>
+              <Link to="/news" className={classes.linkText}>
+                {cardData.news.link}
+              </Link>
               <FontAwesomeIcon
                 icon={faChevronLeft}
                 className={classes.linkIcon}

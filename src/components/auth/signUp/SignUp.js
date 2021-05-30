@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./signUp.module.css";
+import styles from "../signIn/signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";
@@ -18,15 +19,15 @@ import * as Yup from "yup";
 import { register } from "../../../services/register";
 import { setMessage } from "../../../store/auth/authSlice";
 import { useHistory } from "react-router";
+import { Visibility } from "@material-ui/icons";
 
 const SignUp = () => {
-  const history = useHistory()
-  const dispatch = useDispatch()
+  const [showPass, setShowPass] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
   const change = useSelector((state) => state.auth.change);
   let message = useSelector((state) => state.auth.message);
   let isVerifySuccess = useSelector((state) => state.auth.isVerify);
-
-  
 
   const initialValues = {
     email: "",
@@ -52,7 +53,7 @@ const SignUp = () => {
       userType: values.personType,
       userRole: values.activityType,
     };
-    register(userInfo, dispatch , history);
+    register(userInfo, dispatch, history);
     console.log(userInfo);
   };
   const formik = useFormik({
@@ -74,16 +75,20 @@ const SignUp = () => {
               name="email"
               label={authData.signUp.email}
               placeHolder="example@gmail.com"
-              
             />
             <Input
               formik={formik}
-              type="password"
+              type={showPass ? "text" : "password"}
               name="password"
               label={authData.signUp.pass}
               placeHolder="********"
-              
             />
+            <span
+              onClick={() => setShowPass((prevState) => !prevState)}
+              className={styles.showPassword}
+            >
+              <Visibility color="primary" />
+            </span>
             <div className={classes.checkBoxContainer}>
               <FormLabel className={classes.label}>
                 {" "}
@@ -156,20 +161,19 @@ const SignUp = () => {
               ) : null}
             </div>
 
-
             {message === "" ? (
               <Button
-              type="submit"
-              customizeClass={
-                formik.isValid &&
-                formik.values.email !== "" &&
-                formik.values.password !== ""
-                  ? "authActive"
-                  : "auth"
-              }
-            >
-              {authData.signUp.btn}
-            </Button>
+                type="submit"
+                customizeClass={
+                  formik.isValid &&
+                  formik.values.email !== "" &&
+                  formik.values.password !== ""
+                    ? "authActive"
+                    : "auth"
+                }
+              >
+                {authData.signUp.btn}
+              </Button>
             ) : (
               <Grow in={message !== "" ? true : false}>
                 <Alert
@@ -181,7 +185,6 @@ const SignUp = () => {
                 </Alert>
               </Grow>
             )}
-
           </div>
         </form>
       </Grow>

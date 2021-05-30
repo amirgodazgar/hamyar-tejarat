@@ -202,7 +202,7 @@ const Home = () => {
       <div className={classes.news}>
         <div className={classes.header}>
           <h3 data-aos="fade-out">{homeData.news.title}</h3>
-          <Link to="/" data-aos="fade-out">
+          <Link to="/news" data-aos="fade-out">
             {homeData.news.link}
             <ArrowBackIosIcon style={{ fontWeight: "bolder" }} />
           </Link>

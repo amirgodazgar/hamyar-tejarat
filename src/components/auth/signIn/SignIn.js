@@ -14,6 +14,8 @@ import * as Yup from "yup";
 import { signIn } from "../../../services/login";
 import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
+import { useState } from "react";
+import { Visibility } from "@material-ui/icons";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const SignIn = () => {
     dispatch(changeFormType("forgotPassword"));
   };
 
-
+  const [showPass, setShowPass] = useState(false);
   const initialValues = {
     email: "",
     password: "",
@@ -39,13 +41,11 @@ const SignIn = () => {
       .required(authData.signIn.errors.pass.required),
   });
   const onSubmit = (values) => {
-    
     const userInfo = {
       email: values.email,
       password: values.password,
     };
     signIn(userInfo, dispatch, history);
-
   };
 
   const formik = useFormik({
@@ -70,11 +70,17 @@ const SignIn = () => {
             />
             <Input
               formik={formik}
-              type="password"
+              type={showPass ? "text" : "password"}
               name="password"
               label={authData.signIn.pass}
               placeHolder="********"
             />
+            <span
+              onClick={() => setShowPass((prevState) => !prevState)}
+              className={classes.showPassword}
+            >
+              <Visibility color="primary" />
+            </span>
             <div className={classes.checkBoxContainer}>
               <label>
                 <Checkbox
