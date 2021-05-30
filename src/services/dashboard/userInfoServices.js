@@ -216,7 +216,6 @@ export const getProposalDetail = async (ProposalId) => {
 
 //  SEARCH ALL REQUEST  --------------------------------- :
 
-// ClearancemanPanel/SearchAllQuotationRequests?pageNumber=1&pageSize=7&cargoTitle=%D8%A7%D8%B3%D8%A8&cargoTransportTools=RoadTransportation&portOfLoading=%D9%BE%D8%B1%D9%88%DB%8C%D8%B2&tariffCode=0101
 
 export const getSearchAllRequest = async (
   page,
@@ -224,7 +223,7 @@ export const getSearchAllRequest = async (
   tariffCode,
   cargoTitle,
   portOfLoading,
-  transportTools
+  transportTools 
 ) => {
   const data = await http
     .get(

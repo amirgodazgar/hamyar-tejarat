@@ -75,7 +75,7 @@ const ProposalsList = ({ backToTab }) => {
           لیست پیشنهاد ها
         </Typography>
       </Grid>
-      {pageData.length === 0 ? (
+      {rows.length === 0 ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>

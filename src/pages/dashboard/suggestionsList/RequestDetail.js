@@ -14,6 +14,7 @@ import { getSuggestionIdData } from "../../../services/dashboard/userInfoService
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
+import { Alert } from "@material-ui/lab";
 
 const RequestDetail = ({ userName }) => {
   const [pageData, setPageData] = useState([]);
@@ -130,7 +131,13 @@ const RequestDetail = ({ userName }) => {
                         <div className={classes.suggestText}>{item.text}</div>
                       </div>
                     ))}
-                    <Button
+                    {
+                      pageData.proposalsCount === 0 ? 
+                      <Alert severity="warning" className={classes.alert}>
+                        پیشنهادی ثبت نشده
+                      </Alert>
+                      :
+                      <Button
                       className={classes.suggestBtn}
                       color="primary"
                       variant="contained"
@@ -142,6 +149,8 @@ const RequestDetail = ({ userName }) => {
                     >
                       لیست پیشنهادهای ثبت شده
                     </Button>
+                    }
+                
                   </div>
                 </React.Fragment>
               )}

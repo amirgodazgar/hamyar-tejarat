@@ -34,7 +34,6 @@ const SearchAllRequest = ({ backToTab }) => {
   const [result, setResult] = useState([]);
   const history = useHistory();
 
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -67,7 +66,6 @@ const SearchAllRequest = ({ backToTab }) => {
       setResult(res);
     });
   };
-
 
   const rows = result !== undefined ? result : [];
   //   businessmanType: "Private"
@@ -105,7 +103,7 @@ const SearchAllRequest = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          لیست کد تعرفه کالا
+         جستجوی درخواست ها
         </Typography>
       </Grid>
       {!result ? (
@@ -159,7 +157,7 @@ const SearchAllRequest = ({ backToTab }) => {
                 </div>
                 <div className={classes.searchBox}>
                   <Typography className={classes.boxTitle} variant="body1">
-                    جستجو براساس نام کالا
+                    وسیله حمل کالا
                   </Typography>
                   <div className={classes.inputBox}>
                     <select
@@ -167,9 +165,6 @@ const SearchAllRequest = ({ backToTab }) => {
                       value={transportTools}
                       onChange={(e) => setTransportTools(e.target.value)}
                     >
-                      <option style={{ color: "rgba(0,0,0,0.6)" }} value={0}>
-                        انتخاب کنید
-                      </option>
                       <option value={1}>حمل و نقل هوایی</option>
                       <option value={2}>حمل و نقل دریایی</option>
                       <option value={3}>حمل و نقل ریلی</option>
@@ -208,7 +203,7 @@ const SearchAllRequest = ({ backToTab }) => {
                 <Paper className={styles.paper}>
                   <div className={styles.header}>
                     <Typography className={styles.title} variant="h6">
-                      جدیدترین پیشنهاد ها
+                      لیست درخواست ها
                     </Typography>
                     <div
                       className={styles.link}

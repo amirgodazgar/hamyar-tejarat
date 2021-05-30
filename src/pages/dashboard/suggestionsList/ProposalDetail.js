@@ -79,7 +79,7 @@ const ProposalDetail = ({ userName }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-         ثبت پیشنهاد استعلام قیمت
+          پیشنهاد استعلام قیمت
         </Typography>
       </Grid>
       <Grid item container spacing={1} xs={11}>
@@ -92,9 +92,7 @@ const ProposalDetail = ({ userName }) => {
               </div>
               <div
                 className={classes.requestDetailLink}
-                onClick={() =>
-                  history.goBack()
-                }
+                onClick={() => history.goBack()}
               >
                 <ArrowForwardIosRounded fontSize="small" />
                 <p>بازگشت به لیست درخواست ها</p>

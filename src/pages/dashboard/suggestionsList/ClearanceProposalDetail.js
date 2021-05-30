@@ -91,7 +91,7 @@ const ClearanceProposalDetail = ({ userName }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          جزئیات پیشنهاد
+          جزئیات درخواست
         </Typography>
       </Grid>
       <Grid item container spacing={1} xs={11}>

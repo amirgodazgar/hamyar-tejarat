@@ -356,6 +356,16 @@
   border-radius: 10px !important;
 }
 
+.alert {
+  grid-column: 1/3;
+  height: 3rem;
+  margin: 0 auto;
+  font-size: 1rem !important;
+  border-radius: 10px !important;
+  display: flex;
+  align-items: center;
+}
+
 .modal {
   display: flex;
   align-items: center;
