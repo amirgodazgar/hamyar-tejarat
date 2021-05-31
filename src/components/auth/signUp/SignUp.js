@@ -83,12 +83,12 @@ const SignUp = () => {
               label={authData.signUp.pass}
               placeHolder="********"
             />
-            <span
+            {/* <span
               onClick={() => setShowPass((prevState) => !prevState)}
               className={styles.showPassword}
             >
               <Visibility color="primary" />
-            </span>
+            </span> */}
             <div className={classes.checkBoxContainer}>
               <FormLabel className={classes.label}>
                 {" "}

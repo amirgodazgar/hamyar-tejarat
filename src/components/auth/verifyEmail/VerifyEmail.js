@@ -82,7 +82,6 @@ const VerifyEmail = () => {
         setTimeout(() => {
           dispatch(setMessage(""));
           dispatch(changeFormType("activeAccount"));
-        
         }, 2000);
       } else {
         setTimeout(() => {
@@ -113,7 +112,7 @@ const VerifyEmail = () => {
                   <Button
                     variant="outlined"
                     className={`${classes.btn} ${classes.btnSuccess}`}
-                    onClick={() => history.replace("/Register")}
+                    onClick={successHandler}
                   >
                     {message}
                   </Button>

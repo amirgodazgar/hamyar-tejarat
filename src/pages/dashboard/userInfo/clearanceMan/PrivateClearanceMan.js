@@ -14,10 +14,14 @@ import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { postClearancePrivate } from "../../../../services/dashboard/userInfoServices";
+import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 
 const PrivateClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
+  const [alert, setAlert] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [open, setOpen] = useState(false);
   const [workExpImg, setWorkExpImg] = useState(null);
   const [crimeImg, setCrimeImg] = useState(null);
   const initChips =
@@ -127,6 +131,8 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   const onSubmit = (values) => {
     console.log(values);
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
+    const filteredIds = [...new Set(ids)];
+
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
     formData.append(
@@ -152,10 +158,10 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
       userData.address !== undefined ? userData.address : values.address
     );
     formData.append(
-      "ChoosedCustomIds",
+      "StringChoosedCustomIds",
       userData.choosedCustoms.length === 0 ||
         userData.choosedCustoms === undefined
-        ? ids
+        ? filteredIds
         : userData.ChoosedCustomIds
     );
     formData.append(
@@ -167,7 +173,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
     );
 
-    postClearancePrivate(formData);
+    postClearancePrivate(formData, setAlert, setIsConfirm, setOpen);
   };
   const formik = useFormik({
     initialValues,
@@ -462,6 +468,13 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
               </Link>
             </div>
           </form>
+          {open ? (
+            <UserCheckBackDrop
+              setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
+              severity={isConfirm ? "success" : "error"}
+              message={alert}
+            />
+          ) : null}
         </Paper>
       ) : (
         <BackDrop />

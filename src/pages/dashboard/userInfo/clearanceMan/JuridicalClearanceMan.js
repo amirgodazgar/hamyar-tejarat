@@ -14,10 +14,14 @@ import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { postClearanceJuridical } from "../../../../services/dashboard/userInfoServices";
+import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState({});
+  const [alert, setAlert] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [open, setOpen] = useState(false);
   const [workExpImg, setWorkExpImg] = useState(null);
   const [crimeImg, setCrimeImg] = useState(null);
   const initChips =
@@ -49,9 +53,9 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
-      console.log(res.payload);
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
+      // console.log(res.payload);
     });
   }, []);
 
@@ -119,39 +123,41 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   const onSubmit = (values) => {
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
+    const choosedCustomsIds =
+      userData.choosedCustoms.length === 0
+        ? []
+        : userData.choosedCustoms.map((item) => +item.id);
+    const filteredIds = [...new Set(ids)];
+    let idContainer;
+    choosedCustomsIds.forEach((itm) => {
+      idContainer = ids.filter((item) => item !== itm);
+    });
+    const concatIds = [...new Set(idContainer)];
+    // console.log(concatIds);
+
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
     formData.append(
       "CompanyName",
-      userData.companyName !== null || userData.companyName !== undefined
-        ? userData.companyName
-        : values.companyName
+      userData.companyName !== null ? userData.companyName : values.companyName
     );
     formData.append(
       "NationalCompanyId",
-      userData.nationalCompanyId !== null ||
-        userData.nationalCompanyId !== undefined
+      userData.nationalCompanyId !== null
         ? userData.nationalCompanyId
         : values.companyNationalId
     );
     formData.append(
       "PhoneNumber",
-      userData.phoneNumber !== null || userData.phoneNumber !== undefined
-        ? userData.phoneNumber
-        : values.mobileNum
+      userData.phoneNumber !== null ? userData.phoneNumber : values.mobileNum
     );
     formData.append(
       "OfficeAddress",
-      userData.officeAddress !== null || userData.officeAddress !== undefined
-        ? userData.officeAddress
-        : values.address
+      userData.officeAddress !== null ? userData.officeAddress : values.address
     );
     formData.append(
-      "ChoosedCustomIds",
-      userData.choosedCustoms.length === 0 ||
-        userData.choosedCustoms === undefined
-        ? ids
-        : userData.choosedCustoms
+      "StringChoosedCustomIds",
+      userData.choosedCustoms.length === 0 ? filteredIds : concatIds
     );
     formData.append(
       "CertificateOfNoCriminalRecordImage",
@@ -162,7 +168,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
     );
 
-    postClearanceJuridical(formData);
+    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen);
   };
   const formik = useFormik({
     initialValues,
@@ -451,6 +457,13 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
               </Link>
             </div>
           </form>
+          {open ? (
+            <UserCheckBackDrop
+              setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
+              severity={isConfirm ? "success" : "error"}
+              message={alert}
+            />
+          ) : null}
         </Paper>
       ) : (
         <BackDrop />

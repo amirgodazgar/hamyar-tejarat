@@ -12,10 +12,18 @@ import { postBusinessmanPrivate } from "../../../../services/dashboard/userInfoS
 import { useDispatch } from "react-redux";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
 import BackDrop from "../../../../common/backDrop/BackDrop";
+import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 
 const PrivateBusinessMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
+  const [alert, setAlert] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const confirmFailed = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
@@ -50,8 +58,6 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
         : userData.email,
   };
 
-
-
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -85,7 +91,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    postBusinessmanPrivate(userInfo);
+    postBusinessmanPrivate(userInfo, setAlert, setIsConfirm, setOpen);
   };
   const formik = useFormik({
     initialValues,
@@ -176,6 +182,14 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
               </Link>
             </div>
           </form>
+          
+          {open ? (
+            <UserCheckBackDrop
+              setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
+              severity={isConfirm ? "success" : "error"}
+              message={alert}
+            />
+          ) : null}
         </Paper>
       ) : (
         <BackDrop />

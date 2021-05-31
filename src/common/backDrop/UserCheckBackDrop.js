@@ -2,15 +2,20 @@ import React from "react";
 import { Backdrop } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { Alert } from "@material-ui/lab";
-import { WarningOutlined } from "@material-ui/icons";
 
-const UserCheckBackDrop = () => {
+const UserCheckBackDrop = ({ setRoute, severity, message }) => {
   const history = useHistory();
+
+  const routeHandler = (route) => {
+    history.replace(route);
+    window.location.reload();
+  };
+
   return (
     <Backdrop
       open={true}
       style={{
-        zIndex: "9999999999999999999",
+        zIndex: "999999999999999999999999",
         background: "rgba(0,0,0,0.8)",
       }}
     >
@@ -23,16 +28,16 @@ const UserCheckBackDrop = () => {
           alignItems: "center",
           cursor: "pointer",
         }}
-        onClick={() => history.replace("/Dashboard/userInfo")}
+        onClick={() => routeHandler(setRoute)}
       >
         <Alert
           variant="filled"
-          severity="error"
+          severity={severity}
           style={{ cursor: "pointer", borderRadius: "10px" }}
         >
-          کاربر گرامی برای استفاده کامل از خدمات سایت همیار تجارت باید پروفایل و
-           مدارک خود را کامل کنید
-           (کلیک کنید)
+          {message
+            ? message
+            : "( کلیک کنید ) کاربر گرامی برای استفاده از تمامی خدمات سایت همیار تجارت باید اطلاعات کاربری و مدارک خود را کامل کنید"}
         </Alert>
       </div>
     </Backdrop>

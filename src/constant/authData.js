@@ -20,7 +20,6 @@ export const authData = {
         min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
         required: "رمز عبور را وارد کنید",
       },
-      
     },
   },
   signUp: {
@@ -30,7 +29,7 @@ export const authData = {
     personType: "نوع شخص",
     activityType: "نوع فعالیت",
     businessMan: "تاجر یا صاحب کالا",
-    clearanceMan: "ترخیص کالا",
+    clearanceMan: "ترخیص کار",
     real: "حقیقی",
     legal: "حقوقی",
     btn: "ثبت نام",
@@ -43,9 +42,8 @@ export const authData = {
         min: "رمز عبور باید بیشتر از 8 کارکتر باشد",
         required: "رمز عبور را وارد کنید",
       },
-      personType : 'نوع شخص را انتخاب کنید',
-      activityType : 'نوع فعالیت را انتخاب کنید'
-      
+      personType: "نوع شخص را انتخاب کنید",
+      activityType: "نوع فعالیت را انتخاب کنید",
     },
   },
   forgotPass: {
@@ -56,7 +54,7 @@ export const authData = {
   resetPass: {
     title: "تغییر رمز عبور",
     pass: "رمز عبور جدید",
-    passConfirm:" تکرار رمز عبور جدید",
+    passConfirm: " تکرار رمز عبور جدید",
     btn: "ثبت رمز جدید",
     errors: {
       pass: {
@@ -82,5 +80,5 @@ export const authData = {
   successSignUp: {
     title: "ثبت نام شما با موفقیت انجام شد",
     text: "لینک فعال سازی به ایمیل شما ارسال شد",
-  }
-}
+  },
+};

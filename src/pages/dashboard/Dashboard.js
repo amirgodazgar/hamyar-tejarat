@@ -644,7 +644,10 @@ const Dashboard = () => {
                     {isProfileCompleted ? (
                       <DashboardMain backToTab={selectedHandler} />
                     ) : (
-                      <UserCheckBackDrop />
+                      <UserCheckBackDrop
+                        setRoute="/Dashboard/userInfo"
+                        severity="error"
+                      />
                     )}
                   </Route>
 
@@ -653,7 +656,10 @@ const Dashboard = () => {
                     {isProfileCompleted ? (
                       <RequestRegister backToTab={selectedHandler} />
                     ) : (
-                      <UserCheckBackDrop />
+                      <UserCheckBackDrop
+                        setRoute="/Dashboard/userInfo"
+                        severity="error"
+                      />
                     )}
                   </Route>
 
@@ -707,7 +713,10 @@ const Dashboard = () => {
                     {isProfileCompleted ? (
                       <SearchAllRequest backToTab={selectedHandler} />
                     ) : (
-                      <UserCheckBackDrop />
+                      <UserCheckBackDrop
+                        setRoute="/Dashboard/userInfo"
+                        severity="error"
+                      />
                     )}
                   </Route>
 

@@ -4,9 +4,13 @@ import http from "../httpServices";
 // ----------------------------- BusinessMan Methods  -------------------------------- //
 
 // SEND INFORMATION BUSINESSMAN --------------------------------- :
-export const postBusinessmanPrivate = async (userInfo) => {
+export const postBusinessmanPrivate = async (
+  userInfo,
+  setAlert,
+  setIsConfirm,
+  setOpen
+) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
-  console.log(userInfo);
 
   await http
     .post("/BusinessmanPanel/UpdatePrivateBusinessmanProfile", {
@@ -17,11 +21,25 @@ export const postBusinessmanPrivate = async (userInfo) => {
     })
 
     .then((res) => {
-      // console.log("BusinessPrivate", res);
+      console.log("BusinessPrivate", res);
+      if (res.status === 200) {
+        setAlert("success");
+        setIsConfirm(true);
+        setOpen(true);
+      } else if (res.status === 400) {
+        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
+        setIsConfirm(false);
+        setOpen(true);
+      }
     });
 };
 
-export const postBusinessmanJuridical = async (userInfo) => {
+export const postBusinessmanJuridical = async (
+  userInfo,
+  setAlert,
+  setIsConfirm,
+  setOpen
+) => {
   const { companyName, nationalCompanyId, phoneNumber } = userInfo;
 
   await http
@@ -31,7 +49,19 @@ export const postBusinessmanJuridical = async (userInfo) => {
       phoneNumber,
     })
     .then((res) => {
-      // console.log("BusinessJuridical", res);
+      console.log("BusinessJuridical", res);
+      if (res.status === 200) {
+        setAlert("success");
+        setIsConfirm(true);
+        setOpen(true);
+      } else if (res.data.isSuccess === false) {
+        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
+        setIsConfirm(false);
+        setOpen(true);
+      }
+    })
+    .catch((error) => {
+      console.log("kos", error);
     });
 };
 
@@ -154,7 +184,12 @@ export const getProposalData = async (ProposalId) => {
 // ----------------------------- Clearance Methods  -------------------------------- //
 
 // SEND INFORMATION CLEARANCEMAN --------------------------------- :
-export const postClearancePrivate = async (userInfo) => {
+export const postClearancePrivate = async (
+  userInfo,
+  setAlert,
+  setIsConfirm,
+  setOpen
+) => {
   const token = Cookies.get("token");
 
   await http
@@ -165,12 +200,28 @@ export const postClearancePrivate = async (userInfo) => {
       },
     })
     .then((res) => {
-      // console.log("ClearancePrivate-response", res);
+      console.log("ClearancePrivate-response", res);
+      if (res.status === 200) {
+        setAlert("success");
+        setIsConfirm(true);
+        setOpen(true);
+      } else if (res.status === 400) {
+        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
+        setIsConfirm(false);
+        setOpen(true);
+      }
     });
 };
 
-export const postClearanceJuridical = async (userInfo) => {
+export const postClearanceJuridical = async (
+  userInfo,
+  setAlert,
+  setIsConfirm,
+  setOpen
+) => {
   const token = Cookies.get("token");
+  // console.log(userInfo.get("StringChoosedCustomIds"));
+
   await http
     .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
       headers: {
@@ -179,7 +230,17 @@ export const postClearanceJuridical = async (userInfo) => {
       },
     })
     .then((res) => {
-      // console.log("ClearanceJuridical-response", res);
+      console.log("ClearanceJuridical-response", res);
+      if (res.status === 200) {
+        setAlert(res.data.message);
+        setIsConfirm(true);
+        setOpen(true);
+      }
+    })
+    .catch((error) => {
+      setAlert(error.response.data.message);
+      setIsConfirm(false);
+      setOpen(true);
     });
 };
 

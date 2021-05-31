@@ -11,7 +11,7 @@ export const register = async (userInfo, dispatch, history) => {
       userRole,
     })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.data.isSuccess) {
         dispatch(setMessage(res.data.message));
         dispatch(checkVerify(true));
@@ -23,7 +23,7 @@ export const register = async (userInfo, dispatch, history) => {
         dispatch(setMessage(res.data.message));
         dispatch(checkVerify(false));
         // Show send another EMAIL
-        console.log("reject")
+        // console.log("reject")
         
       }
     });

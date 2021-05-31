@@ -12,10 +12,14 @@ import { postBusinessmanJuridical } from "../../../../services/dashboard/userInf
 import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
+import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 
 const JuridicalBusinessMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
+  const [alert, setAlert] = useState("");
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
@@ -31,7 +35,8 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
         : userData.companyName,
 
     companyNationalId:
-      userData.nationalCompanyId === null || userData.nationalCompanyId === undefined
+      userData.nationalCompanyId === null ||
+      userData.nationalCompanyId === undefined
         ? adminPanelData.userInfo.clearanceMan.placeHolder.companyNationalId
         : userData.nationalCompanyId,
 
@@ -77,7 +82,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    postBusinessmanJuridical(userInfo);
+    postBusinessmanJuridical(userInfo, setAlert, setIsConfirm, setOpen);
   };
   const formik = useFormik({
     initialValues,
@@ -162,6 +167,13 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
               </Link>
             </div>
           </form>
+          {open ? (
+            <UserCheckBackDrop
+              setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
+              severity={isConfirm ? "success" : "error"}
+              message={alert}
+            />
+          ) : null}
         </Paper>
       ) : (
         <BackDrop />

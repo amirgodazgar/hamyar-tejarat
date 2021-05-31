@@ -11,7 +11,6 @@ import { clearCookies } from "../../helper/cookies";
 
 const Navbar = () => {
   const isLogin = Cookies.get("login");
-  const [navbar, setNavbar] = useState(false);
   const history = useHistory();
   const [search, setSearch] = useState(true);
   // const searchHandler = () => setSearch((prevState) => !prevState);
@@ -20,22 +19,8 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const fixedNavbar = () => {
-    if (window.pageYOffset > 300) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  window.addEventListener("scroll", fixedNavbar);
-  console.log(navbar);
-
   return (
-    <header
-      className={
-        navbar ? `${classes.header} ${classes.fixedNav}` : classes.header
-      }
-    >
+    <header className={classes.header}>
       <nav data-aos="fade-down" className={classes.navbar}>
         <Link className={classes.logo} to="/">
           <span className={classes.logoText}>همیار تجارت</span>
@@ -93,11 +78,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      <div
-        data-aos="fade-up"
-        style={navbar ? { display: "none" } : null}
-        className={classes.mainTitle}
-      >
+      <div data-aos="fade-up" className={classes.mainTitle}>
         <h1>سامانه همیار تجارت</h1>
         <h6>نخستین سامانه برونسپاری ترخیص کالا در ایران</h6>
         <Button customizeClass="header">همین حالا شروع کنید</Button>

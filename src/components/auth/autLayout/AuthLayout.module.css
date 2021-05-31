@@ -7,7 +7,7 @@
 }
 .container {
   width: 75%;
-  height: 40rem;
+  height: 85%;
   margin: 0 auto;
   display: flex;
   flex-direction: row-reverse;
@@ -115,4 +115,39 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    width: 85%;
+  }
+  .switchBox {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 85%;
+  }
+  .switchBox {
+    width: 70%;
+  }
+  .up {
+    margin: 35% 0 0 0;
+    font-size: 1rem;
+  }
+  .center {
+    font-size: 2rem;
+  }
+  .down {
+    font-size: 1rem;
+  }
+
+  .switchBtn span {
+    font-size: 1rem;
+  }
+  .signIn , .signUp {
+    font-size: 1.3rem;
+  }
 }
