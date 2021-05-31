@@ -14,13 +14,12 @@ import {
   TablePagination,
   Typography,
 } from "@material-ui/core";
-import {
-  ArrowBackIosRounded,
-} from "@material-ui/icons";
+import { ArrowBackIosRounded } from "@material-ui/icons";
 import { getProposalsList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
+import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
 
 const ClearanceProposalList = ({ backToTab }) => {
   const [page, setPage] = React.useState(0);
@@ -67,8 +66,12 @@ const ClearanceProposalList = ({ backToTab }) => {
           لیست پیشنهاد ها
         </Typography>
       </Grid>
-      {pageData.length === 0 || pageData === undefined ? (
-        <BackDrop />
+      {pageData.length === 0 ? (
+        <UserCheckBackDrop
+          setRoute="/Dashboard/getQuotationRequestList/SearchAllQuotationRequests"
+          severity="warning"
+          message="هیچ پیشنهادی ثبت نشده است (برای ثبت پیشنهاد کلیک کنید)"
+        />
       ) : (
         <Grid item container spacing={1} xs={11}>
           <Grid item container xs={12}>

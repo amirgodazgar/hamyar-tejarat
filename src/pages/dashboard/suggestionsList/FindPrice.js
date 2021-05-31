@@ -3,8 +3,7 @@ import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
   Grid,
-  // Fade,
-  // Avatar,
+
   Paper,
   Table,
   TableBody,
@@ -16,12 +15,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
-// import { useFormik } from "formik";
-// import * as Yup from "yup";
 import { getSuggestionsListData } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
+import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
 
 const FindPrice = ({ backToTab }) => {
   const [page, setPage] = React.useState(0);
@@ -54,51 +52,7 @@ const FindPrice = ({ backToTab }) => {
     );
   };
 
-  // const initialValues = {
-  //   first: "",
-  //   second: "",
-  //   third: "",
-  // };
 
-  // const validationSchema = Yup.object({
-  //   first: Yup.string().required("فیلد را پر کنید"),
-  //   second: Yup.string().required("فیلد را پر کنید"),
-  //   third: Yup.mixed().required("انتخاب کنید"),
-  // });
-
-  // const onSubmit = (values) => {
-  //   const userInfo = {
-  //     first: values.first,
-  //     second: values.second,
-  //     third: values.third,
-  //   };
-  //   console.log(userInfo);
-  // };
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit,
-  //   validationSchema,
-  // });
-
-  // const clearHandler = () => {
-  //   formik.values.first = "";
-  //   formik.values.second = "";
-  //   formik.values.third = "";
-  // };
-
-  // const errorBox = (name, label) => (
-  //   <div className={classes.errorBox}>
-  //     <label htmlFor={name}>{label}</label>
-  //     {formik.touched[name] && formik.errors[name] ? (
-  //       <Fade
-  //         in={formik.touched[name] && formik.errors[name] ? true : false}
-  //         timeout={400}
-  //       >
-  //         <div className={classes.error}>{formik.errors[name]}</div>
-  //       </Fade>
-  //     ) : null}
-  //   </div>
-  // );
 
   return (
     <Grid
@@ -112,8 +66,12 @@ const FindPrice = ({ backToTab }) => {
           درخواست استعلام قیمت
         </Typography>
       </Grid>
-      {pageData.length === 0 || pageData === undefined ? (
-        <BackDrop />
+      {pageData.length === 0 ? (
+        <UserCheckBackDrop
+          setRoute="/Dashboard/requestRegister"
+          severity="warning"
+          message="هیچ درخواستی ثبت نشده است (برای ثبت درخواست کلیک کنید)"
+        />
       ) : (
         <Grid item container spacing={1} xs={11}>
           {/* <Paper className={classes.mainPaper}> */}
@@ -123,76 +81,6 @@ const FindPrice = ({ backToTab }) => {
             // spacing={3}
             xs={12}
           >
-            {/* <Grid item xs={12}>
-            <form
-                onSubmit={formik.handleSubmit}
-                className={classes.inputContainer}
-              >
-                <div className={classes.inputBox}>
-                  <InputField
-                    customizeLabel="userInfo_label"
-                    customizeInput="userInfo_input"
-                    formik={formik}
-                    name="first"
-                    type="text"
-                    label="فیلتر اول"
-                    placeHolder="فیلتر اول"
-                  />
-                </div>
-                <div className={classes.inputBox}>
-                  <InputField
-                    customizeLabel="userInfo_label"
-                    customizeInput="userInfo_input"
-                    formik={formik}
-                    name="second"
-                    type="text"
-                    label="فیلتر دوم"
-                    placeHolder="فیلتر دوم"
-                  />
-                </div>
-                <div className={classes.inputBox}>
-                  {errorBox("third", "فیلتر سوم")}
-                  <select
-                    name="third"
-                    value={formik.values.third}
-                    onChange={formik.handleChange}
-                    className={`${classes.selectedInput}  ${
-                      formik.touched.third &&
-                      formik.errors.third &&
-                      formik.values.third === "0"
-                        ? classes.inputError
-                        : null
-                    } `}
-                  >
-                    {[
-                      { label: "انتخاب کنید", value: "0" },
-                      { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                      { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                      { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                    ].map((option, index) => (
-                      <option
-                        style={
-                          option.value === "0"
-                            ? { color: "rgba(0,0,0,0.4)" }
-                            : null
-                        }
-                        value={option.value}
-                        label={option.label}
-                        key={index}
-                      />
-                    ))}
-                  </select>
-                </div>
-                <div className={classes.btnBox}>
-                  <button className={classes.filterBtn} type="submit">
-                    اعمال فیلتر
-                  </button>
-                  <button className={classes.clearBtn} onClick={clearHandler}>
-                    <ClearRounded fontSize="large" />
-                  </button>
-                </div>
-              </form>
-            </Grid> */}
 
             <Grid item xs={12}>
               <Paper className={classes.paper}>
@@ -263,9 +151,7 @@ const FindPrice = ({ backToTab }) => {
                                 }
                               >
                                 <TableCell>
-                                  {/* <div className={classes.businessMan}>
-                                    <Avatar src={avatarImg} />
-                                  </div> */}
+                                
                                 </TableCell>
                                 <TableCell>{row.cargoTitle}</TableCell>
                                 <TableCell>{row.proposalsCount}</TableCell>

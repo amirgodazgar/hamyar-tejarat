@@ -23,14 +23,15 @@ export const postBusinessmanPrivate = async (
     .then((res) => {
       console.log("BusinessPrivate", res);
       if (res.status === 200) {
-        setAlert("success");
+        setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);
-      } else if (res.status === 400) {
-        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
-        setIsConfirm(false);
-        setOpen(true);
       }
+    })
+    .catch((error) => {
+      setAlert(error.response.data.message);
+      setIsConfirm(false);
+      setOpen(true);
     });
 };
 
@@ -51,17 +52,15 @@ export const postBusinessmanJuridical = async (
     .then((res) => {
       console.log("BusinessJuridical", res);
       if (res.status === 200) {
-        setAlert("success");
+        setAlert(res.data.message);
         setIsConfirm(true);
-        setOpen(true);
-      } else if (res.data.isSuccess === false) {
-        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
-        setIsConfirm(false);
         setOpen(true);
       }
     })
     .catch((error) => {
-      console.log("kos", error);
+      setAlert(error.response.data.message);
+      setIsConfirm(false);
+      setOpen(true);
     });
 };
 
@@ -202,14 +201,15 @@ export const postClearancePrivate = async (
     .then((res) => {
       console.log("ClearancePrivate-response", res);
       if (res.status === 200) {
-        setAlert("success");
+        setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);
-      } else if (res.status === 400) {
-        setAlert("خطا در ثبت اطلاعات (ورودی های خود را چک کنید)");
-        setIsConfirm(false);
-        setOpen(true);
       }
+    })
+    .catch((error) => {
+      setAlert(error.response.data.message);
+      setIsConfirm(false);
+      setOpen(true);
     });
 };
 

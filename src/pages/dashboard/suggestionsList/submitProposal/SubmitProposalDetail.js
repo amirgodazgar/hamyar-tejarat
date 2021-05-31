@@ -54,7 +54,8 @@ const SubmitProposalDetail = ({ userName }) => {
     setTimeout(() => {
       setIsSuccess(false);
       setOpen(false);
-    }, 5000);
+      window.location.reload();
+    }, 3000);
   };
 
   const infoData = [
@@ -73,6 +74,10 @@ const SubmitProposalDetail = ({ userName }) => {
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,
+    },
+    {
+      title: " گمرک های مقصد :",
+      text: pageData.customOrigins,
     },
   ];
 
@@ -137,7 +142,7 @@ const SubmitProposalDetail = ({ userName }) => {
             </Grid>
 
             <Grid item xs={10} className={classes.requestDetailMain}>
-              {pageData.length === 0 || pageData === undefined ? (
+              {pageData.length === 0 ? (
                 <BackDrop />
               ) : (
                 <React.Fragment>
@@ -151,98 +156,107 @@ const SubmitProposalDetail = ({ userName }) => {
                         <div className={classes.suggestText}>{item.text}</div>
                       </div>
                     ))}
-                    <Button
-                      className={classes.suggestBtn}
-                      color="primary"
-                      variant="contained"
-                      onClick={handleOpen}
-                    >
-                      ثبت پیشنهاد
-                    </Button>
-                    <Modal
-                      aria-labelledby="transition-modal-title"
-                      aria-describedby="transition-modal-description"
-                      className={classes.modal}
-                      open={open}
-                      onClose={handleClose}
-                      closeAfterTransition
-                      BackdropComponent={Backdrop}
-                      BackdropProps={{
-                        timeout: 500,
-                      }}
-                    >
-                      <Fade in={open}>
-                        <Paper className={classes.modalPaper}>
-                          <Typography
-                            variant="h6"
-                            align="center"
-                            color="primary"
-                            className={classes.modalTitle}
-                          >
-                            ثبت پیشنهاد برای درخواست
-                          </Typography>
-                          <input
-                            className={classes.modalInput}
-                            type="text"
-                            value={proposalValue}
-                            placeholder="مبلغ پیشنهادی"
-                            onChange={(e) => setProposalValue(e.target.value)}
-                          />
-                          <input
-                            className={classes.modalInput}
-                            type="text"
-                            value={proposalDays}
-                            placeholder="تعداد روز پیشنهادی برای ترخیص"
-                            onChange={(e) => setProposalDays(e.target.value)}
-                          />
+                    {pageData.clearancemanCanSubmitProposal ? (
+                      <Button
+                        className={classes.suggestBtn}
+                        color="primary"
+                        variant="contained"
+                        onClick={handleOpen}
+                      >
+                        ثبت پیشنهاد
+                      </Button>
+                    ) : (
+                      <Alert severity="warning" className={classes.alert}>
+                        شما قبلا برای این پیشنهاد یک درخواست ثبت کرده اید
+                      </Alert>
+                    )}
 
-                          <Button
-                            className={classes.modalBtn}
-                            color="primary"
-                            variant="contained"
-                            onClick={() =>
-                              submitProposalHandler(
-                                pageData.id,
-                                proposalValue,
-                                proposalDays,
-                                pageData.businessmanType
-                              )
-                            }
-                          >
-                            ثبت
-                          </Button>
-                          <Fade in={isSuccess}>
-                            {isSuccess ? (
-                              <Alert
-                                variant="standard"
-                                color="success"
-                                onClick={() => setOpen(false)}
-                                style={
-                                  alertMessage === ""
-                                    ? { display: "none" }
-                                    : null
-                                }
-                              >
-                                {alertMessage}
-                              </Alert>
-                            ) : (
-                              <Alert
-                                variant="standard"
-                                color="error"
-                                onClick={() => setOpen(false)}
-                                style={
-                                  alertMessage === ""
-                                    ? { display: "none" }
-                                    : null
-                                }
-                              >
-                                {alertMessage}
-                              </Alert>
-                            )}
-                          </Fade>
-                        </Paper>
-                      </Fade>
-                    </Modal>
+                    {pageData.clearancemanCanSubmitProposal ? (
+                      <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                          timeout: 500,
+                        }}
+                      >
+                        <Fade in={open}>
+                          <Paper className={classes.modalPaper}>
+                            <Typography
+                              variant="h6"
+                              align="center"
+                              color="primary"
+                              className={classes.modalTitle}
+                            >
+                              ثبت پیشنهاد استعلام قیمت
+                            </Typography>
+                            <input
+                              className={classes.modalInput}
+                              type="text"
+                              value={proposalValue}
+                              placeholder="مبلغ پیشنهادی"
+                              onChange={(e) => setProposalValue(e.target.value)}
+                            />
+                            <input
+                              className={classes.modalInput}
+                              type="text"
+                              value={proposalDays}
+                              placeholder="تعداد روز پیشنهادی برای ترخیص"
+                              onChange={(e) => setProposalDays(e.target.value)}
+                            />
+
+                            <Button
+                              className={classes.modalBtn}
+                              color="primary"
+                              variant="contained"
+                              onClick={() =>
+                                submitProposalHandler(
+                                  pageData.id,
+                                  proposalValue,
+                                  proposalDays,
+                                  pageData.businessmanType
+                                )
+                              }
+                            >
+                              ثبت
+                            </Button>
+                            <Fade in={isSuccess}>
+                              {isSuccess ? (
+                                <Alert
+                                  variant="standard"
+                                  color="success"
+                                  onClick={() => setOpen(false)}
+                                  style={
+                                    alertMessage === ""
+                                      ? { display: "none" }
+                                      : null
+                                  }
+                                >
+                                  {alertMessage}
+                                </Alert>
+                              ) : (
+                                <Alert
+                                  variant="standard"
+                                  color="success"
+                                  onClick={() => setOpen(false)}
+                                  style={
+                                    alertMessage === ""
+                                      ? { display: "none" }
+                                      : null
+                                  }
+                                >
+                                  {alertMessage}
+                                </Alert>
+                              )}
+                            </Fade>
+                          </Paper>
+                        </Fade>
+                      </Modal>
+                    ) : null}
                   </div>
                 </React.Fragment>
               )}

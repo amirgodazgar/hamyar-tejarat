@@ -14,7 +14,6 @@
   justify-content: center;
 }
 
-
 /* SEARCH BAR */
 .searchContainer {
   display: flex;
@@ -92,4 +91,9 @@
   cursor: pointer;
   transition: all 250ms !important;
 }
-
+.alert div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  font-size: 0.8rem !important;
+}
