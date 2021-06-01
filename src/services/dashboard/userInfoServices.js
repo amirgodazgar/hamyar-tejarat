@@ -191,6 +191,8 @@ export const postClearancePrivate = async (
   setOpen
 ) => {
   const token = Cookies.get("token");
+  console.log(userInfo.get("WorkExperienceImage"));
+  console.log(userInfo.get("CertificateOfNoCriminalRecordImage"));
 
   await http
     .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {

@@ -28,6 +28,7 @@ const ProposalsList = ({ backToTab }) => {
   const [pageData, setPageData] = useState([]);
   const history = useHistory();
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -41,6 +42,7 @@ const ProposalsList = ({ backToTab }) => {
     let curPage = page === 0 ? 1 : page;
     getProposalsListData(curPage, rowsPerPage, id).then((res) => {
       setPageData(res.results);
+      setIsLoading(false);
       console.log(res);
     });
     backToTab(1);
@@ -74,7 +76,7 @@ const ProposalsList = ({ backToTab }) => {
           لیست پیشنهاد ها
         </Typography>
       </Grid>
-      {rows.length === 0 ? (
+      {isLoading ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>

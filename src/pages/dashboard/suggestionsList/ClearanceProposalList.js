@@ -78,6 +78,7 @@ const ClearanceProposalList = ({ backToTab }) => {
               setRoute="/Dashboard/getQuotationRequestList/SearchAllQuotationRequests"
               severity="warning"
               message="هیچ پیشنهادی ثبت نشده است (برای ثبت پیشنهاد کلیک کنید)"
+              reload={false}
             />
           ) : (
             <Grid item container spacing={1} xs={11}>

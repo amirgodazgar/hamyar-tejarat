@@ -3,12 +3,14 @@ import { Backdrop } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { Alert } from "@material-ui/lab";
 
-const UserCheckBackDrop = ({ setRoute, severity, message }) => {
+const UserCheckBackDrop = ({ setRoute, severity, message, reload }) => {
   const history = useHistory();
 
   const routeHandler = (route) => {
     history.replace(route);
-    window.location.reload();
+    if (reload) {
+      window.location.reload();
+    }
   };
 
   return (

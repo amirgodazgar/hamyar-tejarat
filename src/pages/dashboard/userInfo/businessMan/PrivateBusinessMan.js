@@ -188,6 +188,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
               setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
               severity={isConfirm ? "success" : "error"}
               message={alert}
+              reload={true}
             />
           ) : null}
         </Paper>

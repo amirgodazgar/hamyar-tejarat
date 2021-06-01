@@ -19,10 +19,12 @@ const ProposalDetail = ({ userName }) => {
   const [pageData, setPageData] = useState([]);
   const { id } = useParams();
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getProposalData(id).then((res) => {
       setPageData(res);
+      setIsLoading(false);
     });
   }, []);
 
@@ -82,45 +84,51 @@ const ProposalDetail = ({ userName }) => {
           پیشنهاد استعلام قیمت
         </Typography>
       </Grid>
-      <Grid item container spacing={1} xs={11}>
-        <Paper className={classes.mainPaper}>
-          <Grid item container xs={12}>
-            <Grid item xs={10} className={classes.requestDetailTitle}>
-              <div className={classes.businessMan}>
-                <Avatar src={avatarImg} />
-                <h6 className={classes.businessManName}>{userName()}</h6>
-              </div>
-              <div
-                className={classes.requestDetailLink}
-                onClick={() => history.goBack()}
-              >
-                <ArrowForwardIosRounded fontSize="small" />
-                <p>بازگشت به لیست درخواست ها</p>
-              </div>
-            </Grid>
+      {isLoading ? (
+        <BackDrop />
+      ) : (
+        <Grid item container spacing={1} xs={11}>
+          <Paper className={classes.mainPaper}>
+            <Grid item container xs={12}>
+              <Grid item xs={10} className={classes.requestDetailTitle}>
+                <div className={classes.businessMan}>
+                  <Avatar src={avatarImg} />
+                  <h6 className={classes.businessManName}>{userName()}</h6>
+                </div>
+                <div
+                  className={classes.requestDetailLink}
+                  onClick={() => history.goBack()}
+                >
+                  <ArrowForwardIosRounded fontSize="small" />
+                  <p>بازگشت به لیست درخواست ها</p>
+                </div>
+              </Grid>
 
-            <Grid item xs={10} className={classes.requestDetailMain}>
-              {pageData.length === 0 || pageData === undefined ? (
-                <BackDrop />
-              ) : (
-                <React.Fragment>
-                  <div className={classes.infoDataContainer}>
-                    {showInfoData(infoData)}
-                  </div>
-                  <div className={classes.suggestDataContainer}>
-                    {suggestData.map((item, index) => (
-                      <div className={classes.suggestBox} key={index}>
-                        <div className={classes.suggestTitle}>{item.title}</div>
-                        <div className={classes.suggestText}>{item.text}</div>
-                      </div>
-                    ))}
-                  </div>
-                </React.Fragment>
-              )}
+              <Grid item xs={10} className={classes.requestDetailMain}>
+                {pageData.length === 0 || pageData === undefined ? (
+                  <BackDrop />
+                ) : (
+                  <React.Fragment>
+                    <div className={classes.infoDataContainer}>
+                      {showInfoData(infoData)}
+                    </div>
+                    <div className={classes.suggestDataContainer}>
+                      {suggestData.map((item, index) => (
+                        <div className={classes.suggestBox} key={index}>
+                          <div className={classes.suggestTitle}>
+                            {item.title}
+                          </div>
+                          <div className={classes.suggestText}>{item.text}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </React.Fragment>
+                )}
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 };

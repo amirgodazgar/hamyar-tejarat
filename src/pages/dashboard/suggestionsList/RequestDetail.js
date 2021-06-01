@@ -20,10 +20,12 @@ const RequestDetail = ({ userName }) => {
   const [pageData, setPageData] = useState([]);
   const { id } = useParams();
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getSuggestionIdData(id).then((res) => {
       setPageData(res);
+      setIsLoading(false);
     });
   }, []);
 
@@ -99,27 +101,27 @@ const RequestDetail = ({ userName }) => {
           درخواست استعلام قیمت
         </Typography>
       </Grid>
-      <Grid item container spacing={1} xs={11}>
-        <Paper className={classes.mainPaper}>
-          <Grid item container xs={12}>
-            <Grid item xs={10} className={classes.requestDetailTitle}>
-              <div className={classes.businessMan}>
-                <Avatar src={avatarImg} />
-                <h6 className={classes.businessManName}>{userName()}</h6>
-              </div>
-              <div
-                className={classes.requestDetailLink}
-                onClick={() => history.goBack()}
-              >
-                <ArrowForwardIosRounded fontSize="small" />
-                <p>بازگشت به لیست درخواست ها</p>
-              </div>
-            </Grid>
+      {isLoading ? (
+        <BackDrop />
+      ) : (
+        <Grid item container spacing={1} xs={11}>
+          <Paper className={classes.mainPaper}>
+            <Grid item container xs={12}>
+              <Grid item xs={10} className={classes.requestDetailTitle}>
+                <div className={classes.businessMan}>
+                  <Avatar src={avatarImg} />
+                  <h6 className={classes.businessManName}>{userName()}</h6>
+                </div>
+                <div
+                  className={classes.requestDetailLink}
+                  onClick={() => history.goBack()}
+                >
+                  <ArrowForwardIosRounded fontSize="small" />
+                  <p>بازگشت به لیست درخواست ها</p>
+                </div>
+              </Grid>
 
-            <Grid item xs={10} className={classes.requestDetailMain}>
-              {pageData.length === 0 ? (
-                <BackDrop />
-              ) : (
+              <Grid item xs={10} className={classes.requestDetailMain}>
                 <React.Fragment>
                   <div className={classes.infoDataContainer}>
                     {showInfoData(infoData)}
@@ -131,33 +133,31 @@ const RequestDetail = ({ userName }) => {
                         <div className={classes.suggestText}>{item.text}</div>
                       </div>
                     ))}
-                    {
-                      pageData.proposalsCount === 0 ? 
+                    {pageData.proposalsCount === 0 ? (
                       <Alert severity="warning" className={classes.alert}>
                         پیشنهادی ثبت نشده
                       </Alert>
-                      :
+                    ) : (
                       <Button
-                      className={classes.suggestBtn}
-                      color="primary"
-                      variant="contained"
-                      onClick={() =>
-                        history.replace(
-                          `/Dashboard/suggestionsList/quotationProposals/${id}`
-                        )
-                      }
-                    >
-                      لیست پیشنهادهای ثبت شده
-                    </Button>
-                    }
-                
+                        className={classes.suggestBtn}
+                        color="primary"
+                        variant="contained"
+                        onClick={() =>
+                          history.replace(
+                            `/Dashboard/suggestionsList/quotationProposals/${id}`
+                          )
+                        }
+                      >
+                        لیست پیشنهادهای ثبت شده
+                      </Button>
+                    )}
                   </div>
                 </React.Fragment>
-              )}
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Grid>
+          </Paper>
+        </Grid>
+      )}
     </Grid>
   );
 };

@@ -59,11 +59,17 @@ const Dashboard = () => {
   const [openProposalList, setOpenProposalList] = useState(false);
   const [userData, setUserData] = useState([]);
   const [isProfileCompleted, setIsProfileCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
-      setIsProfileCompleted(res.payload.isProfileCompleted);
+      const checkProfileCompleted =
+        res.payload.isProfileCompleted === undefined
+          ? false
+          : res.payload.isProfileCompleted;
+      setIsProfileCompleted(checkProfileCompleted);
+      setIsLoading(false);
     });
   }, []);
 
@@ -137,7 +143,7 @@ const Dashboard = () => {
         history.replace("/register")
       ) : (
         <div className={classes.container}>
-          {userData === undefined || userData.length === 0 ? (
+          {isLoading ? (
             <BackDrop />
           ) : (
             <>
@@ -641,12 +647,15 @@ const Dashboard = () => {
               <div className={classes.main}>
                 <Switch>
                   <Route exact path="/Dashboard/main">
-                    {isProfileCompleted ? (
+                    {isLoading ? (
+                      <BackDrop />
+                    ) : isProfileCompleted ? (
                       <DashboardMain backToTab={selectedHandler} />
                     ) : (
                       <UserCheckBackDrop
                         setRoute="/Dashboard/userInfo"
                         severity="error"
+                        reload={false}
                       />
                     )}
                   </Route>
@@ -659,6 +668,7 @@ const Dashboard = () => {
                       <UserCheckBackDrop
                         setRoute="/Dashboard/userInfo"
                         severity="error"
+                        reload={false}
                       />
                     )}
                   </Route>
@@ -716,6 +726,7 @@ const Dashboard = () => {
                       <UserCheckBackDrop
                         setRoute="/Dashboard/userInfo"
                         severity="error"
+                        reload={false}
                       />
                     )}
                   </Route>

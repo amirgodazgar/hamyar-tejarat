@@ -173,7 +173,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    // validationSchema,
+    validationSchema,
   });
 
   return (
@@ -462,6 +462,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
               setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}
               severity={isConfirm ? "success" : "error"}
               message={alert}
+              reload={true}
             />
           ) : null}
         </Paper>
