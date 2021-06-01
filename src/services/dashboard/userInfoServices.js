@@ -123,7 +123,8 @@ export const getSuggestionsListData = async (pageNumber = 1, pageSize = 10) => {
     .then((res) => {
       // console.log(res);
       if (res.status === 200) {
-        return res.data.data;
+        // return res.data.data;
+        return res.data;
       }
     });
   return data;

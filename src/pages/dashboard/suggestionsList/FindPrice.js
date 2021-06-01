@@ -3,7 +3,6 @@ import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
   Grid,
-
   Paper,
   Table,
   TableBody,
@@ -38,7 +37,8 @@ const FindPrice = ({ backToTab }) => {
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
     getSuggestionsListData(curPage, rowsPerPage).then((res) => {
-      setPageData(res.results);
+      setPageData(res.data.results);
+      console.log(res);
     });
     backToTab(1);
     history.push("/Dashboard/suggestionsList/quotationRequestList");
@@ -51,8 +51,6 @@ const FindPrice = ({ backToTab }) => {
       `/Dashboard/suggestionsList/singleQuotationRequest/${requestId}`
     );
   };
-
-
 
   return (
     <Grid
@@ -81,7 +79,6 @@ const FindPrice = ({ backToTab }) => {
             // spacing={3}
             xs={12}
           >
-
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <div className={classes.priceHeader}>
@@ -150,9 +147,7 @@ const FindPrice = ({ backToTab }) => {
                                   showDetailHandler(row.quotationRequestsId)
                                 }
                               >
-                                <TableCell>
-                                
-                                </TableCell>
+                                <TableCell></TableCell>
                                 <TableCell>{row.cargoTitle}</TableCell>
                                 <TableCell>{row.proposalsCount}</TableCell>
                                 <TableCell>{row.requestDescription}</TableCell>

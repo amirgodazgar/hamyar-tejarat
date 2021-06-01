@@ -18,7 +18,7 @@ import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
   const [alert, setAlert] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
-      // console.log(res.payload);
+      console.log(res.payload);
     });
   }, []);
 
@@ -178,7 +178,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   return (
     <React.Fragment>
-      {userData ? (
+      {userData.length !== 0 ? (
         <Paper className={classes.paper}>
           <form
             onSubmit={formik.handleSubmit}

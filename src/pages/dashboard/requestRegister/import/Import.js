@@ -16,7 +16,10 @@ import UploadPurchase from "./UploadPurchase";
 import UploadPrice from "./UploadPrice";
 import { Check } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { getRequestRegisterFormData, postRequestRegisterFormData } from "../../../../services/dashboard/userInfoServices";
+import {
+  getRequestRegisterFormData,
+  postRequestRegisterFormData,
+} from "../../../../services/dashboard/userInfoServices";
 // import { adminPanelData } from "../../../../constant/adminPanel";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -71,15 +74,17 @@ const Import = () => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
+    const filtered = [...new Set(ids)];
+    console.log(filtered);
+
     if (formik.isValid) {
       setActiveStep(4);
       const userInfo = {
         tariffCode: values.tariffCode,
         cargoTitle: values.cargoTitle,
         portOfLoading: values.portOfLoading,
-        originCustomIds: ids,
+        originCustomIds: filtered,
         packagingType: values.packagingType,
         cargoAmount: values.cargoAmount,
         cargoTransportTools: values.cargoTransportTools,

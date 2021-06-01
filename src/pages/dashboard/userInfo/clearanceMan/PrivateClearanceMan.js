@@ -183,7 +183,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
 
   return (
     <React.Fragment>
-      {userData ? (
+      {userData.length !== 0 ? (
         <Paper className={classes.paper}>
           <form
             onSubmit={formik.handleSubmit}
@@ -461,7 +461,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 ثبت
               </Button>
 
-              <Link to="/Dashboard/main" replace>
+              <Link to="/Dashboard/main" replace >
                 <Button click={() => backToDashboard(0)} customizeClass="auth">
                   انصراف
                 </Button>
