@@ -23,6 +23,7 @@ const ClearanceProposalDetail = ({ userName }) => {
   useEffect(() => {
     getProposalDetail(id).then((res) => {
       setPageData(res);
+      console.log(pageData);
     });
   }, []);
 
@@ -50,6 +51,10 @@ const ClearanceProposalDetail = ({ userName }) => {
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,
+    },
+    {
+      title: " گمرک های مقصد:",
+      text: pageData.customOrigins,
     },
   ];
 

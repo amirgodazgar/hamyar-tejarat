@@ -161,11 +161,11 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     );
     formData.append(
       "CertificateOfNoCriminalRecordImage",
-      workExpImg ? workExpImg : userData.workExperienceImagePath
+      workExpImg ? workExpImg : userData.certificateOfNoCriminalRecordImagePath
     );
     formData.append(
       "WorkExperienceImage",
-      crimeImg ? crimeImg : userData.certificateOfNoCriminalRecordImagePath
+      crimeImg ? crimeImg : userData.workExperienceImagePath
     );
 
     postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen);
