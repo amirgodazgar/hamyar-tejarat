@@ -1,6 +1,5 @@
 .footer {
   width: 100%;
-  background-color: blue;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -122,8 +121,7 @@
   .signUp h6 {
     font-size: 1.1rem;
   }
-  .links h6 {
-  }
+
   .links ul {
     flex: 2.5;
   }
@@ -142,5 +140,45 @@
   }
   .signUpBox input::placeholder {
     font-size: 0.8rem;
+  }
+}
+@media only screen and (max-width: 426px) {
+  .main {
+    grid-template-columns: 100%;
+    height: 40rem;
+  }
+  .preview,
+  .links,
+  .signUp {
+    padding: 0;
+  }
+  .preview h2 {
+    font-size: 1.7rem;
+  }
+  .preview p {
+    font-size: 0.7rem;
+    flex: 3;
+  }
+  .links ul {
+    flex: 4;
+  }
+  .links li {
+    font-size: 0.85rem;
+  }
+  .signUp span {
+    font-size: 0.7rem;
+  }
+  .signUpBox {
+    display: flex;
+    align-items: center;
+    width: 90%;
+  }
+  .signUpBox input {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .copyRight {
+    font-size: 0.7rem;
   }
 }

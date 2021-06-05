@@ -94,6 +94,10 @@
   transform: translateY(0);
   transition: all 200ms;
 }
+.link span a {
+  color: #277fe5;
+}
+
 .linkText {
   margin: 0 0.5rem;
   font-weight: bold;
@@ -129,5 +133,54 @@
   }
   .link:last-child {
     padding-bottom: 0.6rem !important;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .card.vertical {
+    flex-direction: row;
+    height: 90%;
+  }
+  .card.horizontal {
+    flex-direction: column;
+    height: 100%;
+  }
+  .mainCardImage {
+    flex: 1;
+    width: 100%;
+    height: 50%;
+  }
+  .otherCardImage {
+    width: 40%;
+    height: auto;
+  }
+  .verticalContent {
+    width: 60%;
+  }
+  .content {
+    width: auto;
+    padding: 0.5rem !important;
+  }
+  .title {
+    font-size: 0.85rem;
+  }
+  .otherCardTitle {
+    font-size: 0.65rem;
+  }
+  .text {
+    font-size: 0.65rem;
+  }
+  .linkText {
+    font-size: 0.65rem;
+  }
+  .linkIcon {
+    font-size: 0.65rem;
+  }
+  .firstRow span,
+  .secondRow {
+    font-size: 0.65rem;
+  }
+  .link:last-child {
+    padding-bottom: 0.5rem !important;
   }
 }
