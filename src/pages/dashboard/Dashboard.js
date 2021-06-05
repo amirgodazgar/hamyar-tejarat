@@ -48,6 +48,7 @@ import ClearanceProposalDetail from "./suggestionsList/ClearanceProposalDetail";
 import SearchAllRequest from "./suggestionsList/submitProposal/SearchAllRequest";
 import SubmitProposalDetail from "./suggestionsList/submitProposal/SubmitProposalDetail";
 import UserCheckBackDrop from "../../common/backDrop/UserCheckBackDrop";
+import { clearCookies } from "../../helper/cookies";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -63,6 +64,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
+      if (res.payload === undefined) {
+        clearCookies()
+        history.replace("/register");
+        return
+      }
       setUserData(res.payload);
       const checkProfileCompleted =
         res.payload.isProfileCompleted === undefined
@@ -70,6 +76,7 @@ const Dashboard = () => {
           : res.payload.isProfileCompleted;
       setIsProfileCompleted(checkProfileCompleted);
       setIsLoading(false);
+      console.log(res);
     });
   }, []);
 

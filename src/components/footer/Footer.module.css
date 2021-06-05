@@ -105,3 +105,42 @@
   justify-content: center;
   font-size: 0.9rem;
 }
+
+/* RESOLUTION 1024 */
+
+@media only screen and (max-width: 1024px) {
+  .main {
+    grid-template-columns: 35% 15% 35%;
+  }
+  .preview h2 {
+    font-size: 1.7rem;
+  }
+  .preview p {
+    font-size: 0.9rem;
+  }
+  .links h6,
+  .signUp h6 {
+    font-size: 1.1rem;
+  }
+  .links h6 {
+  }
+  .links ul {
+    flex: 2.5;
+  }
+  .links li {
+    font-size: 0.95rem;
+  }
+  .signUp span {
+    font-size: 0.9rem;
+  }
+  .signUpBox {
+    flex: 2;
+  }
+  .signUpBox input {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+  .signUpBox input::placeholder {
+    font-size: 0.8rem;
+  }
+}

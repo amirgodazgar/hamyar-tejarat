@@ -210,3 +210,79 @@
   font-weight: 600;
 }
 
+/* RESOLUTION 1024 */
+
+@media only screen and (max-width: 1024px) {
+  .logo {
+    flex: 0 0 25%;
+  }
+  .leftSide {
+    flex: 0 0 75%;
+  }
+  .panel {
+    flex: 0 0 25%;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .responsiveMenuContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .responsiveNavbarHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1e4383;
+  }
+  .responsiveLogoText {
+    font-family: Kalameh !important;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 200ms;
+    color: #f0f5f9;
+    margin: 0 1rem;
+  }
+  .logoTextDrawer {
+    font-family: Kalameh !important;
+    font-weight: bold !important;
+    transition: all 200ms !important;
+    color: #f0f5f9 !important;
+  }
+  .logoImg {
+    height: auto;
+    width: 20%;
+    margin: 0.5rem 0;
+    transition: all 200ms !important;
+  }
+  .responsiveNavbarBtn {
+    border-radius: 10px !important;
+    display: flex !important;
+    justify-content: space-evenly !important;
+    align-items: center !important;
+    padding: 0.35rem 0.7rem !important;
+  }
+  .responsiveItem {
+    font-weight: bold !important;
+    color: #192129eb !important;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .header {
+    height: 25rem;
+  }
+  .mainTitle {
+    margin: 3rem auto 0 auto;
+  }
+  .mainTitle h1 {
+    font-size: 1.7rem;
+ 
+  }
+  .mainTitle h6 {
+    font-size: .8rem;
+ 
+  }
+}

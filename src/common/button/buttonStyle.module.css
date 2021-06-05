@@ -11,7 +11,7 @@
 
 .card {
   padding: 1rem;
-  width: 50%;
+  width: 70%;
   background-color: #e7f1fc;
   color: #277fe5;
   border: 1px solid transparent;
@@ -190,4 +190,43 @@
 .tariffSearch:hover {
   background-color: #214c96;
   transition: all 200ms;
+}
+
+/* RESOLUTION 1024 */
+
+@media only screen and (max-width: 1024px) {
+  .footerSignUp {
+    padding: 0.8rem;
+    width: 35%;
+  }
+  .card {
+    padding: 0.5rem;
+    width: 85%;
+    font-size: 0.8rem;
+  }
+  .registration {
+    padding: 0.7rem 0.4rem;
+    font-size: 0.85rem;
+    width: 50%;
+  }
+  .requestCard {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .header {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  .registration {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .registration {
+    width: 60% !important;
+  }
 }

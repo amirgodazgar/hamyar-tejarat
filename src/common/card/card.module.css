@@ -51,3 +51,28 @@
 .rating {
   margin-bottom: 1rem;
 }
+
+/* RESOLUTION 1024 */
+
+@media only screen and (max-width: 1024px) {
+  .card {
+    margin: 1rem 0;
+  }
+  .cardHeader div {
+    margin-left: 0 !important;
+  }
+  .title {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .subTitle {
+    font-size: 0.65rem !important;
+  }
+  .avatar {
+    height: 6rem !important;
+    width: 6rem !important;
+  }
+  .rating {
+    margin-bottom: 1rem;
+  }
+}

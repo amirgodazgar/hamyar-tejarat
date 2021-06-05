@@ -26,7 +26,7 @@ const RequestCard = ({ imgSrc, alt, title, subtitle, animation, delay }) => {
           </Typography>
         </div>
 
-        <CardContent>
+        <CardContent className={classes.cardContentSubTitle}>
           <Typography
             className={classes.subTitle}
             variant="button"

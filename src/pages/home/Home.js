@@ -5,8 +5,6 @@ import clearanceImage from "../../styles/image/image (3).jpg";
 import registrationImage from "../../styles/image/image (6).jpg";
 import newsImg from "../../styles/image/image (7).jpg";
 import otherNewsImg1 from "../../styles/image/image (1).jpg";
-// import otherNewsImg2 from "../../styles/image/image (2).jpg";
-// import otherNewsImg3 from "../../styles/image/image (5).jpg";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import MainCard from "../../common/card/MainCard";
 import NewsCard from "../../common/card/homepage/NewsCard";
@@ -63,6 +61,28 @@ const Home = () => {
   ];
 
   const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const [cardNumber, setCardNumber] = useState(4);
+  const changeCardNumber = () => {
+
+    if (window.innerWidth > 768) {
+      setCardNumber(4);
+    }
+    if (window.innerWidth <= 768) {
+      setCardNumber(3);
+    }
+    if (window.innerWidth <= 600) {
+      setCardNumber(2);
+    }
+    if (window.innerWidth <= 426) {
+      setCardNumber(1);
+    }
+  };
+
+  useEffect(() => {
+    changeCardNumber();
+    window.addEventListener("resize", changeCardNumber);
+  }, [window.innerWidth]);
+
 
   const previous = (
     <button className={classes.preCard}>
@@ -114,10 +134,10 @@ const Home = () => {
             <ItemsCarousel
               noOfChildren={10}
               infiniteLoop={false}
-              activePosition={"center"}
+              activePosition={"left"}
               chevronWidth={70}
               alwaysShowChevrons={true}
-              numberOfCards={4}
+              numberOfCards={cardNumber}
               slidesToScroll={1}
               showSlither={false}
               firstAndLastGutter={false}

@@ -70,7 +70,7 @@
   width: 100%;
 }
 .text {
-  font-size: .9rem;
+  font-size: 0.9rem;
   color: #192129;
   text-overflow: ellipsis;
   white-space: pre-line;
@@ -108,3 +108,26 @@
   transition: all 200ms;
 }
 
+/* RESOLUTION 1024 */
+
+@media only screen and (max-width: 1024px) {
+  .title {
+    font-size: 1rem;
+  }
+  .otherCardTitle {
+    font-size: 0.85rem;
+  }
+  .text {
+    font-size: 0.8rem;
+  }
+  .linkText {
+    font-size: 0.85rem;
+  }
+  .firstRow span,
+  .secondRow {
+    font-size: 0.8rem;
+  }
+  .link:last-child {
+    padding-bottom: 0.6rem !important;
+  }
+}

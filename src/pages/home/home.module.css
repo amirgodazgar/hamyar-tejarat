@@ -321,3 +321,194 @@
   grid-template-columns: repeat(3, 32%);
   justify-content: space-between;
 }
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 1024px) {
+  .footerSignUp {
+    padding: 0.8rem;
+    width: 35%;
+  }
+  .sliderBox {
+    padding: 1rem 1rem 5rem 1rem;
+    height: 70%;
+  }
+  .registration > h3 {
+    font-size: 1.5rem;
+  }
+  .registration > p {
+    font-size: 0.9rem;
+  }
+  .introduction {
+    justify-content: space-evenly;
+  }
+  .introduction .image {
+    padding: 0;
+  }
+  .image img {
+    height: auto;
+    width: 90%;
+  }
+  .introduction .registration {
+    flex: 0 0 40%;
+  }
+  .introduction .image {
+    flex: 0 0 45%;
+  }
+  .header {
+    width: 85%;
+  }
+  .underLine {
+    width: 85%;
+    padding: 1rem 0;
+  }
+  .header > h3 {
+    font-size: 1.5rem;
+  }
+  .header > a {
+    font-size: 0.9rem;
+  }
+  .header > a svg {
+    height: 0.8em !important;
+  }
+  .requestBox {
+    width: 85%;
+    gap: 1rem;
+  }
+  .statisticsInfo {
+    justify-content: space-evenly;
+  }
+  .number {
+    font-size: 2.5rem;
+  }
+  .addIcon {
+    font-size: 1.5rem !important;
+  }
+  .newsBox {
+    flex: 0 0 85%;
+  }
+  .mainNews {
+    width: 85%;
+  }
+  .otherNews {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .clearance {
+    flex-direction: column;
+    padding: 2rem 0;
+    height: 30rem;
+  }
+  .sliderBox {
+    max-width: 65% !important;
+  }
+  .image {
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .links {
+    padding: 1rem;
+  }
+  .links h3 {
+    font-size: 1.2rem;
+    margin: 0.5rem;
+  }
+  .links span {
+    margin: 0.5rem;
+  }
+
+  .links ul {
+    flex: 0 0 70%;
+    padding: 0.5rem;
+  }
+
+  .links li {
+    margin: 0.25rem 0;
+  }
+  .links li a {
+    margin: 0 0.65rem 0 0;
+    font-size: 0.8rem;
+  }
+  .links li svg {
+    font-size: 0.8em !important;
+  }
+  .preCard,
+  .nextCard {
+    height: 2.7rem;
+    width: 2.7rem;
+  }
+  .nextIcon,
+  .preIcon {
+    font-size: 1.5rem !important;
+  }
+  .topCompanies h3 {
+    font-size: 1.5rem;
+  }
+
+  .registration > span {
+    width: 30%;
+  }
+
+  .topCompanies .subLine {
+    width: 15%;
+  }
+  .introduction {
+    flex-direction: column;
+    padding: 3rem 0;
+  }
+  .registration {
+    padding: 1rem 1rem 2rem 1rem;
+  }
+  .registration > h3 {
+    font-size: 1.2rem;
+  }
+  .registration > p {
+    font-size: 0.8rem;
+  }
+  .header {
+    width: 85%;
+  }
+  .underLine {
+    width: 85%;
+    padding: 1rem 0;
+  }
+  .header > h3 {
+    font-size: 1rem;
+  }
+  .header > a {
+    font-size: 0.65rem;
+  }
+  .header > a svg {
+    height: 0.6em !important;
+  }
+  .requestBox {
+    grid-template-columns: repeat(1, 95%);
+  }
+  .statistics {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .statisticsInfo {
+    font-size: 1.5rem !important;
+  }
+  .number {
+    font-size: 2rem;
+  }
+  .addIcon {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .preCard,
+  .nextCard {
+    height: 2.2rem;
+    width: 2.2rem;
+  }
+  .nextIcon,
+  .preIcon {
+    font-size: 1.2rem !important;
+  }
+}

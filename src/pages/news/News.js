@@ -174,7 +174,7 @@ const News = () => {
           </div>
           <div className={classes.popularNews}>
             <Typography variant="h6" color="primary">
-              پر بازدیدترین خبرها
+              پربازدیدترین خبرها
             </Typography>
             {sidebarNews.map((item) => (
               <div className={classes.sidebarNewsBox}>
