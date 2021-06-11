@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { loadingHandler } from "../../helper/general";
 import http from "../httpServices";
 
 // ----------------------------- BusinessMan Methods  -------------------------------- //
@@ -220,10 +221,12 @@ export const postClearanceJuridical = async (
   userInfo,
   setAlert,
   setIsConfirm,
-  setOpen
+  setOpen,
+  dispatch
 ) => {
   const token = Cookies.get("token");
-  // console.log(userInfo.get("StringChoosedCustomIds"));
+  // console.log(userInfo.get("CompanyName"));
+
 
   await http
     .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
@@ -234,6 +237,9 @@ export const postClearanceJuridical = async (
     })
     .then((res) => {
       console.log("ClearanceJuridical-response", res);
+
+      loadingHandler(dispatch , false)
+
       if (res.status === 200) {
         setAlert(res.data.message);
         setIsConfirm(true);

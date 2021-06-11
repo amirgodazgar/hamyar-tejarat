@@ -55,6 +55,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
+      console.log(res.payload);
     });
   }, []);
 
@@ -110,8 +111,9 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     lastName: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.lastName
     ),
-    clearanceId: Yup.string()
-    .required(adminPanelData.userInfo.clearanceMan.error.clearanceId),
+    clearanceId: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.clearanceId
+    ),
     mobile: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .max(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
@@ -133,35 +135,12 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
 
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
-    formData.append(
-      "FirstName",
-      userData.firstName !== null ? userData.firstName : values.firstName
-    );
-    formData.append(
-      "LastName",
-      userData.lastName !== null ? userData.lastName : values.lastName
-    );
-    formData.append(
-      "CustomsBrokerageNumber",
-      userData.clearanceId !== undefined
-        ? userData.clearanceId
-        : values.clearanceId
-    );
-    formData.append(
-      "PhoneNumber",
-      userData.mobile !== undefined ? userData.mobile : values.mobile
-    );
-    formData.append(
-      "OfficeAddress",
-      userData.address !== undefined ? userData.address : values.address
-    );
-    formData.append(
-      "StringChoosedCustomIds",
-      userData.choosedCustoms.length === 0 ||
-        userData.choosedCustoms === undefined
-        ? filteredIds
-        : userData.ChoosedCustomIds
-    );
+    formData.append("FirstName", values.firstName);
+    formData.append("LastName", values.lastName);
+    formData.append("CustomsBrokerageNumber", values.clearanceId);
+    formData.append("PhoneNumber", values.mobile);
+    formData.append("OfficeAddress", values.address);
+    formData.append("StringChoosedCustomIds", filteredIds);
     formData.append(
       "CertificateOfNoCriminalRecordImage",
       workExpImg ? workExpImg : userData.certificateOfNoCriminalRecordImagePath

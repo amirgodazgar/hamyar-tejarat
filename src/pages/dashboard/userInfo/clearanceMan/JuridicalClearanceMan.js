@@ -11,7 +11,7 @@ import { CloudUpload, Image } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { postClearanceJuridical } from "../../../../services/dashboard/userInfoServices";
 import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
@@ -19,7 +19,6 @@ import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [alert, setAlert] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [open, setOpen] = useState(false);
@@ -28,6 +27,8 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
   const initChips =
     userData.choosedCustoms === undefined ? [] : userData.choosedCustoms;
   const [chips, setChips] = useState(initChips);
+  // const isLoading = useSelector(state => state.dashboard.isLoading)
+  // console.log(isLoading)
 
   const addChipsHandler = (e) => {
     const id = e.target.value;
@@ -56,7 +57,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
-      setIsLoading(false);
       console.log(res.payload);
     });
   }, []);
@@ -104,8 +104,10 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     companyName: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.companyName
     ),
-    companyNationalId: Yup.string()
-    .required(adminPanelData.userInfo.clearanceMan.error.companyNationalId),
+
+    companyNationalId: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.companyNationalId
+    ),
     mobileNum: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .max(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
@@ -122,41 +124,15 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   const onSubmit = (values) => {
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
-    const choosedCustomsIds =
-      userData.choosedCustoms.length === 0
-        ? []
-        : userData.choosedCustoms.map((item) => +item.id);
     const filteredIds = [...new Set(ids)];
-    let idContainer;
-    choosedCustomsIds.forEach((itm) => {
-      idContainer = ids.filter((item) => item !== itm);
-    });
-    const concatIds = [...new Set(idContainer)];
 
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
-    formData.append(
-      "CompanyName",
-      userData.companyName !== null ? userData.companyName : values.companyName
-    );
-    formData.append(
-      "NationalCompanyId",
-      userData.nationalCompanyId !== null
-        ? userData.nationalCompanyId
-        : values.companyNationalId
-    );
-    formData.append(
-      "PhoneNumber",
-      userData.phoneNumber !== null ? userData.phoneNumber : values.mobileNum
-    );
-    formData.append(
-      "OfficeAddress",
-      userData.officeAddress !== null ? userData.officeAddress : values.address
-    );
-    formData.append(
-      "StringChoosedCustomIds",
-      userData.choosedCustoms.length === 0 ? filteredIds : concatIds
-    );
+    formData.append("CompanyName", values.companyName);
+    formData.append("NationalCompanyId", values.companyNationalId);
+    formData.append("PhoneNumber", values.mobileNum);
+    formData.append("OfficeAddress", values.address);
+    formData.append("StringChoosedCustomIds", filteredIds);
     formData.append(
       "CertificateOfNoCriminalRecordImage",
       workExpImg ? workExpImg : userData.certificateOfNoCriminalRecordImagePath
@@ -166,7 +142,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.workExperienceImagePath
     );
 
-    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen)
+    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen, dispatch);
   };
   const formik = useFormik({
     initialValues,
@@ -176,7 +152,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   return (
     <React.Fragment>
-      {!isLoading ? (
+      {userData.length !== 0 ? (
         <Paper className={classes.paper}>
           <form
             onSubmit={formik.handleSubmit}

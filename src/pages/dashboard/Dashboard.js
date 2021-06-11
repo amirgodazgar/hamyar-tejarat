@@ -77,7 +77,6 @@ const Dashboard = () => {
           : res.payload.isProfileCompleted;
       setIsProfileCompleted(checkProfileCompleted);
       setIsLoading(false);
-      console.log(res);
     });
   }, []);
 
@@ -148,8 +147,6 @@ const Dashboard = () => {
       setOpen(true);
     }
   };
-
-  console.log(userData)
 
   return (
     <>
@@ -226,7 +223,12 @@ const Dashboard = () => {
                         onClick={exitHandler}
                       >
                         <ExitToAppRounded fontSize="default" />
-                        <Typography style={{marginRight:".2rem"}} variant="button">خروج</Typography>
+                        <Typography
+                          style={{ marginRight: ".2rem" }}
+                          variant="button"
+                        >
+                          خروج
+                        </Typography>
                       </IconButton>
                       <IconButton
                         style={{ borderRadius: "10px" }}

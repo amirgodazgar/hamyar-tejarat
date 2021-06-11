@@ -47,10 +47,13 @@ export const dashBoardSlice = createSlice({
   initialState: {
     userData: null,
     status: "",
+    isLoading : true
   },
 
   reducers: {
-
+    changeLoading : (state , action) => {
+      state.isLoading = action.payload
+    }
   },
 
   extraReducers: {
@@ -67,5 +70,5 @@ export const dashBoardSlice = createSlice({
   },
 });
 
-export const {} = dashBoardSlice.actions;
+export const {changeLoading} = dashBoardSlice.actions;
 export default dashBoardSlice.reducer;
