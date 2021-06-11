@@ -39,7 +39,7 @@ const News = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className={classes.container}>
+    <div className={classes.container} id="newsMain">
       <div>
         <Breadcrumbs
           className={classes.breadcrumbs}

@@ -7,7 +7,7 @@ import { store } from "./store/store";
 import { BrowserRouter as Router } from "react-router-dom";
 
 AOS.init({
-  offset: 100,
+  offset: 80,
   duration: 350, 
 });
 

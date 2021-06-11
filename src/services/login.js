@@ -6,6 +6,7 @@ import {
 } from "../helper/cookies";
 import { checkVerify, getToken, setMessage } from "../store/auth/authSlice";
 
+
 export const signIn = async (userInfo, dispatch, history) => {
   dispatch(getToken(userInfo)).then((res) => {
     Cookies.remove("userInfo");
@@ -31,7 +32,7 @@ export const signIn = async (userInfo, dispatch, history) => {
       setTimeout(() => {
         dispatch(setMessage(""));
         history.replace("/");
-      }, 2000);
+      }, 1000);
     } else {
       dispatch(setMessage(res.payload.data.message));
       dispatch(checkVerify(false));

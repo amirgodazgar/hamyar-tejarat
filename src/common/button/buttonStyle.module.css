@@ -215,7 +215,7 @@
   }
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 768px) {
   .header {
     padding: 0.5rem 0.7rem;
     font-size: 0.8rem;
@@ -229,6 +229,7 @@
     
   }
 }
+
 @media only screen and (max-width: 350px) {
   .registration {
     width: 60% !important;

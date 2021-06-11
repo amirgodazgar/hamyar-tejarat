@@ -67,10 +67,10 @@ const Home = () => {
     if (window.innerWidth > 768) {
       setCardNumber(4);
     }
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 960) {
       setCardNumber(3);
     }
-    if (window.innerWidth <= 600) {
+    if (window.innerWidth <= 768) {
       setCardNumber(2);
     }
     if (window.innerWidth <= 426) {
@@ -162,7 +162,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className={classes.introduction}>
+      <div className={classes.introduction} id="introduction">
         <div className={classes.registration}>
           <h3 data-aos="fade-left" data-aos-delay="10">
             {homeData.registration.title}

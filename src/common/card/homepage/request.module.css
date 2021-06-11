@@ -84,7 +84,7 @@
     padding: 0.6rem !important;
   }
 }
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 785px) {
   .header {
     grid-template-rows: repeat(3, 30%);
   }

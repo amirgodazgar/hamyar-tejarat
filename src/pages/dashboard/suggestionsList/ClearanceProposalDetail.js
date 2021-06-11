@@ -96,7 +96,7 @@ const ClearanceProposalDetail = ({ userName }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          جزئیات درخواست
+          جزئیات پیشنهادها
         </Typography>
       </Grid>
       <Grid item container spacing={1} xs={11}>
@@ -114,7 +114,7 @@ const ClearanceProposalDetail = ({ userName }) => {
                 onClick={() => history.goBack()}
               >
                 <ArrowForwardIosRounded fontSize="small" />
-                <p>بازگشت به لیست درخواست ها</p>
+                <p>بازگشت به لیست پیشنهادها</p>
               </div>
             </Grid>
 

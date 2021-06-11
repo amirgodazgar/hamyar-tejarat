@@ -16,7 +16,7 @@ const LocationPurchase = () => {
 
   const validationSchema = Yup.object({
     tariff: Yup.string().required("کد تعرفه را وارد کنید"),
-    originLoading: Yup.string().required("مبدا بارگیری کالا را وارد کنید"),
+    originLoading: Yup.string().required("مبدا کالا را وارد کنید"),
     originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
     merchandise: Yup.mixed().required(" نوع کالا  را وارد کنید"),
   });
@@ -94,7 +94,7 @@ const LocationPurchase = () => {
         </div>
         <div className={classes.tariffList}>
           <div className={classes.inputBoxPurchase}>
-            {errorBox("originLoading", "مبدا بارگیری کالا ")}
+            {errorBox("originLoading", "مبدا کالا ")}
             <input
               className={`${classes.originLoading}  ${
                 formik.touched.originLoading && formik.errors.originLoading

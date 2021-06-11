@@ -136,7 +136,51 @@
   }
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 960px) {
+  .mainCardImage {
+    width: 50%;
+  }
+  .otherCardImage {
+    width: 40%;
+    height: auto;
+  }
+  .card.vertical {
+    flex-direction: row;
+    height: 90%;
+  }
+  .verticalContent {
+    width: 60%;
+  }
+  .content {
+    width: 50%;
+    padding: 0.5rem !important;
+  }
+  .title {
+    font-size: 1rem;
+  }
+  .otherCardTitle {
+    font-size: 0.85rem;
+  }
+  .text {
+    font-size: .85rem;
+  }
+  .linkText {
+    font-size: 0.8rem;
+  }
+  .linkIcon {
+    font-size: 0.8rem;
+  }
+  .firstRow span,
+  .secondRow {
+    font-size: 0.65rem;
+  }
+  .link:last-child {
+    padding-bottom: 2rem !important;
+  }
+
+
+}
+@media only screen and (max-width: 768px) {
   .card.vertical {
     flex-direction: row;
     height: 90%;

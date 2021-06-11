@@ -35,7 +35,7 @@ const Navbar = () => {
   const styles = useStyles();
   const isLogin = Cookies.get("login");
   const history = useHistory();
-  const [search, setSearch] = useState(true);
+  // const [search, setSearch] = useState(true);
   const [open, setOpen] = useState(false);
   const drawerHandler = () => {
     setOpen(true);
@@ -49,6 +49,15 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  const servicesHandler = () => {
+    setOpen(false);
+    history.push("/");
+  };
+  const newsHandler = () => {
+    setOpen(false);
+    history.push("/news");
+  };
+
   return (
     <header className={classes.header}>
       <Hidden smDown>
@@ -59,11 +68,22 @@ const Navbar = () => {
 
           <div className={classes.leftSide}>
             <ul className={classes.list}>
-              {menuItem.map((item, index) => (
-                <li className={classes.item} key={index}>
-                  {item}
-                </li>
-              ))}
+              <li className={classes.item}>
+                <a href="#introduction" onClick={() => history.push("/")}>
+                  خدمات
+                </a>
+              </li>
+              <li className={classes.item}>
+                <a href="#newsMain" onClick={() => history.push("/news")}>
+                  اخبار
+                </a>
+              </li>
+              <li className={classes.item}>
+                <a>پشتیبانی</a>
+              </li>
+              <li className={classes.item}>
+                <a>درباره ما</a>
+              </li>
             </ul>
             {/* <div className={classes.searchBox} style={{ display: "none" }}>
             <input
@@ -135,59 +155,68 @@ const Navbar = () => {
               <Divider />
               <List>
                 <ListItem>
-                  <Accordion
-                    style={{ width: "100%", background: "#f4f4f4" }}
-                    elevation={0}
-                  >
-                    <AccordionSummary
-                      style={{ minHeight: "2rem" }}
-                      expandIcon={<ExpandMore />}
+                  <a href="#introduction" onClick={servicesHandler}>
+                    <Accordion
+                      expanded={false}
+                      style={{ width: "100%", background: "#f4f4f4" }}
+                      elevation={0}
                     >
-                      <Typography className={classes.responsiveItem}>
-                        خدمات
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails
-                      style={{ display: "flex", flexDirection: "column" }}
+                      <AccordionSummary
+                        style={{ minHeight: "2rem" }}
+                        // expandIcon={<ExpandMore />}
+                      >
+                        <Typography className={classes.responsiveItem}>
+                          خدمات
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails
+                        style={{ display: "flex", flexDirection: "column" }}
+                      >
+                        <Typography variant="button">خدمات تاجرین</Typography>
+                        <Typography variant="button">
+                          خدمات ترخیص کاران
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  </a>
+                </ListItem>
+                <ListItem>
+                  <a href="#newsMain" onClick={newsHandler}>
+                    <Accordion
+                      expanded={false}
+                      style={{ width: "100%", background: "#f4f4f4" }}
+                      elevation={0}
                     >
-                      <Typography variant="button">خدمات تاجرین</Typography>
-                      <Typography variant="button">
-                        خدمات ترخیص کاران
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
+                      <AccordionSummary
+                        style={{ minHeight: "2rem" }}
+                        // expandIcon={<ExpandMore />}
+                      >
+                        <Typography className={classes.responsiveItem}>
+                          اخبار
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails
+                        style={{ display: "flex", flexDirection: "column" }}
+                      >
+                        <Typography variant="button">
+                          جدیدترین خبر ها
+                        </Typography>
+                        <Typography variant="button">
+                          پربازدیدترین خبر ها
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  </a>
                 </ListItem>
                 <ListItem>
                   <Accordion
+                    expanded={false}
                     style={{ width: "100%", background: "#f4f4f4" }}
                     elevation={0}
                   >
                     <AccordionSummary
                       style={{ minHeight: "2rem" }}
-                      expandIcon={<ExpandMore />}
-                    >
-                      <Typography className={classes.responsiveItem}>
-                        اخبار
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails
-                      style={{ display: "flex", flexDirection: "column" }}
-                    >
-                      <Typography variant="button">جدیدترین خبر ها</Typography>
-                      <Typography variant="button">
-                        پربازدیدترین خبر ها
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <ListItem>
-                  <Accordion
-                    style={{ width: "100%", background: "#f4f4f4" }}
-                    elevation={0}
-                  >
-                    <AccordionSummary
-                      style={{ minHeight: "2rem" }}
-                      expandIcon={<ExpandMore />}
+                      // expandIcon={<ExpandMore />}
                     >
                       <Typography className={classes.responsiveItem}>
                         پشتیبانی
@@ -275,7 +304,12 @@ const Navbar = () => {
       <div data-aos="fade-up" className={classes.mainTitle}>
         <h1>سامانه همیار تجارت</h1>
         <h6>نخستین سامانه برونسپاری ترخیص کالا در ایران</h6>
-        <Button customizeClass="header">همین حالا شروع کنید</Button>
+        <Button
+          click={() => history.replace("/Dashboard/main")}
+          customizeClass="header"
+        >
+          همین حالا شروع کنید
+        </Button>
       </div>
     </header>
   );

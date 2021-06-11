@@ -82,7 +82,7 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
             />
           </div>
           <div className={classes.inputBox}>
-            {errorBox("portOfLoading", "مبدا بارگیری کالا ")}
+            {errorBox("portOfLoading", "مبدا کالا ")}
             <input
               className={`${classes.originLoading}  ${
                 formik.touched.portOfLoading && formik.errors.portOfLoading

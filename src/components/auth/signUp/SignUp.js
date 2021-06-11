@@ -20,6 +20,7 @@ import { register } from "../../../services/register";
 import { setMessage } from "../../../store/auth/authSlice";
 import { useHistory } from "react-router";
 import { Visibility } from "@material-ui/icons";
+import BackDrop from "../../../common/backDrop/BackDrop";
 
 const SignUp = () => {
   const [showPass, setShowPass] = useState(false);

@@ -25,6 +25,7 @@ import {
   Email,
   ExpandLess,
   ExpandMore,
+  ExitToAppRounded,
 } from "@material-ui/icons";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import DashboardMain from "./dashboard/DashboardMain";
@@ -65,9 +66,9 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
       if (res.payload === undefined) {
-        clearCookies()
+        clearCookies();
         history.replace("/register");
-        return
+        return;
       }
       setUserData(res.payload);
       const checkProfileCompleted =
@@ -106,6 +107,10 @@ const Dashboard = () => {
     }
   };
 
+  const exitHandler = () => {
+    clearCookies();
+    window.location.reload();
+  };
   const userInfoHandler = () => {
     dispatch(getUserInfoData());
   };
@@ -184,7 +189,7 @@ const Dashboard = () => {
                       </div>
                     </Box>
                     <Box className={classes.notificationBox}>
-                      <IconButton>
+                      {/* <IconButton>
                         <Badge
                           badgeContent={0}
                           color="secondary"
@@ -213,6 +218,19 @@ const Dashboard = () => {
                             className={classes.menuIcon}
                           />
                         </Badge>
+                      </IconButton> */}
+                      <IconButton
+                        style={{ borderRadius: "10px" }}
+                        onClick={exitHandler}
+                      >
+                        <ExitToAppRounded fontSize="default" />
+                        <Typography style={{marginRight:".2rem"}} variant="button">خروج</Typography>
+                      </IconButton>
+                      <IconButton
+                        style={{ borderRadius: "10px" }}
+                        onClick={() => history.push("/")}
+                      >
+                        <Typography variant="button">صفحه اصلی</Typography>
                       </IconButton>
                     </Box>
                   </Box>
@@ -302,7 +320,7 @@ const Dashboard = () => {
                               style={open ? null : { display: "none" }}
                               className={classes.listItemText}
                             >
-                              {"لیست درخواست ها"}
+                              {"فعالیت های شما"}
                             </ListItemText>
                             <div
                               style={
@@ -381,7 +399,7 @@ const Dashboard = () => {
                               style={open ? null : { display: "none" }}
                               className={classes.listItemText}
                             >
-                              {"لیست پیشنهاد ها"}
+                              {"فعالیت های شما"}
                             </ListItemText>
                             <div
                               style={

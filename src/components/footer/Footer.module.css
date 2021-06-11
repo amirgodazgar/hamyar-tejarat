@@ -105,7 +105,7 @@
   font-size: 0.9rem;
 }
 
-/* RESOLUTION 1024 */
+/* RESPONSIVE */
 
 @media only screen and (max-width: 1024px) {
   .main {
@@ -121,7 +121,6 @@
   .signUp h6 {
     font-size: 1.1rem;
   }
-
   .links ul {
     flex: 2.5;
   }
@@ -142,6 +141,51 @@
     font-size: 0.8rem;
   }
 }
+
+@media only screen and (max-width: 910px) {
+  .main {
+    grid-template-columns: 100%;
+    height: 30rem;
+    padding: 1rem 2rem;
+  }
+  .preview,
+  .links,
+  .signUp {
+    padding: 0;
+  }
+  .links{
+    margin-bottom: 2rem;
+  }
+  .preview h2 {
+    font-size: 1.8rem;
+  }
+  .preview p {
+    font-size: 0.85rem;
+    flex: 3;
+  }
+  .links ul {
+    flex: 4;
+  }
+  .links li {
+    font-size: 0.85rem;
+  }
+  .signUp span {
+    font-size: 0.7rem;
+  }
+  .signUpBox {
+    display: flex;
+    align-items: center;
+    width: 65%;
+  }
+  .signUpBox input {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+  }
+  .copyRight {
+    font-size: 0.7rem;
+  }
+}
+
 @media only screen and (max-width: 426px) {
   .main {
     grid-template-columns: 100%;
@@ -177,7 +221,6 @@
     padding: 0.6rem;
     font-size: 0.85rem;
   }
-
   .copyRight {
     font-size: 0.7rem;
   }

@@ -16,8 +16,11 @@ a {
   text-decoration: none !important;
 }
 
-body::-webkit-scrollbar {
+html {
   scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
   width: 13px;
 }
 body::-webkit-scrollbar-track {
