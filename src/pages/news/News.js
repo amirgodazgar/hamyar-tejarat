@@ -43,7 +43,7 @@ const News = () => {
       <div>
         <Breadcrumbs
           className={classes.breadcrumbs}
-          separator={<ArrowBackIosRounded />}
+          separator={<ArrowBackIosRounded className={classes.breadCrumbsIcon} />}
         >
           <Typography className={classes.breadcrumbsText} variant="h6">
             همیار تجارت

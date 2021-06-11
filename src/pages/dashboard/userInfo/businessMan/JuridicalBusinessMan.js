@@ -67,9 +67,9 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
     companyName: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.companyName
     ),
-    companyNationalId: Yup.string()
-      .min(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
-      .required(adminPanelData.userInfo.clearanceMan.error.companyNationalId),
+    companyNationalId: Yup.string().required(
+      adminPanelData.userInfo.clearanceMan.error.companyNationalId
+    ),
     mobileNum: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .required(adminPanelData.userInfo.clearanceMan.error.mobile),
@@ -82,7 +82,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    postBusinessmanJuridical(userInfo, setAlert, setIsConfirm, setOpen);
+    postBusinessmanJuridical(userInfo, setAlert, setIsConfirm, setOpen)
   };
   const formik = useFormik({
     initialValues,

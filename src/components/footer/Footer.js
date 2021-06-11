@@ -5,7 +5,7 @@ import classes from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer className={classes.footer}>
+    <footer className={classes.footer} id="footer">
       <div className={classes.main}>
         <div className={classes.preview}>
           <h2>همیار تجارت</h2>

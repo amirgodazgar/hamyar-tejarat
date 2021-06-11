@@ -111,9 +111,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
       adminPanelData.userInfo.clearanceMan.error.lastName
     ),
     clearanceId: Yup.string()
-      .min(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
-      .max(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
-      .required(adminPanelData.userInfo.clearanceMan.error.clearanceId),
+    .required(adminPanelData.userInfo.clearanceMan.error.clearanceId),
     mobile: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .max(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
@@ -461,7 +459,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
                 ثبت
               </Button>
 
-              <Link to="/Dashboard/main" replace >
+              <Link to="/Dashboard/main" replace>
                 <Button click={() => backToDashboard(0)} customizeClass="auth">
                   انصراف
                 </Button>

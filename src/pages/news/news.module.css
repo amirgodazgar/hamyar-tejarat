@@ -21,6 +21,7 @@
 .main {
   display: flex;
   justify-content: space-between;
+
   width: 100%;
   max-width: 77rem;
   padding: 1rem 0;
@@ -133,9 +134,10 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  flex-wrap: wrap;
 }
 .chips div {
-  margin: 0 0.25rem 0 0.25rem;
+  margin: 0.25rem;
   border-radius: 5px !important;
 }
 
@@ -186,4 +188,179 @@
   height: 100%;
   width: 100%;
   border-radius: 10px;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (max-width: 1400px) {
+  .container {
+    padding: 2rem 5rem;
+  }
+  .newsField {
+    width: 60%;
+  }
+  .sideBar {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding: 2rem 5rem;
+  }
+  .breadcrumbs {
+    width: 97%;
+  }
+  .breadcrumbsText {
+    font-size: 0.8rem !important;
+  }
+  .breadCrumbsIcon {
+    height: 0.8em !important;
+  }
+  .newsTitle {
+    font-size: 1.1rem !important;
+  }
+  .newsDescription {
+    font-size: 0.8rem !important;
+  }
+  .newsText {
+    font-size: 0.8rem !important;
+  }
+  .socialNetwork p,
+  .tags p {
+    font-size: 0.9rem;
+  }
+  .socialNetwork div svg {
+    height: 0.8em !important;
+  }
+  .recentNews h6,
+  .popularNews h6 {
+    font-size: 0.95rem;
+  }
+  .sidebarNewsBox span {
+    font-size: 0.75rem !important;
+  }
+  .recentNews,
+  .popularNews,
+  .newsField {
+    padding: 1rem;
+  }
+  .sidebarNewsBox div {
+    height: 3rem;
+    width: 3rem;
+  }
+  .newsField {
+    width: 62%;
+  }
+  .sideBar {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 961px) {
+  .container {
+    padding: 1rem 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .container {
+    padding: 1rem 2rem;
+  }
+  .sidebarNewsBox span {
+    font-size: 0.7rem !important;
+  }
+  .sidebarNewsBox div {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .newsField {
+    width: 96%;
+  }
+  .sideBar {
+    width: 100% !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+  .recentNews {
+    flex: 0 0 40%;
+    margin-bottom: 0;
+  }
+  .popularNews {
+    flex: 0 0 40%;
+  }
+  .sidebarNewsBox div {
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .main {
+    align-items: center;
+  }
+  .sideBar {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+  .breadcrumbs {
+    padding: 0.75rem;
+  }
+  .breadcrumbsText {
+    font-size: 0.7rem !important;
+  }
+  .breadCrumbsIcon {
+    height: 0.65em !important;
+  }
+  .recentNews {
+    flex: 0 0 85%;
+    margin-bottom: 1rem;
+  }
+  .popularNews {
+    flex: 0 0 85%;
+  }
+  .sidebarNewsBox div {
+    height: 3rem;
+    width: 3rem;
+  }
+  .newsTitle {
+    font-size: 0.95rem !important;
+  }
+  .newsDescription {
+    font-size: 0.7rem !important;
+  }
+  .newsText {
+    font-size: 0.7rem !important;
+  }
+  .socialNetwork p,
+  .tags p {
+    font-size: 0.8rem;
+  }
+  .socialNetwork div svg {
+    height: 0.7em !important;
+  }
+  .recentNews h6,
+  .popularNews h6 {
+    font-size: 0.85rem;
+  }
+  .sidebarNewsBox span {
+    font-size: 0.7rem !important;
+  }
+  .chips div span {
+    font-size: 0.7rem !important;
+  }
 }

@@ -50,7 +50,7 @@ export const postBusinessmanJuridical = async (
       phoneNumber,
     })
     .then((res) => {
-      console.log("BusinessJuridical", res);
+
       if (res.status === 200) {
         setAlert(res.data.message);
         setIsConfirm(true);

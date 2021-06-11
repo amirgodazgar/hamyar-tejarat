@@ -57,6 +57,10 @@ const Navbar = () => {
     setOpen(false);
     history.push("/news");
   };
+  const contactUsHandler = () => {
+    setOpen(false);
+    history.push("/");
+  };
 
   return (
     <header className={classes.header}>
@@ -82,7 +86,9 @@ const Navbar = () => {
                 <a>پشتیبانی</a>
               </li>
               <li className={classes.item}>
-                <a>درباره ما</a>
+                <a href="#footer" onClick={() => history.push("/")}>
+                  درباره ما
+                </a>
               </li>
             </ul>
             {/* <div className={classes.searchBox} style={{ display: "none" }}>
@@ -234,17 +240,19 @@ const Navbar = () => {
                   </Accordion>
                 </ListItem>
                 <ListItem>
-                  <Accordion
-                    expanded={false}
-                    style={{ width: "100%", background: "#f4f4f4" }}
-                    elevation={0}
-                  >
-                    <AccordionSummary>
-                      <Typography className={classes.responsiveItem}>
-                        درباره ما
-                      </Typography>
-                    </AccordionSummary>
-                  </Accordion>
+                  <a href="#footer" onClick={contactUsHandler}>
+                    <Accordion
+                      expanded={false}
+                      style={{ width: "100%", background: "#f4f4f4" }}
+                      elevation={0}
+                    >
+                      <AccordionSummary>
+                        <Typography className={classes.responsiveItem}>
+                          درباره ما
+                        </Typography>
+                      </AccordionSummary>
+                    </Accordion>
+                  </a>
                 </ListItem>
                 <Divider />
                 {isLogin ? (

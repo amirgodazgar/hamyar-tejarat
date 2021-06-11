@@ -19,6 +19,7 @@ import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";
 const JuridicalClearanceMan = ({ backToDashboard }) => {
   const dispatch = useDispatch();
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [alert, setAlert] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [open, setOpen] = useState(false);
@@ -55,6 +56,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
+      setIsLoading(false);
       console.log(res.payload);
     });
   }, []);
@@ -102,11 +104,8 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     companyName: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.companyName
     ),
-
     companyNationalId: Yup.string()
-      .min(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
-      .max(11, adminPanelData.userInfo.clearanceMan.error.wrongNumber)
-      .required(adminPanelData.userInfo.clearanceMan.error.companyNationalId),
+    .required(adminPanelData.userInfo.clearanceMan.error.companyNationalId),
     mobileNum: Yup.string()
       .min(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
       .max(11, adminPanelData.userInfo.clearanceMan.error.mobileWrong)
@@ -133,7 +132,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       idContainer = ids.filter((item) => item !== itm);
     });
     const concatIds = [...new Set(idContainer)];
-    // console.log(concatIds);
 
     values.clearances = chips === undefined ? [] : chips;
     const formData = new FormData();
@@ -168,7 +166,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.workExperienceImagePath
     );
 
-    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen);
+    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen)
   };
   const formik = useFormik({
     initialValues,
@@ -178,7 +176,7 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
 
   return (
     <React.Fragment>
-      {userData.length !== 0 ? (
+      {!isLoading ? (
         <Paper className={classes.paper}>
           <form
             onSubmit={formik.handleSubmit}

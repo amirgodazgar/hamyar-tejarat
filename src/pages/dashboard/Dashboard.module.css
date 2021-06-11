@@ -18,12 +18,12 @@
   transition: all 200ms !important;
 }
 .appBar .leftSide {
-  width: 18rem;
+  width: 20rem;
   max-width: 21rem;
   transition: all 200ms;
 }
 .appBarShift .leftSide {
-  width: 18rem;
+  width: 20rem;
   transition: all 200ms;
 }
 .toolbar {
@@ -77,6 +77,7 @@
   flex-direction: row-reverse;
   justify-content: space-evenly;
   align-items: center;
+  margin-left: 1rem;
 }
 
 .drawerContainer {
