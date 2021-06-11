@@ -54,24 +54,20 @@ const SearchAllRequest = ({ backToTab }) => {
     portOfLoading,
     transportTools
   ) => {
+    const transportToolsDefault = transportTools === 0 ? "" : transportTools;
     await getSearchAllRequest(
       page,
       rowsPerPage,
       tariffCode,
       cargoTitle,
       portOfLoading,
-      transportTools
+      transportToolsDefault
     ).then((res) => {
       setResult(res);
     });
   };
 
   const rows = result !== undefined ? result : [];
-  //   businessmanType: "Private"
-  // cargoTitle: "گاو"
-  // quotationRequestsId: "190d72c4-69bd-49cf-b3bd-32e7b2a23250"
-  // requestDescription: "درخواست استعلام قیمت برای 20 گاو از مسیر حمل‌ و نقل جاده‌ای"
-  // submitDate: "2021-05-28T06:59:24.6701969"
 
   const checkClearanceManType = (clearanceMan) => {
     if (clearanceMan === "Juridical") {
@@ -164,6 +160,7 @@ const SearchAllRequest = ({ backToTab }) => {
                       value={transportTools}
                       onChange={(e) => setTransportTools(e.target.value)}
                     >
+                      <option value={""}>انتخاب همه</option>
                       <option value={1}>حمل و نقل هوایی</option>
                       <option value={2}>حمل و نقل دریایی</option>
                       <option value={3}>حمل و نقل ریلی</option>

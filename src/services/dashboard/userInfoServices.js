@@ -51,7 +51,6 @@ export const postBusinessmanJuridical = async (
       phoneNumber,
     })
     .then((res) => {
-
       if (res.status === 200) {
         setAlert(res.data.message);
         setIsConfirm(true);
@@ -227,7 +226,6 @@ export const postClearanceJuridical = async (
   const token = Cookies.get("token");
   // console.log(userInfo.get("CompanyName"));
 
-
   await http
     .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
       headers: {
@@ -238,7 +236,7 @@ export const postClearanceJuridical = async (
     .then((res) => {
       console.log("ClearanceJuridical-response", res);
 
-      loadingHandler(dispatch , false)
+      loadingHandler(dispatch, false);
 
       if (res.status === 200) {
         setAlert(res.data.message);
@@ -294,18 +292,30 @@ export const getSearchAllRequest = async (
   portOfLoading,
   transportTools
 ) => {
-  const data = await http
-    .get(
-      `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
-        page === 0 ? 1 : page
-      }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`
-    )
-    .then((res) => {
-      console.log(res.data.data.searchResult);
-      if (res.status === 200) {
-        return res.data.data.searchResult.results;
-      }
-    });
+  console.log(
+    page,
+    pageSize,
+    tariffCode,
+    cargoTitle,
+    portOfLoading,
+    transportTools
+  );
+
+  const url =
+    transportTools === ""
+      ? `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
+          page === 0 ? 1 : page
+        }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`
+      : `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
+          page === 0 ? 1 : page
+        }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`;
+
+  const data = await http.get(url).then((res) => {
+    console.log(res.data.data.searchResult);
+    if (res.status === 200) {
+      return res.data.data.searchResult.results;
+    }
+  });
   return data;
 };
 
