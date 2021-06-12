@@ -39,7 +39,7 @@ const ClearanceMan = () => {
     <Paper className={classes.paper}>
       <div className={classes.header}>
         <Typography className={classes.title} variant="h6">
-          آخرین درخواست ها    
+          آخرین درخواست ها
         </Typography>
         <span
           onClick={() =>

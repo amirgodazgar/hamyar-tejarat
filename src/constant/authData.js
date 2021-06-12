@@ -47,7 +47,8 @@ export const authData = {
     },
   },
   forgotPass: {
-    title: "تغییر رمز عبور",
+    title: "بازیابی رمز عبور",
+    forgotBtn:"ارسال ایمیل بازیابی",
     return: "بازگشت",
     btn: "بازیابی رمز",
   },

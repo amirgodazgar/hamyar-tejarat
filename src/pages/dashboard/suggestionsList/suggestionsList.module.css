@@ -426,3 +426,193 @@
   width: 12rem;
   border-radius: 10px !important;
 }
+
+/* RESPONSIVE --------------------------------------------------*/
+
+@media only screen and (max-width: 800px) {
+  .requestDetailMain {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .mainTitle h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .mainPaper {
+    padding: 2rem 1rem !important;
+  }
+  .infoDataContainer,
+  .suggestDataContainer {
+    width: 100%;
+  }
+  .infoDataContainer {
+    border-bottom: 1px solid #7a7e83;
+  }
+
+  .businessManName,
+  .requestDetailLink p {
+    font-size: 0.85rem;
+  }
+  .requestDetailLink p {
+    font-size: 0.7rem;
+  }
+  .circle,
+  .infoDataTitle,
+  .infoDataText {
+    font-size: 0.85rem;
+  }
+  .suggestTitle,
+  .suggestText {
+    font-size: 0.85rem;
+  }
+  .suggestBtn {
+    font-size: 1rem !important;
+    padding: 0.5rem !important;
+    width: 80% !important;
+    height: 2.5rem !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .tableRow td,
+  .tableHeader td {
+    padding: 0.9rem !important;
+  }
+  .mainTitle h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  table {
+    min-width: 19rem !important;
+    overflow-x: scroll !important;
+  }
+  .tableRow,
+  .tableHeader {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .tableRow td,
+  .tableHeader td {
+    padding: 1rem !important;
+  }
+
+  .tableRow:nth-child(2n-1) {
+    background-color: #c4cad0;
+  }
+  .businessManName {
+    margin-right: 0;
+  }
+  .businessManName,
+  .requestDetailLink p {
+    font-size: 0.85rem;
+  }
+  .requestDetailLink p {
+    font-size: 0.65rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  table {
+    min-width: 13rem !important;
+    overflow-x: scroll !important;
+  }
+  .title {
+    font-size: 0.75rem !important;
+  }
+  .tableHeader {
+    font-size: 0.75rem !important;
+  }
+  .link p,
+  .link svg {
+    font-size: 0.65rem !important;
+  }
+  .tableRow td {
+    font-size: 0.7rem !important;
+  }
+  .tableRow td svg {
+    font-size: 0.7rem !important;
+  }
+  .tableRow {
+    font-size: 0.7rem !important;
+  }
+  .tablePagination p,
+  .tablePagination div,
+  .tablePagination div ul li {
+    font-size: 0.7rem !important;
+  }
+  .mainPaper {
+    padding: 1rem 0.5rem !important;
+  }
+  .mainTitle h4 {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  .requestDetailMain {
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .businessManName,
+  .requestDetailLink p {
+    font-size: 0.75rem;
+  }
+  .requestDetailLink p {
+    font-size: 0.6rem;
+  }
+  .circle,
+  .infoDataTitle,
+  .infoDataText {
+    font-size: 0.75rem;
+  }
+  .requestDetailTitle {
+    flex-direction: column;
+  }
+  .requestDetailLink {
+    margin-top: 1rem;
+  }
+  .infoDataText {
+    flex: 1;
+  }
+  .suggestDataContainer {
+    grid-template-columns: repeat(1, auto);
+    grid-template-rows: repeat(4, auto);
+  }
+  .suggestTitle,
+  .suggestText {
+    font-size: 0.75rem;
+  }
+  .suggestBtn {
+    font-size: 0.85rem !important;
+  }
+  .modalPaper {
+    width: 85% !important;
+    padding: 0.5rem !important;
+    height: 40% !important;
+  }
+
+  .modalTitle {
+    font-size: 1rem !important;
+    height: 2rem;
+  }
+
+  .modalBtn {
+    height: 2rem !important;
+    width: 70% !important;
+    margin: 0 auto !important;
+  }
+
+  .modalInput {
+    font-size: 0.75rem;
+    height: 2rem;
+    width: 70%;
+  }
+
+  .modalAlert div {
+    font-size: 0.85rem !important;
+  }
+}

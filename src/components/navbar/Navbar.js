@@ -83,7 +83,7 @@ const Navbar = () => {
                 </a>
               </li>
               <li className={classes.item}>
-                <a>پشتیبانی</a>
+                <a>تماس با ما</a>
               </li>
               <li className={classes.item}>
                 <a href="#footer" onClick={() => history.push("/")}>
@@ -225,7 +225,7 @@ const Navbar = () => {
                       // expandIcon={<ExpandMore />}
                     >
                       <Typography className={classes.responsiveItem}>
-                        پشتیبانی
+                        تماس با ما
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails

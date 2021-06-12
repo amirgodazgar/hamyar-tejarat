@@ -62,7 +62,7 @@ const ForgotPassword = () => {
                   : "auth"
               }
             >
-              {authData.forgotPass.title}
+              {authData.forgotPass.forgotBtn}
             </Button>
           </div>
 

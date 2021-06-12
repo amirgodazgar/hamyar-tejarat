@@ -13,6 +13,7 @@ import {
   TableRow,
   TablePagination,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
 import { getProposalsList } from "../../../services/dashboard/userInfoServices";
@@ -20,8 +21,16 @@ import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
+const useStyles = makeStyles((theme) => ({
+  [theme.breakpoints.down("sm")]: {
+    menuItem: {
+      fontSize: ".7rem",
+    },
+  },
+}));
 
 const ClearanceProposalList = ({ backToTab }) => {
+  const styles = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
@@ -169,6 +178,7 @@ const ClearanceProposalList = ({ backToTab }) => {
                         </Table>
                       </TableContainer>
                       <TablePagination
+                        classes={{ menuItem: styles.menuItem }}
                         className={classes.tablePagination}
                         rowsPerPageOptions={[
                           10,

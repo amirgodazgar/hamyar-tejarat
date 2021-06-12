@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "../suggestionsList.module.css";
+import styles from "./submitProposal.module.css";
 import {
   Grid,
   Fade,
@@ -166,7 +167,7 @@ const SubmitProposalDetail = ({ userName }) => {
                         ثبت پیشنهاد
                       </Button>
                     ) : (
-                      <Alert severity="warning" className={classes.alert}>
+                      <Alert severity="warning" className={styles.alert}>
                         شما قبلا برای این پیشنهاد یک درخواست ثبت کرده اید
                       </Alert>
                     )}

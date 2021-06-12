@@ -14,18 +14,21 @@ import {
   ListItemText,
   Fade,
   Collapse,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import classes from "./Dashboard.module.css";
 import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
 import {
-  Menu,
+  Menu as MenuIcon,
   Notifications,
   Email,
   ExpandLess,
   ExpandMore,
   ExitToAppRounded,
+  SettingsRounded,
 } from "@material-ui/icons";
 import { Switch, Route, Link, useHistory } from "react-router-dom";
 import DashboardMain from "./dashboard/DashboardMain";
@@ -62,6 +65,15 @@ const Dashboard = () => {
   const [userData, setUserData] = useState([]);
   const [isProfileCompleted, setIsProfileCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
@@ -164,7 +176,7 @@ const Dashboard = () => {
               >
                 <Toolbar className={classes.toolbar}>
                   <IconButton onClick={drawerHandler}>
-                    <Menu fontSize="large" className={classes.menuIcon} />
+                    <MenuIcon fontSize="large" className={classes.menuIcon} />
                   </IconButton>
 
                   <Box color="primary" className={classes.leftSide}>
@@ -218,24 +230,43 @@ const Dashboard = () => {
                           />
                         </Badge>
                       </IconButton> */}
-                      <IconButton
-                        style={{ borderRadius: "10px" }}
-                        onClick={exitHandler}
-                      >
-                        <ExitToAppRounded fontSize="default" />
-                        <Typography
-                          style={{ marginRight: ".2rem" }}
-                          variant="button"
+                      <>
+                        <IconButton onClick={handleClick}>
+                          <SettingsRounded />
+                        </IconButton>
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={anchorEl}
+                          keepMounted
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
                         >
-                          خروج
-                        </Typography>
-                      </IconButton>
-                      <IconButton
-                        style={{ borderRadius: "10px" }}
-                        onClick={() => history.push("/")}
-                      >
-                        <Typography variant="button">صفحه اصلی</Typography>
-                      </IconButton>
+                          <MenuItem onClick={handleClose}>
+                            <IconButton
+                              style={{ borderRadius: "10px", width: "100%" }}
+                              onClick={() => history.push("/")}
+                            >
+                              <Typography variant="button">
+                                صفحه اصلی
+                              </Typography>
+                            </IconButton>
+                          </MenuItem>
+                          <MenuItem onClick={handleClose}>
+                            <IconButton
+                              style={{ borderRadius: "10px", width: "100%" }}
+                              onClick={exitHandler}
+                            >
+                              <ExitToAppRounded fontSize="default" />
+                              <Typography
+                                style={{ marginRight: ".2rem" }}
+                                variant="button"
+                              >
+                                خروج
+                              </Typography>
+                            </IconButton>
+                          </MenuItem>
+                        </Menu>
+                      </>
                     </Box>
                   </Box>
                 </Toolbar>

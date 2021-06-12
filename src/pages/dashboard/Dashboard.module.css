@@ -18,12 +18,12 @@
   transition: all 200ms !important;
 }
 .appBar .leftSide {
-  width: 20rem;
+  width: 12rem;
   max-width: 21rem;
   transition: all 200ms;
 }
 .appBarShift .leftSide {
-  width: 20rem;
+  width: 12rem;
   transition: all 200ms;
 }
 .toolbar {
@@ -191,8 +191,18 @@
   padding: 7rem 14rem 3rem 0rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
+  .main {
+    padding: 5rem 3rem 2rem 0rem;
+  }
+}
+@media only screen and (max-width: 960px) {
   .main {
     padding: 7rem 5rem 3rem 0rem;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .main {
+    padding: 7rem 5rem .5rem 0;
   }
 }
