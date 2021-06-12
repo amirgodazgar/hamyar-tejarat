@@ -306,3 +306,145 @@ input[type="file"] {
 .BtnBox a {
   flex: 0 0 45%;
 }
+
+/* RESPONSIVE -------------------------------------------------------- */
+
+@media only screen and (max-width: 1366px) {
+  .paper {
+    padding: 2rem 3rem !important;
+    border-radius: 10px !important;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .juridicalClearanceMan,
+  .privateClearanceMan {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .juridicalClearanceMan,
+  .privateClearanceMan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+
+  .firstRow_JC {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .selectClearance {
+    order: 1;
+  }
+  .clearances {
+    order: 2;
+    min-height: 5rem !important;
+  }
+
+  .criminalRecord {
+    order: 3;
+    width: 50%;
+  }
+  .imageCriminalRecord {
+    order: 4;
+    width: 50%;
+  }
+  .workExperience {
+    order: 5;
+    width: 50%;
+  }
+  .imageWorkExperience {
+    order: 6;
+    width: 50%;
+  }
+  .BtnBox {
+    order: 7;
+  }
+  .selectClearanceTitle,
+  .criminalRecordTitle,
+  .workExperienceTitle,
+  .clearancesTitle,
+  .imageCriminalRecordTitle,
+  .imageWorkExperienceTitle {
+    padding: 0.85rem 0;
+  }
+  .uploadIcon {
+    top: 2.5rem;
+    left: 1.5rem;
+  }
+  .selectInput,
+  .uploadInput {
+    font-size: 0.9rem;
+  }
+  .workExperience input::before,
+  .criminalRecord input::before {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .criminalRecord {
+    width: 100%;
+  }
+  .imageCriminalRecord {
+    width: 100%;
+  }
+  .workExperience {
+    width: 100%;
+  }
+  .imageWorkExperience {
+    width: 100%;
+  }
+  .uploadIcon {
+    top: 2.6rem;
+    left: 2rem;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .paper {
+    padding: 1rem 0.5rem !important;
+  }
+  .criminalRecord {
+    width: 100%;
+  }
+  .imageCriminalRecord {
+    width: 100%;
+  }
+  .workExperience {
+    width: 100%;
+  }
+  .imageWorkExperience {
+    width: 100%;
+  }
+  .uploadIcon {
+    top: 2.6rem;
+    left: 2rem;
+  }
+  .selectClearanceTitle,
+  .criminalRecordTitle,
+  .workExperienceTitle,
+  .clearancesTitle,
+  .imageCriminalRecordTitle,
+  .imageWorkExperienceTitle {
+    font-size: 0.75rem !important;
+  }
+  .uploadIcon {
+    top: 2.3rem;
+    left: 2rem;
+  }
+  .selectInput,
+  .uploadInput {
+    font-size: 0.75rem;
+  }
+  .workExperience input::before,
+  .criminalRecord input::before {
+    font-size: 0.75rem;
+  }
+  .chip span {
+    font-size: 0.7rem;
+  }
+}

@@ -121,3 +121,63 @@
 .BtnBox_PB a {
   flex: 0 0 45%;
 }
+
+@media only screen and (max-width: 1366px) {
+  .paper {
+    padding: 2rem 3rem !important;
+    border-radius: 10px !important;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .juridicalBusinessMan,
+  .privateBusinessMan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+
+  .firstRow_JB,
+  .firstRow_PB {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+  .emailBox_PB input,
+  .emailBox input {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .juridicalBusinessMan,
+  .privateBusinessMan {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+  }
+
+  .firstRow_JB,
+  .firstRow_PB {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .paper {
+    padding: 1rem 0.5rem !important;
+  }
+  .emailBox_PB input,
+  .emailBox input {
+    width: 90%;
+  }
+
+  .BtnBox,
+  .BtnBox_PB {
+    padding: 0;
+  }
+}
