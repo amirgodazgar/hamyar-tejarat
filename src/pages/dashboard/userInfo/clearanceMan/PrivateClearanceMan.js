@@ -27,6 +27,7 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   const initChips =
     userData.choosedCustoms === undefined ? [] : userData.choosedCustoms;
   const [chips, setChips] = useState(initChips);
+  const [isLoading, setIsLoading] = useState(false);
 
   const addChipsHandler = (e) => {
     const id = e.target.value;
@@ -121,11 +122,6 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     address: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.address
     ),
-    // selectClearance: Yup.mixed().required(
-    //   adminPanelData.userInfo.clearanceMan.error.selectClearance
-    // ),
-    // workExperience: Yup.mixed().required(),
-    // criminalRecord: Yup.mixed().required(),
   });
 
   const onSubmit = (values) => {
@@ -150,7 +146,14 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.workExperienceImagePath
     );
 
-    postClearancePrivate(formData, setAlert, setIsConfirm, setOpen);
+    setIsLoading(true);
+    postClearancePrivate(
+      formData,
+      setAlert,
+      setIsConfirm,
+      setOpen,
+      setIsLoading
+    );
   };
   const formik = useFormik({
     initialValues,
@@ -437,6 +440,8 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
               <Button type="submit" customizeClass="authActive">
                 ثبت
               </Button>
+
+              {isLoading ? <BackDrop /> : null}
 
               <Link to="/Dashboard/main" replace>
                 <Button click={() => backToDashboard(0)} customizeClass="auth">

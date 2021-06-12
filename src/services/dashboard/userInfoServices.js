@@ -11,10 +11,10 @@ export const getBusinessmanDashboardData = async () => {
     .get("/BusinessmanPanel/GetBusinessmanDashboardData")
     .then((res) => {
       if (res.status === 200) {
-        return res.data.data.recentQuotationRequests
+        return res.data.data.recentQuotationRequests;
       }
     });
-    return data
+  return data;
 };
 
 // SEND INFORMATION BUSINESSMAN --------------------------------- :
@@ -22,7 +22,8 @@ export const postBusinessmanPrivate = async (
   userInfo,
   setAlert,
   setIsConfirm,
-  setOpen
+  setOpen,
+  setIsLoading
 ) => {
   const { firstName, lastName, nationalId, phoneNumber } = userInfo;
 
@@ -37,6 +38,7 @@ export const postBusinessmanPrivate = async (
     .then((res) => {
       console.log("BusinessPrivate", res);
       if (res.status === 200) {
+        setIsLoading(false);
         setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);
@@ -53,7 +55,8 @@ export const postBusinessmanJuridical = async (
   userInfo,
   setAlert,
   setIsConfirm,
-  setOpen
+  setOpen,
+  setIsLoading
 ) => {
   const { companyName, nationalCompanyId, phoneNumber } = userInfo;
 
@@ -65,6 +68,7 @@ export const postBusinessmanJuridical = async (
     })
     .then((res) => {
       if (res.status === 200) {
+        setIsLoading(false);
         setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);
@@ -196,8 +200,6 @@ export const getProposalData = async (ProposalId) => {
 
 // ----------------------------- Clearance Methods  -----------------------------------------------------------------//
 
-
-
 // DASHBOARD INFO--------------------------------------:
 
 export const getClearancemanDashboardData = async () => {
@@ -205,19 +207,19 @@ export const getClearancemanDashboardData = async () => {
     .get("/ClearancemanPanel/GetClearancemanDashboardData")
     .then((res) => {
       if (res.status === 200) {
-        return res.data.data.recentQuotationRequests
+        return res.data.data.recentQuotationRequests;
       }
     });
-    return data
+  return data;
 };
-
 
 // SEND INFORMATION CLEARANCEMAN --------------------------------- :
 export const postClearancePrivate = async (
   userInfo,
   setAlert,
   setIsConfirm,
-  setOpen
+  setOpen,
+  setIsLoading
 ) => {
   const token = Cookies.get("token");
   console.log(userInfo.get("WorkExperienceImage"));
@@ -233,6 +235,7 @@ export const postClearancePrivate = async (
     .then((res) => {
       console.log("ClearancePrivate-response", res);
       if (res.status === 200) {
+        setIsLoading(false);
         setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);
@@ -250,7 +253,7 @@ export const postClearanceJuridical = async (
   setAlert,
   setIsConfirm,
   setOpen,
-  dispatch
+  setIsLoading
 ) => {
   const token = Cookies.get("token");
   // console.log(userInfo.get("CompanyName"));
@@ -265,9 +268,8 @@ export const postClearanceJuridical = async (
     .then((res) => {
       console.log("ClearanceJuridical-response", res);
 
-      loadingHandler(dispatch, false);
-
       if (res.status === 200) {
+        setIsLoading(false);
         setAlert(res.data.message);
         setIsConfirm(true);
         setOpen(true);

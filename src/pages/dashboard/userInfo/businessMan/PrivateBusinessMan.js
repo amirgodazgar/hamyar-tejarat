@@ -20,6 +20,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
   const [alert, setAlert] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const confirmFailed = () => {
     setOpen(false);
@@ -91,7 +92,14 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    postBusinessmanPrivate(userInfo, setAlert, setIsConfirm, setOpen);
+    setIsLoading(true)
+    postBusinessmanPrivate(
+      userInfo,
+      setAlert,
+      setIsConfirm,
+      setOpen,
+      setIsLoading
+    );
   };
   const formik = useFormik({
     initialValues,
@@ -175,6 +183,8 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
                 ثبت
               </Button>
 
+              {isLoading ? <BackDrop /> : null}
+
               <Link to="/Dashboard/main" replace>
                 <Button click={() => backToDashboard(0)} customizeClass="auth">
                   انصراف
@@ -182,7 +192,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
               </Link>
             </div>
           </form>
-          
+
           {open ? (
             <UserCheckBackDrop
               setRoute={isConfirm ? "/Dashboard/main" : "/Dashboard/userInfo"}

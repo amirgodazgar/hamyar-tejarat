@@ -27,8 +27,8 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
   const initChips =
     userData.choosedCustoms === undefined ? [] : userData.choosedCustoms;
   const [chips, setChips] = useState(initChips);
-  // const isLoading = useSelector(state => state.dashboard.isLoading)
-  // console.log(isLoading)
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const addChipsHandler = (e) => {
     const id = e.target.value;
@@ -57,7 +57,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
-      console.log(res.payload);
     });
   }, []);
 
@@ -115,11 +114,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     address: Yup.string().required(
       adminPanelData.userInfo.clearanceMan.error.address
     ),
-    // selectClearance: Yup.mixed().required(
-    //   adminPanelData.userInfo.clearanceMan.error.selectClearance
-    // ),
-    // workExperience: Yup.mixed().required(),
-    // criminalRecord: Yup.mixed().required(),
   });
 
   const onSubmit = (values) => {
@@ -142,7 +136,14 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
       crimeImg ? crimeImg : userData.workExperienceImagePath
     );
 
-    postClearanceJuridical(formData, setAlert, setIsConfirm, setOpen, dispatch);
+    setIsLoading(true);
+    postClearanceJuridical(
+      formData,
+      setAlert,
+      setIsConfirm,
+      setOpen,
+      setIsLoading
+    );
   };
   const formik = useFormik({
     initialValues,
@@ -423,6 +424,8 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
               <Button type="submit" customizeClass="authActive">
                 ثبت
               </Button>
+
+              {isLoading ? <BackDrop /> : null}
 
               <Link to="/Dashboard/main" replace>
                 <Button click={() => backToDashboard(0)} customizeClass="auth">

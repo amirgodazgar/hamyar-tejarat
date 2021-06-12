@@ -19,11 +19,10 @@ import * as Yup from "yup";
 import { register } from "../../../services/register";
 import { setMessage } from "../../../store/auth/authSlice";
 import { useHistory } from "react-router";
-import { Visibility } from "@material-ui/icons";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
 const SignUp = () => {
-  const [showPass, setShowPass] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const change = useSelector((state) => state.auth.change);
@@ -54,8 +53,9 @@ const SignUp = () => {
       userType: values.personType,
       userRole: values.activityType,
     };
-    register(userInfo, dispatch, history);
-    console.log(userInfo);
+
+    setIsLoading(true);
+    register(userInfo, dispatch, history, setIsLoading);
   };
   const formik = useFormik({
     initialValues,
@@ -79,17 +79,11 @@ const SignUp = () => {
             />
             <Input
               formik={formik}
-              type={showPass ? "text" : "password"}
+              type="password"
               name="password"
               label={authData.signUp.pass}
               placeHolder="********"
             />
-            {/* <span
-              onClick={() => setShowPass((prevState) => !prevState)}
-              className={styles.showPassword}
-            >
-              <Visibility color="primary" />
-            </span> */}
             <div className={classes.checkBoxContainer}>
               <FormLabel className={classes.label}>
                 {" "}
@@ -163,18 +157,21 @@ const SignUp = () => {
             </div>
 
             {message === "" ? (
-              <Button
-                type="submit"
-                customizeClass={
-                  formik.isValid &&
-                  formik.values.email !== "" &&
-                  formik.values.password !== ""
-                    ? "authActive"
-                    : "auth"
-                }
-              >
-                {authData.signUp.btn}
-              </Button>
+              <>
+                <Button
+                  type="submit"
+                  customizeClass={
+                    formik.isValid &&
+                    formik.values.email !== "" &&
+                    formik.values.password !== ""
+                      ? "authActive"
+                      : "auth"
+                  }
+                >
+                  {authData.signUp.btn}
+                </Button>
+                {isLoading ? <BackDrop /> : null}
+              </>
             ) : (
               <Grow in={message !== "" ? true : false}>
                 <Alert

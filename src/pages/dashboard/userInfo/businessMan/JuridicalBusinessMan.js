@@ -20,6 +20,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
   const [alert, setAlert] = useState("");
   const [isConfirm, setIsConfirm] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
@@ -82,7 +83,14 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    postBusinessmanJuridical(userInfo, setAlert, setIsConfirm, setOpen)
+    setIsLoading(true)
+    postBusinessmanJuridical(
+      userInfo,
+      setAlert,
+      setIsConfirm,
+      setOpen,
+      setIsLoading
+    );
   };
   const formik = useFormik({
     initialValues,
@@ -159,6 +167,8 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
               <Button type="submit" customizeClass="authActive">
                 ثبت
               </Button>
+
+              {isLoading ? <BackDrop /> : null}
 
               <Link to="/Dashboard/main" replace>
                 <Button click={() => backToDashboard(0)} customizeClass="auth">
