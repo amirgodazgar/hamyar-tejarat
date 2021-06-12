@@ -2,7 +2,20 @@ import Cookies from "js-cookie";
 import { loadingHandler } from "../../helper/general";
 import http from "../httpServices";
 
-// ----------------------------- BusinessMan Methods  -------------------------------- //
+// ----------------------------- BusinessMan Methods  --------------------------------------------------- //
+
+// DASHBOARD INFO--------------------------------------:
+
+export const getBusinessmanDashboardData = async () => {
+  const data = await http
+    .get("/BusinessmanPanel/GetBusinessmanDashboardData")
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data.data.recentQuotationRequests
+      }
+    });
+    return data
+};
 
 // SEND INFORMATION BUSINESSMAN --------------------------------- :
 export const postBusinessmanPrivate = async (
@@ -181,7 +194,23 @@ export const getProposalData = async (ProposalId) => {
   return data;
 };
 
-// ----------------------------- Clearance Methods  -------------------------------- //
+// ----------------------------- Clearance Methods  -----------------------------------------------------------------//
+
+
+
+// DASHBOARD INFO--------------------------------------:
+
+export const getClearancemanDashboardData = async () => {
+  const data = await http
+    .get("/ClearancemanPanel/GetClearancemanDashboardData")
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data.data.recentQuotationRequests
+      }
+    });
+    return data
+};
+
 
 // SEND INFORMATION CLEARANCEMAN --------------------------------- :
 export const postClearancePrivate = async (

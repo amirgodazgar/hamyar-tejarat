@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./dashboard.module.css";
 import {
-  Avatar,
   Paper,
   Table,
   TableBody,
@@ -9,97 +8,45 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   Typography,
 } from "@material-ui/core";
-import avatarImg from "../../../styles/image/profile-image.svg";
 import { ArrowBackIos } from "@material-ui/icons";
+import { getBusinessmanDashboardData } from "../../../services/dashboard/userInfoServices";
+import { useState } from "react";
+import { dateToPersian } from "../../../helper/general";
+import { useHistory } from "react-router-dom";
+import BackDrop from "../../../common/backDrop/BackDrop";
 
 const BusinessMan = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  const [getData, setGetData] = useState([]);
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const rows = [
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-    {
-      transmitter: "شرکت ترخیص همراه سپاهان ایرانیان",
-      requestId: "125278000532",
-      cost: 70000000,
-      date: "1400/01/20",
-      description:
-        "انجام روند ترخیص در 10 روز کاری و به همراه بیمه کامل کانتیرها",
-    },
-  ];
+  useEffect(() => {
+    getBusinessmanDashboardData().then((res) => {
+      setGetData(res);
+      setIsLoading(false);
+    });
+  }, []);
+
+  const showDetailHandler = (requestId) => {
+    history.push(
+      `/Dashboard/suggestionsList/singleQuotationRequest/${requestId}`
+    );
+  };
 
   return (
     <Paper className={classes.paper}>
       <div className={classes.header}>
         <Typography className={classes.title} variant="h6">
-          جدیدترین تیکت ها
+          آخرین درخواست های شما
         </Typography>
-        <span className={classes.link}>
+        <span
+          onClick={() =>
+            history.push("/Dashboard/suggestionsList/quotationRequestList")
+          }
+          className={classes.link}
+        >
           <Typography variant="body2">مشاهده همه</Typography>
           <ArrowBackIos fontSize="small" />
         </span>
@@ -110,61 +57,40 @@ const BusinessMan = () => {
             <TableHead>
               <TableRow>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  فرستنده
+                  عنوان کالا
                 </TableCell>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  شناسه درخواست
+                  شرح در خواست
                 </TableCell>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  مبلغ پیشنهادی (تومان){" "}
-                </TableCell>
-                <TableCell variant="head" className={classes.tableHeader}>
-                  {" "}
-                  تاریخ
-                </TableCell>
-                <TableCell variant="head" className={classes.tableHeader}>
-                  {" "}
-                  توضیحات
+                  تاریخ ثبت
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index} className={classes.tableRow}>
-                    <TableCell>
-                      <div className={classes.transmitter}>
-                        <Avatar src={avatarImg} />
-                        <p>{row.transmitter}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>{row.requestId}</TableCell>
-                    <TableCell>{row.cost.toLocaleString()}</TableCell>
-                    <TableCell>{row.date}</TableCell>
+            {isLoading ? (
+              <BackDrop />
+            ) : (
+              <TableBody>
+                {getData.map((row) => (
+                  <TableRow
+                    key={row.quotationRequestsId}
+                    className={classes.tableRow}
+                    onClick={() => showDetailHandler(row.quotationRequestsId)}
+                  >
+                    <TableCell>{row.cargoTitle}</TableCell>
+                    <TableCell>{row.requestDescription}</TableCell>
                     <TableCell>
                       <div className={classes.fixCell}>
-                        <p>{row.description}</p>
+                        <p>{dateToPersian(row.submitDate)}</p>
                         <ArrowBackIos fontSize="small" />
                       </div>
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
-        <TablePagination
-          className={classes.tablePagination}
-          rowsPerPageOptions={[10, 25, 50, { value: 999999999, label: "همه" }]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-          labelRowsPerPage="ردیف در هر صفحه"
-          labelDisplayedRows={({ from, to }) => `${from}-${to}`}
-        />
       </div>
     </Paper>
   );

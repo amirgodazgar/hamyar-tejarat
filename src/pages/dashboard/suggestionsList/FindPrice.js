@@ -40,7 +40,6 @@ const FindPrice = ({ backToTab }) => {
     getSuggestionsListData(curPage, rowsPerPage).then((res) => {
       setPageData(res.data.results);
       setIsLoading(false);
-      console.log(res);
     });
     backToTab(1);
     history.push("/Dashboard/suggestionsList/quotationRequestList");

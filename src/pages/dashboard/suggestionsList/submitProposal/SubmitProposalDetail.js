@@ -42,7 +42,7 @@ const SubmitProposalDetail = ({ userName }) => {
   useEffect(() => {
     getProposalDetail(id).then((res) => {
       setPageData(res);
-      console.log(res);
+      
     });
   }, []);
 

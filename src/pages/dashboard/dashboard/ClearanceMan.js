@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./dashboard.module.css";
 import {
-  Avatar,
   Paper,
   Table,
   TableBody,
@@ -10,103 +9,90 @@ import {
   TableHead,
   TableRow,
   Typography,
-  TablePagination,
 } from "@material-ui/core";
-import avatarImg from "../../../styles/image/profile-image.svg";
+
 import { ArrowBackIos } from "@material-ui/icons";
+import { dateToPersian } from "../../../helper/general";
+import { useHistory } from "react-router-dom";
+import { getClearancemanDashboardData } from "../../../services/dashboard/userInfoServices";
+import BackDrop from "../../../common/backDrop/BackDrop";
 
 const ClearanceMan = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const [getData, setGetData] = useState([]);
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getClearancemanDashboardData().then((res) => {
+      setGetData(res);
+      setIsLoading(false);
+    });
+  }, []);
+
+  const showDetailHandler = (proposalId) => {
+    history.push(
+      `/Dashboard/quotationProposalsListAsync/quotationRequestDetail/${proposalId}`
+    );
   };
 
-  const rows = [
-    {
-      transmitter: "شرکت فروش لوازم ساختمانی ایرانیان",
-      subject: "درخواست ترخیص 7 تن میلگرد از مسیر زمینی",
-      service: "صادرات",
-      clearanceLocation: "بازارچه پرويزخان",
-      date: "1400/01/20",
-    },
-  ];
   return (
     <Paper className={classes.paper}>
       <div className={classes.header}>
         <Typography className={classes.title} variant="h6">
-          جدیدترین درخواست ها
+          آخرین درخواست ها    
         </Typography>
-        <span className={classes.link}>
+        <span
+          onClick={() =>
+            history.push(
+              "/Dashboard/quotationProposalsListAsync/quotationRequestList"
+            )
+          }
+          className={classes.link}
+        >
           <Typography variant="body2">مشاهده همه</Typography>
           <ArrowBackIos fontSize="small" />
         </span>
       </div>
       <div className={classes.body}>
-        <TableContainer>
+        <TableContainer className={classes.tableContainer}>
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  فرستنده
+                  عنوان کالا
                 </TableCell>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  موضوع
+                  شرح در خواست
                 </TableCell>
                 <TableCell variant="head" className={classes.tableHeader}>
-                  نوع خدمت{" "}
-                </TableCell>
-                <TableCell variant="head" className={classes.tableHeader}>
-                  {" "}
-                  گمرک محل ترخیص
-                </TableCell>
-                <TableCell variant="head" className={classes.tableHeader}>
-                  {" "}
-                  تاریخ
+                  تاریخ ثبت
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <TableRow key={index} className={classes.tableRow}>
-                    <TableCell>
-                      <div className={classes.transmitter}>
-                        <Avatar src={avatarImg} />
-                        <p>{row.transmitter}</p>
-                      </div>
-                    </TableCell>
-                    <TableCell>{row.subject}</TableCell>
-                    <TableCell>{row.service}</TableCell>
-                    <TableCell>{row.clearanceLocation}</TableCell>
+            {isLoading ? (
+              <BackDrop />
+            ) : (
+              <TableBody>
+                {getData.map((row) => (
+                  <TableRow
+                    key={row.quotationRequestsId}
+                    className={classes.tableRow}
+                    onClick={() => showDetailHandler(row.quotationRequestsId)}
+                  >
+                    <TableCell>{row.cargoTitle}</TableCell>
+                    <TableCell>{row.requestDescription}</TableCell>
                     <TableCell>
                       <div className={classes.fixCell}>
-                        <p>{row.date}</p>
+                        <p>{dateToPersian(row.submitDate)}</p>
                         <ArrowBackIos fontSize="small" />
                       </div>
                     </TableCell>
                   </TableRow>
                 ))}
-            </TableBody>
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
-        <TablePagination
-          className={classes.tablePagination}
-          rowsPerPageOptions={[10, 25, 50, { value: 999999999, label: "همه" }]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-          labelRowsPerPage="ردیف در هر صفحه"
-          labelDisplayedRows={({ from, to }) => `${from}-${to}`}
-        />
       </div>
     </Paper>
   );
