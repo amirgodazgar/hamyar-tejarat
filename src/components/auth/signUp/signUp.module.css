@@ -47,7 +47,7 @@
 .alert {
   color: #b60123e1 !important;
   font-size: 0.9rem;
-  padding: .5rem !important;
+  padding: 0.5rem !important;
   border-radius: 50% !important;
   display: flex;
   justify-content: center;
@@ -70,3 +70,68 @@
   padding: 0;
 }
 
+@media only screen and (max-width: 961px) {
+  .inputBox {
+    width: 80%;
+  }
+  .label {
+    margin-left: 1.5rem;
+    font-size: 0.9rem !important;
+  }
+  .radioGroup {
+    flex-wrap: nowrap !important;
+  }
+  .checkBoxContainer span,
+  .checkBoxContainer label {
+    font-weight: 400;
+    font-size: 0.9rem !important;
+  }
+  .radioGroup svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+  .alertResponse div:nth-child(2) {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .inputBox {
+    width: 90%;
+  }
+  .label {
+    margin-left: 0.8rem;
+    font-size: 0.85rem !important;
+  }
+  .radioGroup {
+    flex-wrap: nowrap !important;
+  }
+  .checkBoxContainer span,
+  .checkBoxContainer label {
+    font-weight: 400;
+    font-size: 0.8rem !important;
+  }
+  .radioGroup svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}
+@media only screen and (max-width: 400px) {
+
+  .label {
+    margin-left: 0.8rem;
+    font-size: 0.75rem !important;
+  }
+  .radioGroup {
+    flex-wrap: nowrap !important;
+  }
+  .checkBoxContainer span,
+  .checkBoxContainer label {
+    font-weight: 400;
+    font-size: 0.7rem !important;
+  }
+  .radioGroup svg {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+}

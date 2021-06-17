@@ -14,3 +14,31 @@
   font-weight: 500;
   color: #192129b0;
 }
+
+@media only screen and (max-width: 961px) {
+  .inputBox {
+    width: 90%;
+  }
+  .text {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .email {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #192129b0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .inputBox {
+    width: 90%;
+  }
+  .text {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .email {
+    font-size: 0.8rem;
+  }
+}

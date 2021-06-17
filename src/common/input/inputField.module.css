@@ -70,9 +70,18 @@
   transition: all 250ms;
 }
 
+@media only screen and (max-width: 961px) {
+  .labelBox {
+    align-items: flex-end;
+  }
+  .label {
+    margin: 0 0.5rem 0 0;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .label {
-    margin: 0 0.5rem -0.5rem 0;
+    margin: 0 0.5rem 0 0;
     font-size: 0.75rem;
   }
   .textField {
@@ -80,7 +89,14 @@
     height: 2rem;
   }
 
+  .textField {
+    font-size: 0.8rem;
+  }
   .textField::placeholder {
+    font-size: 0.75rem;
+  }
+
+  .error {
     font-size: 0.75rem;
   }
 }

@@ -126,9 +126,14 @@
   }
 }
 
+@media only screen and (max-width: 961px) {
+  .container {
+    width: 60%;
+  }
+}
 @media only screen and (max-width: 768px) {
   .container {
-    width: 85%;
+    width: 70%;
   }
   .switchBox {
     width: 70%;
@@ -147,7 +152,35 @@
   .switchBtn span {
     font-size: 1rem;
   }
-  .signIn , .signUp {
+  .signIn,
+  .signUp {
     font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .formTitle {
+    font-size: 1.5rem !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 85%;
+  }
+  .formTitle {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .signIn,
+  .signUp {
+    font-size: 1.15rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    width: 95%;
   }
 }

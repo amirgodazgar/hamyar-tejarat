@@ -1,4 +1,4 @@
-import { Fade, Typography } from "@material-ui/core";
+import { Fade, Hidden, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import classes from "./AuthLayout.module.css";
@@ -23,11 +23,14 @@ const AuthLayout = ({ children, title, titleType }) => {
   return (
     <div className={classes.authLayout}>
       <div className={classes.container}>
+      <Hidden smDown>
         <div className={classes.image}>
           <span className={classes.up}>{authData.authLayout.upText}</span>
           <h6 className={classes.center}>{authData.authLayout.title}</h6>
           <span className={classes.down}>{authData.authLayout.downText}</span>
         </div>
+      </Hidden>
+        
         <div className={classes.registerContainer}>
           <div className={classes.title}>
             {titleType !== "register" ? (

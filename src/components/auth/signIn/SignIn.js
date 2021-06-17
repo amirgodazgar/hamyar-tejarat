@@ -77,12 +77,7 @@ const SignIn = () => {
               label={authData.signIn.pass}
               placeHolder="********"
             />
-            {/* <span
-              onClick={() => setShowPass((prevState) => !prevState)}
-              className={classes.showPassword}
-            >
-              <Visibility color="primary" />
-            </span> */}
+    
             <div className={classes.checkBoxContainer}>
               <label>
                 <Checkbox

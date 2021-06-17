@@ -64,3 +64,46 @@
   right: 26rem;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 961px) {
+  .inputBox {
+    width: 80%;
+  }
+  .forgotPass {
+    font-size: 0.9rem;
+  }
+  .checkBoxContainer i {
+    font-size: 0.9rem;
+  }
+  .checkbox svg {
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+
+  .alert div:nth-child(2) {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .inputBox {
+    width: 90%;
+  }
+  .forgotPass {
+    font-size: 0.85rem;
+  }
+  .checkBoxContainer i {
+    font-size: 0.85rem;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .inputBox {
+    width: 90%;
+  }
+  .forgotPass {
+    font-size: 0.8rem;
+  }
+  .checkBoxContainer i {
+    font-size: 0.8rem;
+  }
+}
