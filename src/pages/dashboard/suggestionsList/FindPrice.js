@@ -89,7 +89,7 @@ const FindPrice = ({ backToTab }) => {
                   <Paper className={classes.paper}>
                     <div className={classes.priceHeader}>
                       <Typography className={classes.priceTitle} variant="h6">
-                        جدیدترین درخواست ها
+                        درخواست های ثبت شده توسط شما
                       </Typography>
                     </div>
                     <div className={classes.body}>

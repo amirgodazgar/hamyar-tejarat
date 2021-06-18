@@ -87,6 +87,7 @@ const SearchAllRequest = ({ backToTab }) => {
     history.push(
       "/Dashboard/getQuotationRequestList/SearchAllQuotationRequests"
     );
+    filterList("", "", "", "");
   }, []);
 
   return (

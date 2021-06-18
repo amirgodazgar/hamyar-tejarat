@@ -96,7 +96,7 @@ const ClearanceProposalList = ({ backToTab }) => {
                   <Paper className={classes.paper}>
                     <div className={classes.header}>
                       <Typography className={classes.title} variant="h6">
-                        جدیدترین پیشنهاد ها
+                        پیشنهادهای ثبت شده توسط شما
                       </Typography>
                       <div className={classes.link}></div>
                     </div>

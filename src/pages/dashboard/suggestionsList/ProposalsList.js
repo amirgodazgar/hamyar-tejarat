@@ -85,7 +85,7 @@ const ProposalsList = ({ backToTab }) => {
               <Paper className={classes.paper}>
                 <div className={classes.header}>
                   <Typography className={classes.title} variant="h6">
-                    جدیدترین پیشنهاد ها
+                    آخرین پیشنهادات
                   </Typography>
                   <div
                     className={classes.link}

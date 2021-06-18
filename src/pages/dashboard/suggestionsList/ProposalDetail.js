@@ -100,7 +100,7 @@ const ProposalDetail = ({ userName }) => {
                   onClick={() => history.goBack()}
                 >
                   <ArrowForwardIosRounded fontSize="small" />
-                  <p>بازگشت به لیست درخواست ها</p>
+                  <p>بازگشت به لیست پیشنهاد ها</p>
                 </div>
               </Grid>
 
