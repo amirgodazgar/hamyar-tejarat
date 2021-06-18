@@ -201,8 +201,27 @@
     padding: 7rem 5rem 3rem 0rem;
   }
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 340px) {
   .main {
-    padding: 7rem 5rem .5rem 0;
+    padding: 7rem 4rem 0.5rem 0;
+  }
+  .notificationBox svg,
+  .menuIcon {
+    height: 0.75em !important;
+    width: 0.75em !important;
+  }
+  .listItem div svg {
+    height: 0.75em !important;
+    width: 0.75em !important;
+  }
+  .listItem div span,
+  .dropDownText span {
+    font-size: 0.75rem !important;
+  }
+  .appBar {
+    width: calc(100% - 4rem) !important;
+  }
+  .drawerContainer {
+    width: 4rem;
   }
 }

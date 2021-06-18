@@ -148,8 +148,8 @@ const Import = () => {
           className={classes.stepper}
         >
           {steps.map((label, index) => (
-            <Step key={index}>
-              <StepLabel>{label.type}</StepLabel>
+            <Step key={index} className={classes.step}>
+              <StepLabel className={classes.stepLabel}>{label.type}</StepLabel>
             </Step>
           ))}
         </Stepper>
