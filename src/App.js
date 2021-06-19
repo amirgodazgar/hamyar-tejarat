@@ -12,6 +12,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import VerifyEmail from "./components/auth/verifyEmail/VerifyEmail";
 import ResetPassword from "./components/auth/resetPassword/ResetPassword";
 import News from "./pages/news/News";
+import ContactUs from "./pages/contactUs/ContactUs";
 
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -29,6 +30,7 @@ function App() {
           <Layout>
             <Route exact path="/" component={Home} />
             <Route path="/news" component={News} />
+            <Route path="/contactUs" component={ContactUs} />
           </Layout>
         </Switch>
       </StylesProvider>

@@ -59,7 +59,7 @@ const Navbar = () => {
   };
   const contactUsHandler = () => {
     setOpen(false);
-    history.push("/");
+    history.push("/contactUs");
   };
 
   return (
@@ -83,7 +83,12 @@ const Navbar = () => {
                 </a>
               </li>
               <li className={classes.item}>
-                <a>تماس با ما</a>
+                <a
+                  href="#contact-us"
+                  onClick={() => history.push("/contactUs")}
+                >
+                  تماس با ما
+                </a>
               </li>
               <li className={classes.item}>
                 <a href="#footer" onClick={() => history.push("/")}>
@@ -215,29 +220,35 @@ const Navbar = () => {
                   </a>
                 </ListItem>
                 <ListItem>
-                  <Accordion
-                    expanded={false}
-                    style={{ width: "100%", background: "#f4f4f4" }}
-                    elevation={0}
-                  >
-                    <AccordionSummary
-                      style={{ minHeight: "2rem" }}
-                      // expandIcon={<ExpandMore />}
+                  <a href="#contact-us" onClick={contactUsHandler}>
+                    <Accordion
+                      expanded={false}
+                      style={{ width: "100%", background: "#f4f4f4" }}
+                      elevation={0}
                     >
-                      <Typography className={classes.responsiveItem}>
-                        تماس با ما
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails
-                      style={{ display: "flex", flexDirection: "column" }}
-                    >
-                      <Typography variant="button">تماس با پشتیبانی</Typography>
-                      <Typography variant="button">رسیدگی به شکایات</Typography>
-                      <Typography variant="button">
-                        تلفن گویا همیار تجارت
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
+                      <AccordionSummary
+                        style={{ minHeight: "2rem" }}
+                        // expandIcon={<ExpandMore />}
+                      >
+                        <Typography className={classes.responsiveItem}>
+                          تماس با ما
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails
+                        style={{ display: "flex", flexDirection: "column" }}
+                      >
+                        <Typography variant="button">
+                          تماس با پشتیبانی
+                        </Typography>
+                        <Typography variant="button">
+                          رسیدگی به شکایات
+                        </Typography>
+                        <Typography variant="button">
+                          تلفن گویا همیار تجارت
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  </a>
                 </ListItem>
                 <ListItem>
                   <a href="#footer" onClick={contactUsHandler}>
