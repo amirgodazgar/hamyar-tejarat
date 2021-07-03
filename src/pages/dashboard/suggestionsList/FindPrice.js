@@ -150,7 +150,7 @@ const FindPrice = ({ backToTab }) => {
                                     key={row.quotationRequestsId}
                                     className={classes.tableRow}
                                     onClick={() =>
-                                      showDetailHandler(row.quotationRequestsId)
+                                      showDetailHandler(row.id)
                                     }
                                   >
                                     <TableCell></TableCell>
