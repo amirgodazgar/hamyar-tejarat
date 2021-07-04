@@ -1,32 +1,28 @@
 import React from "react";
 import classes from "./import.module.css";
 import { Typography, Fade } from "@material-ui/core";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { CloudUpload, Image } from "@material-ui/icons";
-import { Alert } from "@material-ui/lab";
+import { CloudUpload } from "@material-ui/icons";
 
-const UploadPurchase = () => {
-  const initialValues = {
-    loadingBill: "",
-    performa: "",
-    packingList: "",
-  };
-
-  const validationSchema = Yup.object({
-    loadingBill: Yup.mixed().required(),
-    performa: Yup.mixed().required(),
-    packingList: Yup.mixed().required(),
-  });
-
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
+const UploadPurchase = ({
+  transportTools,
+  formik,
+  setPerforma,
+  setBillOfLoading,
+  setPackingList,
+}) => {
+  const errorBox = (name, label) => (
+    <div className={classes.errorBox}>
+      <label htmlFor={name}>{label}</label>
+      {formik.touched[name] && formik.errors[name] ? (
+        <Fade
+          in={formik.touched[name] && formik.errors[name] ? true : false}
+          timeout={400}
+        >
+          <div className={classes.error}></div>
+        </Fade>
+      ) : null}
+    </div>
+  );
 
   return (
     <React.Fragment>
@@ -34,120 +30,126 @@ const UploadPurchase = () => {
         لطفا تصویر مدارک درخواستی را با فرمت و حجم حداکثر کیلوبایت بارگذاری
         نمایید
       </Typography>
-      <div className={classes.uploadContainer}>
-        <div className={classes.uploadImgBox}>
-          <div className={classes.uploadImgTitle}> پیش نمایش تصویر بارنامه</div>
-          <div className={classes.uploadImg}>
-            {formik.values.loadingBill ? (
-              <img src={formik.values.loadingBill} alt="criminal-record" />
-            ) : (
-              <Image fontSize="large" />
-            )}
+      <div className={classes.formBox}>
+        <div className={classes.inputContainer}>
+          <div className={classes.UploadInputBox}>
+            {errorBox("packagingTypePurchase", "نوع بسته بندی")}
+            <input
+              className={`${classes.packingType}  ${
+                formik.touched.packagingTypePurchase &&
+                formik.errors.packagingTypePurchase
+                  ? classes.inputError
+                  : null
+              } `}
+              name="packagingTypePurchase"
+              type="text"
+              placeholder="بسته بندی معمولی"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.packagingTypePurchase}
+              required
+            />
+          </div>
+          <div className={classes.UploadInputBox}>
+            {errorBox("cargoAmountPurchase", " میزان/ حجم کالای مورد نظر ")}
+            <input
+              className={`${classes.amount}  ${
+                formik.touched.cargoAmountPurchase &&
+                formik.errors.cargoAmountPurchase
+                  ? classes.inputError
+                  : null
+              } `}
+              name="cargoAmountPurchase"
+              type="text"
+              placeholder=" 20 کیلوگرم "
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.cargoAmountPurchase}
+              required
+            />
+          </div>
+          <div className={classes.UploadInputBox}>
+            {errorBox("cargoTransportToolsPurchase", "وسیله حمل کالا ")}
+            <select
+              multiple={false}
+              name="cargoTransportToolsPurchase"
+              value={formik.values.cargoTransportToolsPurchase}
+              onChange={formik.handleChange}
+              className={`${classes.conveyanceSelect}  ${
+                formik.touched.cargoTransportToolsPurchase &&
+                formik.errors.cargoTransportToolsPurchase &&
+                formik.values.cargoTransportToolsPurchase === "0"
+                  ? classes.inputError
+                  : null
+              } `}
+            >
+              <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
+              {transportTools.map((option, index) => (
+                <option value={option.value} key={index}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={classes.UploadInputBox}>
+            {errorBox("cargoValuePurchase", "ارزش کالای مورد نظر (تومان) ")}
+            <input
+              className={`${classes.priceValue}  ${
+                formik.touched.cargoValuePurchase &&
+                formik.errors.cargoValuePurchase
+                  ? classes.inputError
+                  : null
+              } `}
+              name="cargoValuePurchase"
+              type="text"
+              placeholder="70,000,000"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.cargoValuePurchase}
+              required
+            />
           </div>
         </div>
 
-        <div className={classes.uploadImgBox}>
-          <div className={classes.uploadImgTitle}> پیش نمایش تصویر پرفورما</div>
-          <div className={classes.uploadImg}>
-            {formik.values.performa ? (
-              <img src={formik.values.performa} alt="criminal-record" />
-            ) : (
-              <Image fontSize="large" />
-            )}
-          </div>
-        </div>
+        <div className={classes.inputContainer}>
+          <div className={classes.uploadInputBox}>
+            {errorBox("loadingBill", "بارگذاری بارنامه (Bill of Loading)")}
 
-        <div className={classes.uploadImgBox}>
-          <div className={classes.uploadImgTitle}>
-            پیش نمایش تصویر فهرست عدل بندی
+            <input
+              className={classes.uploadInput}
+              type="file"
+              name="loadingBill"
+              value={formik.values.loadingBill}
+              onChange={(e) => setBillOfLoading(e.target.files[0])}
+            />
+            <CloudUpload fontSize="small" className={classes.uploadIcon} />
           </div>
-          <div className={classes.uploadImg}>
-            {formik.values.packingList ? (
-              <img src={formik.values.packingList} alt="criminal-record" />
-            ) : (
-              <Image fontSize="large" />
-            )}
-          </div>
-        </div>
-      </div>
 
-      <div className={classes.inputContainer}>
-        <div className={classes.uploadInputBox}>
-          <div className={classes.uploadInputBoxTitle}>
-            بارگذاری بارنامه یا Bill of Loading
-            {formik.touched.workExperience && formik.errors.workExperience ? (
-              <Fade
-                in={
-                  formik.touched.workExperience && formik.errors.workExperience
-                    ? true
-                    : false
-                }
-                timeout={400}
-              >
-                <Alert severity="error" className={classes.alert}></Alert>
-              </Fade>
-            ) : null}
-          </div>
-          <input
-            className={classes.uploadInput}
-            type="file"
-            name="loadingBill"
-            value={formik.values.loadingBill}
-            onChange={formik.handleChange}
-          />
-          <CloudUpload fontSize="small" className={classes.uploadIcon} />
-        </div>
+          <div className={classes.uploadInputBox}>
+            {errorBox("performa", "  بارگذاری پرفورما")}
 
-        <div className={classes.uploadInputBox}>
-          <div className={classes.uploadInputBoxTitle}>
-            بارگذاری پرفورما
-            {formik.touched.workExperience && formik.errors.workExperience ? (
-              <Fade
-                in={
-                  formik.touched.workExperience && formik.errors.workExperience
-                    ? true
-                    : false
-                }
-                timeout={400}
-              >
-                <Alert severity="error" className={classes.alert}></Alert>
-              </Fade>
-            ) : null}
+            <input
+              className={classes.uploadInput}
+              type="file"
+              name="performa"
+              value={formik.values.performa}
+              onChange={(e) => setPerforma(e.target.files[0])}
+            />
+            <CloudUpload fontSize="small" className={classes.uploadIcon} />
           </div>
-          <input
-            className={classes.uploadInput}
-            type="file"
-            name="performa"
-            value={formik.values.performa}
-            onChange={formik.handleChange}
-          />
-          <CloudUpload fontSize="small" className={classes.uploadIcon} />
-        </div>
 
-        <div className={classes.uploadInputBox}>
-          <div className={classes.uploadInputBoxTitle}>
-            بارگذاری فهرست عدل بندی یا Packing List
-            {formik.touched.workExperience && formik.errors.workExperience ? (
-              <Fade
-                in={
-                  formik.touched.workExperience && formik.errors.workExperience
-                    ? true
-                    : false
-                }
-                timeout={400}
-              >
-                <Alert severity="error" className={classes.alert}></Alert>
-              </Fade>
-            ) : null}
-          </div>
-          <input
-            className={classes.uploadInput}
-            type="file"
-            name="packingList"
-            value={formik.values.packingList}
-            onChange={formik.handleChange}
-          />
-          <CloudUpload fontSize="small" className={classes.uploadIcon} />
+          <from className={classes.uploadInputBox}>
+            {errorBox("packingList", "بارگذاری فهرست عدل بندی  (Packing List)")}
+            <input
+              className={classes.uploadInput}
+              type="file"
+              name="packingList"
+              value={formik.values.packingList}
+              onChange={(e) => setPackingList(e.target.files[0])}
+            />
+
+            <CloudUpload fontSize="small" className={classes.uploadIcon} />
+          </from>
         </div>
       </div>
     </React.Fragment>

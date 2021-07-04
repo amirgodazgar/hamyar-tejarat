@@ -129,6 +129,28 @@ export const postRequestRegisterFormData = async (userInfo) => {
   return data;
 };
 
+// Request Register purchase POST :
+export const postRequestRegisterFormDataPurchase = async (formData) => {
+  const token = Cookies.get("token");
+
+  console.log(formData.get("BillOfLoading"));
+  console.log(formData.get("Performa"));
+  console.log(formData.get("PackingList"));
+
+  await http
+    .post("/BusinessmanPanel/SubmitClearanceRequest", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ContentType: "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+      }
+    });
+};
+
 // -------------- Suggestions List  -------------------------------- //
 
 // Suggestions List  GET :
@@ -140,7 +162,6 @@ export const getSuggestionsListData = async (pageNumber = 1, pageSize = 10) => {
     .then((res) => {
       // console.log(res);
       if (res.status === 200) {
-        // return res.data.data;
         return res.data;
       }
     });
@@ -222,8 +243,8 @@ export const postClearancePrivate = async (
   setIsLoading
 ) => {
   const token = Cookies.get("token");
-  console.log(userInfo.get("WorkExperienceImage"));
-  console.log(userInfo.get("CertificateOfNoCriminalRecordImage"));
+  // console.log(userInfo.get("WorkExperienceImage"));
+  // console.log(userInfo.get("CertificateOfNoCriminalRecordImage"));
 
   await http
     .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {

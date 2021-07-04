@@ -125,12 +125,7 @@
   box-shadow: 0px 4px 8px 1px #c4cad05b;
   transition: all 200ms;
 }
-.purchase {
-  color: #c4cad0;
-  background-color: #f4f4f4;
-  box-shadow: 0px 4px 8px 1px #c4cad086;
-  cursor: auto;
-}
+
 /* Third step -------------------*/
 
 .formBox {
@@ -155,7 +150,7 @@
 .tariffList {
   flex: 1.5;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
@@ -195,7 +190,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   margin: 0 auto;
-  width: 95%;
+  width: 100%;
 }
 .tariffCodes img,
 .tariffCodes span {
@@ -299,15 +294,15 @@
 
 /* -----------UPLOAD--------------- */
 .firstStpSubTitle_Upload {
-  flex: 0.3;
+  flex: 1;
   display: flex;
   justify-content: center !important;
-  align-items: flex-start !important;
+  align-items: center !important;
 }
 /* ------- INPUT ------ */
-.uploadContainer,
+
 .inputContainer {
-  flex: 1.2;
+  flex: 1.75;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -320,15 +315,15 @@
   padding: 0 0.2rem;
 }
 
-/* .uploadInputBox {
+.uploadInputBox {
   position: relative;
-  height: 100%;
-  flex: 0 0 30%;
+  height: 80%;
+  flex: 0 0 33%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
-} */
+}
 .uploadInputBox input {
   color: transparent;
 }
@@ -364,7 +359,7 @@ input[type="file"] {
   border-radius: 10px;
   padding: 0.75rem 0;
   position: absolute;
-  top: 3rem;
+  top: 3.7rem;
   left: 2rem;
   cursor: pointer;
 }
@@ -389,42 +384,6 @@ input[type="file"] {
   transition: all 250ms;
 }
 
-/* ------ IMAGE ------ */
-.uploadImgBox {
-  flex: 0 0 30%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.uploadImgTitle {
-  width: 95%;
-  height: 12%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0 0.2rem;
-}
-
-.uploadImg {
-  background-color: #f4f4f4;
-  width: 95%;
-  height: 85%;
-  border: 1px solid #70707025;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0px 4px 8px 1px #c4cad05b;
-}
-.uploadImg img {
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
-}
-
 /* ----------------------------- */
 .successfulContainer {
   flex: 5.25;
@@ -445,7 +404,7 @@ input[type="file"] {
   text-align: center;
 }
 .link {
-  width: 30%;
+  width: 35%;
   height: 10%;
 }
 .successfulBtn {
@@ -541,12 +500,12 @@ input[type="file"] {
     height: 8rem;
     width: 95%;
   }
-  .uploadContainer {
+  /* .uploadContainer {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
-  }
+  } */
   .UploadInputBox {
     width: 50%;
     margin-bottom: 1rem;
@@ -634,8 +593,7 @@ input[type="file"] {
     width: 50%;
     margin: 0 auto;
   }
-  .inputContainer,
-  .uploadContainer {
+  .inputContainer {
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 1rem;

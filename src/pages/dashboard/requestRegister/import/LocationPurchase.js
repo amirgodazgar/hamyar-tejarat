@@ -1,35 +1,10 @@
 import React from "react";
 import classes from "./import.module.css";
-import { Fade, Typography } from "@material-ui/core";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { Chip, Fade, Typography } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
-const LocationPurchase = () => {
-  const initialValues = {
-    tariff: "",
-    originLoading: "",
-    originReleasing: "",
-    merchandise: "",
-  };
-
-  const validationSchema = Yup.object({
-    tariff: Yup.string().required("کد تعرفه را وارد کنید"),
-    originLoading: Yup.string().required("مبدا کالا را وارد کنید"),
-    originReleasing: Yup.mixed().required("گمرک یا محل ترخیص را وارد کنید"),
-    merchandise: Yup.mixed().required(" نوع کالا  را وارد کنید"),
-  });
-
-  const onSubmit = (values) => {
-    console.log(values);
-  };
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
-
+const LocationPurchase = ({ placeClearance, formik }) => {
   const errorBox = (name, label) => (
     <div className={classes.errorBox}>
       <label htmlFor={name}>{label}</label>
@@ -38,7 +13,7 @@ const LocationPurchase = () => {
           in={formik.touched[name] && formik.errors[name] ? true : false}
           timeout={400}
         >
-          <div className={classes.error}>{formik.errors[name]}</div>
+          <div className={classes.error}></div>
         </Fade>
       ) : null}
     </div>
@@ -50,42 +25,62 @@ const LocationPurchase = () => {
         لطفا اطلاعات مربوط به مبدا و مقصد کالای موردنظر خود را وارد کنید
       </Typography>
       <div className={classes.formBox}>
-        <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
-          <div className={classes.inputBoxPurchase}>
-            {errorBox("tariff", "کد تعرفه")}
+        <div className={classes.inputContainer}>
+          <div className={classes.inputBox}>
+            {errorBox("tariffCodePurchase", "کد تعرفه")}
             <input
               className={`${classes.tariff}  ${
-                formik.touched.tariff && formik.errors.tariff
+                formik.touched.tariffCodePurchase &&
+                formik.errors.tariffCodePurchase
                   ? classes.inputError
                   : null
               } `}
-              name="tariff"
+              name="tariffCodePurchase"
               type="text"
-              placeholder="0101"
+              placeholder="0202"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.tariff}
+              value={formik.values.tariffCodePurchase}
               required
             />
           </div>
-          <div className={classes.inputBoxPurchase}>
-            {errorBox("merchandise", "نوع کالا ")}
+          <div className={classes.inputBox}>
+            {errorBox("cargoTitlePurchase", " عنوان کالا ")}
             <input
               className={`${classes.merchandise}  ${
-                formik.touched.merchandise && formik.errors.merchandise
+                formik.touched.cargoTitlePurchase &&
+                formik.errors.cargoTitlePurchase
                   ? classes.inputError
                   : null
               } `}
-              name="merchandise"
+              name="cargoTitlePurchase"
               type="text"
-              placeholder=" اسب و الاغ"
+              placeholder="گوشت حیوانات از نوع گاو، منجمد"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.merchandise}
+              value={formik.values.cargoTitlePurchase}
               required
             />
           </div>
-        </form>
+          <div className={classes.inputBox}>
+            {errorBox("portOfLoadingPurchase", "مبدا کالا ")}
+            <input
+              className={`${classes.originLoading}  ${
+                formik.touched.portOfLoadingPurchase &&
+                formik.errors.portOfLoadingPurchase
+                  ? classes.inputError
+                  : null
+              } `}
+              name="portOfLoadingPurchase"
+              type="text"
+              placeholder="بازارچه پرویزخان"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.portOfLoadingPurchase}
+              required
+            />
+          </div>
+        </div>
         <div className={classes.tariffCodes}>
           <Link to="/Dashboard/tariffCodesList" target="blank">
             <img src={tariffSvg} alt="tariffCode" />
@@ -93,54 +88,44 @@ const LocationPurchase = () => {
           </Link>
         </div>
         <div className={classes.tariffList}>
-          <div className={classes.inputBoxPurchase}>
-            {errorBox("originLoading", "مبدا کالا ")}
-            <input
-              className={`${classes.originLoading}  ${
-                formik.touched.originLoading && formik.errors.originLoading
-                  ? classes.inputError
-                  : null
-              } `}
-              name="originLoading"
-              type="text"
-              placeholder="بازارچه پرویزخان"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.originLoading}
-              required
-            />
-          </div>
-          <div className={classes.inputBoxPurchase}>
-            {errorBox("originReleasing", "گمرک مقصد، محل ترخیص کالا ")}
+          <div className={classes.inputBox} style={{ width: "30%" }}>
+            {errorBox("originCustomIdsPurchase", "گمرک مقصد، محل ترخیص کالا ")}
             <select
-              name="originReleasing"
-              value={formik.values.originReleasing}
+              multiple={false}
+              name="originCustomIdsPurchase"
+              value={formik.values.originCustomIdsPurchase}
               onChange={formik.handleChange}
               className={`${classes.originReleasingSelect}  ${
-                formik.touched.originReleasing &&
-                formik.errors.originReleasing &&
-                formik.values.originReleasing === "0"
+                formik.touched.originCustomIdsPurchase &&
+                formik.errors.originCustomIdsPurchase &&
+                formik.values.originCustomIdsPurchase === "0"
                   ? classes.inputError
                   : null
               } `}
             >
-              {[
-                { label: "انتخاب کنید", value: "0" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-                { label: " بازارچه پرویزخان", value: "بازارچه پرویزخان" },
-              ].map((option, index) => (
-                <option
-                  style={
-                    option.value === "0" ? { color: "rgba(0,0,0,0.4)" } : null
-                  }
-                  value={option.value}
-                  label={option.label}
-                  key={index}
-                />
+              <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
+              {placeClearance.map((option, index) => (
+                <option value={option.id} key={index}>
+                  {option.name}
+                </option>
               ))}
             </select>
           </div>
+          {/* <div className={classes.selectedTariffBox}>
+            <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
+            <div className={classes.selectedTariff}>
+              {chips.map((item, index) =>
+                index !== -1 ? (
+                  <Chip
+                    className={classes.chip}
+                    label={item.name}
+                    onDelete={() => chipDeleteHandler(index)}
+                    key={item.id}
+                  />
+                ) : null
+              )}
+            </div>
+          </div> */}
         </div>
       </div>
     </React.Fragment>

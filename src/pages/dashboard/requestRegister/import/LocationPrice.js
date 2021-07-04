@@ -5,7 +5,6 @@ import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
 const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
-  // const [chips, setChips] = useState([]);
   const addChipsHandler = (e) => {
     const id = e.target.value;
     const text = e.nativeEvent.target[id].text;
@@ -15,10 +14,6 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
       name: text,
     });
     setChips((prevState) => [...prevState, ...updateValue]);
-
-    // const PrevIds = prevState.map(item => item.id)
-    // const updateIds = updateValue.map(item => item.id)
-    // [...new Set([...prevState, ...updateValue])]);
   };
 
   const chipDeleteHandler = (chip) => {

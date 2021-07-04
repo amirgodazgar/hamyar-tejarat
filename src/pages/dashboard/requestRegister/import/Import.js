@@ -19,10 +19,12 @@ import { Link } from "react-router-dom";
 import {
   getRequestRegisterFormData,
   postRequestRegisterFormData,
+  postRequestRegisterFormDataPurchase,
 } from "../../../../services/dashboard/userInfoServices";
-// import { adminPanelData } from "../../../../constant/adminPanel";
 import { useFormik } from "formik";
+import { useFormik as useFormikPurchase } from "formik";
 import * as Yup from "yup";
+import * as YupPurchase from "yup";
 
 const Import = () => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -30,6 +32,9 @@ const Import = () => {
   const [transportTools, setTransportTools] = useState([]);
   const [placeClearance, setPlaceClearance] = useState([]);
   const [chips, setChips] = useState([]);
+  const [performa, setPerforma] = useState(null);
+  const [billOfLoading, setBillOfLoading] = useState(null);
+  const [packingList, setPackingList] = useState(null);
 
   const initialValues = {
     tariffCode: "",
@@ -42,6 +47,20 @@ const Import = () => {
     cargoValue: "",
   };
 
+  const initialValuesPurchase = {
+    tariffCodePurchase: "",
+    cargoTitlePurchase: "",
+    portOfLoadingPurchase: "",
+    originCustomIdsPurchase: 0,
+    packagingTypePurchase: "",
+    cargoAmountPurchase: "",
+    cargoTransportToolsPurchase: "",
+    cargoValuePurchase: "",
+    loadingBill: "",
+    performa: "",
+    packingList: "",
+  };
+
   const validationSchema = Yup.object({
     tariffCode: Yup.string().required(),
     cargoTitle: Yup.mixed().required(),
@@ -51,6 +70,20 @@ const Import = () => {
     cargoAmount: Yup.string().required(),
     cargoTransportTools: Yup.mixed().required(),
     cargoValue: Yup.mixed().required(),
+  });
+
+  const validationSchemaPurchase = YupPurchase.object({
+    portOfLoadingPurchase: YupPurchase.string().required(),
+    tariffCodePurchase: YupPurchase.string().required(),
+    cargoTitlePurchase: YupPurchase.mixed().required(),
+    originCustomIdsPurchase: YupPurchase.mixed().required(),
+    packagingTypePurchase: YupPurchase.string().required(),
+    cargoAmountPurchase: YupPurchase.string().required(),
+    cargoTransportToolsPurchase: YupPurchase.mixed().required(),
+    cargoValuePurchase: YupPurchase.mixed().required(),
+    // loadingBill: YupPurchase.mixed().required(),
+    // performa: YupPurchase.mixed().required(),
+    // packingList: YupPurchase.mixed().required(),
   });
 
   useEffect(() => {
@@ -76,7 +109,6 @@ const Import = () => {
   const onSubmit = (values) => {
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
     const filtered = [...new Set(ids)];
-    console.log(filtered);
 
     if (formik.isValid) {
       setActiveStep(4);
@@ -90,16 +122,50 @@ const Import = () => {
         cargoTransportTools: values.cargoTransportTools,
         cargoValue: values.cargoValue,
       };
-
       postRequestRegisterFormData(userInfo);
     }
-    // values.originReleasing.push(...chips);
+    values.originReleasing.push(...chips);
+  };
+
+  const onSubmitPurchase = (values) => {
+    console.log(values);
+
+    if (
+      formikPurchase.isValid &&
+      billOfLoading !== null &&
+      performa !== null &&
+      packingList !== null
+    ) {
+      setActiveStep(4);
+      const formData = new FormData();
+      formData.append("PortOfLoading", values.portOfLoadingPurchase);
+      formData.append("CustomId", values.originCustomIdsPurchase);
+      formData.append("BillOfLoading", billOfLoading);
+      formData.append("Performa", performa);
+      formData.append("PackingList", packingList);
+      formData.append("TariffCode", values.tariffCodePurchase);
+      formData.append("CargoTitle", values.cargoTitlePurchase);
+      formData.append("PackagingType", values.packagingTypePurchase);
+      formData.append("CargoAmount", values.cargoAmountPurchase);
+      formData.append(
+        "CargoTransportTools",
+        values.cargoTransportToolsPurchase
+      );
+      formData.append("CargoValue", values.cargoValuePurchase);
+      postRequestRegisterFormDataPurchase(formData);
+    }
   };
 
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema,
+  });
+
+  const formikPurchase = useFormikPurchase({
+    initialValues: initialValuesPurchase,
+    onSubmit: onSubmitPurchase,
+    validationSchema: validationSchemaPurchase,
   });
 
   const steps = [
@@ -119,7 +185,12 @@ const Import = () => {
         return <RequestType setRequestType={setIsPurchase} />;
       case 2:
         return isPurchase ? (
-          <LocationPurchase />
+          <LocationPurchase
+            formik={formikPurchase}
+            placeClearance={placeClearance}
+            chips={chips}
+            setChips={setChips}
+          />
         ) : (
           <LocationPrice
             formik={formik}
@@ -130,7 +201,13 @@ const Import = () => {
         );
       case 3:
         return isPurchase ? (
-          <UploadPurchase />
+          <UploadPurchase
+            formik={formikPurchase}
+            transportTools={transportTools}
+            setPerforma={setPerforma}
+            setBillOfLoading={setBillOfLoading}
+            setPackingList={setPackingList}
+          />
         ) : (
           <UploadPrice formik={formik} transportTools={transportTools} />
         );
@@ -153,7 +230,12 @@ const Import = () => {
             </Step>
           ))}
         </Stepper>
-        <form onSubmit={formik.handleSubmit} className={classes.main}>
+        <form
+          onSubmit={
+            isPurchase ? formikPurchase.handleSubmit : formik.handleSubmit
+          }
+          className={classes.main}
+        >
           {activeStep !== steps.length ? (
             <>
               <div className={classes.container}>
@@ -190,6 +272,31 @@ const Import = () => {
                 </div>
               </div>
             </>
+          ) : isPurchase ? (
+            <div className={classes.main}>
+              <div className={classes.container}>
+                <div className={classes.successfulContainer}>
+                  <Check fontSize="large" className={classes.successfulIcon} />
+                  <Typography variant="h6" className={classes.successfulTitle}>
+                    درخواست شما با موفقیت ثبت شد و در لیست در خواست ها نمایش
+                    داده می شود
+                  </Typography>
+                  <Link
+                    to="/Dashboard/suggestionsList/clearance"
+                    className={classes.link}
+                  >
+                    <Button
+                      className={classes.successfulBtn}
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                    >
+                      مشاهده لیست درخواست های شما
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
           ) : (
             <div className={classes.main}>
               <div className={classes.container}>
@@ -209,7 +316,7 @@ const Import = () => {
                       color="primary"
                       onClick={handleNext}
                     >
-                      مشاهده لیست پیشنهادها
+                      مشاهده لیست پیشنهادهای شما
                     </Button>
                   </Link>
                 </div>

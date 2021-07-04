@@ -11,7 +11,7 @@ import { CloudUpload, Image } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import { getUserInfoData } from "../../../../store/dashboard/dashboardSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { postClearanceJuridical } from "../../../../services/dashboard/userInfoServices";
 import UserCheckBackDrop from "../../../../common/backDrop/UserCheckBackDrop";

@@ -25,7 +25,7 @@ const UploadPrice = ({ transportTools, formik }) => {
         لطفا اطلاعات مربوط به مبدا و مقصد کالای موردنظر خود را وارد کنید
       </Typography>
       <div className={classes.formBox}>
-        <form onSubmit={formik.handleSubmit} className={classes.uploadContainer}>
+        <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
           <div className={classes.UploadInputBox}>
             {errorBox("packagingType", "نوع بسته بندی")}
             <input
