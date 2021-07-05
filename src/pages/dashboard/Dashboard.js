@@ -23,8 +23,8 @@ import logoImage from "../../styles/image/logo.png";
 import { adminPanelData } from "../../constant/adminPanel";
 import {
   Menu as MenuIcon,
-  Notifications,
-  Email,
+  // Notifications,
+  // Email,
   ExpandLess,
   ExpandMore,
   ExitToAppRounded,
@@ -38,7 +38,7 @@ import UserInfo from "./userInfo/UserInfo";
 import BankAccount from "./bankAccount/BankAccount";
 import TariffCodeList from "./tariffCodesList/TariffCodeList";
 import cardImage from "../../styles/svg/profile-image.svg";
-import ClearanceList from "./suggestionsList/ClearanceList";
+import ClearanceRequestList from "./suggestionsList/ClearanceRequestList";
 import FindPrice from "./suggestionsList/FindPrice";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
@@ -53,6 +53,9 @@ import SearchAllRequest from "./suggestionsList/submitProposal/SearchAllRequest"
 import SubmitProposalDetail from "./suggestionsList/submitProposal/SubmitProposalDetail";
 import UserCheckBackDrop from "../../common/backDrop/UserCheckBackDrop";
 import { clearCookies } from "../../helper/cookies";
+import ClearanceRequestDetail from "./suggestionsList/ClearanceRequestDetail";
+import SearchAllClearanceRequests from "./suggestionsList/SearchAllClearanceRequests";
+import SubmitClearanceRequestDetail from "./suggestionsList/submitProposal/SubmitClearanceRequestDetail";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -153,7 +156,7 @@ const Dashboard = () => {
     history.replace(path);
   };
   const secondDropDownHandler = (path) => {
-    if (path === "/Dashboard/getQuotationRequestList") {
+    if (path === "/Dashboard/RequestList") {
       setOpenProposalList((prevState) => !prevState);
       setOpenSuggestList(false);
       setOpen(true);
@@ -745,8 +748,11 @@ const Dashboard = () => {
                   </Route>
 
                   {/* ----- BusinessMan -------- */}
-                  <Route path="/Dashboard/suggestionsList/clearance">
-                    <ClearanceList backToTab={selectedHandler} />
+                  <Route path="/Dashboard/suggestionsList/clearanceRequestsList">
+                    <ClearanceRequestList backToTab={selectedHandler} />
+                  </Route>
+                  <Route path="/Dashboard/suggestionsList/ClearanceRequestDetail/:id">
+                    <ClearanceRequestDetail userName={userName} />
                   </Route>
                   <Route path="/Dashboard/suggestionsList/quotationRequestList">
                     <FindPrice backToTab={selectedHandler} />
@@ -763,14 +769,14 @@ const Dashboard = () => {
 
                   {/* ----- ClearanceMan -------- */}
 
-                  {/* ClearanceList DEMO */}
+                  {/* ClearanceRequestList  */}
                   <Route path="/Dashboard/quotationProposalsListAsync/clearance">
-                    <ClearanceList />
+                    <ClearanceRequestList />
                   </Route>
-                  <Route path="/Dashboard/getQuotationRequestList/clearance">
-                    <ClearanceList />
+                  <Route path="/Dashboard/RequestList/clearance">
+                    <ClearanceRequestList />
                   </Route>
-                  {/* ClearanceList : request & proposal */}
+                  {/* ClearanceRequestList : request & proposal */}
 
                   <Route path="/Dashboard/quotationProposalsListAsync/quotationRequestList">
                     <ClearanceProposalList backToTab={selectedHandler} />
@@ -779,7 +785,19 @@ const Dashboard = () => {
                     <ClearanceProposalDetail userName={userName} />
                   </Route>
 
-                  <Route path="/Dashboard/getQuotationRequestList/SearchAllQuotationRequests">
+                  <Route path="/Dashboard/RequestList/SearchAllClearanceRequests">
+                    {isProfileCompleted ? (
+                      <SearchAllClearanceRequests backToTab={selectedHandler} />
+                    ) : (
+                      <UserCheckBackDrop
+                        setRoute="/Dashboard/userInfo"
+                        severity="error"
+                        reload={false}
+                      />
+                    )}
+                  </Route>
+
+                  <Route path="/Dashboard/RequestList/SearchAllQuotationRequests">
                     {isProfileCompleted ? (
                       <SearchAllRequest backToTab={selectedHandler} />
                     ) : (
@@ -791,8 +809,11 @@ const Dashboard = () => {
                     )}
                   </Route>
 
-                  <Route path="/Dashboard/getQuotationRequestList/GetQuotationRequest/:id">
+                  <Route path="/Dashboard/RequestList/GetQuotationRequest/:id">
                     <SubmitProposalDetail userName={userName} />
+                  </Route>
+                  <Route path="/Dashboard/RequestList/GetClearanceRequestDetail/:id">
+                    <SubmitClearanceRequestDetail userName={userName} />
                   </Route>
                 </Switch>
               </div>

@@ -22,7 +22,7 @@ import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { Alert } from "@material-ui/lab";
 
-const SubmitProposalDetail = () => {
+const SubmitClearanceRequestDetail = () => {
   const [pageData, setPageData] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [proposalValue, setProposalValue] = useState("");
@@ -268,4 +268,4 @@ const SubmitProposalDetail = () => {
   );
 };
 
-export default SubmitProposalDetail;
+export default SubmitClearanceRequestDetail;

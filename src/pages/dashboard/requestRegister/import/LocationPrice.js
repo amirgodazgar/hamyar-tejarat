@@ -41,7 +41,7 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
         لطفا اطلاعات مربوط به مبدا و مقصد کالای موردنظر خود را وارد کنید
       </Typography>
       <div className={classes.formBox}>
-        <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
+        <div  className={classes.inputContainer}>
           <div className={classes.inputBox}>
             {errorBox("tariffCode", "کد تعرفه")}
             <input
@@ -93,7 +93,7 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
               required
             />
           </div>
-        </form>
+        </div>
         <div className={classes.tariffCodes}>
           <Link to="/Dashboard/tariffCodesList" target="blank">
             <img src={tariffSvg} alt="tariffCode" />

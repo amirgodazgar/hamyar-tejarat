@@ -145,13 +145,11 @@ const FindPrice = ({ backToTab }) => {
                                   page * rowsPerPage,
                                   page * rowsPerPage + rowsPerPage
                                 )
-                                .map((row, index) => (
+                                .map((row) => (
                                   <TableRow
-                                    key={row.quotationRequestsId}
+                                    key={row.id}
                                     className={classes.tableRow}
-                                    onClick={() =>
-                                      showDetailHandler(row.id)
-                                    }
+                                    onClick={() => showDetailHandler(row.id)}
                                   >
                                     <TableCell></TableCell>
                                     <TableCell>{row.cargoTitle}</TableCell>

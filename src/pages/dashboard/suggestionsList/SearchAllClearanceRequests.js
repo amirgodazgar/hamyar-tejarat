@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import classes from "./submitProposal.module.css";
-import styles from "../suggestionsList.module.css";
+import classes from "./submitProposal/submitProposal.module.css";
+import styles from "./suggestionsList.module.css";
 import {
   Grid,
   Paper,
@@ -17,13 +17,13 @@ import {
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
 import { useHistory } from "react-router";
-import BackDrop from "../../../../common/backDrop/BackDrop";
-import { getSearchAllRequest } from "../../../../services/dashboard/userInfoServices";
+import BackDrop from "../../../common/backDrop/BackDrop";
+import { searchAllClearanceRequests } from "../../../services/dashboard/userInfoServices";
 import { ClearRounded } from "@material-ui/icons";
-import { dateToPersian } from "../../../../helper/general";
+import { dateToPersian } from "../../../helper/general";
 import { Alert } from "@material-ui/lab";
 
-const SearchAllRequest = ({ backToTab }) => {
+const SearchAllClearanceRequests = ({ backToTab }) => {
   const [tariffCode, setTariffCode] = useState("");
   const [cargoTitle, setCargoTitle] = useState("");
   const [portOfLoading, setPortOfLoading] = useState("");
@@ -55,7 +55,7 @@ const SearchAllRequest = ({ backToTab }) => {
     transportTools
   ) => {
     const transportToolsDefault = transportTools === 0 ? "" : transportTools;
-    await getSearchAllRequest(
+    await searchAllClearanceRequests(
       page,
       rowsPerPage,
       tariffCode,
@@ -78,13 +78,13 @@ const SearchAllRequest = ({ backToTab }) => {
   };
   const showDetailHandler = (proposalId) => {
     history.push(
-      `/Dashboard/RequestList/GetQuotationRequest/${proposalId}`
+      `/Dashboard/RequestList/GetClearanceRequestDetail/${proposalId}`
     );
   };
 
   useEffect(() => {
     backToTab(3);
-    history.push("/Dashboard/RequestList/SearchAllQuotationRequests");
+    history.push("/Dashboard/RequestList/SearchAllClearanceRequests");
     filterList("", "", "", "");
   }, []);
 
@@ -97,7 +97,7 @@ const SearchAllRequest = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          جستجوی درخواست ها
+          جستجوی درخواست های ترخیص کالا
         </Typography>
       </Grid>
       {!result ? (
@@ -225,12 +225,6 @@ const SearchAllRequest = ({ backToTab }) => {
                                   variant="head"
                                   className={styles.tableHeader}
                                 >
-                                  تاجر
-                                </TableCell>
-                                <TableCell
-                                  variant="head"
-                                  className={styles.tableHeader}
-                                >
                                   نوع کالا
                                 </TableCell>
                                 <TableCell
@@ -267,15 +261,12 @@ const SearchAllRequest = ({ backToTab }) => {
                               )
                               .map((row) => (
                                 <TableRow
-                                  key={row.quotationRequestsId}
+                                  key={row.clearanceRequestsId}
                                   className={styles.tableRow}
                                   onClick={() =>
-                                    showDetailHandler(row.quotationRequestsId)
+                                    showDetailHandler(row.clearanceRequestsId)
                                   }
                                 >
-                                  <TableCell>
-                                    {checkClearanceManType(row.businessmanType)}
-                                  </TableCell>
                                   <TableCell>{row.cargoTitle}</TableCell>
                                   <TableCell>
                                     {row.requestDescription}
@@ -325,4 +316,4 @@ const SearchAllRequest = ({ backToTab }) => {
   );
 };
 
-export default SearchAllRequest;
+export default SearchAllClearanceRequests;

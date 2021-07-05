@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
-
 import { Alert } from "@material-ui/lab";
 import {
   Grid,
@@ -13,29 +12,19 @@ import {
   TableRow,
   TablePagination,
   Typography,
-  makeStyles,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
-import { getProposalsList } from "../../../services/dashboard/userInfoServices";
+import { getClearanceRequestsList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
-const useStyles = makeStyles((theme) => ({
-  [theme.breakpoints.down("sm")]: {
-    menuItem: {
-      fontSize: ".7rem",
-    },
-  },
-}));
 
-const ClearanceProposalList = ({ backToTab }) => {
-  const styles = useStyles();
+const ClearanceRequestList = ({ backToTab }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
   const history = useHistory();
-  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   const handleChangePage = (event, newPage) => {
@@ -48,23 +37,22 @@ const ClearanceProposalList = ({ backToTab }) => {
 
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
-    getProposalsList(curPage, rowsPerPage).then((res) => {
-      setPageData(res.results);
+    getClearanceRequestsList(curPage, rowsPerPage).then((res) => {
+      console.log(res);
+      setPageData(res);
       setIsLoading(false);
     });
     backToTab(1);
-    history.push(`/Dashboard/quotationProposalsListAsync/quotationRequestList`);
+    history.push("/Dashboard/suggestionsList/clearanceRequestsList");
   }, []);
 
   const rows = pageData !== undefined ? pageData : [];
 
-  const showDetailHandler = (proposalId) => {
+  const showDetailHandler = (requestId) => {
     history.push(
-      `/Dashboard/quotationProposalsListAsync/quotationRequestDetail/${proposalId}`
+      `/Dashboard/suggestionsList/ClearanceRequestDetail/${requestId}`
     );
   };
-
-  console.log(isLoading);
 
   return (
     <Grid
@@ -75,7 +63,7 @@ const ClearanceProposalList = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          لیست پیشنهاد ها
+          درخواست های ترخیص کالا
         </Typography>
       </Grid>
       {isLoading ? (
@@ -84,23 +72,27 @@ const ClearanceProposalList = ({ backToTab }) => {
         <>
           {pageData.length === 0 ? (
             <UserCheckBackDrop
-              setRoute="/Dashboard/RequestList/SearchAllQuotationRequests"
+              setRoute="/Dashboard/requestRegister"
               severity="warning"
-              message="هیچ پیشنهادی ثبت نشده است (برای ثبت پیشنهاد کلیک کنید)"
+              message="هیچ درخواستی ثبت نشده است (برای ثبت درخواست کلیک کنید)"
               reload={false}
             />
           ) : (
             <Grid item container spacing={1} xs={11}>
-              <Grid item container xs={12}>
+              {/* <Paper className={classes.mainPaper}> */}
+              <Grid
+                item
+                container
+                // spacing={3}
+                xs={12}
+              >
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
-                    <div className={classes.header}>
-                      <Typography className={classes.title} variant="h6">
-                        پیشنهادهای ثبت شده توسط شما
+                    <div className={classes.priceHeader}>
+                      <Typography className={classes.priceTitle} variant="h6">
+                        درخواست های ثبت شده توسط شما
                       </Typography>
-                      <div className={classes.link}></div>
                     </div>
-
                     <div className={classes.body}>
                       <TableContainer>
                         <Table>
@@ -112,16 +104,32 @@ const ClearanceProposalList = ({ backToTab }) => {
                                     variant="head"
                                     className={classes.tableHeader}
                                   >
-                                    تعداد روزهای تخمین زده شده
+                                    {""}
                                   </TableCell>
-
                                   <TableCell
                                     variant="head"
                                     className={classes.tableHeader}
                                   >
-                                    مبلغ پیشنهادی
+                                    عنوان کالا
                                   </TableCell>
-
+                                  <TableCell
+                                    variant="head"
+                                    className={classes.tableHeader}
+                                  >
+                                    تعداد پیشنهاد
+                                  </TableCell>
+                                  <TableCell
+                                    variant="head"
+                                    className={classes.tableHeader}
+                                  >
+                                    شرح در خواست
+                                  </TableCell>
+                                  <TableCell
+                                    variant="head"
+                                    className={classes.tableHeader}
+                                  >
+                                    گمرک مقصد
+                                  </TableCell>
                                   <TableCell
                                     variant="head"
                                     className={classes.tableHeader}
@@ -148,18 +156,15 @@ const ClearanceProposalList = ({ backToTab }) => {
                                   <TableRow
                                     key={row.id}
                                     className={classes.tableRow}
-                                    onClick={() =>
-                                      showDetailHandler(row.quotationRequestId)
-                                    }
+                                    onClick={() => showDetailHandler(row.id)}
                                   >
+                                    <TableCell></TableCell>
+                                    <TableCell>{row.cargoTitle}</TableCell>
+                                    <TableCell>{row.proposalsCount}</TableCell>
                                     <TableCell>
-                                      {Number(
-                                        row.estimatedNumberOfDays
-                                      ).toLocaleString()}
+                                      {row.requestDescription}
                                     </TableCell>
-                                    <TableCell>
-                                      {Number(row.price).toLocaleString()}
-                                    </TableCell>
+                                    <TableCell>{row.customName}</TableCell>
 
                                     <TableCell>
                                       <div className={classes.fixCell}>
@@ -178,7 +183,6 @@ const ClearanceProposalList = ({ backToTab }) => {
                         </Table>
                       </TableContainer>
                       <TablePagination
-                        classes={{ menuItem: styles.menuItem }}
                         className={classes.tablePagination}
                         rowsPerPageOptions={[
                           10,
@@ -199,6 +203,7 @@ const ClearanceProposalList = ({ backToTab }) => {
                   </Paper>
                 </Grid>
               </Grid>
+              {/* </Paper> */}
             </Grid>
           )}
         </>
@@ -207,4 +212,4 @@ const ClearanceProposalList = ({ backToTab }) => {
   );
 };
 
-export default ClearanceProposalList;
+export default ClearanceRequestList;

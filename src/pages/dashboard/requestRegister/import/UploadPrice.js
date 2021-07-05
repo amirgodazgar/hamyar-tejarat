@@ -11,9 +11,7 @@ const UploadPrice = ({ transportTools, formik }) => {
           in={formik.touched[name] && formik.errors[name] ? true : false}
           timeout={400}
         >
-          <div className={classes.error}>
-          {/* {formik.errors[name]} */}
-          </div>
+          <div className={classes.error}></div>
         </Fade>
       ) : null}
     </div>
@@ -25,7 +23,7 @@ const UploadPrice = ({ transportTools, formik }) => {
         لطفا اطلاعات مربوط به مبدا و مقصد کالای موردنظر خود را وارد کنید
       </Typography>
       <div className={classes.formBox}>
-        <form onSubmit={formik.handleSubmit} className={classes.inputContainer}>
+        <div className={classes.inputContainer}>
           <div className={classes.UploadInputBox}>
             {errorBox("packagingType", "نوع بسته بندی")}
             <input
@@ -99,7 +97,7 @@ const UploadPrice = ({ transportTools, formik }) => {
               required
             />
           </div>
-        </form>
+        </div>
         <div className={classes.tariffCodes}></div>
         <div className={classes.tariffList}></div>
       </div>

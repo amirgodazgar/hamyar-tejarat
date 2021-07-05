@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import {
   Grid,
-  Fade,
+  // Fade,
   Avatar,
   Paper,
   Typography,
-  Button,
+  // Button,
 } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";

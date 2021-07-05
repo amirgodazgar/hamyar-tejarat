@@ -24,7 +24,7 @@ export const adminPanelData = {
       dropDownText: [
         {
           text: "ترخیص کالا",
-          path: "/Dashboard/suggestionsList/clearance",
+          path: "/Dashboard/suggestionsList/clearanceRequestsList",
         },
         {
           text: "استعلام قیمت",
@@ -101,15 +101,15 @@ export const adminPanelData = {
     {
       text: "لیست درخواست ها",
       icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
-      path: "/Dashboard/getQuotationRequestList",
+      path: "/Dashboard/RequestList",
       dropDownText: [
         {
           text: "ترخیص کالا",
-          path: "/Dashboard/getQuotationRequestList/clearance",
+          path: "/Dashboard/RequestList/SearchAllClearanceRequests",
         },
         {
           text: "استعلام قیمت",
-          path: "/Dashboard/getQuotationRequestList/SearchAllQuotationRequests",
+          path: "/Dashboard/RequestList/SearchAllQuotationRequests",
         },
       ],
       hasDropDown: true,

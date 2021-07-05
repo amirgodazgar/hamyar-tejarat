@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import { loadingHandler } from "../../helper/general";
 import http from "../httpServices";
 
 // ----------------------------- BusinessMan Methods  --------------------------------------------------- //
@@ -219,6 +218,40 @@ export const getProposalData = async (ProposalId) => {
   return data;
 };
 
+// GetClearanceRequestsList :
+export const getClearanceRequestsList = async (
+  pageNumber = 1,
+  pageSize = 10
+) => {
+  const data = await http
+    .get(
+      `/BusinessmanPanel/GetClearanceRequestsList?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    )
+    .then((res) => {
+      if (res.status === 200) {
+        console.log(res.data.data);
+        return res.data.data.results;
+      }
+    });
+  return data;
+};
+
+// GetSingleClearanceRequest :
+export const getSingleClearanceRequest = async (clearanceRequestId) => {
+  const data = await http
+    .get(
+      `/BusinessmanPanel/GetSingleClearanceRequest?clearanceRequestId=${clearanceRequestId}`
+    )
+    .then((res) => {
+      if (res.status === 200) {
+        console.log(res.data.data);
+        return res.data.data;
+      }
+    });
+  return data;
+};
+getSingleClearanceRequest("9a4b2460-2f39-4158-902c-5fc6648a67e7");
+
 // ----------------------------- Clearance Methods  -----------------------------------------------------------------//
 
 // DASHBOARD INFO--------------------------------------:
@@ -334,7 +367,7 @@ export const getProposalDetail = async (ProposalId) => {
   return data;
 };
 
-//  SEARCH ALL REQUEST  --------------------------------- :
+//  SEARCH ALL REQUEST QUOTATION --------------------------------- :
 
 export const getSearchAllRequest = async (
   page,
@@ -359,6 +392,43 @@ export const getSearchAllRequest = async (
           page === 0 ? 1 : page
         }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`
       : `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
+          page === 0 ? 1 : page
+        }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`;
+
+  const data = await http.get(url).then((res) => {
+    console.log(res.data.data.searchResult);
+    if (res.status === 200) {
+      return res.data.data.searchResult.results;
+    }
+  });
+  return data;
+};
+
+//  SEARCH ALL REQUEST CLEARANCE --------------------------------- :
+
+export const searchAllClearanceRequests = async (
+  page,
+  pageSize,
+  tariffCode,
+  cargoTitle,
+  portOfLoading,
+  transportTools
+) => {
+  console.log(
+    page,
+    pageSize,
+    tariffCode,
+    cargoTitle,
+    portOfLoading,
+    transportTools
+  );
+
+  const url =
+    transportTools === ""
+      ? `/ClearancemanPanel/SearchAllClearanceRequests?pageNumber=${
+          page === 0 ? 1 : page
+        }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`
+      : `/ClearancemanPanel/SearchAllClearanceRequests?pageNumber=${
           page === 0 ? 1 : page
         }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`;
 
