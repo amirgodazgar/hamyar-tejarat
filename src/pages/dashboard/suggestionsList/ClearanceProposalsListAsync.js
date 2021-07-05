@@ -15,7 +15,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
-import { getProposalsList } from "../../../services/dashboard/userInfoServices";
+import { getClearanceList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ClearanceProposalList = ({ backToTab }) => {
+const ClearanceProposalsListAsync = ({ backToTab }) => {
   const styles = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -47,19 +47,21 @@ const ClearanceProposalList = ({ backToTab }) => {
 
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
-    getProposalsList(curPage, rowsPerPage).then((res) => {
+    getClearanceList(curPage, rowsPerPage).then((res) => {
       setPageData(res.results);
       setIsLoading(false);
     });
     backToTab(1);
-    history.push(`/Dashboard/quotationProposalsListAsync/quotationRequestList`);
+    history.push(
+      `/Dashboard/quotationProposalsListAsync/ClearanceProposalsListAsync`
+    );
   }, []);
 
   const rows = pageData !== undefined ? pageData : [];
 
-  const showDetailHandler = (proposalId) => {
+  const showDetailHandler = (clearanceRequestId) => {
     history.push(
-      `/Dashboard/quotationProposalsListAsync/quotationRequestDetail/${proposalId}`
+      `/Dashboard/quotationProposalsListAsync/ClearanceProposalRequestDetail/${clearanceRequestId}`
     );
   };
 
@@ -74,7 +76,7 @@ const ClearanceProposalList = ({ backToTab }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          لیست پیشنهاد ها
+          لیست پیشنهاد های ترخیص کالا
         </Typography>
       </Grid>
       {isLoading ? (
@@ -148,7 +150,7 @@ const ClearanceProposalList = ({ backToTab }) => {
                                     key={row.id}
                                     className={classes.tableRow}
                                     onClick={() =>
-                                      showDetailHandler(row.quotationRequestId)
+                                      showDetailHandler(row.clearanceRequestId)
                                     }
                                   >
                                     <TableCell>
@@ -206,4 +208,4 @@ const ClearanceProposalList = ({ backToTab }) => {
   );
 };
 
-export default ClearanceProposalList;
+export default ClearanceProposalsListAsync;

@@ -250,7 +250,6 @@ export const getSingleClearanceRequest = async (clearanceRequestId) => {
     });
   return data;
 };
-getSingleClearanceRequest("9a4b2460-2f39-4158-902c-5fc6648a67e7");
 
 // ----------------------------- Clearance Methods  -----------------------------------------------------------------//
 
@@ -341,6 +340,20 @@ export const getProposalsList = async (pageNumber = 1, pageSize = 10) => {
   const data = await http
     .get(
       `/ClearancemanPanel/GetQuotationProposalsListAsync?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    )
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+//  CLEARANCE LIST  --------------------------------- :
+export const getClearanceList = async (pageNumber = 1, pageSize = 10) => {
+  const data = await http
+    .get(
+      `/ClearancemanPanel/GetClearanceProposalsListAsync?pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
       console.log(res);
@@ -465,6 +478,53 @@ export const submitQuotationProposal = async (
       },
     })
     .then((res) => {
+      if (res.status === 200) {
+        setAlertMessage(res.data.message);
+      } else {
+        setAlertMessage(res.data.message);
+      }
+    });
+};
+
+//  SUBMIT-REQUEST-CLEARANCE  --------------------------------- :
+
+export const getClearanceRequestDetail = async (clearanceRequestId) => {
+  const data = await http
+    .get(
+      `/ClearancemanPanel/GetClearanceRequest?clearanceRequestId=${clearanceRequestId}`
+    )
+    .then((res) => {
+      // console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+
+//  SUBMIT-PROPOSAL  --------------------------------- :
+
+export const submitClearanceProposal = async (
+  clearanceRequestId,
+  proposalValue,
+  estimatedNumberOfDays,
+  setAlertMessage
+) => {
+  const data = {
+    clearanceRequestId,
+    proposalValue: Number(proposalValue),
+    estimatedNumberOfDays: Number(estimatedNumberOfDays),
+  };
+  console.log(data);
+  const token = Cookies.get("token");
+  await http
+    .post("/ClearancemanPanel/SubmitClearanceProposal", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      console.log(res);
       if (res.status === 200) {
         setAlertMessage(res.data.message);
       } else {

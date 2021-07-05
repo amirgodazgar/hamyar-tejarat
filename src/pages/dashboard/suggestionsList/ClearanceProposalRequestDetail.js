@@ -6,21 +6,19 @@ import {
   Avatar,
   Paper,
   Typography,
-  Button,
+  // Button,
 } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
-import { getSingleClearanceRequest } from "../../../services/dashboard/userInfoServices";
+import { getClearanceRequestDetail } from "../../../services/dashboard/userInfoServices";
 import { apiRootDomain, dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
-import { Alert } from "@material-ui/lab";
 
-const ClearanceRequestDetail = ({ userName }) => {
+const ClearanceProposalRequestDetail = ({ userName }) => {
   const [pageData, setPageData] = useState([]);
   const { id } = useParams();
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState(true);
 
   const downloadHandler = (path) => {
     setTimeout(() => {
@@ -32,24 +30,28 @@ const ClearanceRequestDetail = ({ userName }) => {
   };
 
   useEffect(() => {
-    getSingleClearanceRequest(id).then((res) => {
+    getClearanceRequestDetail(id).then((res) => {
+      console.log(res);
       setPageData(res);
-      setIsLoading(false);
     });
   }, []);
 
+  //   const checkClearanceManType = (clearanceMan) => {
+  //     if (clearanceMan === "Juridical") {
+  //       return "حقوقی";
+  //     } else if (clearanceMan === "Private") {
+  //       return "حقیقی";
+  //     }
+  //   };
+
   const infoData = [
-    {
-      title: "عنوان کالا :",
-      text: pageData.cargoTitle,
-    },
     {
       title: "تاریخ ثبت :",
       text: dateToPersian(pageData.submitDate),
     },
     {
-      title: "کد تعرفه :",
-      text: pageData.customCargosId,
+      title: "عنوان کالا :",
+      text: pageData.cargoTitle,
     },
     {
       title: "جنس و نوع کالا :",
@@ -62,10 +64,6 @@ const ClearanceRequestDetail = ({ userName }) => {
     {
       title: " گمرک مقصد:",
       text: pageData.customName,
-    },
-    {
-      title: " تعداد پیشنهادات :",
-      text: pageData.proposalsCount,
     },
   ];
 
@@ -138,30 +136,32 @@ const ClearanceRequestDetail = ({ userName }) => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          جزئیات درخواست ترخیص کالا
+          جزئیات پیشنهاد ترخیص کالا
         </Typography>
       </Grid>
-      {isLoading ? (
-        <BackDrop />
-      ) : (
-        <Grid item container spacing={1} xs={11}>
-          <Paper className={classes.mainPaper}>
-            <Grid item container xs={12}>
-              <Grid item xs={10} className={classes.requestDetailTitle}>
-                <div className={classes.businessMan}>
-                  <Avatar src={avatarImg} />
-                  <h6 className={classes.businessManName}>{userName()}</h6>
-                </div>
-                <div
-                  className={classes.requestDetailLink}
-                  onClick={() => history.goBack()}
-                >
-                  <ArrowForwardIosRounded fontSize="small" />
-                  <p>بازگشت به لیست درخواست ها</p>
-                </div>
-              </Grid>
+      <Grid item container spacing={1} xs={11}>
+        <Paper className={classes.mainPaper}>
+          <Grid item container xs={12}>
+            <Grid item xs={10} className={classes.requestDetailTitle}>
+              <div className={classes.businessMan}>
+                <Avatar src={avatarImg} />
+                <h6 className={classes.businessManName}>
+                  {pageData.businessmanName}
+                </h6>
+              </div>
+              <div
+                className={classes.requestDetailLink}
+                onClick={() => history.goBack()}
+              >
+                <ArrowForwardIosRounded fontSize="small" />
+                <p>بازگشت به لیست پیشنهادها</p>
+              </div>
+            </Grid>
 
-              <Grid item xs={10} className={classes.requestDetailMain}>
+            <Grid item xs={10} className={classes.requestDetailMain}>
+              {pageData.length === 0 || pageData === undefined ? (
+                <BackDrop />
+              ) : (
                 <React.Fragment>
                   <div className={classes.infoDataContainer}>
                     <>
@@ -176,33 +176,15 @@ const ClearanceRequestDetail = ({ userName }) => {
                         <div className={classes.suggestText}>{item.text}</div>
                       </div>
                     ))}
-                    {pageData.proposalsCount === 0 ? (
-                      <Alert severity="warning" className={classes.alert}>
-                        پیشنهادی ثبت نشده
-                      </Alert>
-                    ) : (
-                      <Button
-                        className={classes.suggestBtn}
-                        color="primary"
-                        variant="contained"
-                        onClick={() =>
-                          history.replace(
-                            `/Dashboard/suggestionsList/quotationProposals/${id}`
-                          )
-                        }
-                      >
-                        لیست پیشنهادهای ثبت شده
-                      </Button>
-                    )}
                   </div>
                 </React.Fragment>
-              </Grid>
+              )}
             </Grid>
-          </Paper>
-        </Grid>
-      )}
+          </Grid>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };
 
-export default ClearanceRequestDetail;
+export default ClearanceProposalRequestDetail;

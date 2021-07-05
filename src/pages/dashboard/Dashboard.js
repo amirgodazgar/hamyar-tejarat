@@ -56,6 +56,8 @@ import { clearCookies } from "../../helper/cookies";
 import ClearanceRequestDetail from "./suggestionsList/ClearanceRequestDetail";
 import SearchAllClearanceRequests from "./suggestionsList/SearchAllClearanceRequests";
 import SubmitClearanceRequestDetail from "./suggestionsList/submitProposal/SubmitClearanceRequestDetail";
+import ClearanceProposalsListAsync from "./suggestionsList/ClearanceProposalsListAsync";
+import ClearanceProposalRequestDetail from "./suggestionsList/ClearanceProposalRequestDetail";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -770,10 +772,12 @@ const Dashboard = () => {
                   {/* ----- ClearanceMan -------- */}
 
                   {/* ClearanceRequestList  */}
-                  <Route path="/Dashboard/quotationProposalsListAsync/clearance">
-                    <ClearanceRequestList />
+
+                  <Route path="/Dashboard/quotationProposalsListAsync/ClearanceProposalsListAsync">
+                    <ClearanceProposalsListAsync backToTab={selectedHandler} />
                   </Route>
-                  <Route path="/Dashboard/RequestList/clearance">
+
+                  <Route path="/Dashboard/RequestList/ClearanceRequestList">
                     <ClearanceRequestList />
                   </Route>
                   {/* ClearanceRequestList : request & proposal */}
@@ -781,8 +785,13 @@ const Dashboard = () => {
                   <Route path="/Dashboard/quotationProposalsListAsync/quotationRequestList">
                     <ClearanceProposalList backToTab={selectedHandler} />
                   </Route>
+
                   <Route path="/Dashboard/quotationProposalsListAsync/quotationRequestDetail/:id">
                     <ClearanceProposalDetail userName={userName} />
+                  </Route>
+
+                  <Route path="/Dashboard/quotationProposalsListAsync/ClearanceProposalRequestDetail/:id">
+                    <ClearanceProposalRequestDetail userName={userName} />
                   </Route>
 
                   <Route path="/Dashboard/RequestList/SearchAllClearanceRequests">

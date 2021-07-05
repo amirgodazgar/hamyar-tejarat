@@ -89,7 +89,7 @@ export const adminPanelData = {
       dropDownText: [
         {
           text: "ترخیص کالا",
-          path: "/Dashboard/quotationProposalsListAsync/clearance",
+          path: "/Dashboard/quotationProposalsListAsync/ClearanceProposalsListAsync",
         },
         {
           text: "استعلام قیمت",

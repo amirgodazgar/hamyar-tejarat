@@ -14,10 +14,10 @@ import {
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../../styles/image/profile-image.svg";
 import {
-  getProposalDetail,
-  submitQuotationProposal,
+  getClearanceRequestDetail,
+  submitClearanceProposal,
 } from "../../../../services/dashboard/userInfoServices";
-import { dateToPersian } from "../../../../helper/general";
+import { apiRootDomain, dateToPersian } from "../../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../../common/backDrop/BackDrop";
 import { Alert } from "@material-ui/lab";
@@ -40,14 +40,24 @@ const SubmitClearanceRequestDetail = () => {
     setOpen(false);
   };
 
+  const downloadHandler = (path) => {
+    setTimeout(() => {
+      const response = {
+        file: `${apiRootDomain}${path}`,
+      };
+      window.open(response.file);
+    }, 100);
+  };
+
   useEffect(() => {
-    getProposalDetail(id).then((res) => {
+    getClearanceRequestDetail(id).then((res) => {
+       console.log(res)
       setPageData(res);
     });
   }, []);
 
-  const submitProposalHandler = (id, value, days, type) => {
-    submitQuotationProposal(id, value, days, type, setAlertMessage);
+  const submitProposalHandler = (id, value, days) => {
+    submitClearanceProposal(id, value, days, setAlertMessage);
     setProposalValue("");
     setProposalDays("");
     setIsSuccess(true);
@@ -76,8 +86,8 @@ const SubmitClearanceRequestDetail = () => {
       text: pageData.portOfLoading,
     },
     {
-      title: " گمرک های مقصد :",
-      text: pageData.customOrigins,
+      title: " گمرک مقصد:",
+      text: pageData.customName,
     },
   ];
 
@@ -100,12 +110,43 @@ const SubmitClearanceRequestDetail = () => {
     },
   ];
 
+  const filesData = [
+    {
+      title: "دریافت بارنامه",
+      path: pageData.billOfLoadingPath,
+    },
+    {
+      title: " دریافت فهرست عدل بندی",
+      path: pageData.packingListPath,
+    },
+    {
+      title: "دریافت پرفرما",
+      path: pageData.performaPath,
+    },
+  ];
+
   const showInfoData = (infoData) => {
     return infoData.map((item, index) => (
       <div className={classes.requestBox} key={index}>
         <div className={classes.circle}></div>
         <div className={classes.infoDataTitle}>{item.title}</div>
         <div className={classes.infoDataText}>{item.text}</div>
+      </div>
+    ));
+  };
+
+  const showInfoFiles = (infoData) => {
+    return infoData.map((item, index) => (
+      <div className={classes.requestBox} key={index}>
+        <div className={classes.circle}></div>
+        <div className={classes.infoDataTitle}>{item.title}</div>
+        <div
+          className={classes.infoDataText}
+          style={{ cursor: "pointer", color: "#2780e5" }}
+          onClick={() => downloadHandler(item.path)}
+        >
+          برای دریافت فایل کلیک کنید
+        </div>
       </div>
     ));
   };
@@ -119,7 +160,7 @@ const SubmitClearanceRequestDetail = () => {
     >
       <Grid item xs={11} className={classes.mainTitle}>
         <Typography variant="h4" color="primary">
-          جزئیات درخواست
+          جزئیات درخواست ترخیص کالا
         </Typography>
       </Grid>
       <Grid item container spacing={1} xs={11}>
@@ -147,7 +188,10 @@ const SubmitClearanceRequestDetail = () => {
               ) : (
                 <React.Fragment>
                   <div className={classes.infoDataContainer}>
-                    {showInfoData(infoData)}
+                    <>
+                      {showInfoData(infoData)}
+                      {showInfoFiles(filesData)}
+                    </>
                   </div>
                   <div className={classes.suggestDataContainer}>
                     {suggestData.map((item, index) => (
@@ -192,7 +236,7 @@ const SubmitClearanceRequestDetail = () => {
                               color="primary"
                               className={classes.modalTitle}
                             >
-                              ثبت پیشنهاد استعلام قیمت
+                              ثبت پیشنهاد ترخیص کالا
                             </Typography>
                             <input
                               className={classes.modalInput}
@@ -217,8 +261,7 @@ const SubmitClearanceRequestDetail = () => {
                                 submitProposalHandler(
                                   pageData.id,
                                   proposalValue,
-                                  proposalDays,
-                                  pageData.businessmanType
+                                  proposalDays
                                 )
                               }
                             >
