@@ -58,6 +58,8 @@ import SearchAllClearanceRequests from "./suggestionsList/SearchAllClearanceRequ
 import SubmitClearanceRequestDetail from "./suggestionsList/submitProposal/SubmitClearanceRequestDetail";
 import ClearanceProposalsListAsync from "./suggestionsList/ClearanceProposalsListAsync";
 import ClearanceProposalRequestDetail from "./suggestionsList/ClearanceProposalRequestDetail";
+import ClearanceProposalListRegistered from "./suggestionsList/ClearanceProposalListRegistered";
+import ClearanceProposalSingleRegistered from "./suggestionsList/ClearanceProposalSingleRegistered";
 
 const Dashboard = () => {
   const history = useHistory();
@@ -767,6 +769,15 @@ const Dashboard = () => {
                   </Route>
                   <Route path="/Dashboard/suggestionsList/SingleQuotationProposal/:id">
                     <ProposalDetail userName={userName} />
+                  </Route>
+                  <Route path="/Dashboard/suggestionsList/ClearanceProposalListRegistered/:id">
+                    <ClearanceProposalListRegistered
+                      backToTab={selectedHandler}
+                    />
+                  </Route>
+
+                  <Route path="/Dashboard/suggestionsList/SingleClearanceProposal/:id">
+                    <ClearanceProposalSingleRegistered userName={userName} />
                   </Route>
 
                   {/* ----- ClearanceMan -------- */}

@@ -187,7 +187,7 @@ const ClearanceRequestDetail = ({ userName }) => {
                         variant="contained"
                         onClick={() =>
                           history.replace(
-                            `/Dashboard/suggestionsList/quotationProposals/${id}`
+                            `/Dashboard/suggestionsList/ClearanceProposalListRegistered/${id}`
                           )
                         }
                       >

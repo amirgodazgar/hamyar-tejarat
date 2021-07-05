@@ -203,6 +203,40 @@ export const getProposalsListData = async (
   return data;
 };
 
+// CLEARANCE Proposals list GET :
+export const getClearanceProposalList = async (
+  pageNumber = 1,
+  pageSize = 10,
+  ProposalId
+) => {
+  const data = await http
+    .get(
+      `/BusinessmanPanel/GetClearanceProposals?clearanceRequestId=${ProposalId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    )
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+
+// CLEARANCE Proposals single GET :
+export const getClearanceProposalSingle = async (ProposalId) => {
+  const data = await http
+    .get(
+      `/BusinessmanPanel/GetSingleClearanceProposal?clearanceProposalId=${ProposalId}`
+    )
+    .then((res) => {
+      // console.log(res);
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
+
 // Proposal Single GET :
 export const getProposalData = async (ProposalId) => {
   const data = await http
