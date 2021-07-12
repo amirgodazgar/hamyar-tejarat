@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import classes from "./signUp.module.css";
-import styles from "../signIn/signIn.module.css";
 import Button from "../../../common/button/Button";
 import { useFormik } from "formik";
 import Input from "../../../common/input/InputField";

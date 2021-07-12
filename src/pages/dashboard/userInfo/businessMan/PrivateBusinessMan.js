@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Paper } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
@@ -92,7 +92,7 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    setIsLoading(true)
+    setIsLoading(true);
     postBusinessmanPrivate(
       userInfo,
       setAlert,
@@ -209,4 +209,4 @@ const PrivateBusinessMan = ({ backToDashboard }) => {
   );
 };
 
-export default PrivateBusinessMan;
+export default memo(PrivateBusinessMan);

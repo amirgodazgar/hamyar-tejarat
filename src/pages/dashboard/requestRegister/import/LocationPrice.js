@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo } from "react";
 import classes from "./import.module.css";
 import { Chip, Fade, Typography } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
@@ -144,4 +144,4 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
   );
 };
 
-export default LocationPrice;
+export default memo(LocationPrice);

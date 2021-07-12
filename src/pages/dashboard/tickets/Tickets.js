@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./tickets.module.css";
 import { Alert } from "@material-ui/lab";
 import { Grid, Typography } from "@material-ui/core";
@@ -7,7 +7,8 @@ const Tickets = () => {
   return (
     <Grid
       container
-      justify="center" justify="center"
+      justify="center"
+      justify="center"
       alignItems="center"
       className={classes.container}
     >
@@ -35,4 +36,4 @@ const Tickets = () => {
   );
 };
 
-export default Tickets;
+export default memo(Tickets);

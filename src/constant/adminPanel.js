@@ -69,13 +69,7 @@ export const adminPanelData = {
     },
     {
       text: "لیست کد تعرفه کالا",
-      icon: (
-        <PageviewRounded
-          fontSize="large"
-          style={{ color: "#C4CAD0" }}
-          dashboard
-        />
-      ),
+      icon: <PageviewRounded fontSize="large" style={{ color: "#C4CAD0" }} />,
       path: "/Dashboard/tariffCodesList",
       hasDropDown: false,
     },

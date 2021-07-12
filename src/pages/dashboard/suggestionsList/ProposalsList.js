@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
@@ -13,10 +13,7 @@ import {
   TablePagination,
   Typography,
 } from "@material-ui/core";
-import {
-  ArrowBackIosRounded,
-  // ArrowForwardIosRounded,
-} from "@material-ui/icons";
+import { ArrowBackIosRounded } from "@material-ui/icons";
 import { getProposalsListData } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
@@ -207,4 +204,4 @@ const ProposalsList = ({ backToTab }) => {
   );
 };
 
-export default ProposalsList;
+export default memo(ProposalsList);

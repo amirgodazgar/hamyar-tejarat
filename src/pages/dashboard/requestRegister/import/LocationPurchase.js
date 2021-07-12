@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./import.module.css";
-import { Chip, Fade, Typography } from "@material-ui/core";
+import { Fade, Typography } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
@@ -111,25 +111,10 @@ const LocationPurchase = ({ placeClearance, formik }) => {
               ))}
             </select>
           </div>
-          {/* <div className={classes.selectedTariffBox}>
-            <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
-            <div className={classes.selectedTariff}>
-              {chips.map((item, index) =>
-                index !== -1 ? (
-                  <Chip
-                    className={classes.chip}
-                    label={item.name}
-                    onDelete={() => chipDeleteHandler(index)}
-                    key={item.id}
-                  />
-                ) : null
-              )}
-            </div>
-          </div> */}
         </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default LocationPurchase;
+export default memo(LocationPurchase);

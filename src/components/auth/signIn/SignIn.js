@@ -14,8 +14,6 @@ import * as Yup from "yup";
 import { signIn } from "../../../services/login";
 import { Alert } from "@material-ui/lab";
 import { useHistory } from "react-router";
-import { useState } from "react";
-import { Visibility } from "@material-ui/icons";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
 const SignIn = () => {
@@ -28,7 +26,6 @@ const SignIn = () => {
     dispatch(changeFormType("forgotPassword"));
   };
 
-  const [showPass, setShowPass] = useState(false);
   const initialValues = {
     email: "",
     password: "",
@@ -72,12 +69,12 @@ const SignIn = () => {
             />
             <Input
               formik={formik}
-              type={showPass ? "text" : "password"}
+              type="password"
               name="password"
               label={authData.signIn.pass}
               placeHolder="********"
             />
-    
+
             <div className={classes.checkBoxContainer}>
               <label>
                 <Checkbox

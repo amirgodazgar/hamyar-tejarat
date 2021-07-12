@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./import.module.css";
 import {
   Paper,
@@ -250,7 +250,7 @@ const Import = () => {
                   >
                     بازگشت
                   </Button>
-                  {activeStep == steps.length - 1 ? (
+                  {activeStep === steps.length - 1 ? (
                     <Button
                       className={classes.forwardBtn}
                       variant="contained"
@@ -282,7 +282,7 @@ const Import = () => {
                     داده می شود
                   </Typography>
                   <Link
-                    to="/Dashboard/suggestionsList/clearance"
+                    to="/Dashboard/suggestionsList/clearanceRequestsList"
                     className={classes.link}
                   >
                     <Button
@@ -329,4 +329,4 @@ const Import = () => {
   );
 };
 
-export default Import;
+export default memo(Import);

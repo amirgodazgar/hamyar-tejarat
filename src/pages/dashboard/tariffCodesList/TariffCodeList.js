@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import classes from "./TariffCodeList.module.css";
 import {
   Grid,
@@ -237,4 +237,4 @@ const TariffCodeList = ({ backToTab }) => {
   );
 };
 
-export default TariffCodeList;
+export default memo(TariffCodeList);

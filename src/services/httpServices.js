@@ -9,7 +9,6 @@ axios.defaults.baseURL = "https://lunacyst.ir/api/v1";
 // Request Config ---------------------------------
 axios.interceptors.request.use(
   (config) => {
-    
     const token = Cookies.get("token");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
@@ -54,7 +53,6 @@ axios.interceptors.response.use(
           refreshToken: Cookies.get("refreshToken"),
         })
         .then((res) => {
-          console.log("refresh token ", res);
           if (res.status === 200) {
             const tokenInfo = res.data.data;
             const tokenData = {

@@ -4,9 +4,8 @@ import classes from "./navbar.module.css";
 import { Link, useHistory } from "react-router-dom";
 import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../common/button/Button";
-import { menuItem } from "../../constant/layoutData";
 import Cookies from "js-cookie";
-import { ExitToApp, ExpandMore, Menu } from "@material-ui/icons";
+import { ExitToApp, Menu } from "@material-ui/icons";
 import logoImage from "../../styles/image/logo-white.png";
 import { clearCookies } from "../../helper/cookies";
 import {
@@ -16,8 +15,6 @@ import {
   List,
   ListItem,
   Divider,
-  ListItemIcon,
-  ListItemText,
   Accordion,
   AccordionSummary,
   Typography,

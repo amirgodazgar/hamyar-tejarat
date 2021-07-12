@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
@@ -212,4 +212,4 @@ const ClearanceRequestList = ({ backToTab }) => {
   );
 };
 
-export default ClearanceRequestList;
+export default memo(ClearanceRequestList);

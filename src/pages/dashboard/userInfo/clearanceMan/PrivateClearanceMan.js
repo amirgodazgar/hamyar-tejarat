@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Chip, Paper, Fade } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
@@ -466,4 +466,4 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   );
 };
 
-export default PrivateClearanceMan;
+export default memo(PrivateClearanceMan);

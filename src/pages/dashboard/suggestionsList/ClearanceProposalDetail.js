@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
-import {
-  Grid,
-  // Fade,
-  Avatar,
-  Paper,
-  Typography,
-  // Button,
-} from "@material-ui/core";
+import { Grid, Avatar, Paper, Typography } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
 import { getProposalDetail } from "../../../services/dashboard/userInfoServices";
@@ -15,7 +8,7 @@ import { dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
-const ClearanceProposalDetail = ({ userName }) => {
+const ClearanceProposalDetail = () => {
   const [pageData, setPageData] = useState([]);
   const { id } = useParams();
   const history = useHistory();
@@ -23,17 +16,8 @@ const ClearanceProposalDetail = ({ userName }) => {
   useEffect(() => {
     getProposalDetail(id).then((res) => {
       setPageData(res);
-     
     });
   }, []);
-
-  //   const checkClearanceManType = (clearanceMan) => {
-  //     if (clearanceMan === "Juridical") {
-  //       return "حقوقی";
-  //     } else if (clearanceMan === "Private") {
-  //       return "حقیقی";
-  //     }
-  //   };
 
   const infoData = [
     {
@@ -144,4 +128,4 @@ const ClearanceProposalDetail = ({ userName }) => {
   );
 };
 
-export default ClearanceProposalDetail;
+export default memo(ClearanceProposalDetail);

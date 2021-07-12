@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import classes from "./userInfo.module.css";
 import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
@@ -61,4 +61,4 @@ const UserInfo = ({ backToTab }) => {
   );
 };
 
-export default UserInfo;
+export default memo(UserInfo);

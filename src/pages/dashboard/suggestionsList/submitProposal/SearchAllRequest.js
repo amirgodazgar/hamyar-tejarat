@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import classes from "./submitProposal.module.css";
 import styles from "../suggestionsList.module.css";
 import {
@@ -77,9 +77,7 @@ const SearchAllRequest = ({ backToTab }) => {
     }
   };
   const showDetailHandler = (proposalId) => {
-    history.push(
-      `/Dashboard/RequestList/GetQuotationRequest/${proposalId}`
-    );
+    history.push(`/Dashboard/RequestList/GetQuotationRequest/${proposalId}`);
   };
 
   useEffect(() => {
@@ -325,4 +323,4 @@ const SearchAllRequest = ({ backToTab }) => {
   );
 };
 
-export default SearchAllRequest;
+export default memo(SearchAllRequest);

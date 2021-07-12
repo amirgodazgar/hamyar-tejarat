@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Chip, Paper, Fade } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
@@ -28,7 +28,6 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
     userData.choosedCustoms === undefined ? [] : userData.choosedCustoms;
   const [chips, setChips] = useState(initChips);
   const [isLoading, setIsLoading] = useState(false);
-
 
   const addChipsHandler = (e) => {
     const id = e.target.value;
@@ -450,4 +449,4 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
   );
 };
 
-export default JuridicalClearanceMan;
+export default memo(JuridicalClearanceMan);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import classes from "./requestRegister.module.css";
 import { Grid, Typography } from "@material-ui/core";
 import { adminPanelData } from "../../../constant/adminPanel";
@@ -32,4 +32,4 @@ const RequestRegister = ({ backToTab }) => {
   );
 };
 
-export default RequestRegister;
+export default memo(RequestRegister);

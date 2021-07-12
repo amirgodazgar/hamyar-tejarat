@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import classes from "./dashboard.module.css";
 import {
   Paper,
@@ -96,4 +96,4 @@ const BusinessMan = () => {
   );
 };
 
-export default BusinessMan;
+export default memo(BusinessMan);

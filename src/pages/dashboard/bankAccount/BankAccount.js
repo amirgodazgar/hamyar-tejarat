@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import classes from "./bankAccount.module.css";
 import { Alert } from "@material-ui/lab";
 import { Grid, Typography } from "@material-ui/core";
@@ -42,4 +42,4 @@ const BankAccount = ({ backToTab }) => {
   );
 };
 
-export default BankAccount;
+export default memo(BankAccount);

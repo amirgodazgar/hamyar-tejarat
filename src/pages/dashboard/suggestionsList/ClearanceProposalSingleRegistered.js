@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
-import {
-  Grid,
-  // Fade,
-  Avatar,
-  Paper,
-  Typography,
-  // Button,
-} from "@material-ui/core";
+import { Grid, Avatar, Paper, Typography } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
 import { getClearanceProposalSingle } from "../../../services/dashboard/userInfoServices";
@@ -122,4 +115,4 @@ const ClearanceProposalSingleRegistered = ({ userName }) => {
   );
 };
 
-export default ClearanceProposalSingleRegistered;
+export default memo(ClearanceProposalSingleRegistered);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
 import { Paper } from "@material-ui/core";
 import Button from "../../../../common/button/Button";
@@ -83,7 +83,7 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
       phoneNumber: values.mobileNum,
     };
 
-    setIsLoading(true)
+    setIsLoading(true);
     postBusinessmanJuridical(
       userInfo,
       setAlert,
@@ -192,4 +192,4 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
     </React.Fragment>
   );
 };
-export default JuridicalBusinessMan;
+export default memo(JuridicalBusinessMan);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import {
   Grid,
@@ -162,4 +162,4 @@ const RequestDetail = ({ userName }) => {
   );
 };
 
-export default RequestDetail;
+export default memo(RequestDetail);

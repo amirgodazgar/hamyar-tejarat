@@ -1,6 +1,12 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./import.module.css";
-import { Typography, Fade } from "@material-ui/core";
+import {
+  Typography,
+  Fade,
+  Input,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
 import { CloudUpload } from "@material-ui/icons";
 
 const UploadPurchase = ({
@@ -114,46 +120,76 @@ const UploadPurchase = ({
         <div className={classes.inputContainer}>
           <div className={classes.uploadInputBox}>
             {errorBox("loadingBill", "بارگذاری بارنامه (Bill of Loading)")}
-
-            <input
-              className={classes.uploadInput}
+            <Input
+              className={classes.uploadInputSelect}
+              disableUnderline
+              style={{ padding: "0" }}
               type="file"
               name="loadingBill"
               value={formik.values.loadingBill}
               onChange={(e) => setBillOfLoading(e.target.files[0])}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton style={{ padding: "0" }}>
+                    <CloudUpload
+                      fontSize="small"
+                      className={classes.uploadIcon}
+                    />
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-            <CloudUpload fontSize="small" className={classes.uploadIcon} />
           </div>
 
           <div className={classes.uploadInputBox}>
             {errorBox("performa", "  بارگذاری پرفورما")}
-
-            <input
-              className={classes.uploadInput}
+            <Input
+              className={classes.uploadInputSelect}
+              disableUnderline
+              style={{ padding: "0" }}
               type="file"
               name="performa"
               value={formik.values.performa}
               onChange={(e) => setPerforma(e.target.files[0])}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton style={{ padding: "0" }}>
+                    <CloudUpload
+                      fontSize="small"
+                      className={classes.uploadIcon}
+                    />
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-            <CloudUpload fontSize="small" className={classes.uploadIcon} />
           </div>
 
-          <from className={classes.uploadInputBox}>
+          <div className={classes.uploadInputBox}>
             {errorBox("packingList", "بارگذاری فهرست عدل بندی  (Packing List)")}
-            <input
-              className={classes.uploadInput}
-              type="file"
+            <Input
+              className={classes.uploadInputSelect}
+              disableUnderline
+              style={{ padding: "0" }}
               name="packingList"
+              type="file"
               value={formik.values.packingList}
               onChange={(e) => setPackingList(e.target.files[0])}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton style={{ padding: "0" }}>
+                    <CloudUpload
+                      fontSize="small"
+                      className={classes.uploadIcon}
+                    />
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-
-            <CloudUpload fontSize="small" className={classes.uploadIcon} />
-          </from>
+          </div>
         </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default UploadPurchase;
+export default memo(UploadPurchase);

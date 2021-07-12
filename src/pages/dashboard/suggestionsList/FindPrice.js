@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
@@ -204,4 +204,4 @@ const FindPrice = ({ backToTab }) => {
   );
 };
 
-export default FindPrice;
+export default memo(FindPrice);

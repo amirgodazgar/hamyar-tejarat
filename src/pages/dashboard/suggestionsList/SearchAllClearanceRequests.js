@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import classes from "./submitProposal/submitProposal.module.css";
 import styles from "./suggestionsList.module.css";
 import {
@@ -316,4 +316,4 @@ const SearchAllClearanceRequests = ({ backToTab }) => {
   );
 };
 
-export default SearchAllClearanceRequests;
+export default memo(SearchAllClearanceRequests);

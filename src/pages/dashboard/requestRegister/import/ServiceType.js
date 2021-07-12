@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./import.module.css";
 import { Typography } from "@material-ui/core";
 import ExportSvg from "../../../../styles/svg/export.svg";
@@ -28,4 +28,4 @@ const ServiceType = () => {
   );
 };
 
-export default ServiceType;
+export default memo(ServiceType);

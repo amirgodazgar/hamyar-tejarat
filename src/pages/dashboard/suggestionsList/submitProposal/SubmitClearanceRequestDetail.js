@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "../suggestionsList.module.css";
 import styles from "./submitProposal.module.css";
 import {
@@ -51,12 +51,13 @@ const SubmitClearanceRequestDetail = () => {
 
   useEffect(() => {
     getClearanceRequestDetail(id).then((res) => {
-       console.log(res)
+      console.log(res);
       setPageData(res);
     });
   }, []);
 
   const submitProposalHandler = (id, value, days) => {
+    if (value === "" || days === "") return;
     submitClearanceProposal(id, value, days, setAlertMessage);
     setProposalValue("");
     setProposalDays("");
@@ -311,4 +312,4 @@ const SubmitClearanceRequestDetail = () => {
   );
 };
 
-export default SubmitClearanceRequestDetail;
+export default memo(SubmitClearanceRequestDetail);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import classes from "./dashboard.module.css";
 import {
   Paper,
@@ -98,4 +98,4 @@ const ClearanceMan = () => {
   );
 };
 
-export default ClearanceMan;
+export default memo(ClearanceMan);

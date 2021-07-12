@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
 import { Alert } from "@material-ui/lab";
 import {
@@ -17,7 +17,7 @@ import {
 import { ArrowBackIosRounded } from "@material-ui/icons";
 import { getClearanceList } from "../../../services/dashboard/userInfoServices";
 import { dateToPersian } from "../../../helper/general";
-import { useHistory, useParams } from "react-router";
+import { useHistory } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,6 @@ const ClearanceProposalsListAsync = ({ backToTab }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
   const history = useHistory();
-  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   const handleChangePage = (event, newPage) => {
@@ -208,4 +207,4 @@ const ClearanceProposalsListAsync = ({ backToTab }) => {
   );
 };
 
-export default ClearanceProposalsListAsync;
+export default memo(ClearanceProposalsListAsync);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import classes from "./import.module.css";
 import { Fade, Typography } from "@material-ui/core";
 
@@ -105,4 +105,4 @@ const UploadPrice = ({ transportTools, formik }) => {
   );
 };
 
-export default UploadPrice;
+export default memo(UploadPrice);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import classes from "../suggestionsList.module.css";
 import styles from "./submitProposal.module.css";
 import {
@@ -47,6 +47,7 @@ const SubmitProposalDetail = () => {
   }, []);
 
   const submitProposalHandler = (id, value, days, type) => {
+    if (value === "" || days === "") return;
     submitQuotationProposal(id, value, days, type, setAlertMessage);
     setProposalValue("");
     setProposalDays("");
@@ -268,4 +269,4 @@ const SubmitProposalDetail = () => {
   );
 };
 
-export default SubmitProposalDetail;
+export default memo(SubmitProposalDetail);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import classes from "./import.module.css";
 import { Typography } from "@material-ui/core";
 import PriceSvg from "../../../../styles/svg/askfor-price.svg";
@@ -57,4 +57,4 @@ const RequestType = ({ setRequestType }) => {
   );
 };
 
-export default RequestType;
+export default memo(RequestType);

@@ -15,6 +15,7 @@ const ActiveAccount = () => {
   const signInHandler = () => {
     dispatch(changeFormType("signIn"));
     dispatch(setMessage(""));
+    history.replace("/register");
   };
 
   return (
@@ -22,11 +23,7 @@ const ActiveAccount = () => {
       <Grow in={change}>
         <div className={classes.container}>
           <span className={classes.text}>{authData.activeAccount.text}</span>
-          <Button
-            click={() => history.replace("/register")}
-            click={signInHandler}
-            customizeClass="confirmation"
-          >
+          <Button click={signInHandler} customizeClass="confirmation">
             {authData.activeAccount.btn}
           </Button>
         </div>

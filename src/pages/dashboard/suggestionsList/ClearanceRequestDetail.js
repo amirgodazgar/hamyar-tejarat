@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import classes from "./suggestionsList.module.css";
-import {
-  Grid,
-  // Fade,
-  Avatar,
-  Paper,
-  Typography,
-  Button,
-} from "@material-ui/core";
+import { Grid, Avatar, Paper, Typography, Button } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
 import { getSingleClearanceRequest } from "../../../services/dashboard/userInfoServices";
@@ -205,4 +198,4 @@ const ClearanceRequestDetail = ({ userName }) => {
   );
 };
 
-export default ClearanceRequestDetail;
+export default memo(ClearanceRequestDetail);
