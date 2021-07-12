@@ -23,8 +23,7 @@ export const register = async (userInfo, dispatch, history, setIsLoading) => {
       } else {
         dispatch(setMessage(res.data.message));
         dispatch(checkVerify(false));
-        // Show send another EMAIL
-        // console.log("reject")
+      
       }
     });
 };

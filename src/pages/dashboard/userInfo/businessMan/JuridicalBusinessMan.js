@@ -24,7 +24,6 @@ const JuridicalBusinessMan = ({ backToDashboard }) => {
 
   useEffect(() => {
     dispatch(getUserInfoData()).then((res) => {
-      console.log(res.payload);
       setUserData(res.payload);
     });
   }, []);

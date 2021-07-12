@@ -48,7 +48,7 @@ const ResetPassword = () => {
       newPasswordConfirmation: values.newPasswordConfirmation,
     };
     resetPassword(userInfo, dispatch);
-    console.log(userInfo);
+    
   };
   const formik = useFormik({
     initialValues,

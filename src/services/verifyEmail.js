@@ -13,7 +13,7 @@ export const verifyEmail = async (config, dispatch, isSuccess) => {
       token,
     })
     .then((res) => {
-      console.log(res);
+      
       if (res.status === 200 ) {
         isSuccess(true);
         

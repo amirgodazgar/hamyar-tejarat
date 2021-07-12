@@ -62,7 +62,7 @@ const ClearanceProposalList = ({ backToTab }) => {
     );
   };
 
-  console.log(isLoading);
+
 
   return (
     <Grid

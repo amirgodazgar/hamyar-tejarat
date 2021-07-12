@@ -64,8 +64,6 @@ const ClearanceProposalsListAsync = ({ backToTab }) => {
     );
   };
 
-  console.log(isLoading);
-
   return (
     <Grid
       container

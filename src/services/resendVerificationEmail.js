@@ -7,7 +7,7 @@ export const resendVerificationEmail = async (email, dispatch) => {
       email,
     })
     .then((res) => {
-       console.log(res.data)
+     
       if (res.data.isSuccess) {
         dispatch(checkResendVerification(true));
         dispatch(setMessage(res.data.message))

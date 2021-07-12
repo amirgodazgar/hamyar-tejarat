@@ -40,7 +40,6 @@ const ProposalsList = ({ backToTab }) => {
     getProposalsListData(curPage, rowsPerPage, id).then((res) => {
       setPageData(res.results);
       setIsLoading(false);
-      console.log(res);
     });
     backToTab(1);
     history.push(`/Dashboard/suggestionsList/quotationProposals/${id}`);

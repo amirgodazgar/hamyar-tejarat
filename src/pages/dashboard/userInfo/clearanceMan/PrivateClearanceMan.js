@@ -56,7 +56,6 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
     dispatch(getUserInfoData()).then((res) => {
       setUserData(res.payload);
       setChips(res.payload.choosedCustoms);
-      console.log(res.payload);
     });
   }, []);
 
@@ -125,7 +124,6 @@ const PrivateClearanceMan = ({ backToDashboard }) => {
   });
 
   const onSubmit = (values) => {
-    console.log(values);
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
     const filteredIds = [...new Set(ids)];
 

@@ -14,6 +14,6 @@ export const requestResetPassword = async (email, dispatch) => {
       } else {
         return;
       }
-      console.log(res);
+      
     });
 };

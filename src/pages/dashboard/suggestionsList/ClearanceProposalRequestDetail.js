@@ -24,7 +24,7 @@ const ClearanceProposalRequestDetail = () => {
 
   useEffect(() => {
     getClearanceRequestDetail(id).then((res) => {
-      console.log(res);
+     
       setPageData(res);
     });
   }, []);

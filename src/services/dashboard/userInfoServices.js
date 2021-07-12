@@ -35,7 +35,6 @@ export const postBusinessmanPrivate = async (
     })
 
     .then((res) => {
-      console.log("BusinessPrivate", res);
       if (res.status === 200) {
         setIsLoading(false);
         setAlert(res.data.message);
@@ -87,7 +86,6 @@ export const getRequestRegisterFormData = async () => {
   const data = await http
     .get("/BusinessmanPanel/GetQuotationRequestFormData")
     .then((res) => {
-      // console.log(res)
       if (res.status === 200) {
         return res.data.data;
       }
@@ -108,33 +106,23 @@ export const postRequestRegisterFormData = async (userInfo) => {
     cargoValue,
   } = userInfo;
 
-  const data = await http
-    .post("/BusinessmanPanel/SubmitQuotationRequestForm", {
-      tariffCode,
-      cargoTitle,
-      portOfLoading,
-      originCustomIds,
-      packagingType,
-      cargoAmount,
-      cargoTransportTools,
-      cargoValue,
-    })
-    .then((res) => {
-      // console.log(res);
-      if (res.status === 200) {
-        console.log("200", res);
-      }
-    });
+  const data = await http.post("/BusinessmanPanel/SubmitQuotationRequestForm", {
+    tariffCode,
+    cargoTitle,
+    portOfLoading,
+    originCustomIds,
+    packagingType,
+    cargoAmount,
+    cargoTransportTools,
+    cargoValue,
+  });
+
   return data;
 };
 
 // Request Register purchase POST :
 export const postRequestRegisterFormDataPurchase = async (formData) => {
   const token = Cookies.get("token");
-
-  console.log(formData.get("BillOfLoading"));
-  console.log(formData.get("Performa"));
-  console.log(formData.get("PackingList"));
 
   await http
     .post("/BusinessmanPanel/SubmitClearanceRequest", formData, {
@@ -143,11 +131,7 @@ export const postRequestRegisterFormDataPurchase = async (formData) => {
         ContentType: "multipart/form-data",
       },
     })
-    .then((res) => {
-      console.log(res);
-      if (res.status === 200) {
-      }
-    });
+    
 };
 
 // -------------- Suggestions List  -------------------------------- //
@@ -159,7 +143,6 @@ export const getSuggestionsListData = async (pageNumber = 1, pageSize = 10) => {
       `/BusinessmanPanel/GetQuotationRequestList?pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data;
       }
@@ -174,7 +157,6 @@ export const getSuggestionIdData = async (requestId) => {
       `/BusinessmanPanel/GetSingleQuotationRequest?quotationRequestId=${requestId}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -195,7 +177,6 @@ export const getProposalsListData = async (
       `/BusinessmanPanel/GetQuotationProposals?quotationRequestId=${ProposalId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -214,7 +195,6 @@ export const getClearanceProposalList = async (
       `/BusinessmanPanel/GetClearanceProposals?clearanceRequestId=${ProposalId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -229,7 +209,6 @@ export const getClearanceProposalSingle = async (ProposalId) => {
       `/BusinessmanPanel/GetSingleClearanceProposal?clearanceProposalId=${ProposalId}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -244,7 +223,6 @@ export const getProposalData = async (ProposalId) => {
       `/BusinessmanPanel/GetSingleQuotationProposal?quotationProposalId=${ProposalId}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -263,7 +241,6 @@ export const getClearanceRequestsList = async (
     )
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data.data);
         return res.data.data.results;
       }
     });
@@ -278,7 +255,6 @@ export const getSingleClearanceRequest = async (clearanceRequestId) => {
     )
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data.data);
         return res.data.data;
       }
     });
@@ -309,8 +285,6 @@ export const postClearancePrivate = async (
   setIsLoading
 ) => {
   const token = Cookies.get("token");
-  // console.log(userInfo.get("WorkExperienceImage"));
-  // console.log(userInfo.get("CertificateOfNoCriminalRecordImage"));
 
   await http
     .post("/ClearancemanPanel/UpdatePrivateClearancemanProfile", userInfo, {
@@ -320,7 +294,6 @@ export const postClearancePrivate = async (
       },
     })
     .then((res) => {
-      console.log("ClearancePrivate-response", res);
       if (res.status === 200) {
         setIsLoading(false);
         setAlert(res.data.message);
@@ -343,7 +316,6 @@ export const postClearanceJuridical = async (
   setIsLoading
 ) => {
   const token = Cookies.get("token");
-  // console.log(userInfo.get("CompanyName"));
 
   await http
     .post("/ClearancemanPanel/UpdateJuridicalClearancemanProfile", userInfo, {
@@ -353,8 +325,6 @@ export const postClearanceJuridical = async (
       },
     })
     .then((res) => {
-      console.log("ClearanceJuridical-response", res);
-
       if (res.status === 200) {
         setIsLoading(false);
         setAlert(res.data.message);
@@ -376,7 +346,6 @@ export const getProposalsList = async (pageNumber = 1, pageSize = 10) => {
       `/ClearancemanPanel/GetQuotationProposalsListAsync?pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -390,7 +359,6 @@ export const getClearanceList = async (pageNumber = 1, pageSize = 10) => {
       `/ClearancemanPanel/GetClearanceProposalsListAsync?pageNumber=${pageNumber}&pageSize=${pageSize}`
     )
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -406,7 +374,6 @@ export const getProposalDetail = async (ProposalId) => {
       `/ClearancemanPanel/GetQuotationRequest?quotationRequestId=${ProposalId}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -424,15 +391,6 @@ export const getSearchAllRequest = async (
   portOfLoading,
   transportTools
 ) => {
-  console.log(
-    page,
-    pageSize,
-    tariffCode,
-    cargoTitle,
-    portOfLoading,
-    transportTools
-  );
-
   const url =
     transportTools === ""
       ? `/ClearancemanPanel/SearchAllQuotationRequests?pageNumber=${
@@ -443,7 +401,6 @@ export const getSearchAllRequest = async (
         }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`;
 
   const data = await http.get(url).then((res) => {
-    console.log(res.data.data.searchResult);
     if (res.status === 200) {
       return res.data.data.searchResult.results;
     }
@@ -461,15 +418,6 @@ export const searchAllClearanceRequests = async (
   portOfLoading,
   transportTools
 ) => {
-  console.log(
-    page,
-    pageSize,
-    tariffCode,
-    cargoTitle,
-    portOfLoading,
-    transportTools
-  );
-
   const url =
     transportTools === ""
       ? `/ClearancemanPanel/SearchAllClearanceRequests?pageNumber=${
@@ -480,7 +428,6 @@ export const searchAllClearanceRequests = async (
         }&pageSize=${pageSize}&cargoTitle=${cargoTitle}&cargoTransportTools=${transportTools}&portOfLoading=${portOfLoading}&tariffCode=${tariffCode}`;
 
   const data = await http.get(url).then((res) => {
-    console.log(res.data.data.searchResult);
     if (res.status === 200) {
       return res.data.data.searchResult.results;
     }
@@ -503,7 +450,7 @@ export const submitQuotationProposal = async (
     estimatedNumberOfDays: Number(estimatedNumberOfDays),
     businessmanType,
   };
-  console.log(data);
+
   const token = Cookies.get("token");
   await http
     .post("/ClearancemanPanel/SubmitQuotationProposal", data, {
@@ -528,7 +475,6 @@ export const getClearanceRequestDetail = async (clearanceRequestId) => {
       `/ClearancemanPanel/GetClearanceRequest?clearanceRequestId=${clearanceRequestId}`
     )
     .then((res) => {
-      // console.log(res);
       if (res.status === 200) {
         return res.data.data;
       }
@@ -549,7 +495,7 @@ export const submitClearanceProposal = async (
     proposalValue: Number(proposalValue),
     estimatedNumberOfDays: Number(estimatedNumberOfDays),
   };
-  console.log(data);
+
   const token = Cookies.get("token");
   await http
     .post("/ClearancemanPanel/SubmitClearanceProposal", data, {
@@ -558,7 +504,6 @@ export const submitClearanceProposal = async (
       },
     })
     .then((res) => {
-      console.log(res);
       if (res.status === 200) {
         setAlertMessage(res.data.message);
       } else {

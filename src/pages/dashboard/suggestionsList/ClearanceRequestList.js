@@ -38,7 +38,6 @@ const ClearanceRequestList = ({ backToTab }) => {
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
     getClearanceRequestsList(curPage, rowsPerPage).then((res) => {
-      console.log(res);
       setPageData(res);
       setIsLoading(false);
     });

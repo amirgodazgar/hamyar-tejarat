@@ -43,7 +43,7 @@ const ClearanceProposalListRegistered = ({ backToTab }) => {
     getClearanceProposalList(curPage, rowsPerPage, id).then((res) => {
       setPageData(res.results);
       setIsLoading(false);
-      console.log(res);
+   
     });
     backToTab(1);
     history.push(

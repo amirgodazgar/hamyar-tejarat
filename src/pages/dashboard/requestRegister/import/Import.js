@@ -128,7 +128,7 @@ const Import = () => {
   };
 
   const onSubmitPurchase = (values) => {
-    console.log(values);
+ 
 
     if (
       formikPurchase.isValid &&
