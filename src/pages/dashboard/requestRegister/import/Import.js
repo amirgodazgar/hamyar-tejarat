@@ -17,6 +17,7 @@ import UploadPrice from "./UploadPrice";
 import { Check } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import {
+  getRequestRegisterClearanceFormData,
   getRequestRegisterFormData,
   postRequestRegisterFormData,
   postRequestRegisterFormDataPurchase,
@@ -31,6 +32,7 @@ const Import = () => {
   const [isPurchase, setIsPurchase] = React.useState(false);
   const [transportTools, setTransportTools] = useState([]);
   const [placeClearance, setPlaceClearance] = useState([]);
+  const [placeClearancePurchase, setPlaceClearancePurchase] = useState([]);
   const [chips, setChips] = useState([]);
   const [performa, setPerforma] = useState(null);
   const [billOfLoading, setBillOfLoading] = useState(null);
@@ -81,17 +83,19 @@ const Import = () => {
     cargoAmountPurchase: YupPurchase.string().required(),
     cargoTransportToolsPurchase: YupPurchase.mixed().required(),
     cargoValuePurchase: YupPurchase.mixed().required(),
-    // loadingBill: YupPurchase.mixed().required(),
-    // performa: YupPurchase.mixed().required(),
-    // packingList: YupPurchase.mixed().required(),
   });
 
   useEffect(() => {
     getRequestRegisterFormData().then((res) => {
       const { cargoTransportTools } = res;
       const { customsList } = res;
+
       setTransportTools(cargoTransportTools);
       setPlaceClearance(customsList);
+    });
+    getRequestRegisterClearanceFormData().then((res) => {
+      const { customsList } = res;
+      setPlaceClearancePurchase(customsList);
     });
   }, []);
 
@@ -128,8 +132,6 @@ const Import = () => {
   };
 
   const onSubmitPurchase = (values) => {
- 
-
     if (
       formikPurchase.isValid &&
       billOfLoading !== null &&
@@ -187,7 +189,7 @@ const Import = () => {
         return isPurchase ? (
           <LocationPurchase
             formik={formikPurchase}
-            placeClearance={placeClearance}
+            placeClearancePurchase={placeClearancePurchase}
             chips={chips}
             setChips={setChips}
           />

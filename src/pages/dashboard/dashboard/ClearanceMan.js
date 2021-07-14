@@ -16,6 +16,7 @@ import { dateToPersian } from "../../../helper/general";
 import { useHistory } from "react-router-dom";
 import { getClearancemanDashboardData } from "../../../services/dashboard/userInfoServices";
 import BackDrop from "../../../common/backDrop/BackDrop";
+import { Pagination } from "@material-ui/lab";
 
 const ClearanceMan = () => {
   const [getData, setGetData] = useState([]);
@@ -93,6 +94,16 @@ const ClearanceMan = () => {
             )}
           </Table>
         </TableContainer>
+        <Pagination
+          style={{
+            padding: "2rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          count={1}
+          color="primary"
+        />
       </div>
     </Paper>
   );

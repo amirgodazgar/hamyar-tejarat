@@ -229,22 +229,17 @@
 .criminalRecord input::before {
   content: "انتخاب تصویر";
   color: #19212970;
-  display: inline-block;
-  background-color: #f4f4f4;
-  font-size: 1rem;
-  border-radius: 10px;
   outline: none;
-  border: 1px solid #70707025;
-  padding: 0.65rem 0.5rem;
-  width: 90%;
-  transition: all 250ms;
+  background-color: #ffffff;
+  display: inline-block;
+  font-size: 0.85rem !important;
+  border-radius: 10px;
+  padding: 0 !important;
+  width: 95%;
+  font-family: inherit !important;
+  transition: all 200ms;
 }
-.workExperience input:hover::before,
-.criminalRecord input:hover::before {
-  box-shadow: 0px 4px 8px 1px #c4cad03a;
-  border: 1px solid #70707057;
-  transition: all 250ms;
-}
+
 input[type="file"] {
   cursor: pointer;
 }
@@ -252,14 +247,10 @@ input[type="file"] {
   width: 100%;
 }
 .uploadIcon {
-  background-color: #f4f4f4;
+  background-color: #ffffff;
+  fill: #192129 !important;
   border-radius: 10px;
-  padding: 0.75rem 0;
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
   cursor: pointer;
-  opacity: 0.4;
 }
 
 .selectInput {
@@ -447,4 +438,18 @@ input[type="file"] {
   .chip span {
     font-size: 0.7rem;
   }
+}
+
+.uploadInputSelect {
+  width: 95%;
+  height: 2.5rem !important;
+  border: 1px solid #70707057;
+  border-radius: 10px;
+  padding: 0 0.65rem !important;
+  font-size: 0.95rem !important;
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px 1px #c4cad05b;
+  font-family: inherit !important;
+  transition: all 200ms;
 }

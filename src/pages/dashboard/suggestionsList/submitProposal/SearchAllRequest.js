@@ -21,24 +21,19 @@ import BackDrop from "../../../../common/backDrop/BackDrop";
 import { getSearchAllRequest } from "../../../../services/dashboard/userInfoServices";
 import { ClearRounded } from "@material-ui/icons";
 import { dateToPersian } from "../../../../helper/general";
-import { Alert } from "@material-ui/lab";
+import { Alert, Pagination } from "@material-ui/lab";
 
 const SearchAllRequest = ({ backToTab }) => {
   const [tariffCode, setTariffCode] = useState("");
   const [cargoTitle, setCargoTitle] = useState("");
   const [portOfLoading, setPortOfLoading] = useState("");
   const [transportTools, setTransportTools] = useState(0);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [result, setResult] = useState([]);
   const history = useHistory();
+  const [page, setPage] = React.useState(1);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
   const clearInputs = () => {
@@ -57,7 +52,7 @@ const SearchAllRequest = ({ backToTab }) => {
     const transportToolsDefault = transportTools === 0 ? "" : transportTools;
     await getSearchAllRequest(
       page,
-      rowsPerPage,
+      10,
       tariffCode,
       cargoTitle,
       portOfLoading,
@@ -258,35 +253,28 @@ const SearchAllRequest = ({ backToTab }) => {
                           }
                         >
                           {rows.length !== 0 ? (
-                            rows
-                              .slice(
-                                page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage
-                              )
-                              .map((row) => (
-                                <TableRow
-                                  key={row.quotationRequestsId}
-                                  className={styles.tableRow}
-                                  onClick={() =>
-                                    showDetailHandler(row.quotationRequestsId)
-                                  }
-                                >
-                                  <TableCell>
-                                    {checkClearanceManType(row.businessmanType)}
-                                  </TableCell>
-                                  <TableCell>{row.cargoTitle}</TableCell>
-                                  <TableCell>
-                                    {row.requestDescription}
-                                  </TableCell>
+                            rows.slice((page - 1) * 5, page * 5).map((row) => (
+                              <TableRow
+                                key={row.quotationRequestsId}
+                                className={styles.tableRow}
+                                onClick={() =>
+                                  showDetailHandler(row.quotationRequestsId)
+                                }
+                              >
+                                <TableCell>
+                                  {checkClearanceManType(row.businessmanType)}
+                                </TableCell>
+                                <TableCell>{row.cargoTitle}</TableCell>
+                                <TableCell>{row.requestDescription}</TableCell>
 
-                                  <TableCell>
-                                    <div className={styles.fixCell}>
-                                      <p>{dateToPersian(row.submitDate)}</p>
-                                      <ArrowBackIosRounded fontSize="small" />
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              ))
+                                <TableCell>
+                                  <div className={styles.fixCell}>
+                                    <p>{dateToPersian(row.submitDate)}</p>
+                                    <ArrowBackIosRounded fontSize="small" />
+                                  </div>
+                                </TableCell>
+                              </TableRow>
+                            ))
                           ) : (
                             <Alert variant="standard" severity="info">
                               موردی یافت نشد دوباره جستجو کنید
@@ -295,22 +283,21 @@ const SearchAllRequest = ({ backToTab }) => {
                         </TableBody>
                       </Table>
                     </TableContainer>
-                    <TablePagination
-                      className={styles.tablePagination}
-                      rowsPerPageOptions={[
-                        10,
-                        25,
-                        50,
-                        { value: 999999999, label: "همه" },
-                      ]}
-                      component="div"
-                      count={rows.length}
-                      rowsPerPage={rowsPerPage}
+                    <Pagination
+                      style={{
+                        padding: "2rem",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      count={
+                        rows.length % 5 === 0
+                          ? Number((rows.length / 5).toFixed())
+                          : Number((rows.length / 5).toFixed())
+                      }
                       page={page}
-                      onChangePage={handleChangePage}
-                      onChangeRowsPerPage={handleChangeRowsPerPage}
-                      labelRowsPerPage="ردیف در هر صفحه"
-                      labelDisplayedRows={({ from, to }) => `${from}-${to}`}
+                      onChange={handleChange}
+                      color="primary"
                     />
                   </div>
                 </Paper>

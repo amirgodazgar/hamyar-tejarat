@@ -1,6 +1,13 @@
 import React, { memo, useEffect, useState } from "react";
 import InputField from "../../../../common/input/InputField";
-import { Chip, Paper, Fade } from "@material-ui/core";
+import {
+  Chip,
+  Paper,
+  Fade,
+  InputAdornment,
+  IconButton,
+  Input,
+} from "@material-ui/core";
 import Button from "../../../../common/button/Button";
 import classes from "./clearanceMan.module.css";
 import inputClass from "../../../../common/input/inputField.module.css";
@@ -379,14 +386,25 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
                   </Fade>
                 ) : null}
               </div>
-              <input
-                className={classes.uploadInput}
-                type="file"
+              <Input
+                className={classes.uploadInputSelect}
+                disableUnderline
+                style={{ padding: "0" }}
                 name="criminalRecord"
+                type="file"
                 value={formik.values.criminalRecord}
                 onChange={(e) => onChangeCrimeImg(e)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton style={{ padding: "0" }}>
+                      <CloudUpload
+                        fontSize="small"
+                        className={classes.uploadIcon}
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-              <CloudUpload fontSize="small" className={classes.uploadIcon} />
             </div>
             <div className={`${classes.thirdRow} ${classes.workExperience} `}>
               <div className={classes.workExperienceTitle}>
@@ -409,14 +427,25 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
                   </Fade>
                 ) : null}
               </div>
-              <input
-                className={classes.uploadInput}
-                type="file"
+              <Input
+                className={classes.uploadInputSelect}
+                disableUnderline
+                style={{ padding: "0" }}
                 name="workExperience"
+                type="file"
                 value={formik.values.workExperience}
                 onChange={(e) => onChangeWorkExpImg(e)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton style={{ padding: "0" }}>
+                      <CloudUpload
+                        fontSize="small"
+                        className={classes.uploadIcon}
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                }
               />
-              <CloudUpload fontSize="small" className={classes.uploadIcon} />
             </div>
 
             <div className={classes.BtnBox} type="submit">

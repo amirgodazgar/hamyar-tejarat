@@ -4,7 +4,7 @@ import { Fade, Typography } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
 
-const LocationPurchase = ({ placeClearance, formik }) => {
+const LocationPurchase = ({ placeClearancePurchase, formik }) => {
   const errorBox = (name, label) => (
     <div className={classes.errorBox}>
       <label htmlFor={name}>{label}</label>
@@ -104,7 +104,7 @@ const LocationPurchase = ({ placeClearance, formik }) => {
               } `}
             >
               <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
-              {placeClearance.map((option, index) => (
+              {placeClearancePurchase.map((option, index) => (
                 <option value={option.id} key={index}>
                   {option.name}
                 </option>

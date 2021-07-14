@@ -16,6 +16,7 @@ import { useState } from "react";
 import { dateToPersian } from "../../../helper/general";
 import { useHistory } from "react-router-dom";
 import BackDrop from "../../../common/backDrop/BackDrop";
+import { Pagination } from "@material-ui/lab";
 
 const BusinessMan = () => {
   const [getData, setGetData] = useState([]);
@@ -91,6 +92,17 @@ const BusinessMan = () => {
             )}
           </Table>
         </TableContainer>
+
+        <Pagination
+          style={{
+            padding: "2rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          count={1}
+          color="primary"
+        />
       </div>
     </Paper>
   );

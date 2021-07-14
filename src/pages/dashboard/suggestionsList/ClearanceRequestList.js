@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import classes from "./suggestionsList.module.css";
-import { Alert } from "@material-ui/lab";
+import { Alert, Pagination } from "@material-ui/lab";
 import {
   Grid,
   Paper,
@@ -10,7 +10,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TablePagination,
   Typography,
 } from "@material-ui/core";
 import { ArrowBackIosRounded } from "@material-ui/icons";
@@ -21,23 +20,18 @@ import BackDrop from "../../../common/backDrop/BackDrop";
 import UserCheckBackDrop from "../../../common/backDrop/UserCheckBackDrop";
 
 const ClearanceRequestList = ({ backToTab }) => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [pageData, setPageData] = useState([]);
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = React.useState(1);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
   useEffect(() => {
     let curPage = page === 0 ? 1 : page;
-    getClearanceRequestsList(curPage, rowsPerPage).then((res) => {
+    getClearanceRequestsList(curPage, 10).then((res) => {
       setPageData(res);
       setIsLoading(false);
     });
@@ -147,10 +141,7 @@ const ClearanceRequestList = ({ backToTab }) => {
                           <TableBody>
                             {rows.length !== 0 ? (
                               rows
-                                .slice(
-                                  page * rowsPerPage,
-                                  page * rowsPerPage + rowsPerPage
-                                )
+                                .slice((page - 1) * 6, page * 6)
                                 .map((row) => (
                                   <TableRow
                                     key={row.id}
@@ -181,22 +172,21 @@ const ClearanceRequestList = ({ backToTab }) => {
                           </TableBody>
                         </Table>
                       </TableContainer>
-                      <TablePagination
-                        className={classes.tablePagination}
-                        rowsPerPageOptions={[
-                          10,
-                          25,
-                          50,
-                          { value: 999999999, label: "همه" },
-                        ]}
-                        component="div"
-                        count={rows.length}
-                        rowsPerPage={rowsPerPage}
+                      <Pagination
+                        style={{
+                          padding: "2rem",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                        count={
+                          rows.length % 5 === 0
+                            ? Number((rows.length / 5).toFixed())
+                            : Number((rows.length / 5).toFixed())
+                        }
                         page={page}
-                        onChangePage={handleChangePage}
-                        onChangeRowsPerPage={handleChangeRowsPerPage}
-                        labelRowsPerPage="ردیف در هر صفحه"
-                        labelDisplayedRows={({ from, to }) => `${from}-${to}`}
+                        onChange={handleChange}
+                        color="primary"
                       />
                     </div>
                   </Paper>

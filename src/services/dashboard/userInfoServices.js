@@ -92,6 +92,17 @@ export const getRequestRegisterFormData = async () => {
     });
   return data;
 };
+// Request Register ClearanceFormData GET :
+export const getRequestRegisterClearanceFormData = async () => {
+  const data = await http
+    .get("/BusinessmanPanel/GetClearanceRequestForm")
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    });
+  return data;
+};
 
 // Request Register POST :
 export const postRequestRegisterFormData = async (userInfo) => {
@@ -124,14 +135,12 @@ export const postRequestRegisterFormData = async (userInfo) => {
 export const postRequestRegisterFormDataPurchase = async (formData) => {
   const token = Cookies.get("token");
 
-  await http
-    .post("/BusinessmanPanel/SubmitClearanceRequest", formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        ContentType: "multipart/form-data",
-      },
-    })
-    
+  await http.post("/BusinessmanPanel/SubmitClearanceRequest", formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      ContentType: "multipart/form-data",
+    },
+  });
 };
 
 // -------------- Suggestions List  -------------------------------- //
