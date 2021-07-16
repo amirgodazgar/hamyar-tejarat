@@ -67,7 +67,7 @@ const ClearanceProposalsListAsync = ({ backToTab }) => {
         <>
           {pageData.length === 0 ? (
             <UserCheckBackDrop
-              setRoute="/Dashboard/RequestList/SearchAllQuotationRequests"
+              setRoute="/Dashboard/RequestList/SearchAllClearanceRequests"
               severity="warning"
               message="هیچ پیشنهادی ثبت نشده است (برای ثبت پیشنهاد کلیک کنید)"
               reload={false}

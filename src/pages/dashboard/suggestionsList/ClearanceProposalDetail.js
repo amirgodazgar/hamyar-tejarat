@@ -15,6 +15,7 @@ const ClearanceProposalDetail = () => {
 
   useEffect(() => {
     getProposalDetail(id).then((res) => {
+      console.log(res)
       setPageData(res);
     });
   }, []);

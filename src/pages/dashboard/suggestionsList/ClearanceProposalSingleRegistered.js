@@ -4,7 +4,7 @@ import { Grid, Avatar, Paper, Typography } from "@material-ui/core";
 import { ArrowForwardIosRounded } from "@material-ui/icons";
 import avatarImg from "../../../styles/image/profile-image.svg";
 import { getClearanceProposalSingle } from "../../../services/dashboard/userInfoServices";
-import { dateToPersian } from "../../../helper/general";
+import { apiRootDomain, dateToPersian } from "../../../helper/general";
 import { useHistory, useParams } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
 
@@ -14,8 +14,18 @@ const ClearanceProposalSingleRegistered = ({ userName }) => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(true);
 
+  const downloadHandler = (path) => {
+    setTimeout(() => {
+      const response = {
+        file: `${apiRootDomain}${path}`,
+      };
+      window.open(response.file);
+    }, 100);
+  };
+
   useEffect(() => {
     getClearanceProposalSingle(id).then((res) => {
+      console.log(res);
       setPageData(res);
       setIsLoading(false);
     });
@@ -44,12 +54,35 @@ const ClearanceProposalSingleRegistered = ({ userName }) => {
     },
   ];
 
+  const filesData = [
+    {
+      title: "دریافت رزمه ترخیص کار",
+      path: pageData.clearancemanWorkExperienceFilePath,
+    },
+  ];
+
   const showInfoData = (infoData) => {
     return infoData.map((item, index) => (
       <div className={classes.requestBox} key={index}>
         <div className={classes.circle}></div>
         <div className={classes.infoDataTitle}>{item.title}</div>
         <div className={classes.infoDataText}>{item.text}</div>
+      </div>
+    ));
+  };
+
+  const showInfoFiles = (infoData) => {
+    return infoData.map((item, index) => (
+      <div className={classes.requestBox} key={index}>
+        <div className={classes.circle}></div>
+        <div className={classes.infoDataTitle}>{item.title}</div>
+        <div
+          className={classes.infoDataText}
+          style={{ cursor: "pointer", color: "#2780e5" }}
+          onClick={() => downloadHandler(item.path)}
+        >
+          برای دریافت فایل کلیک کنید
+        </div>
       </div>
     ));
   };
@@ -92,7 +125,10 @@ const ClearanceProposalSingleRegistered = ({ userName }) => {
                 ) : (
                   <React.Fragment>
                     <div className={classes.infoDataContainer}>
-                      {showInfoData(infoData)}
+                      <>
+                        {showInfoData(infoData)}
+                        {showInfoFiles(filesData)}
+                      </>
                     </div>
                     <div className={classes.suggestDataContainer}>
                       {suggestData.map((item, index) => (
