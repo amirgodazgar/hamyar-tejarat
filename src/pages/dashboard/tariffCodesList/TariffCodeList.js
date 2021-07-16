@@ -94,7 +94,7 @@ const TariffCodeList = ({ backToTab }) => {
           لیست کد تعرفه کالا
         </Typography>
       </Grid>
-      {!result ? (
+      {!searchCargo || searchCargo.length === 0 ? (
         <BackDrop />
       ) : (
         <Grid item container spacing={1} xs={11}>

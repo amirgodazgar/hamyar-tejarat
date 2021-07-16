@@ -231,6 +231,10 @@
   transition: all 200ms;
 }
 
+.tariff {
+  padding: 0.2rem !important;
+}
+
 .originReleasingSelect {
   padding: 0.6rem !important;
 }
@@ -460,6 +464,9 @@ input[type="file"] {
     height: 2.5rem !important;
     font-size: 0.8rem !important;
   }
+  .tariff {
+    padding: 0 !important;
+  }
   .originReleasingSelect,
   .conveyanceSelect {
     width: 52% !important;
@@ -614,6 +621,10 @@ input[type="file"] {
     height: 2rem !important;
     font-size: 0.8rem !important;
   }
+  .tariff {
+    padding: 0 !important;
+    width: 71% !important;
+  }
   .originReleasingSelect,
   .conveyanceSelect {
     width: 72% !important;
@@ -737,6 +748,10 @@ input[type="file"] {
   .originReleasingSelect,
   .conveyanceSelect {
     width: 100% !important;
+  }
+  .tariff {
+    padding: 0 !important;
+    width: 98% !important;
   }
 
   .errorBox label {

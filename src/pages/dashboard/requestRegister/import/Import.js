@@ -113,6 +113,7 @@ const Import = () => {
   };
 
   const onSubmit = (values) => {
+    console.log(values);
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
     const filtered = [...new Set(ids)];
 
@@ -130,7 +131,6 @@ const Import = () => {
       };
       postRequestRegisterFormData(userInfo);
     }
-    values.originReleasing.push(...chips);
   };
 
   const onSubmitPurchase = (values) => {
