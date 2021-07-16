@@ -33,6 +33,7 @@ const Import = () => {
   const [transportTools, setTransportTools] = useState([]);
   const [placeClearance, setPlaceClearance] = useState([]);
   const [placeClearancePurchase, setPlaceClearancePurchase] = useState([]);
+  const [transportToolsPurchase, setTransportToolsPurchase] = useState([]);
   const [chips, setChips] = useState([]);
   const [performa, setPerforma] = useState(null);
   const [billOfLoading, setBillOfLoading] = useState(null);
@@ -94,8 +95,9 @@ const Import = () => {
       setPlaceClearance(customsList);
     });
     getRequestRegisterClearanceFormData().then((res) => {
-      const { customsList } = res;
+      const { customsList, cargoTransportTools } = res;
       setPlaceClearancePurchase(customsList);
+      setTransportToolsPurchase(cargoTransportTools);
     });
   }, []);
 
@@ -205,7 +207,7 @@ const Import = () => {
         return isPurchase ? (
           <UploadPurchase
             formik={formikPurchase}
-            transportTools={transportTools}
+            transportToolsPurchase={transportToolsPurchase}
             setPerforma={setPerforma}
             setBillOfLoading={setBillOfLoading}
             setPackingList={setPackingList}

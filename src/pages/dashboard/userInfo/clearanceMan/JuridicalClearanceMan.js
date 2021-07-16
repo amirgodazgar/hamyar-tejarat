@@ -60,10 +60,16 @@ const JuridicalClearanceMan = ({ backToDashboard }) => {
   };
 
   useEffect(() => {
-    dispatch(getUserInfoData()).then((res) => {
-      setUserData(res.payload);
-      setChips(res.payload.choosedCustoms);
-    });
+    let unmounted = false;
+    if (!unmounted) {
+      dispatch(getUserInfoData()).then((res) => {
+        setUserData(res.payload);
+        setChips(res.payload.choosedCustoms);
+      });
+    }
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   const placeHolder = {

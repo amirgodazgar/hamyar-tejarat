@@ -520,3 +520,16 @@ export const submitClearanceProposal = async (
       }
     });
 };
+
+// SEARCH CARGO AUTOCOMPLETE :
+export const searchCargoByTerm = async (key) => {
+  const data = await http
+    .get(`/CustomsCargos/SearchCustomsCargosByTerm?term=${key}`)
+    .then((res) => {
+      // console.log(res);
+      return res.data.data;
+    });
+  return data;
+};
+
+// searchCargoByTerm("اسب");

@@ -2,6 +2,8 @@ import React, { useState, useEffect, memo } from "react";
 import classes from "./TariffCodeList.module.css";
 import {
   Grid,
+  InputAdornment,
+  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -9,48 +11,75 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Typography,
 } from "@material-ui/core";
-import Button from "../../../common/button/Button";
-import http from "../../../services/httpServices";
+
 import { useHistory } from "react-router";
 import BackDrop from "../../../common/backDrop/BackDrop";
-import { Pagination } from "@material-ui/lab";
+import { Autocomplete, Pagination } from "@material-ui/lab";
+import { debounce } from "lodash";
+import { useRef } from "react";
+import { searchCargoByTerm } from "../../../services/dashboard/userInfoServices";
+import { SearchRounded } from "@material-ui/icons";
+
+const useStyles = makeStyles({
+  root: {
+    flexDirection: "row",
+    padding: "0",
+    "& .MuiAutocomplete-inputRoot": {
+      padding: "0 .5rem",
+      outline: "none",
+      border: "none",
+      "& fieldset": {
+        border: "none",
+      },
+      "&:hover fieldset": {
+        border: "none",
+      },
+    },
+  },
+});
 
 const TariffCodeList = ({ backToTab }) => {
   let history = useHistory();
+  const styles = useStyles();
+  const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("");
+  const [result, setResult] = useState([]);
+  const [page, setPage] = React.useState(1);
+  const [userQuery, setUserQuery] = useState("");
+  const [searchCargo, setSearchCargo] = useState([]);
+
+  const delayQuery = useRef(
+    debounce(
+      (q) =>
+        searchCargoByTerm(q).then((res) => {
+          setSearchCargo(res);
+          setLoading(false);
+        }),
+      500
+    )
+  ).current;
+
+  const searchCargoHandler = (e, value) => {
+    setUserQuery(e.target.value);
+    delayQuery(e.target.value);
+    setSearchText(value);
+  };
 
   useEffect(() => {
     backToTab(6);
     history.push("/Dashboard/tariffCodesList");
   }, []);
 
-  const [textSearch, setTextSearch] = useState("");
-  const [codeSearch, setCodeSearch] = useState([]);
-  const [result, setResult] = useState([]);
-  const [page, setPage] = React.useState(1);
+  const searchCargoList =
+    !searchCargo || searchCargo.length === 0
+      ? [{ id: "موردی پیدا نشد", persianCargoDescription: "موردی پیدا نشد" }]
+      : searchCargo;
 
   const handleChange = (event, value) => {
     setPage(value);
-  };
-  const getDataByText = async (text) => {
-    await http
-      .get(
-        `CustomsCargos/SearchCustomsCargos?persianDescription=${text}&page=1&pageSize=10`
-      )
-      .then((res) => {
-        setResult(res.data.data.results);
-      });
-  };
-
-  const getDataByCode = async (code) => {
-    await http
-      .get(
-        `https://lunacyst.ir/api/v1/CustomsCargos/SearchCustomsCargos?tariffCode=${code}&page=1&pageSize=10`
-      )
-      .then((res) => {
-        setResult(res.data.data.results);
-      });
   };
 
   return (
@@ -77,20 +106,43 @@ const TariffCodeList = ({ backToTab }) => {
                     جستجو براساس کد کالا
                   </Typography>
                   <div className={classes.search}>
-                    <input
-                      value={codeSearch}
-                      onChange={(e) => setCodeSearch(e.target.value)}
-                      id="code-search"
-                      type="text"
-                      placeholder="0202"
+                    <Autocomplete
+                      loading={loading}
+                      loadingText="جستجو کنید..."
+                      className={styles.root}
+                      freeSolo
+                      disableClearable
+                      onChange={(e, value) => setSearchText(e, value)}
+                      endadornment={
+                        <InputAdornment position="end">
+                          <SearchRounded />
+                        </InputAdornment>
+                      }
+                      options={searchCargoList.map((option) => option.id)}
+                      renderInput={(params) => (
+                        <TextField
+                          className={`${classes.searchInput} ${styles.root}`}
+                          {...params}
+                          value={userQuery}
+                          onChange={(e, value) => searchCargoHandler(e, value)}
+                          placeholder="جستجو کنید"
+                          name="searchCargo"
+                          margin="none"
+                          type="search"
+                          variant="outlined"
+                          InputProps={{
+                            ...params.InputProps,
+                            type: "searchCargo",
+                            endAdornment: (
+                              <SearchRounded
+                                color="primary"
+                                className={classes.searchIcon}
+                              />
+                            ),
+                          }}
+                        />
+                      )}
                     />
-                    <Button
-                      click={() => getDataByCode(codeSearch)}
-                      customizeClass="tariffSearch"
-                      type="submit"
-                    >
-                      جستجو
-                    </Button>
                   </div>
                 </div>
                 <div className={classes.searchBox}>
@@ -98,20 +150,45 @@ const TariffCodeList = ({ backToTab }) => {
                     جستجو براساس نام کالا
                   </Typography>
                   <div className={classes.search}>
-                    <input
-                      value={textSearch}
-                      onChange={(e) => setTextSearch(e.target.value)}
-                      id="text-search"
-                      type="text"
-                      placeholder="گوشت حیوانات از نوع گاو، منجمد."
+                    <Autocomplete
+                      loading={loading}
+                      loadingText="جستجو کنید..."
+                      className={styles.root}
+                      freeSolo
+                      disableClearable
+                      onChange={(e, value) => setSearchText(e, value)}
+                      endadornment={
+                        <InputAdornment position="end">
+                          <SearchRounded />
+                        </InputAdornment>
+                      }
+                      options={searchCargoList.map(
+                        (option) => option.persianCargoDescription
+                      )}
+                      renderInput={(params) => (
+                        <TextField
+                          className={`${classes.searchInput} ${styles.root}`}
+                          {...params}
+                          value={userQuery}
+                          onChange={(e, value) => searchCargoHandler(e, value)}
+                          placeholder="جستجو کنید"
+                          name="searchCargo"
+                          margin="none"
+                          type="search"
+                          variant="outlined"
+                          InputProps={{
+                            ...params.InputProps,
+                            type: "searchCargo",
+                            endAdornment: (
+                              <SearchRounded
+                                color="primary"
+                                className={classes.searchIcon}
+                              />
+                            ),
+                          }}
+                        />
+                      )}
                     />
-                    <Button
-                      click={() => getDataByText(textSearch)}
-                      customizeClass="tariffSearch"
-                      type="submit"
-                    >
-                      جستجو
-                    </Button>
                   </div>
                 </div>
               </Grid>
@@ -153,8 +230,9 @@ const TariffCodeList = ({ backToTab }) => {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {result.length !== 0 || result === null ? (
-                            result
+                          {searchCargoList.length !== 0 ||
+                          searchCargoList === null ? (
+                            searchCargoList
                               .slice((page - 1) * 5, page * 5)
                               .map((row, index) => (
                                 <TableRow
@@ -209,9 +287,9 @@ const TariffCodeList = ({ backToTab }) => {
                         alignItems: "center",
                       }}
                       count={
-                        result.length % 5 === 0
-                          ? Number((result.length / 5).toFixed())
-                          : Number((result.length / 5).toFixed())
+                        searchCargoList.length % 5 === 0
+                          ? Number((searchCargoList.length / 5).toFixed())
+                          : Number((searchCargoList.length / 5).toFixed())
                       }
                       page={page}
                       onChange={handleChange}

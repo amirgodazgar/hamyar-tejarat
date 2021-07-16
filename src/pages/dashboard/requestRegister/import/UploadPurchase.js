@@ -10,7 +10,7 @@ import {
 import { CloudUpload } from "@material-ui/icons";
 
 const UploadPurchase = ({
-  transportTools,
+  transportToolsPurchase,
   formik,
   setPerforma,
   setBillOfLoading,
@@ -90,7 +90,7 @@ const UploadPurchase = ({
               } `}
             >
               <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
-              {transportTools.map((option, index) => (
+              {transportToolsPurchase.map((option, index) => (
                 <option value={option.value} key={index}>
                   {option.name}
                 </option>

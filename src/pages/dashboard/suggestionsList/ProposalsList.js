@@ -184,7 +184,7 @@ const ProposalsList = ({ backToTab }) => {
                       50,
                       { value: 999999999, label: "همه" },
                     ]}
-                    component="div"
+                   
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
