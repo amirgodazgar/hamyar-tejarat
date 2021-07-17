@@ -9,19 +9,27 @@ import {
 } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
-import { Autocomplete, createFilterOptions } from "@material-ui/lab";
+import { Autocomplete,  } from "@material-ui/lab";
 import { SearchRounded } from "@material-ui/icons";
 import { searchCargoByTerm } from "../../../../services/dashboard/userInfoServices";
 import { debounce } from "lodash";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
+    "& .MuiChip-label ": {
+      maxWidth: "8.5rem",
+    },
+    "& .MuiChip-root ": {
+      height: "25px",
+    },
+
     flexDirection: "row",
     padding: "0",
     "& .MuiAutocomplete-inputRoot": {
       padding: "0 .5rem",
       outline: "none",
       border: "none",
+
       "& fieldset": {
         border: "none",
       },
@@ -30,13 +38,13 @@ const useStyles = makeStyles({
       },
     },
   },
-});
+}));
 
 const LocationPurchase = ({ placeClearancePurchase, formik }) => {
   const styles = useStyles();
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
   const [searchCargo, setSearchCargo] = useState([]);
+  const [selectedValueId, setSelectedValueId] = useState("");
 
   const delayQuery = useRef(
     debounce(
@@ -53,9 +61,11 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
     delayQuery(e.target.value);
     formik.setFieldValue("tariffCodePurchase", value);
   };
-  const cargoTitlePurchaseHandler = (e, value) => {
-    delayQuery(e.target.value);
-    formik.setFieldValue("cargoTitlePurchase", value);
+
+  const autoCompleteHandler = (e, value) => {
+    const selectedId = value.map((item) => item.id).toString();
+    setSelectedValueId(selectedId);
+    formik.setFieldValue("tariffCodePurchase", selectedId);
   };
 
   const searchCargoList =
@@ -87,40 +97,41 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
           <div className={classes.inputBox}>
             {errorBox("tariffCodePurchase", "کد تعرفه")}
             <Autocomplete
-              loading={loading}
-              freeSolo
-              loadingText="لطفا صبر کنید..."
-              disableClearable
               className={`${classes.tariff} ${styles.root} ${
                 formik.touched.tariffCodePurchase &&
                 formik.errors.tariffCodePurchase
                   ? classes.inputError
                   : null
               } `}
-              onChange={(e, value) =>
-                formik.setFieldValue("tariffCodePurchase", value.id)
+              multiple
+              limitTags={1}
+              options={searchCargoList}
+              getOptionDisabled={() => !!selectedValueId}
+              getOptionLabel={(option) =>
+                option.persianCargoDescription
+                  ? `${option.id} ${option.persianCargoDescription}`
+                  : ""
               }
+              renderOption={(option) => {
+                return option.persianCargoDescription;
+              }}
+              onChange={(e, value) => autoCompleteHandler(e, value)}
+              loading={loading}
+              loadingText="لطفا صبر کنید..."
+              freeSolo
+              disableClearable
               endadornment={
                 <InputAdornment position="end">
                   <SearchRounded />
                 </InputAdornment>
               }
-              options={searchCargoList}
-              getOptionLabel={(option) =>
-                option.persianCargoDescription
-                  ? option.persianCargoDescription
-                  : ""
-              }
-              renderOption={(option, state) => {
-                return option.persianCargoDescription;
-              }}
               renderInput={(params) => (
                 <TextField
                   className={styles.root}
                   {...params}
                   onChange={(e, value) => TariffCodePurchaseHandler(e, value)}
                   name="tariffCodePurchase"
-                  placeholder="0202"
+                  placeholder={!!selectedValueId ? "" : " 1006 - برنج "}
                   margin="none"
                   type="search"
                   variant="outlined"
@@ -130,6 +141,7 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
                     ...params.InputProps,
                     type: "tariffCodePurchase",
                     endAdornment: <SearchRounded />,
+                    autoComplete: "new-password",
                   }}
                 />
               )}
@@ -137,57 +149,20 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
           </div>
           <div className={classes.inputBox}>
             {errorBox("cargoTitlePurchase", " عنوان کالا ")}
-
-            <Autocomplete
-              loading={loading}
-              freeSolo
-              loadingText="لطفا صبر کنید..."
-              disableClearable
-              className={`${classes.tariff} ${styles.root} ${
+            <input
+              className={`${classes.originLoading}  ${
                 formik.touched.cargoTitlePurchase &&
                 formik.errors.cargoTitlePurchase
                   ? classes.inputError
                   : null
               } `}
-              onChange={(e, value) =>
-                formik.setFieldValue(
-                  "cargoTitlePurchase",
-                  value.persianCargoDescription
-                )
-              }
-              endadornment={
-                <InputAdornment position="end">
-                  <SearchRounded />
-                </InputAdornment>
-              }
-              options={searchCargoList}
-              getOptionLabel={(option) =>
-                option.persianCargoDescription
-                  ? option.persianCargoDescription
-                  : ""
-              }
-              renderOption={(option, state) => {
-                return option.persianCargoDescription;
-              }}
-              renderInput={(params) => (
-                <TextField
-                  className={styles.root}
-                  {...params}
-                  onChange={(e, value) => cargoTitlePurchaseHandler(e, value)}
-                  placeholder="گوشت حیوانات از نوع گاو، منجمد"
-                  margin="none"
-                  type="search"
-                  variant="outlined"
-                  name="cargoTitlePurchase"
-                  onBlur={formik.handleBlur}
-                  required
-                  InputProps={{
-                    ...params.InputProps,
-                    type: "cargoTitlePurchase",
-                    endAdornment: <SearchRounded />,
-                  }}
-                />
-              )}
+              name="cargoTitlePurchase"
+              type="text"
+              placeholder="گوشت حیوانات از نوع گاو، منجمد"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.cargoTitlePurchase}
+              required
             />
           </div>
           <div className={classes.inputBox}>

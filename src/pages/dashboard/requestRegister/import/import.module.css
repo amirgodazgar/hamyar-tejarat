@@ -486,6 +486,10 @@ input[type="file"] {
   .priceValue::placeholder {
     font-size: 0.75rem !important;
   }
+  .tariff input::placeholder {
+    font-size: 0.75rem !important;
+    
+  }
   .errorBox label {
     font-size: 0.8rem;
     margin-bottom: 0.25rem;
@@ -752,6 +756,10 @@ input[type="file"] {
   .tariff {
     padding: 0 !important;
     width: 98% !important;
+  }
+  .tariff input::placeholder {
+    font-size: 0.75rem !important;
+    
   }
 
   .errorBox label {
