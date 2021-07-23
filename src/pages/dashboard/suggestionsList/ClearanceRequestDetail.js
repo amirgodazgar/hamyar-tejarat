@@ -33,7 +33,7 @@ const ClearanceRequestDetail = ({ userName }) => {
 
   const infoData = [
     {
-      title: "عنوان کالا :",
+      title: "توضیحات کد تعرفه:",
       text: pageData.cargoTitle,
     },
     {
@@ -44,10 +44,7 @@ const ClearanceRequestDetail = ({ userName }) => {
       title: "کد تعرفه :",
       text: pageData.customCargosId,
     },
-    {
-      title: "جنس و نوع کالا :",
-      text: pageData.customsCargosName,
-    },
+
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,

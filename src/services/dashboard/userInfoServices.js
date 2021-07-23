@@ -108,7 +108,6 @@ export const getRequestRegisterClearanceFormData = async () => {
 export const postRequestRegisterFormData = async (userInfo) => {
   const {
     tariffCode,
-    cargoTitle,
     portOfLoading,
     originCustomIds,
     packagingType,
@@ -119,7 +118,6 @@ export const postRequestRegisterFormData = async (userInfo) => {
 
   const data = await http.post("/BusinessmanPanel/SubmitQuotationRequestForm", {
     tariffCode,
-    cargoTitle,
     portOfLoading,
     originCustomIds,
     packagingType,
@@ -526,10 +524,7 @@ export const searchCargoByTerm = async (key) => {
   const data = await http
     .get(`/CustomsCargos/SearchCustomsCargosByTerm?term=${key}`)
     .then((res) => {
-      // console.log(res);
       return res.data.data;
     });
   return data;
 };
-
-// searchCargoByTerm("اسب");

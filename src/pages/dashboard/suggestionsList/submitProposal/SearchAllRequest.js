@@ -41,6 +41,7 @@ const SearchAllRequest = ({ backToTab }) => {
     setCargoTitle("");
     setPortOfLoading("");
     setTransportTools(0);
+    filterList("", "", "", "");
   };
 
   const filterList = async (

@@ -41,7 +41,7 @@ const Import = () => {
 
   const initialValues = {
     tariffCode: "",
-    cargoTitle: "",
+
     portOfLoading: "",
     originCustomIds: [],
     packagingType: "",
@@ -52,7 +52,7 @@ const Import = () => {
 
   const initialValuesPurchase = {
     tariffCodePurchase: "",
-    cargoTitlePurchase: "",
+
     portOfLoadingPurchase: "",
     originCustomIdsPurchase: 0,
     packagingTypePurchase: "",
@@ -66,7 +66,7 @@ const Import = () => {
 
   const validationSchema = Yup.object({
     tariffCode: Yup.string().required(),
-    cargoTitle: Yup.mixed().required(),
+
     portOfLoading: Yup.string().required(),
     originCustomIds: Yup.mixed().required(),
     packagingType: Yup.string().required(),
@@ -78,7 +78,7 @@ const Import = () => {
   const validationSchemaPurchase = YupPurchase.object({
     portOfLoadingPurchase: YupPurchase.string().required(),
     tariffCodePurchase: YupPurchase.string().required(),
-    cargoTitlePurchase: YupPurchase.mixed().required(),
+
     originCustomIdsPurchase: YupPurchase.mixed().required(),
     packagingTypePurchase: YupPurchase.string().required(),
     cargoAmountPurchase: YupPurchase.string().required(),
@@ -113,7 +113,7 @@ const Import = () => {
   };
 
   const onSubmit = (values) => {
-    console.log(values);
+   
     const ids = chips === undefined ? [] : chips.map((item) => +item.id);
     const filtered = [...new Set(ids)];
 
@@ -121,7 +121,7 @@ const Import = () => {
       setActiveStep(4);
       const userInfo = {
         tariffCode: values.tariffCode,
-        cargoTitle: values.cargoTitle,
+
         portOfLoading: values.portOfLoading,
         originCustomIds: filtered,
         packagingType: values.packagingType,
@@ -148,7 +148,6 @@ const Import = () => {
       formData.append("Performa", performa);
       formData.append("PackingList", packingList);
       formData.append("TariffCode", values.tariffCodePurchase);
-      formData.append("CargoTitle", values.cargoTitlePurchase);
       formData.append("PackagingType", values.packagingTypePurchase);
       formData.append("CargoAmount", values.cargoAmountPurchase);
       formData.append(

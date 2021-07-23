@@ -24,6 +24,7 @@ const RequestDetail = ({ userName }) => {
 
   useEffect(() => {
     getSuggestionIdData(id).then((res) => {
+     
       setPageData(res);
       setIsLoading(false);
     });
@@ -31,7 +32,7 @@ const RequestDetail = ({ userName }) => {
 
   const infoData = [
     {
-      title: "عنوان کالا :",
+      title: "توضیحات کد تعرفه:",
       text: pageData.cargoTitle,
     },
     {
@@ -41,10 +42,6 @@ const RequestDetail = ({ userName }) => {
     {
       title: "کد تعرفه :",
       text: pageData.customCargosId,
-    },
-    {
-      title: "جنس و نوع کالا :",
-      text: pageData.customsCargosName,
     },
     {
       title: "مبدا بارگیری :",

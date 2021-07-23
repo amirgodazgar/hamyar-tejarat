@@ -25,7 +25,7 @@ const ClearanceProposalSingleRegistered = ({ userName }) => {
 
   useEffect(() => {
     getClearanceProposalSingle(id).then((res) => {
-      console.log(res);
+      
       setPageData(res);
       setIsLoading(false);
     });

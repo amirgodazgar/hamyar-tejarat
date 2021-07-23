@@ -163,23 +163,6 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
             />
           </div>
           <div className={classes.inputBox}>
-            {errorBox("cargoTitle", " عنوان کالا ")}
-            <input
-              className={`${classes.originLoading}  ${
-                formik.touched.cargoTitle && formik.errors.cargoTitle
-                  ? classes.inputError
-                  : null
-              } `}
-              name="cargoTitle"
-              type="text"
-              placeholder="گوشت حیوانات از نوع گاو، منجمد"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.cargoTitle}
-              required
-            />
-          </div>
-          <div className={classes.inputBox}>
             {errorBox("portOfLoading", "مبدا کالا ")}
             <input
               className={`${classes.originLoading}  ${
@@ -196,14 +179,6 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
               required
             />
           </div>
-        </div>
-        <div className={classes.tariffCodes}>
-          <Link to="/Dashboard/tariffCodesList" target="blank">
-            <img src={tariffSvg} alt="tariffCode" />
-            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
-          </Link>
-        </div>
-        <div className={classes.tariffList}>
           <div className={classes.inputBox} style={{ width: "30%" }}>
             {errorBox("originCustomIds", "گمرک مقصد، محل ترخیص کالا ")}
             <select
@@ -226,6 +201,14 @@ const LocationPrice = ({ placeClearance, formik, chips, setChips }) => {
               ))}
             </select>
           </div>
+        </div>
+        <div className={classes.tariffCodes}>
+          <Link to="/Dashboard/tariffCodesList" target="blank">
+            <img src={tariffSvg} alt="tariffCode" />
+            <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
+          </Link>
+        </div>
+        <div className={classes.tariffList}>
           <div className={classes.selectedTariffBox}>
             <div className={classes.tariffListTitle}>گمرک های انتخاب شده</div>
             <div className={classes.selectedTariff}>

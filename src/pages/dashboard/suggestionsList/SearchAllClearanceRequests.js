@@ -40,6 +40,7 @@ const SearchAllClearanceRequests = ({ backToTab }) => {
     setCargoTitle("");
     setPortOfLoading("");
     setTransportTools(0);
+    filterList("", "", "", "");
   };
 
   const filterList = async (
@@ -63,13 +64,6 @@ const SearchAllClearanceRequests = ({ backToTab }) => {
 
   const rows = result !== undefined ? result : [];
 
-  const checkClearanceManType = (clearanceMan) => {
-    if (clearanceMan === "Juridical") {
-      return "حقوقی";
-    } else if (clearanceMan === "Private") {
-      return "حقیقی";
-    }
-  };
   const showDetailHandler = (proposalId) => {
     history.push(
       `/Dashboard/RequestList/GetClearanceRequestDetail/${proposalId}`

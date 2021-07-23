@@ -51,6 +51,7 @@ const SubmitClearanceRequestDetail = () => {
 
   useEffect(() => {
     getClearanceRequestDetail(id).then((res) => {
+   
       setPageData(res);
     });
   }, []);
@@ -74,13 +75,10 @@ const SubmitClearanceRequestDetail = () => {
       text: dateToPersian(pageData.submitDate),
     },
     {
-      title: "عنوان کالا :",
+      title: "توضیحات کد تعرفه:",
       text: pageData.cargoTitle,
     },
-    {
-      title: "جنس و نوع کالا :",
-      text: pageData.customsCargosName,
-    },
+
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,

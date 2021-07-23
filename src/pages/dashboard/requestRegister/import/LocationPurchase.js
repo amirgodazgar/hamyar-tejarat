@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import tariffSvg from "../../../../styles/svg/link.svg";
 import { Link } from "react-router-dom";
-import { Autocomplete,  } from "@material-ui/lab";
+import { Autocomplete } from "@material-ui/lab";
 import { SearchRounded } from "@material-ui/icons";
 import { searchCargoByTerm } from "../../../../services/dashboard/userInfoServices";
 import { debounce } from "lodash";
@@ -147,23 +147,28 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
               )}
             />
           </div>
-          <div className={classes.inputBox}>
-            {errorBox("cargoTitlePurchase", " عنوان کالا ")}
-            <input
-              className={`${classes.originLoading}  ${
-                formik.touched.cargoTitlePurchase &&
-                formik.errors.cargoTitlePurchase
+          <div className={classes.inputBox} style={{ width: "30%" }}>
+            {errorBox("originCustomIdsPurchase", "گمرک مقصد، محل ترخیص کالا ")}
+            <select
+              multiple={false}
+              name="originCustomIdsPurchase"
+              value={formik.values.originCustomIdsPurchase}
+              onChange={formik.handleChange}
+              className={`${classes.originReleasingSelect}  ${
+                formik.touched.originCustomIdsPurchase &&
+                formik.errors.originCustomIdsPurchase &&
+                formik.values.originCustomIdsPurchase === "0"
                   ? classes.inputError
                   : null
               } `}
-              name="cargoTitlePurchase"
-              type="text"
-              placeholder="گوشت حیوانات از نوع گاو، منجمد"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.cargoTitlePurchase}
-              required
-            />
+            >
+              <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
+              {placeClearancePurchase.map((option, index) => (
+                <option value={option.id} key={index}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={classes.inputBox}>
             {errorBox("portOfLoadingPurchase", "مبدا کالا ")}
@@ -190,31 +195,7 @@ const LocationPurchase = ({ placeClearancePurchase, formik }) => {
             <span>لیست کد تعرفه و اولویت های کالاهای گمرکی</span>
           </Link>
         </div>
-        <div className={classes.tariffList}>
-          <div className={classes.inputBox} style={{ width: "30%" }}>
-            {errorBox("originCustomIdsPurchase", "گمرک مقصد، محل ترخیص کالا ")}
-            <select
-              multiple={false}
-              name="originCustomIdsPurchase"
-              value={formik.values.originCustomIdsPurchase}
-              onChange={formik.handleChange}
-              className={`${classes.originReleasingSelect}  ${
-                formik.touched.originCustomIdsPurchase &&
-                formik.errors.originCustomIdsPurchase &&
-                formik.values.originCustomIdsPurchase === "0"
-                  ? classes.inputError
-                  : null
-              } `}
-            >
-              <option style={{ color: "rgba(0,0,0,0.4)" }}>انتخاب کنید</option>
-              {placeClearancePurchase.map((option, index) => (
-                <option value={option.id} key={index}>
-                  {option.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        <div className={classes.tariffList}></div>
       </div>
     </React.Fragment>
   );

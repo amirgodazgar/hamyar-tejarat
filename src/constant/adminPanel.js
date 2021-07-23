@@ -1,3 +1,4 @@
+import { Tooltip } from "@material-ui/core";
 import {
   Home,
   List,
@@ -13,13 +14,21 @@ export const adminPanelData = {
   listItem: [
     {
       text: "داشبورد",
-      icon: <Home fontSize="large" style={{ color: "#C4CAD0" }} />,
+      icon: (
+        <Tooltip title="داشبورد">
+          <Home fontSize="large" style={{ color: "#C4CAD0" }} />
+        </Tooltip>
+      ),
       path: "/Dashboard/main",
       hasDropDown: false,
     },
     {
-      text: "لیست درخواست ها",
-      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      text: "فعالیت های شما",
+      icon: (
+        <Tooltip title="فعالیت های شما">
+          <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/suggestionsList",
       dropDownText: [
         {
@@ -35,19 +44,31 @@ export const adminPanelData = {
     },
     {
       text: "تیکت ها",
-      icon: <Sms fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <Tooltip title="تیکت ها">
+          <Sms fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/tickets",
       hasDropDown: false,
     },
     {
       text: "ثبت درخواست",
-      icon: <Edit fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <Tooltip title=" ثبت درخواست">
+          <Edit fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/requestRegister",
       hasDropDown: false,
     },
     {
       text: "اطلاعات کاربری",
-      icon: <Person fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <Tooltip title="اطلاعات کاربری">
+          <Person fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/userInfo",
       dropDownText: [
         {
@@ -63,13 +84,21 @@ export const adminPanelData = {
     },
     {
       text: "حساب بانکی",
-      icon: <Payment fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <Tooltip title="حساب بانکی">
+          <Payment fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/bankAccount",
       hasDropDown: false,
     },
     {
       text: "لیست کد تعرفه کالا",
-      icon: <PageviewRounded fontSize="large" style={{ color: "#C4CAD0" }} />,
+      icon: (
+        <Tooltip title="لیست کد تعرفه کالا">
+          <PageviewRounded fontSize="large" style={{ color: "#C4CAD0" }} />
+        </Tooltip>
+      ),
       path: "/Dashboard/tariffCodesList",
       hasDropDown: false,
     },
@@ -77,8 +106,12 @@ export const adminPanelData = {
 
   listItemClearance: [
     {
-      text: "لیست پیشنهاد ها",
-      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      text: "فعالیت های شما",
+      icon: (
+        <Tooltip title="فعالیت های شما">
+          <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/quotationProposalsListAsync",
       dropDownText: [
         {
@@ -94,7 +127,11 @@ export const adminPanelData = {
     },
     {
       text: "لیست درخواست ها",
-      icon: <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />,
+      icon: (
+        <Tooltip title="لیست درخواست ها">
+          <List fontSize="large" style={{ color: "#C4CAD0" }} dashboard />
+        </Tooltip>
+      ),
       path: "/Dashboard/RequestList",
       dropDownText: [
         {

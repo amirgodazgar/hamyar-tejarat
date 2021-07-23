@@ -15,7 +15,7 @@ const ClearanceProposalDetail = () => {
 
   useEffect(() => {
     getProposalDetail(id).then((res) => {
-      console.log(res)
+     
       setPageData(res);
     });
   }, []);
@@ -26,13 +26,10 @@ const ClearanceProposalDetail = () => {
       text: dateToPersian(pageData.submitDate),
     },
     {
-      title: "عنوان کالا :",
+      title: "توضیحات کد تعرفه:",
       text: pageData.cargoTitle,
     },
-    {
-      title: "جنس و نوع کالا :",
-      text: pageData.customsCargosName,
-    },
+
     {
       title: "مبدا بارگیری :",
       text: pageData.portOfLoading,
